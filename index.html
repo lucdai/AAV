@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phân Tích & Trực Quan Hóa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script src="https://unpkg.com/@sgratzl/chartjs-chart-boxplot@3.10.0/build/index.umd.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        .input-cell:focus { outline: 2px solid #6366f1; background: white; }
+        .tab-btn.active { border-bottom: 2px solid #4f46e5; color: #4f46e5; font-weight: 600; }
+        .tab-btn { color: #64748b; font-weight: 500; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen p-4 md:p-6">
+
+    <div class="max-w-7xl mx-auto space-y-4">
+        
+        <!-- HEADER -->
+        <header class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="p-2 bg-indigo-600 rounded-lg shadow text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                </div>
+                <h1 class="text-xl font-bold text-slate-900">Phân Tích & Trực Quan Hóa</h1>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <span class="text-sm font-medium text-slate-600">Làm tròn:</span>
+                <input type="number" id="decimalPlaces" value="2" min="0" max="10" class="w-16 p-1.5 text-center border border-slate-300 rounded focus:ring-2 focus:ring-indigo-500 font-mono text-sm" onchange="calculate()">
+            </div>
+        </header>
+
+        <!-- TAB NAVIGATION -->
+        <nav class="flex border-b border-slate-200 bg-white rounded-t-xl px-6 shadow-sm overflow-x-auto">
+            <button onclick="switchTab('data')" id="tabDataBtn" class="tab-btn active px-6 py-4 transition-colors whitespace-nowrap">
+                Dữ liệu & Thống kê
+            </button>
+            <button onclick="switchTab('charts')" id="tabChartsBtn" class="tab-btn px-6 py-4 transition-colors flex items-center gap-2 whitespace-nowrap">
+                Kho Biểu đồ
+                <span class="bg-indigo-100 text-indigo-700 text-xs px-2 py-0.5 rounded-full">12 loại</span>
+            </button>
+        </nav>
+
+        <!-- ================= TAB 1: DATA & STATS ================= -->
+        <div id="tabDataContent" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            
+            <!-- LEFT COLUMN: INPUTS -->
+            <div class="lg:col-span-4 space-y-4">
+                <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-200 flex gap-2">
+                    <button onclick="switchInputMode('raw')" id="btnRaw" class="flex-1 py-2 text-sm font-medium rounded bg-indigo-50 text-indigo-700">Dữ liệu thô</button>
+                    <button onclick="switchInputMode('table')" id="btnTable" class="flex-1 py-2 text-sm font-medium rounded text-slate-500 hover:bg-slate-50">Bảng tần số</button>
+                </div>
+
+                <div class="flex gap-2">
+                    <button onclick="addDataset()" class="flex-1 text-xs bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded shadow-sm font-medium transition">+ Thêm Mẫu</button>
+                    <button onclick="removeLastDataset()" class="flex-1 text-xs bg-white border border-slate-300 text-slate-600 hover:text-red-600 py-2 rounded shadow-sm font-medium transition">Xóa Mẫu</button>
+                </div>
+
+                <!-- RAW INPUT -->
+                <div id="rawSection" class="space-y-3">
+                    <div id="datasetContainer" class="space-y-3 max-h-[400px] overflow-y-auto pr-1"></div>
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
+                        <div class="font-bold text-slate-700 mb-3 text-xs uppercase">Cấu hình ghép nhóm</div>
+                        <div class="space-y-3">
+                            <select id="method" onchange="toggleInputs(); calculate()" class="w-full p-2 border border-slate-300 rounded text-sm bg-white"><option value="auto">Tự động</option><option value="manual_width">Cố định độ rộng (h)</option><option value="manual_count">Cố định số nhóm (k)</option></select>
+                            <div id="inputH" class="hidden"><input type="number" id="manualH" value="5" min="0.1" step="0.1" class="w-full p-2 border border-slate-300 rounded text-sm" placeholder="Độ rộng (h)" onchange="calculate()"></div>
+                            <div id="inputK" class="hidden"><input type="number" id="manualK" value="6" min="1" max="50" class="w-full p-2 border border-slate-300 rounded text-sm" placeholder="Số nhóm (k)" onchange="calculate()"></div>
+                            <input type="number" id="startValue" placeholder="Giá trị bắt đầu" class="w-full p-2 border border-slate-300 rounded text-sm" onchange="calculate()">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TABLE INPUT -->
+                <div id="tableSection" class="hidden bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="p-3 bg-slate-50 border-b border-slate-200 flex justify-between items-center">
+                        <h3 class="font-bold text-sm text-slate-700">Nhập Bảng</h3>
+                        <button onclick="addManualRow()" class="text-xs bg-white border px-2 py-1 rounded hover:bg-indigo-50 text-indigo-700">+ Nhóm</button>
+                    </div>
+                    <div class="p-2 overflow-x-auto"><table class="w-full text-xs" id="manualInputTable"><thead><tr id="manualHeaderRow"></tr></thead><tbody id="manualBody"></tbody></table></div>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: TABLES -->
+            <div class="lg:col-span-8">
+                <!-- Wrapper for Results -->
+                <div id="resultsSection" class="hidden space-y-6">
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="p-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center">
+                            <h2 class="font-bold text-slate-800 text-sm uppercase">Bảng Phân Bố Tần Số</h2>
+                            <button onclick="copyTable()" class="text-xs border bg-white px-3 py-1 rounded hover:text-indigo-600">Copy</button>
+                        </div>
+                        <div class="overflow-x-auto"><table class="w-full text-sm text-left" id="freqTable"></table></div>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="p-4 bg-slate-50 border-b border-slate-200"><h2 class="font-bold text-slate-800 text-sm uppercase">Bảng Các Chỉ Số Thống Kê</h2></div>
+                        <div class="overflow-x-auto"><table class="w-full text-sm text-left" id="statsTable"></table></div>
+                    </div>
+                </div>
+                
+                <!-- Empty State Data -->
+                <div id="emptyState" class="hidden h-96 flex flex-col items-center justify-center text-slate-400 bg-slate-50 border-2 border-dashed border-slate-200 rounded-xl">
+                    <svg class="w-12 h-12 mb-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    <p class="text-sm">Vui lòng nhập dữ liệu để xem kết quả</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= TAB 2: VISUALIZATION ================= -->
+        <div id="tabChartsContent" class="hidden">
+            
+            <!-- Charts Wrapper -->
+            <div id="chartsWrapper" class="hidden space-y-6">
+                <h3 class="text-lg font-bold text-slate-800 border-b pb-2">1. Phân Phối & So Sánh Cơ Bản</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="font-bold text-slate-700 mb-4 text-center">Grouped Bar Chart (Cột Nhóm)</h3>
+                        <div class="h-64 relative w-full"><canvas id="chartHistogram"></canvas></div>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="font-bold text-slate-700 mb-4 text-center">Line Chart (Đường/Polygon)</h3>
+                        <div class="h-64 relative w-full"><canvas id="chartPolygon"></canvas></div>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="font-bold text-slate-700 mb-4 text-center">Stacked Column (Cột Chồng)</h3>
+                        <div class="h-64 relative w-full"><canvas id="chartStacked"></canvas></div>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="font-bold text-slate-700 mb-4 text-center">Relative Frequency (Tần số tương đối %)</h3>
+                        <div class="h-64 relative w-full"><canvas id="chartRelFreq"></canvas></div>
+                    </div>
+                </div>
+
+                <h3 class="text-lg font-bold text-slate-800 border-b pb-2 pt-4">2. Thống Kê Nâng Cao</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="font-bold text-slate-700 mb-4 text-center">Violin Plot (Vi-ô-lông)</h3>
+                        <div class="h-64 relative w-full"><canvas id="chartViolin"></canvas></div>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="font-bold text-slate-700 mb-4 text-center">Box Plot (Hộp)</h3>
+                        <div class="h-64 relative w-full"><canvas id="chartBox"></canvas></div>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 md:col-span-2">
+                        <h3 class="font-bold text-slate-700 mb-4 text-center">Scatter Plot (Phân Tán)</h3>
+                        <div class="h-64 relative w-full"><canvas id="chartScatter"></canvas></div>
+                    </div>
+                </div>
+
+                <h3 class="text-lg font-bold text-slate-800 border-b pb-2 pt-4">3. Cơ Cấu & Tích Lũy</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="font-bold text-slate-700 text-sm">Pie/Donut</h3>
+                            <select id="pieDatasetSelect" onchange="updatePieChart()" class="text-xs border rounded p-1"></select>
+                        </div>
+                        <div class="h-64 relative w-full"><canvas id="chartPie"></canvas></div>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="font-bold text-slate-700 mb-4 text-center">Stacked Area (Miền)</h3>
+                        <div class="h-64 relative w-full"><canvas id="chartArea"></canvas></div>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="font-bold text-slate-700 mb-4 text-center">Ogive (Tích lũy)</h3>
+                        <div class="h-64 relative w-full"><canvas id="chartOgive"></canvas></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty State Charts -->
+            <div id="emptyChartsState" class="hidden h-96 flex flex-col items-center justify-center text-slate-400 bg-slate-50 border-2 border-dashed border-slate-200 rounded-xl mt-6">
+                <svg class="w-12 h-12 mb-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path></svg>
+                <p class="text-sm">Vui lòng nhập dữ liệu để xem biểu đồ</p>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // --- State ---
+        let mode = 'raw', currentTab = 'data';
+        let datasets = [{ id: 1, name: "Mẫu A", dataStr: "45, 52, 60, 48, 55, 62, 49, 58, 65, 51" }];
+        let manualRows = [{ id: 1, lower: 40, upper: 50, freqs: {} }, { id: 2, lower: 50, upper: 60, freqs: {} }, { id: 3, lower: 60, upper: 70, freqs: {} }];
+        const colors = [
+            { bg: 'rgba(59, 130, 246, 0.5)', border: '#2563eb' }, { bg: 'rgba(239, 68, 68, 0.5)', border: '#dc2626' },
+            { bg: 'rgba(16, 185, 129, 0.5)', border: '#059669' }, { bg: 'rgba(245, 158, 11, 0.5)', border: '#d97706' },
+            { bg: 'rgba(139, 92, 246, 0.5)', border: '#7c3aed' }
+        ];
+        
+        // --- Tabs & Mode ---
+        function switchTab(t) {
+            currentTab = t;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(t==='data'?'tabDataBtn':'tabChartsBtn').classList.add('active');
+            document.getElementById('tabDataContent').classList.toggle('hidden', t!=='data');
+            document.getElementById('tabChartsContent').classList.toggle('hidden', t!=='charts');
+            if(t==='charts') calculate();
+        }
+        function switchInputMode(m) {
+            mode = m;
+            document.getElementById('btnRaw').className = mode==='raw' ? "flex-1 py-2 text-sm font-medium rounded bg-indigo-50 text-indigo-700" : "flex-1 py-2 text-sm font-medium rounded text-slate-500 hover:bg-slate-50";
+            document.getElementById('btnTable').className = mode==='table' ? "flex-1 py-2 text-sm font-medium rounded bg-indigo-50 text-indigo-700" : "flex-1 py-2 text-sm font-medium rounded text-slate-500 hover:bg-slate-50";
+            document.getElementById('rawSection').classList.toggle('hidden', mode!=='raw');
+            document.getElementById('tableSection').classList.toggle('hidden', mode!=='table');
+            calculate();
+        }
+
+        // --- Dataset Ops ---
+        function addDataset() {
+            const newId = (datasets.length>0 ? Math.max(...datasets.map(d=>d.id)):0)+1;
+            datasets.push({id:newId, name:`Mẫu ${String.fromCharCode(65+datasets.length)}`, dataStr:""});
+            renderInputs(); calculate();
+        }
+        function removeLastDataset() { if(datasets.length<=1)return; datasets.pop(); renderInputs(); calculate(); }
+        function updateRaw(id, val) { datasets.find(d=>d.id===id).dataStr=val; calculate(); }
+        function updateName(id, val) { datasets.find(d=>d.id===id).name=val; renderInputs(); calculate(); }
+        function renderInputs() {
+            document.getElementById('datasetContainer').innerHTML = datasets.map(ds=>`
+                <div class="bg-white border rounded p-2"><div class="flex justify-between mb-1">
+                <input value="${ds.name}" onchange="updateName(${ds.id}, this.value)" class="text-xs font-bold w-20 border-b outline-none focus:border-indigo-500"></div>
+                <textarea oninput="updateRaw(${ds.id}, this.value)" class="w-full h-12 text-[10px] font-mono border rounded p-1 resize-none">${ds.dataStr}</textarea></div>`).join('');
+            const h = document.getElementById('manualHeaderRow');
+            h.innerHTML = `<th class="p-2 w-12">Dưới</th><th class="p-2 w-12">Trên</th>` + datasets.map(d=>`<th class="p-2 text-center text-indigo-700">${d.name}</th>`).join('') + `<th class="w-6"></th>`;
+            renderManualBody();
+            updatePieSelect();
+        }
+        function updatePieSelect() {
+            const sel = document.getElementById('pieDatasetSelect');
+            sel.innerHTML = datasets.map(d => `<option value="${d.id}">${d.name}</option>`).join('');
+        }
+
+        // --- Manual Table ---
+        function renderManualBody() {
+            document.getElementById('manualBody').innerHTML = manualRows.map(r=>`
+                <tr class="border-b hover:bg-slate-50"><td class="p-1"><input type="number" value="${r.lower}" onchange="updRow(${r.id},'lower',this.value)" class="w-full p-1 border rounded text-center input-cell"></td>
+                <td class="p-1"><input type="number" value="${r.upper}" onchange="updRow(${r.id},'upper',this.value)" class="w-full p-1 border rounded text-center input-cell"></td>
+                ${datasets.map(ds=>`<td class="p-1"><input type="number" value="${r.freqs[ds.id]||0}" min="0" onchange="updRow(${r.id},'freq_${ds.id}',this.value)" class="w-full p-1 border rounded text-center font-bold text-indigo-600 input-cell"></td>`).join('')}
+                <td class="p-1"><button onclick="delRow(${r.id})" class="text-red-300 hover:text-red-500">x</button></td></tr>`).join('');
+        }
+        function addManualRow() {
+            const last = manualRows[manualRows.length-1];
+            let l = last?last.upper:0, w = last?(last.upper-last.lower)||10:10;
+            manualRows.push({id:Date.now(), lower:l, upper:l+w, freqs:{}}); renderManualBody(); calculate();
+        }
+        function delRow(id) { if(manualRows.length>1) { manualRows=manualRows.filter(r=>r.id!==id); renderManualBody(); calculate(); } }
+        function updRow(id, f, val) {
+            const r = manualRows.find(x=>x.id===id); if(!r)return;
+            if(f.startsWith('freq')) r.freqs[parseInt(f.split('_')[1])] = parseInt(val)||0;
+            else { 
+                r[f]=parseFloat(val); 
+                if(manualRows.indexOf(r)===0 && (f==='lower'||f==='upper')) {
+                   const w = manualRows[0].upper - manualRows[0].lower;
+                   if(w>0) { for(let i=1;i<manualRows.length;i++){ manualRows[i].lower=manualRows[i-1].upper; manualRows[i].upper=manualRows[i].lower+w;} renderManualBody(); } 
+                }
+            }
+            calculate();
+        }
+
+        // --- Core Calc ---
+        let lastGroups = [], lastResults = [];
+
+        function calculate() {
+            let groups = [], results = [];
+            const resultsSection = document.getElementById('resultsSection');
+            const emptyState = document.getElementById('emptyState');
+            const chartsWrapper = document.getElementById('chartsWrapper');
+            const emptyChartsState = document.getElementById('emptyChartsState');
+
+            if(mode==='raw') {
+                const pDS = datasets.map(d => ({...d, data: d.dataStr.split(/[\s,;]+/).map(x=>parseFloat(x)).filter(n=>!isNaN(n)).sort((a,b)=>a-b)})).filter(d=>d.data.length>0);
+                if(pDS.length===0) { 
+                    resultsSection.classList.add('hidden'); emptyState.classList.remove('hidden'); 
+                    chartsWrapper.classList.add('hidden'); emptyChartsState.classList.remove('hidden');
+                    return;
+                }
+                const all = pDS.flatMap(d=>d.data), min=Math.min(...all), max=Math.max(...all);
+                const meth = document.getElementById('method').value, uStart=document.getElementById('startValue').value;
+                let start=uStart!==""?parseFloat(uStart):min, k=5, h=10;
+                
+                if(meth==='auto'){ k=Math.ceil(1+3.322*Math.log10(all.length)); h=Math.ceil((max-start)/k)||1; }
+                else if(meth==='manual_width'){ h=parseFloat(document.getElementById('manualH').value)||5; k=Math.ceil((max-start)/h); if(start+k*h<=max)k++;}
+                else { k=parseInt(document.getElementById('manualK').value)||5; h=(max-start)/k; }
+
+                for(let i=0;i<k;i++) groups.push({id:i+1, lower:start+i*h, upper:start+(i+1)*h, midpoint:start+i*h+h/2});
+                results = pDS.map((ds,i)=> processStats(ds.name, groups, colors[i%colors.length], ds.data, null));
+            } else {
+                groups = manualRows.map((r,i)=>({id:i+1, lower:r.lower, upper:r.upper, midpoint:(r.lower+r.upper)/2}));
+                results = datasets.map((ds,i)=> processStats(ds.name, groups, colors[i%colors.length], null, ds.id));
+            }
+            
+            const hasData = results.some(r => r.s.N > 0);
+            if(hasData) {
+                resultsSection.classList.remove('hidden'); emptyState.classList.add('hidden');
+                chartsWrapper.classList.remove('hidden'); emptyChartsState.classList.add('hidden');
+                lastGroups = groups; lastResults = results;
+                renderTables(groups, results);
+                if(currentTab==='charts') updateAllCharts(groups, results);
+            } else {
+                resultsSection.classList.add('hidden'); emptyState.classList.remove('hidden');
+                chartsWrapper.classList.add('hidden'); emptyChartsState.classList.remove('hidden');
+            }
+        }
+
+        function processStats(name, groups, color, rawData, dsId) {
+            let cf=0;
+            const gStats = groups.map((g, idx) => {
+                let freq = 0;
+                if(rawData) freq = (idx===groups.length-1) ? rawData.filter(x=>x>=g.lower && x<=g.upper+0.0001).length : rawData.filter(x=>x>=g.lower && x<g.upper).length;
+                else freq = manualRows[idx].freqs[dsId] || 0;
+                cf += freq;
+                return {...g, freq, cf};
+            });
+            const N = cf;
+            if(N===0) return {name, color, gStats, rawData: rawData||[], s:{N:0}};
+            
+            const mean = gStats.reduce((a,g)=>a+g.freq*g.midpoint,0)/N;
+            const variance = gStats.reduce((a,g)=>a+g.freq*Math.pow(g.midpoint-mean,2),0)/N;
+            const sd = Math.sqrt(variance);
+            const cv = mean!==0 ? (sd/Math.abs(mean))*100 : 0;
+            
+            let trueMean=null, absErr=null, relErr=null, outliers=[], range=0;
+            if(rawData) {
+                trueMean = rawData.reduce((a,b)=>a+b,0)/N; absErr = Math.abs(trueMean-mean); relErr = trueMean!==0 ? (absErr/Math.abs(trueMean))*100 : 0;
+                range = rawData[rawData.length-1] - rawData[0];
+            } else {
+                const ag = gStats.filter(g=>g.freq>0);
+                if(ag.length) range = ag[ag.length-1].upper - ag[0].lower;
+            }
+
+            const getQ = (t) => {
+                const g = gStats.find(x=>x.cf>=t);
+                if(!g) return {val:gStats[gStats.length-1].upper, grp:'>Max'};
+                const prev = gStats[g.id-2]?gStats[g.id-2].cf:0;
+                return {val: g.lower + ((t-prev)/g.freq)*(g.upper-g.lower), grp:`[${fmt(g.lower)};${fmt(g.upper)})`};
+            };
+            const q1 = getQ(N/4), q2=getQ(N/2), q3=getQ(3*N/4);
+            const iqr = q3.val - q1.val;
+
+            let maxF=-1, mG=null; gStats.forEach(g=>{if(g.freq>maxF){maxF=g.freq; mG=g;}});
+            let mode = 0;
+            if(mG) {
+                const i=gStats.indexOf(mG), p=(i>0?gStats[i-1].freq:0), n=(i<gStats.length-1?gStats[i+1].freq:0);
+                mode = mG.lower + ((mG.freq-p)/((mG.freq-p)+(mG.freq-n)))*(mG.upper-mG.lower);
+            }
+
+            if(rawData) {
+                const lf=q1.val-1.5*iqr, uf=q3.val+1.5*iqr;
+                outliers=rawData.filter(x=>x<lf||x>uf);
+            }
+
+            return { name, color, gStats, rawData: rawData || generateSimulatedData(gStats), s: {
+                N, mean, trueMean, absErr, relErr, variance, sd, cv, range,
+                q1:q1.val, q2:q2.val, q3:q3.val, iqr, mode, q1Loc:q1.grp, q2Loc:q2.grp, q3Loc:q3.grp,
+                outliers, disp: cv<10?"Thấp":cv<30?"TB":"Cao"
+            }};
+        }
+
+        function generateSimulatedData(gStats) {
+            let data = [];
+            gStats.forEach(g => {
+                for(let i=0; i<g.freq; i++) {
+                    const jitter = (Math.random() - 0.5) * (g.upper - g.lower) * 0.8;
+                    data.push(g.midpoint + jitter);
+                }
+            });
+            return data.sort((a,b)=>a-b);
+        }
+
+        function renderTables(groups, results) {
+            const m = [
+                {id:'N', l:'Tổng số (N)'}, {id:'trueMean', l:'Số đúng (x̄ gốc)', raw:1}, {id:'mean', l:'Số gần đúng (x̄ nhóm)'},
+                {id:'absErr', l:'Sai số tuyệt đối', raw:1}, {id:'relErr', l:'Sai số tương đối (%)', raw:1},
+                {id:'q2', l:'Trung vị (Me)'}, {id:'q1', l:'Q1'}, {id:'q3', l:'Q3'}, {id:'mode', l:'Mốt (Mo)'},
+                {id:'range', l:'Khoảng biến thiên (R)'}, {id:'iqr', l:'IQR'}, {id:'variance', l:'Phương sai (s²)'},
+                {id:'sd', l:'Độ lệch chuẩn (s)'}, {id:'cv', l:'CV (%)'}, {id:'disp', l:'Mức độ phân tán', txt:1},
+                {id:'outliers', l:'Ngoại lai (sl)', raw:1, len:1},
+                {id:'q1Loc', l:'Vị trí Q1', txt:1}, {id:'q2Loc', l:'Vị trí Me', txt:1}, {id:'q3Loc', l:'Vị trí Q3', txt:1}
+            ];
+            let h = `<thead><tr class="bg-indigo-50 border-b"><th class="px-4 py-2">Chỉ số</th>`+results.map(r=>`<th class="px-4 py-2 text-center" style="color:${r.color.border}">${r.name}</th>`).join('')+`</tr></thead><tbody>`;
+            m.forEach(x => {
+                h += `<tr class="border-b last:border-0 hover:bg-slate-50"><td class="px-4 py-2 font-medium text-slate-600">${x.l}</td>` + results.map(r=>{
+                    let v = r.s[x.id];
+                    if(x.raw && mode==='table') return `<td class="text-center text-slate-300 italic">N/A</td>`;
+                    if(v===undefined) return `<td>-</td>`;
+                    if(x.len) return `<td class="text-center font-bold text-red-600">${v.length}</td>`;
+                    if(x.txt) return `<td class="text-center text-slate-700">${v}</td>`;
+                    return `<td class="text-center font-bold text-slate-700">${fmt(v)}</td>`;
+                }).join('') + `</tr>`;
+            });
+            document.getElementById('statsTable').innerHTML = h+`</tbody>`;
+
+            let fh = `<thead><tr class="bg-indigo-50 border-b"><th class="px-4 py-2">Nhóm</th><th class="px-4 py-2 text-center">c_i</th>`+results.map(r=>`<th class="px-4 py-2 text-center" style="color:${r.color.border}">f (${r.name})</th>`).join('')+`</tr></thead><tbody>`;
+            groups.forEach((g,i)=>{
+                fh += `<tr class="border-b hover:bg-slate-50"><td class="px-4 py-2 text-slate-800">[${fmt(g.lower)}; ${fmt(g.upper)})</td><td class="px-4 py-2 text-center text-slate-500">${fmt(g.midpoint)}</td>`+results.map(r=>`<td class="px-4 py-2 text-center font-bold">${r.gStats[i].freq}</td>`).join('')+`</tr>`;
+            });
+            document.getElementById('freqTable').innerHTML = fh+`</tbody>`;
+        }
+
+        let charts = {};
+        function updateAllCharts(groups, results) {
+            const l = groups.map(g=>`[${fmt(g.lower)}; ${fmt(g.upper)})`);
+            const ol = [fmt(groups[0].lower), ...groups.map(g=>fmt(g.upper))]; 
+            const ds = (fn, type, fill) => results.map(r=>({
+                label: r.name, data: fn(r), backgroundColor: r.color.bg, borderColor: r.color.border, 
+                borderWidth: 1.5, tension: 0.3, fill: fill
+            }));
+
+            draw('chartHistogram', 'bar', l, ds(r=>r.gStats.map(g=>g.freq), 'bar', false), {scales:{x:{stacked:false},y:{beginAtZero:true}}});
+            draw('chartPolygon', 'line', groups.map(g=>fmt(g.midpoint)), ds(r=>r.gStats.map(g=>g.freq), 'line', false), {elements:{line:{tension:0}}});
+            draw('chartStacked', 'bar', l, ds(r=>r.gStats.map(g=>g.freq), 'bar', false), {scales:{x:{stacked:true},y:{stacked:true}}});
+            draw('chartRelFreq', 'bar', l, ds(r=>r.gStats.map(g=>(g.freq/r.s.N)*100), 'bar', false), {scales:{y:{beginAtZero:true, title:{display:true,text:'%'}}}});
+            draw('chartArea', 'line', l, ds(r=>r.gStats.map(g=>g.freq), 'line', true), {scales:{y:{stacked:true, beginAtZero:true}}, elements:{line:{tension:0.4}}});
+            draw('chartOgive', 'line', ol, ds(r=>[0, ...r.gStats.map(g=>g.cf)], 'line', false), {elements:{line:{tension:0.2}}});
+            updatePieChart();
+
+            const boxData = results.map(r => ({ label: r.name, backgroundColor: r.color.bg, borderColor: r.color.border, borderWidth: 1, outlierColor: '#ef4444', padding: 10, itemRadius: 0, data: [r.rawData] }));
+            draw('chartBox', 'boxplot', ['Phân bố'], boxData, {});
+
+            const violinData = results.map(r => ({ label: r.name, backgroundColor: r.color.bg, borderColor: r.color.border, borderWidth: 1, data: [r.rawData] }));
+            draw('chartViolin', 'violin', ['Mật độ'], violinData, {});
+
+            const scatterData = results.map(r => ({ label: r.name, backgroundColor: r.color.border, data: r.rawData.map((val, idx) => ({ x: val, y: Math.random() * 0.5 + results.indexOf(r) })) }));
+            draw('chartScatter', 'scatter', null, scatterData, { scales: { x: { type: 'linear', position: 'bottom', title: {display:true, text:'Giá trị'} }, y: { display: false } } });
+        }
+
+        function updatePieChart() {
+            const dsId = parseInt(document.getElementById('pieDatasetSelect').value) || (datasets[0]?datasets[0].id:0);
+            const dataset = datasets.find(d => d.id === dsId);
+            if(!dataset || !lastGroups.length) return;
+            let gStats = [];
+            if(mode==='raw') {
+                const data = dataset.dataStr.split(/[\s,;]+/).map(x=>parseFloat(x)).filter(n=>!isNaN(n));
+                gStats = lastGroups.map(g => ({...g, freq: data.filter(x=>x>=g.lower && x<g.upper).length}));
+            } else {
+                gStats = lastGroups.map((g,i) => ({...g, freq: manualRows[i].freqs[dsId]||0}));
+            }
+            const data = { labels: lastGroups.map(g => `[${fmt(g.lower)}; ${fmt(g.upper)})`), datasets: [{ data: gStats.map(g => g.freq), backgroundColor: ['#60a5fa','#f87171','#34d399','#fbbf24','#a78bfa','#f472b6','#9ca3af'] }] };
+            draw('chartPie', 'doughnut', data.labels, data.datasets, {});
+        }
+
+        function draw(id, type, l, d, opt) {
+            const ctx = document.getElementById(id).getContext('2d');
+            if(charts[id]) charts[id].destroy();
+            charts[id] = new Chart(ctx, {type, data:{labels:l, datasets:d}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom'}}, ...opt}});
+        }
+
+        function fmt(n) { const d=parseInt(document.getElementById('decimalPlaces').value)||2; return (n===undefined||n===null)?"-":new Intl.NumberFormat('vi-VN',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n); }
+        function toggleInputs() { const m=document.getElementById('method').value; document.getElementById('inputH').classList.toggle('hidden', m!=='manual_width'); document.getElementById('inputK').classList.toggle('hidden', m!=='manual_count'); }
+        function copyTable() { 
+            const el = document.getElementById('freqTable'); let range, sel;
+            if (document.createRange && window.getSelection) { range = document.createRange(); sel = window.getSelection(); sel.removeAllRanges(); try { range.selectNodeContents(el); sel.addRange(range); } catch (e) { range.selectNode(el); sel.addRange(range); } document.execCommand("copy"); sel.removeAllRanges(); alert("Đã sao chép!"); }
+        }
+
+        window.onload = () => { renderInputs(); calculate(); };
+    </script>
+</body>
+</html>
