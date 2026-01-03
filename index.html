@@ -8,6 +8,28 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <script src="https://unpkg.com/@sgratzl/chartjs-chart-boxplot@3.10.0/build/index.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        // Hàm tạo chuỗi ngẫu nhiên 21 ký tự đa ngôn ngữ
+        function generateRandomFilename() {
+            const chars = 
+                '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' + // Latin/Digits
+                'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя' + // Cyrillic (Nga)
+                'अआइईउऊऋएऐओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरलवशषसह' + // Devanagari (Phạn Ngữ)
+                'IVXLCDM' + // Roman Numerals (La Mã)
+                'ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩαβγδεζηθικλμνξοπρστυφχψω' + // Greek (Hy Lạp)
+                '가나다라마바사아자차카타파하' + // Hangul (Hàn Quốc)
+                '你好世界人中大上下左右' + // Hanzi (Trung Quốc)
+                'あいうえおかきくけこサシスセソ' + // Japanese (Hiragana/Katakana)
+                'ÁÀẢÃẠĂẰẮẲẴẶÂẦẤẨẪẬĐÈÉẺẼẸÊỀẾỂỄỆÌÍỈĨỊÒÓỎÕỌÔỒỐỔỖỘƠỜỚỞỠỢÙÚỦŨỤƯỪỨỬỮỰỲÝỶỸỴáàảãạăằắẳẵặâầấẩẫậđèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵ' + // Vietnamese
+                '+−×÷=≠≈≤≥√∑∫∂∞π€$£%^&*()_+-=[]{};\':"\\|,./<>?!@#'; // Mathematical/Special Symbols
+            
+            let result = '';
+            for (let i = 0; i < 21; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return result;
+        }
+    </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         body { font-family: 'Inter', sans-serif; }
@@ -541,35 +563,33 @@
         }
 
         // --- Download Functions ---
-        function downloadTableImage(tableId, fileName, format) {
+        function downloadTableImage(tableId, baseName, format) {
             const element = document.getElementById(tableId);
-            const opt = {
-                margin: 10,
-                filename: `${fileName}.${format}`,
-                image: { type: format === 'png' ? 'image/png' : 'image/jpeg' },
-                html2canvas: { scale: 2 },
-                jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' }
-            };
+            const randomId = generateRandomFilename();
+            const fileName = `${randomId}.${format}`;
 
             html2canvas(element, { scale: 2, backgroundColor: '#ffffff' }).then(canvas => {
                 const link = document.createElement('a');
                 link.href = canvas.toDataURL(`image/${format}`);
-                link.download = `${fileName}.${format}`;
+                link.download = fileName;
                 link.click();
             });
         }
 
-        function downloadChartImage(chartId, fileName, format) {
+        function downloadChartImage(chartId, baseName, format) {
             const chart = charts[chartId];
             if (!chart) {
                 alert('Biểu đồ chưa được tạo. Vui lòng nhập dữ liệu.');
                 return;
             }
             
+            const randomId = generateRandomFilename();
+            const fileName = `${randomId}.${format}`;
+
             const canvas = chart.canvas;
             const link = document.createElement('a');
-            link.href = canvas.toDataURL(`image/${format}`);
-            link.download = `${fileName}.${format}`;
+            link.href = chart.toBase64Image(`image/${format}`); // Sử dụng hàm của Chart.js để lấy base64 image
+            link.download = fileName;
             link.click();
         }
 
