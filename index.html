@@ -1,195 +1,383 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ứng dụng Thống kê và Trực quan hóa</title>
+    <title>AAV Data Analysis</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
-            color: #333;
         }
-        
+
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             background: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             overflow: hidden;
         }
-        
+
         header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 30px;
+            padding: 40px;
             text-align: center;
         }
-        
+
         header h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
         }
-        
+
         header p {
             font-size: 1.1em;
             opacity: 0.9;
         }
-        
-        .content {
+
+        .controls {
             padding: 30px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            align-items: end;
         }
-        
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .control-group label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 0.95em;
+        }
+
+        .control-group input,
+        .control-group select {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .control-group input:focus,
+        .control-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .btn-download {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-download:hover {
+            background: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(40, 167, 69, 0.3);
+        }
+
+        .btn-download-all {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .btn-download-all:hover {
+            background: #138496;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(23, 162, 184, 0.3);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .results-section {
+            margin-bottom: 40px;
+        }
+
+        .results-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+            font-size: 1.8em;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .table-wrapper {
+            position: relative;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        table thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            position: sticky;
+            top: 0;
+        }
+
+        table th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        table tbody tr {
+            transition: all 0.2s ease;
+        }
+
+        table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        table tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            margin-bottom: 40px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 400px;
+            margin-bottom: 15px;
+        }
+
+        .chart-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 15px;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+            font-size: 1.1em;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #667eea;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             margin-bottom: 30px;
         }
-        
+
         .stat-card {
-            background: #f8f9fa;
-            border-left: 4px solid #667eea;
-            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
             border-radius: 8px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
         }
-        
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
-        }
-        
+
         .stat-card h3 {
-            color: #667eea;
+            font-size: 0.9em;
+            opacity: 0.9;
             margin-bottom: 10px;
-            font-size: 0.95em;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-        
+
         .stat-card .value {
-            font-size: 2.5em;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 5px;
+            font-size: 2em;
+            font-weight: 700;
         }
-        
-        .stat-card .label {
-            color: #666;
-            font-size: 0.9em;
-        }
-        
-        .charts-section {
-            margin-top: 30px;
-        }
-        
-        .charts-section h2 {
-            color: #333;
-            margin-bottom: 20px;
-            font-size: 1.8em;
-            border-bottom: 2px solid #667eea;
-            padding-bottom: 10px;
-        }
-        
-        .chart-container {
+
+        .export-section {
             background: #f8f9fa;
             padding: 20px;
             border-radius: 8px;
-            margin-bottom: 20px;
-            text-align: center;
+            margin-bottom: 30px;
+            border-left: 4px solid #17a2b8;
         }
-        
-        .chart-placeholder {
-            background: linear-gradient(135deg, #e0e7ff 0%, #f3e8ff 100%);
-            padding: 40px;
-            border-radius: 6px;
-            color: #667eea;
-            font-size: 1.1em;
-            min-height: 300px;
+
+        .export-section h3 {
+            color: #17a2b8;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
-            justify-content: center;
-        }
-        
-        .controls {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            display: flex;
-            flex-wrap: wrap;
             gap: 10px;
+        }
+
+        .export-section h3::before {
+            content: "📥";
+            font-size: 1.2em;
+        }
+
+        .download-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .download-item {
+            display: flex;
             align-items: center;
-        }
-        
-        button {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            transition: background 0.3s ease;
-        }
-        
-        button:hover {
-            background: #764ba2;
-        }
-        
-        select, input {
+            gap: 10px;
             padding: 10px;
+            background: white;
+            border-radius: 6px;
             border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1em;
         }
-        
-        .info-section {
-            background: #e7f3ff;
-            border-left: 4px solid #667eea;
+
+        .download-item input[type="checkbox"] {
+            cursor: pointer;
+        }
+
+        .download-item label {
+            cursor: pointer;
+            flex: 1;
+            color: #333;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
             padding: 15px;
-            border-radius: 5px;
-            margin-top: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 4px solid #721c24;
         }
-        
-        .info-section p {
-            margin: 5px 0;
-            color: #555;
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 4px solid #155724;
         }
-        
-        footer {
-            background: #f8f9fa;
-            padding: 20px;
-            text-align: center;
-            color: #666;
-            border-top: 1px solid #ddd;
-            font-size: 0.9em;
-        }
-        
+
         @media (max-width: 768px) {
             header h1 {
                 font-size: 1.8em;
             }
-            
-            .stats-grid {
+
+            .controls {
                 grid-template-columns: 1fr;
             }
-            
-            .controls {
+
+            .chart-wrapper {
+                height: 300px;
+            }
+
+            .button-group {
                 flex-direction: column;
             }
-            
-            button, select, input {
+
+            .btn {
                 width: 100%;
             }
         }
@@ -198,112 +386,750 @@
 <body>
     <div class="container">
         <header>
-            <h1>📊 Ứng dụng Thống kê và Trực quan hóa</h1>
-            <p>Phân tích dữ liệu một cách hiệu quả và trực quan</p>
+            <h1>🧬 AAV Data Analysis Portal</h1>
+            <p>Comprehensive Data Visualization and Export Suite</p>
         </header>
-        
-        <div class="content">
-            <!-- Controls Section -->
-            <div class="controls">
-                <label for="dateRange">Khoảng thời gian:</label>
-                <input type="date" id="dateRange">
-                <label for="category">Danh mục:</label>
-                <select id="category">
-                    <option value="">Tất cả</option>
-                    <option value="sales">Bán hàng</option>
-                    <option value="users">Người dùng</option>
-                    <option value="performance">Hiệu suất</option>
-                </select>
-                <button onclick="updateStats()">Cập nhật</button>
-                <button onclick="exportData()">Xuất dữ liệu</button>
+
+        <div class="controls">
+            <div class="control-group">
+                <label for="csvFile">Upload CSV File:</label>
+                <input type="file" id="csvFile" accept=".csv" />
             </div>
-            
-            <!-- Statistics Cards -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <h3>Tổng doanh thu</h3>
-                    <div class="value">$125,430</div>
-                    <div class="label">Tăng 12.5% so với tháng trước</div>
-                </div>
-                
-                <div class="stat-card">
-                    <h3>Người dùng hoạt động</h3>
-                    <div class="value">8,542</div>
-                    <div class="label">Tăng 8.3% so với tháng trước</div>
-                </div>
-                
-                <div class="stat-card">
-                    <h3>Đơn hàng hoàn thành</h3>
-                    <div class="value">2,341</div>
-                    <div class="label">Tỷ lệ hoàn thành 98.7%</div>
-                </div>
-                
-                <div class="stat-card">
-                    <h3>Tỷ lệ chuyển đổi</h3>
-                    <div class="value">4.23%</div>
-                    <div class="label">Tăng 0.8% so với tháng trước</div>
-                </div>
-            </div>
-            
-            <!-- Charts Section -->
-            <div class="charts-section">
-                <h2>📈 Biểu đồ và Phân tích</h2>
-                
-                <div class="chart-container">
-                    <h3>Biểu đồ doanh thu hàng tháng</h3>
-                    <div class="chart-placeholder">
-                        📊 Biểu đồ đường - Doanh thu qua các tháng
-                    </div>
-                </div>
-                
-                <div class="chart-container">
-                    <h3>Phân bổ người dùng theo danh mục</h3>
-                    <div class="chart-placeholder">
-                        🥧 Biểu đồ tròn - Phân bổ dữ liệu
-                    </div>
-                </div>
-                
-                <div class="chart-container">
-                    <h3>Xu hướng hoạt động hàng ngày</h3>
-                    <div class="chart-placeholder">
-                        📊 Biểu đồ cột - Hoạt động hàng ngày
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Info Section -->
-            <div class="info-section">
-                <h3>ℹ️ Thông tin ứng dụng</h3>
-                <p><strong>Ngày cập nhật:</strong> 03/01/2026</p>
-                <p><strong>Giờ cập nhật (UTC):</strong> 16:01:59</p>
-                <p><strong>Tác giả:</strong> lucdai</p>
-                <p>Ứng dụng này cung cấp các công cụ phân tích và trực quan hóa dữ liệu toàn diện để giúp bạn hiểu rõ hơn về hiệu suất kinh doanh của mình.</p>
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="loadFile()">Load Data</button>
+                <button class="btn btn-secondary" onclick="clearData()">Clear Data</button>
             </div>
         </div>
-        
-        <footer>
-            <p>&copy; 2026 Ứng dụng Thống kê và Trực quan hóa. Mọi quyền lợi được bảo lưu.</p>
-            <p>Liên hệ: support@example.com | Phiên bản: 1.0.0</p>
-        </footer>
+
+        <div class="content">
+            <div id="message"></div>
+            <div id="results" style="display: none;">
+                <!-- Bulk Export Section -->
+                <div class="export-section">
+                    <h3>Batch Export All Visualizations</h3>
+                    <p style="margin-bottom: 15px; color: #555;">Select which visualizations to include in your batch download:</p>
+                    <div class="download-items">
+                        <div class="download-item">
+                            <input type="checkbox" id="exportFreqTable" checked>
+                            <label for="exportFreqTable">Frequency Distribution Table</label>
+                        </div>
+                        <div class="download-item">
+                            <input type="checkbox" id="exportStatsTable" checked>
+                            <label for="exportStatsTable">Statistics Table</label>
+                        </div>
+                        <div class="download-item">
+                            <input type="checkbox" id="exportFreqChart" checked>
+                            <label for="exportFreqChart">Frequency Distribution Chart</label>
+                        </div>
+                        <div class="download-item">
+                            <input type="checkbox" id="exportStatsChart" checked>
+                            <label for="exportStatsChart">Statistics Chart</label>
+                        </div>
+                        <div class="download-item">
+                            <input type="checkbox" id="exportBoxChart" checked>
+                            <label for="exportBoxChart">Box Plot Chart</label>
+                        </div>
+                        <div class="download-item">
+                            <input type="checkbox" id="exportHistogram" checked>
+                            <label for="exportHistogram">Histogram Chart</label>
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn btn-download-all" onclick="downloadAllVisualizations()">
+                            📦 Download All Selected as ZIP
+                        </button>
+                        <button class="btn btn-secondary" onclick="selectAllExports()">Select All</button>
+                        <button class="btn btn-secondary" onclick="deselectAllExports()">Deselect All</button>
+                    </div>
+                </div>
+
+                <!-- Statistics Cards -->
+                <div class="results-section">
+                    <h2>Summary Statistics</h2>
+                    <div class="stats-grid" id="statsGrid"></div>
+                </div>
+
+                <!-- Frequency Distribution Table -->
+                <div class="results-section">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h2 style="margin: 0; padding: 0; border: none;">Frequency Distribution</h2>
+                        <button class="btn btn-download" onclick="downloadFrequencyTable()">📥 Download Table</button>
+                    </div>
+                    <div class="table-container">
+                        <div class="table-wrapper" id="freqTableWrapper">
+                            <table id="frequencyTable"></table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Statistics Table -->
+                <div class="results-section">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h2 style="margin: 0; padding: 0; border: none;">Statistical Summary</h2>
+                        <button class="btn btn-download" onclick="downloadStatsTable()">📥 Download Table</button>
+                    </div>
+                    <div class="table-container">
+                        <div class="table-wrapper" id="statsTableWrapper">
+                            <table id="statsTable"></table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Frequency Distribution Chart -->
+                <div class="results-section">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h2 style="margin: 0; padding: 0; border: none;">Frequency Distribution Chart</h2>
+                        <button class="btn btn-download" onclick="downloadFrequencyChart()">📥 Download Chart</button>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-wrapper">
+                            <canvas id="frequencyChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Statistics Chart -->
+                <div class="results-section">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h2 style="margin: 0; padding: 0; border: none;">Statistics Comparison</h2>
+                        <button class="btn btn-download" onclick="downloadStatsChart()">📥 Download Chart</button>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-wrapper">
+                            <canvas id="statsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Box Plot -->
+                <div class="results-section">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h2 style="margin: 0; padding: 0; border: none;">Box Plot Analysis</h2>
+                        <button class="btn btn-download" onclick="downloadBoxChart()">📥 Download Chart</button>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-wrapper">
+                            <canvas id="boxChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Histogram -->
+                <div class="results-section">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h2 style="margin: 0; padding: 0; border: none;">Histogram Distribution</h2>
+                        <button class="btn btn-download" onclick="downloadHistogram()">📥 Download Chart</button>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-wrapper">
+                            <canvas id="histogram"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    
+
     <script>
-        function updateStats() {
-            const dateRange = document.getElementById('dateRange').value;
-            const category = document.getElementById('category').value;
-            alert('Đang cập nhật thống kê...\nNgày: ' + (dateRange || 'Tất cả') + '\nDanh mục: ' + (category || 'Tất cả'));
+        let chartInstances = {};
+        let rawData = [];
+
+        function loadFile() {
+            const fileInput = document.getElementById('csvFile');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                showMessage('Please select a CSV file', 'error');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const csv = e.target.result;
+                    rawData = parseCSV(csv);
+                    
+                    if (rawData.length === 0) {
+                        showMessage('CSV file is empty or invalid', 'error');
+                        return;
+                    }
+
+                    analyzeData();
+                    document.getElementById('results').style.display = 'block';
+                    showMessage('Data loaded and analyzed successfully!', 'success');
+                } catch (error) {
+                    showMessage('Error parsing CSV: ' + error.message, 'error');
+                    console.error(error);
+                }
+            };
+            reader.readAsText(file);
         }
-        
-        function exportData() {
-            alert('Đang xuất dữ liệu dưới dạng CSV...');
-            // Implement export functionality here
+
+        function parseCSV(csv) {
+            const lines = csv.trim().split('\n');
+            if (lines.length < 2) return [];
+
+            const headers = lines[0].split(',').map(h => h.trim());
+            const data = [];
+
+            for (let i = 1; i < lines.length; i++) {
+                const values = lines[i].split(',').map(v => v.trim());
+                if (values.length === headers.length) {
+                    const row = {};
+                    headers.forEach((header, index) => {
+                        const value = parseFloat(values[index]);
+                        row[header] = isNaN(value) ? values[index] : value;
+                    });
+                    data.push(row);
+                }
+            }
+
+            return data;
         }
-        
-        // Set today's date as default
-        document.addEventListener('DOMContentLoaded', function() {
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('dateRange').value = today;
-        });
+
+        function analyzeData() {
+            const column = Object.keys(rawData[0]).find(key => 
+                !isNaN(parseFloat(rawData[0][key]))
+            );
+
+            if (!column) {
+                showMessage('No numeric columns found in CSV', 'error');
+                return;
+            }
+
+            const values = rawData.map(row => parseFloat(row[column])).filter(v => !isNaN(v));
+            
+            generateFrequencyDistribution(values, column);
+            generateStatistics(values, column);
+            generateFrequencyChart(values, column);
+            generateStatsChart(values, column);
+            generateBoxChart(values, column);
+            generateHistogram(values, column);
+            displayStatisticsCards(values);
+        }
+
+        function generateFrequencyDistribution(values, columnName) {
+            const min = Math.min(...values);
+            const max = Math.max(...values);
+            const binCount = Math.ceil(Math.sqrt(values.length));
+            const binSize = (max - min) / binCount;
+
+            const bins = Array(binCount).fill(0);
+            values.forEach(v => {
+                let binIndex = Math.floor((v - min) / binSize);
+                if (binIndex === binCount) binIndex--;
+                bins[binIndex]++;
+            });
+
+            const table = document.getElementById('frequencyTable');
+            table.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>Range</th>
+                        <th>Frequency</th>
+                        <th>Percentage</th>
+                        <th>Cumulative %</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${bins.map((count, i) => {
+                        const rangeStart = (min + i * binSize).toFixed(2);
+                        const rangeEnd = (min + (i + 1) * binSize).toFixed(2);
+                        const percentage = ((count / values.length) * 100).toFixed(2);
+                        const cumulative = ((bins.slice(0, i + 1).reduce((a, b) => a + b) / values.length) * 100).toFixed(2);
+                        return `
+                            <tr>
+                                <td>${rangeStart} - ${rangeEnd}</td>
+                                <td>${count}</td>
+                                <td>${percentage}%</td>
+                                <td>${cumulative}%</td>
+                            </tr>
+                        `;
+                    }).join('')}
+                </tbody>
+            `;
+        }
+
+        function generateStatistics(values, columnName) {
+            values.sort((a, b) => a - b);
+            
+            const mean = values.reduce((a, b) => a + b) / values.length;
+            const median = values.length % 2 === 0 
+                ? (values[values.length / 2 - 1] + values[values.length / 2]) / 2 
+                : values[Math.floor(values.length / 2)];
+            const variance = values.reduce((a, v) => a + Math.pow(v - mean, 2), 0) / values.length;
+            const stdDev = Math.sqrt(variance);
+            const q1 = values[Math.floor(values.length * 0.25)];
+            const q3 = values[Math.floor(values.length * 0.75)];
+            const iqr = q3 - q1;
+
+            const table = document.getElementById('statsTable');
+            table.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Count</td><td>${values.length}</td></tr>
+                    <tr><td>Mean</td><td>${mean.toFixed(4)}</td></tr>
+                    <tr><td>Median</td><td>${median.toFixed(4)}</td></tr>
+                    <tr><td>Std. Deviation</td><td>${stdDev.toFixed(4)}</td></tr>
+                    <tr><td>Variance</td><td>${variance.toFixed(4)}</td></tr>
+                    <tr><td>Minimum</td><td>${Math.min(...values).toFixed(4)}</td></tr>
+                    <tr><td>Q1 (25%)</td><td>${q1.toFixed(4)}</td></tr>
+                    <tr><td>Q3 (75%)</td><td>${q3.toFixed(4)}</td></tr>
+                    <tr><td>IQR</td><td>${iqr.toFixed(4)}</td></tr>
+                    <tr><td>Maximum</td><td>${Math.max(...values).toFixed(4)}</td></tr>
+                </tbody>
+            `;
+        }
+
+        function displayStatisticsCards(values) {
+            const mean = (values.reduce((a, b) => a + b) / values.length).toFixed(2);
+            const median = values.length % 2 === 0 
+                ? ((values[values.length / 2 - 1] + values[values.length / 2]) / 2).toFixed(2)
+                : values[Math.floor(values.length / 2)].toFixed(2);
+            const variance = (values.reduce((a, v) => a + Math.pow(v - mean, 2), 0) / values.length).toFixed(2);
+            const stdDev = Math.sqrt(variance).toFixed(2);
+
+            document.getElementById('statsGrid').innerHTML = `
+                <div class="stat-card">
+                    <h3>Total Records</h3>
+                    <div class="value">${values.length}</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Mean</h3>
+                    <div class="value">${mean}</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Median</h3>
+                    <div class="value">${median}</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Std. Dev.</h3>
+                    <div class="value">${stdDev}</div>
+                </div>
+            `;
+        }
+
+        function generateFrequencyChart(values, columnName) {
+            const min = Math.min(...values);
+            const max = Math.max(...values);
+            const binCount = Math.ceil(Math.sqrt(values.length));
+            const binSize = (max - min) / binCount;
+
+            const bins = Array(binCount).fill(0);
+            const labels = [];
+            
+            values.forEach(v => {
+                let binIndex = Math.floor((v - min) / binSize);
+                if (binIndex === binCount) binIndex--;
+                bins[binIndex]++;
+            });
+
+            for (let i = 0; i < binCount; i++) {
+                const start = (min + i * binSize).toFixed(2);
+                const end = (min + (i + 1) * binSize).toFixed(2);
+                labels.push(`${start}-${end}`);
+            }
+
+            destroyChart('frequencyChart');
+            const ctx = document.getElementById('frequencyChart').getContext('2d');
+            chartInstances['frequencyChart'] = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Frequency',
+                        data: bins,
+                        backgroundColor: 'rgba(102, 126, 234, 0.7)',
+                        borderColor: 'rgba(102, 126, 234, 1)',
+                        borderWidth: 2,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        },
+                        title: {
+                            display: true,
+                            text: 'Frequency Distribution'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Frequency'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function generateStatsChart(values, columnName) {
+            values.sort((a, b) => a - b);
+            
+            const mean = values.reduce((a, b) => a + b) / values.length;
+            const median = values.length % 2 === 0 
+                ? (values[values.length / 2 - 1] + values[values.length / 2]) / 2 
+                : values[Math.floor(values.length / 2)];
+            const stdDev = Math.sqrt(values.reduce((a, v) => a + Math.pow(v - mean, 2), 0) / values.length);
+
+            destroyChart('statsChart');
+            const ctx = document.getElementById('statsChart').getContext('2d');
+            chartInstances['statsChart'] = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Mean', 'Median', 'Std. Dev', 'Min', 'Max'],
+                    datasets: [{
+                        label: 'Statistical Measures',
+                        data: [mean, median, stdDev, Math.min(...values), Math.max(...values)],
+                        backgroundColor: [
+                            'rgba(102, 126, 234, 0.7)',
+                            'rgba(118, 75, 162, 0.7)',
+                            'rgba(255, 107, 107, 0.7)',
+                            'rgba(75, 192, 192, 0.7)',
+                            'rgba(255, 193, 7, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(102, 126, 234, 1)',
+                            'rgba(118, 75, 162, 1)',
+                            'rgba(255, 107, 107, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(255, 193, 7, 1)'
+                        ],
+                        borderWidth: 2,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        },
+                        title: {
+                            display: true,
+                            text: 'Statistical Summary'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function generateBoxChart(values, columnName) {
+            values.sort((a, b) => a - b);
+            
+            const q1 = values[Math.floor(values.length * 0.25)];
+            const median = values.length % 2 === 0 
+                ? (values[values.length / 2 - 1] + values[values.length / 2]) / 2 
+                : values[Math.floor(values.length / 2)];
+            const q3 = values[Math.floor(values.length * 0.75)];
+            const min = Math.min(...values);
+            const max = Math.max(...values);
+
+            destroyChart('boxChart');
+            const ctx = document.getElementById('boxChart').getContext('2d');
+            chartInstances['boxChart'] = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Box Plot'],
+                    datasets: [{
+                        label: 'Min',
+                        data: [min],
+                        backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'Q1',
+                        data: [q1 - min],
+                        backgroundColor: 'rgba(102, 126, 234, 0.7)',
+                        borderColor: 'rgba(102, 126, 234, 1)',
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'Median',
+                        data: [median - q1],
+                        backgroundColor: 'rgba(255, 193, 7, 0.7)',
+                        borderColor: 'rgba(255, 193, 7, 1)',
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'Q3',
+                        data: [q3 - median],
+                        backgroundColor: 'rgba(118, 75, 162, 0.7)',
+                        borderColor: 'rgba(118, 75, 162, 1)',
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'Max',
+                        data: [max - q3],
+                        backgroundColor: 'rgba(255, 107, 107, 0.7)',
+                        borderColor: 'rgba(255, 107, 107, 1)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        },
+                        title: {
+                            display: true,
+                            text: 'Box Plot Analysis'
+                        }
+                    },
+                    scales: {
+                        x: {
+                            stacked: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function generateHistogram(values, columnName) {
+            const min = Math.min(...values);
+            const max = Math.max(...values);
+            const binCount = Math.ceil(Math.sqrt(values.length));
+            const binSize = (max - min) / binCount;
+
+            const bins = Array(binCount).fill(0);
+            values.forEach(v => {
+                let binIndex = Math.floor((v - min) / binSize);
+                if (binIndex === binCount) binIndex--;
+                bins[binIndex]++;
+            });
+
+            destroyChart('histogram');
+            const ctx = document.getElementById('histogram').getContext('2d');
+            chartInstances['histogram'] = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: bins.map((_, i) => `${(min + i * binSize).toFixed(1)}`),
+                    datasets: [{
+                        label: 'Frequency Distribution',
+                        data: bins,
+                        borderColor: 'rgba(102, 126, 234, 1)',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        borderWidth: 2,
+                        pointRadius: 4,
+                        pointBackgroundColor: 'rgba(102, 126, 234, 1)',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        },
+                        title: {
+                            display: true,
+                            text: 'Histogram Distribution'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Frequency'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function destroyChart(chartId) {
+            if (chartInstances[chartId]) {
+                chartInstances[chartId].destroy();
+                delete chartInstances[chartId];
+            }
+        }
+
+        function showMessage(msg, type) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.innerHTML = `<div class="${type}">${msg}</div>`;
+            setTimeout(() => {
+                messageDiv.innerHTML = '';
+            }, 5000);
+        }
+
+        function clearData() {
+            document.getElementById('csvFile').value = '';
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('message').innerHTML = '';
+            Object.keys(chartInstances).forEach(key => destroyChart(key));
+            rawData = [];
+        }
+
+        // Individual Download Functions
+        function downloadFrequencyTable() {
+            downloadTable('frequencyTable', 'frequency-distribution.png');
+        }
+
+        function downloadStatsTable() {
+            downloadTable('statsTable', 'statistics-summary.png');
+        }
+
+        function downloadFrequencyChart() {
+            downloadChart('frequencyChart', 'frequency-chart.png');
+        }
+
+        function downloadStatsChart() {
+            downloadChart('statsChart', 'statistics-chart.png');
+        }
+
+        function downloadBoxChart() {
+            downloadChart('boxChart', 'box-plot.png');
+        }
+
+        function downloadHistogram() {
+            downloadChart('histogram', 'histogram.png');
+        }
+
+        function downloadTable(tableId, filename) {
+            const element = document.getElementById(tableId).parentElement;
+            html2canvas(element, { scale: 2, backgroundColor: '#ffffff' }).then(canvas => {
+                const link = document.createElement('a');
+                link.href = canvas.toDataURL('image/png');
+                link.download = filename;
+                link.click();
+            }).catch(err => {
+                showMessage('Error downloading table: ' + err.message, 'error');
+                console.error(err);
+            });
+        }
+
+        function downloadChart(chartId, filename) {
+            const canvas = document.getElementById(chartId);
+            const image = canvas.toDataURL('image/png');
+            const link = document.createElement('a');
+            link.href = image;
+            link.download = filename;
+            link.click();
+        }
+
+        // Batch Download Functions
+        function selectAllExports() {
+            document.querySelectorAll('.export-section input[type="checkbox"]').forEach(checkbox => {
+                checkbox.checked = true;
+            });
+        }
+
+        function deselectAllExports() {
+            document.querySelectorAll('.export-section input[type="checkbox"]').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+        }
+
+        async function downloadAllVisualizations() {
+            try {
+                const zip = new JSZip();
+                const imgFolder = zip.folder('AAV_Analysis_Export');
+                let itemCount = 0;
+
+                // Check selections
+                if (document.getElementById('exportFreqTable').checked) {
+                    await addTableToZip(imgFolder, 'frequencyTable', 'frequency-distribution-table.png');
+                    itemCount++;
+                }
+                if (document.getElementById('exportStatsTable').checked) {
+                    await addTableToZip(imgFolder, 'statsTable', 'statistics-summary-table.png');
+                    itemCount++;
+                }
+                if (document.getElementById('exportFreqChart').checked) {
+                    await addChartToZip(imgFolder, 'frequencyChart', 'frequency-distribution-chart.png');
+                    itemCount++;
+                }
+                if (document.getElementById('exportStatsChart').checked) {
+                    await addChartToZip(imgFolder, 'statsChart', 'statistics-comparison-chart.png');
+                    itemCount++;
+                }
+                if (document.getElementById('exportBoxChart').checked) {
+                    await addChartToZip(imgFolder, 'boxChart', 'box-plot-chart.png');
+                    itemCount++;
+                }
+                if (document.getElementById('exportHistogram').checked) {
+                    await addChartToZip(imgFolder, 'histogram', 'histogram-chart.png');
+                    itemCount++;
+                }
+
+                if (itemCount === 0) {
+                    showMessage('Please select at least one item to export', 'error');
+                    return;
+                }
+
+                // Generate and download zip
+                const blob = await zip.generateAsync({ type: 'blob' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = `AAV_Analysis_Export_${new Date().toISOString().split('T')[0]}.zip`;
+                link.click();
+
+                showMessage(`Successfully exported ${itemCount} visualization(s) to ZIP file!`, 'success');
+            } catch (error) {
+                showMessage('Error creating ZIP file: ' + error.message, 'error');
+                console.error(error);
+            }
+        }
+
+        async function addTableToZip(folder, tableId, filename) {
+            return new Promise((resolve, reject) => {
+                const element = document.getElementById(tableId).parentElement;
+                html2canvas(element, { scale: 2, backgroundColor: '#ffffff' })
+                    .then(canvas => {
+                        canvas.toBlob(blob => {
+                            folder.file(filename, blob);
+                            resolve();
+                        });
+                    })
+                    .catch(reject);
+            });
+        }
+
+        async function addChartToZip(folder, chartId, filename) {
+            return new Promise((resolve, reject) => {
+                try {
+                    const canvas = document.getElementById(chartId);
+                    canvas.toBlob(blob => {
+                        folder.file(filename, blob);
+                        resolve();
+                    });
+                } catch (error) {
+                    reject(error);
+                }
+            });
+        }
     </script>
 </body>
 </html>
