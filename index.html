@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AAV Analysis Tool</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <style>
@@ -13,659 +13,590 @@
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
         }
-
+        
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-        }
-
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
             padding: 30px;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
             text-align: center;
         }
-
-        header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
+        
+        .subtitle {
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 14px;
         }
-
-        header p {
-            font-size: 1.1em;
-            opacity: 0.95;
-        }
-
-        .main-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            padding: 30px;
-        }
-
-        .section {
+        
+        .input-section {
+            margin-bottom: 30px;
+            padding: 20px;
             background: #f8f9fa;
-            padding: 25px;
-            border-radius: 10px;
-            border: 1px solid #e0e0e0;
+            border-radius: 8px;
         }
-
-        .section h2 {
-            color: #333;
-            margin-bottom: 20px;
-            font-size: 1.5em;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 10px;
-        }
-
-        .form-group {
+        
+        .input-group {
             margin-bottom: 15px;
         }
-
+        
         label {
             display: block;
             margin-bottom: 8px;
-            color: #555;
+            color: #333;
             font-weight: 500;
         }
-
-        input[type="file"],
-        input[type="text"],
-        input[type="number"],
-        select {
+        
+        input[type="file"], input[type="text"], input[type="number"] {
             width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
+            padding: 10px;
+            border: 1px solid #ddd;
             border-radius: 5px;
-            font-size: 1em;
-            transition: border-color 0.3s;
+            font-size: 14px;
         }
-
-        input[type="file"]:focus,
-        input[type="text"]:focus,
-        input[type="number"]:focus,
-        select:focus {
+        
+        input[type="file"]:focus, input[type="text"]:focus, input[type="number"]:focus {
             outline: none;
             border-color: #667eea;
-            box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 0 5px rgba(102, 126, 234, 0.1);
         }
-
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
         button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .btn-primary {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: 600;
-            transition: transform 0.2s, box-shadow 0.2s;
-            margin-right: 10px;
-            margin-bottom: 10px;
         }
-
-        button:hover {
+        
+        .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
-
-        button:active {
-            transform: translateY(0);
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
         }
-
-        .download-btn {
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            padding: 8px 15px;
-            font-size: 0.9em;
-            margin-top: 10px;
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
         }
-
-        .download-btn:hover {
-            box-shadow: 0 5px 15px rgba(17, 153, 142, 0.4);
+        
+        .btn-success {
+            background: #28a745;
+            color: white;
         }
-
-        .batch-download-btn {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            padding: 12px 25px;
-            font-size: 1em;
-            width: 100%;
-            margin-top: 20px;
+        
+        .btn-success:hover {
+            background: #218838;
+            transform: translateY(-2px);
         }
-
-        .batch-download-btn:hover {
-            box-shadow: 0 5px 15px rgba(245, 87, 108, 0.4);
+        
+        .btn-info {
+            background: #17a2b8;
+            color: white;
+            padding: 8px 12px;
+            font-size: 12px;
         }
-
-        .output-section {
-            grid-column: 1 / -1;
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 10px;
-            border: 1px solid #e0e0e0;
+        
+        .btn-info:hover {
+            background: #138496;
         }
-
-        .output-section h2 {
+        
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .results-section {
+            margin-top: 30px;
+        }
+        
+        .results-section h2 {
             color: #333;
             margin-bottom: 20px;
-            font-size: 1.5em;
-            border-bottom: 3px solid #667eea;
             padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
         }
-
-        .charts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 30px;
-            margin-top: 20px;
+        
+        .table-container {
+            margin-bottom: 30px;
+            overflow-x: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
-
-        .chart-container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: relative;
+        
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #ddd;
         }
-
-        .chart-container h3 {
+        
+        .table-header h3 {
             color: #333;
-            margin-bottom: 15px;
-            font-size: 1.2em;
+            margin: 0;
+            font-size: 16px;
         }
-
-        .chart-wrapper {
-            position: relative;
-            height: 400px;
-            margin-bottom: 10px;
-        }
-
-        canvas {
-            max-width: 100%;
-        }
-
+        
         table {
             width: 100%;
             border-collapse: collapse;
             background: white;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-
-        thead {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        th, td {
-            padding: 15px;
+        
+        th {
+            background: #f8f9fa;
+            padding: 12px;
             text-align: left;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        tr:hover {
-            background: #f5f5f5;
-        }
-
-        .table-container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .table-container h3 {
+            font-weight: 600;
             color: #333;
-            margin-bottom: 15px;
-            font-size: 1.2em;
+            border-bottom: 2px solid #ddd;
         }
-
-        .error {
-            background: #ffebee;
-            color: #c62828;
+        
+        td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .chart-container {
+            position: relative;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .chart-header h3 {
+            color: #333;
+            margin: 0;
+            font-size: 16px;
+        }
+        
+        canvas {
+            max-height: 400px;
+        }
+        
+        .message {
             padding: 15px;
+            margin: 15px 0;
             border-radius: 5px;
-            margin-bottom: 15px;
-            border-left: 4px solid #c62828;
+            text-align: center;
+            font-weight: 500;
         }
-
-        .success {
-            background: #e8f5e9;
-            color: #2e7d32;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            border-left: 4px solid #2e7d32;
+        
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
         }
-
-        .info {
-            background: #e3f2fd;
-            color: #1565c0;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            border-left: 4px solid #1565c0;
+        
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
         }
-
-        .download-controls {
+        
+        .message.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .controls-section {
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
-            margin-top: 10px;
+            margin-bottom: 20px;
         }
-
-        .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #667eea;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            animation: spin 1s linear infinite;
-            display: inline-block;
-            margin-right: 10px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @media (max-width: 1200px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
-
-            .charts-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .loading {
-            display: none;
-        }
-
-        .loading.active {
+        
+        .download-controls {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 10px;
-            color: #667eea;
+            gap: 8px;
+            flex-wrap: wrap;
+            padding: 10px 0;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>🧬 AAV Analysis Tool</h1>
-            <p>Advanced Analysis and Visualization of Adeno-Associated Virus Data</p>
-        </header>
-
-        <div class="main-content">
-            <div class="section">
-                <h2>📥 Data Input</h2>
-                <div class="form-group">
-                    <label for="fileInput">Upload CSV File:</label>
-                    <input type="file" id="fileInput" accept=".csv" />
-                    <small style="color: #999; margin-top: 5px; display: block;">
-                        CSV format: One value per line or comma-separated
-                    </small>
-                </div>
-                <button onclick="handleFileUpload()">Parse CSV</button>
-                <div id="uploadStatus"></div>
+        <h1>🧬 AAV Analysis Tool</h1>
+        <p class="subtitle">Analyze DNA sequences and visualize frequency data</p>
+        
+        <div class="input-section">
+            <div class="input-group">
+                <label for="fileInput">Upload DNA Sequence File (FASTA format):</label>
+                <input type="file" id="fileInput" accept=".fasta,.fa,.txt" />
             </div>
-
-            <div class="section">
-                <h2>⚙️ Configuration</h2>
-                <div class="form-group">
-                    <label for="binCount">Number of Bins (for Histogram):</label>
-                    <input type="number" id="binCount" value="10" min="5" max="50" />
-                </div>
-                <div class="form-group">
-                    <label for="dataLabel">Data Label:</label>
-                    <input type="text" id="dataLabel" placeholder="e.g., Virus Titer (vg/mL)" value="Value" />
-                </div>
-                <button onclick="analyzeData()">Analyze Data</button>
-                <div id="analysisStatus"></div>
+            
+            <div class="input-group">
+                <label for="minLength">Minimum Sequence Length:</label>
+                <input type="number" id="minLength" value="20" min="1" />
+            </div>
+            
+            <div class="button-group">
+                <button class="btn-primary" onclick="analyzeSequence()">Analyze Sequence</button>
+                <button class="btn-secondary" onclick="clearResults()">Clear Results</button>
             </div>
         </div>
-
-        <div class="output-section" id="outputSection" style="display: none;">
-            <h2>📊 Analysis Results</h2>
+        
+        <div id="message"></div>
+        
+        <div class="results-section hidden" id="resultsSection">
+            <h2>Analysis Results</h2>
             
-            <div id="statusMessage"></div>
-
-            <!-- Download Controls -->
-            <div style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
-                <h3 style="color: #333; margin-bottom: 15px;">📥 Download Options</h3>
-                <button class="batch-download-btn" onclick="downloadAllAsZip()">
-                    <span id="zipSpinner"></span> Download All as ZIP
-                </button>
-                <p style="color: #666; font-size: 0.9em; margin-top: 10px;">
-                    💡 Batch download all charts and tables as PNG images in a single ZIP file
-                </p>
+            <div class="controls-section">
+                <button class="btn-success" onclick="downloadAllAsZip()">📦 Download All as ZIP</button>
+                <span id="downloadStatus"></span>
             </div>
-
+            
+            <!-- Frequency Table -->
+            <div class="table-container">
+                <div class="table-header">
+                    <h3>Sequence Frequency Table</h3>
+                    <div class="download-controls">
+                        <button class="btn-info" onclick="downloadTableAsImage('frequencyTableDiv', 'frequency-table.png')">📥 Download Table</button>
+                    </div>
+                </div>
+                <div id="frequencyTableDiv">
+                    <table id="frequencyTable">
+                        <thead>
+                            <tr>
+                                <th>Sequence</th>
+                                <th>Count</th>
+                                <th>Percentage</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            
             <!-- Statistics Table -->
-            <div class="table-container" id="statsTableContainer" style="display: none;">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <h3>📈 Descriptive Statistics</h3>
-                    <button class="download-btn" onclick="downloadTableImage('statsTable', 'statistics-table')">
-                        📥 Download as Image
-                    </button>
+            <div class="table-container">
+                <div class="table-header">
+                    <h3>Statistics</h3>
+                    <div class="download-controls">
+                        <button class="btn-info" onclick="downloadTableAsImage('statsTableDiv', 'statistics-table.png')">📥 Download Table</button>
+                    </div>
                 </div>
-                <table id="statsTable">
-                    <thead>
-                        <tr>
-                            <th>Statistic</th>
-                            <th>Value</th>
-                        </tr>
-                    </thead>
-                    <tbody id="statsBody"></tbody>
-                </table>
-            </div>
-
-            <!-- Frequency Distribution Table -->
-            <div class="table-container" id="freqTableContainer" style="display: none;">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <h3>📊 Frequency Distribution</h3>
-                    <button class="download-btn" onclick="downloadTableImage('freqTable', 'frequency-distribution')">
-                        📥 Download as Image
-                    </button>
+                <div id="statsTableDiv">
+                    <table id="statsTable">
+                        <thead>
+                            <tr>
+                                <th>Metric</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
                 </div>
-                <table id="freqTable">
-                    <thead>
-                        <tr>
-                            <th>Range</th>
-                            <th>Frequency</th>
-                            <th>Cumulative %</th>
-                        </tr>
-                    </thead>
-                    <tbody id="freqBody"></tbody>
-                </table>
             </div>
-
-            <!-- Charts Grid -->
-            <div class="charts-grid" id="chartsGrid"></div>
+            
+            <!-- Frequency Bar Chart -->
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3>Sequence Frequency Distribution</h3>
+                    <button class="btn-info" onclick="downloadChartAsImage('frequencyChart', 'frequency-chart.png')">📥 Download Chart</button>
+                </div>
+                <canvas id="frequencyChart"></canvas>
+            </div>
+            
+            <!-- Length Distribution Chart -->
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3>Sequence Length Distribution</h3>
+                    <button class="btn-info" onclick="downloadChartAsImage('lengthChart', 'length-chart.png')">📥 Download Chart</button>
+                </div>
+                <canvas id="lengthChart"></canvas>
+            </div>
+            
+            <!-- GC Content Chart -->
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3>GC Content Distribution</h3>
+                    <button class="btn-info" onclick="downloadChartAsImage('gcChart', 'gc-chart.png')">📥 Download Chart</button>
+                </div>
+                <canvas id="gcChart"></canvas>
+            </div>
         </div>
     </div>
 
     <script>
-        // Global variables
-        let dataArray = [];
-        let analysisResults = {};
-        const charts = {};
+        let analysisData = null;
+        let charts = {};
 
-        // Handle file upload
-        function handleFileUpload() {
+        function showMessage(message, type = 'info') {
+            const messageDiv = document.getElementById('message');
+            messageDiv.textContent = message;
+            messageDiv.className = `message ${type}`;
+            messageDiv.style.display = 'block';
+            
+            if (type === 'success') {
+                setTimeout(() => {
+                    messageDiv.style.display = 'none';
+                }, 4000);
+            }
+        }
+
+        function analyzeSequence() {
             const fileInput = document.getElementById('fileInput');
-            const statusDiv = document.getElementById('uploadStatus');
-
+            const minLength = parseInt(document.getElementById('minLength').value);
+            
             if (!fileInput.files.length) {
-                statusDiv.innerHTML = '<div class="error">❌ Please select a file</div>';
+                showMessage('Please select a file', 'error');
                 return;
             }
 
             const file = fileInput.files[0];
             const reader = new FileReader();
 
-            reader.onload = (e) => {
+            reader.onload = function(e) {
                 try {
                     const content = e.target.result;
-                    // Parse CSV - handle both comma-separated and line-separated values
-                    let values = content.replace(/\r/g, '').split(/[\n,]/).filter(v => v.trim());
-                    dataArray = values.map(v => parseFloat(v.trim())).filter(v => !isNaN(v));
-
-                    if (dataArray.length === 0) {
-                        throw new Error('No valid numeric data found in file');
+                    const sequences = parseFASTA(content);
+                    
+                    if (sequences.length === 0) {
+                        showMessage('No sequences found in file', 'error');
+                        return;
                     }
 
-                    statusDiv.innerHTML = `<div class="success">✅ Loaded ${dataArray.length} data points successfully</div>`;
+                    const filteredSequences = sequences.filter(seq => seq.length >= minLength);
+                    
+                    if (filteredSequences.length === 0) {
+                        showMessage(`No sequences found with length >= ${minLength}`, 'error');
+                        return;
+                    }
+
+                    analysisData = analyzeSequences(filteredSequences);
+                    displayResults(analysisData);
+                    showMessage(`Analysis complete! ${filteredSequences.length} sequences analyzed.`, 'success');
                 } catch (error) {
-                    statusDiv.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
-                    dataArray = [];
+                    showMessage(`Error: ${error.message}`, 'error');
                 }
             };
 
             reader.readAsText(file);
         }
 
-        // Analyze data
-        function analyzeData() {
-            const statusDiv = document.getElementById('analysisStatus');
+        function parseFASTA(content) {
+            const sequences = [];
+            let currentSeq = '';
+            const lines = content.split('\n');
 
-            if (dataArray.length === 0) {
-                statusDiv.innerHTML = '<div class="error">❌ Please upload and parse data first</div>';
-                return;
+            for (let line of lines) {
+                line = line.trim();
+                if (line.startsWith('>')) {
+                    if (currentSeq) {
+                        sequences.push(currentSeq.toUpperCase());
+                    }
+                    currentSeq = '';
+                } else if (line) {
+                    currentSeq += line;
+                }
             }
 
-            try {
-                const binCount = parseInt(document.getElementById('binCount').value);
-                const dataLabel = document.getElementById('dataLabel').value || 'Value';
-
-                // Calculate statistics
-                analysisResults = calculateStatistics(dataArray, binCount);
-                analysisResults.dataLabel = dataLabel;
-
-                // Display results
-                displayStatistics();
-                displayFrequencyTable();
-                displayCharts();
-
-                document.getElementById('outputSection').style.display = 'block';
-                statusDiv.innerHTML = '<div class="success">✅ Analysis completed successfully</div>';
-            } catch (error) {
-                statusDiv.innerHTML = `<div class="error">❌ Analysis error: ${error.message}</div>`;
+            if (currentSeq) {
+                sequences.push(currentSeq.toUpperCase());
             }
+
+            return sequences;
         }
 
-        // Calculate statistics
-        function calculateStatistics(data, binCount) {
-            const sorted = [...data].sort((a, b) => a - b);
-            const n = sorted.length;
+        function analyzeSequences(sequences) {
+            const frequencyMap = {};
+            const lengths = [];
+            const gcContents = [];
 
-            // Basic statistics
-            const mean = data.reduce((a, b) => a + b) / n;
-            const variance = data.reduce((sq, n) => sq + Math.pow(n - mean, 2), 0) / n;
-            const stdDev = Math.sqrt(variance);
-            const min = Math.min(...data);
-            const max = Math.max(...data);
-            const range = max - min;
-
-            // Quartiles
-            const q1 = sorted[Math.floor(n * 0.25)];
-            const median = sorted[Math.floor(n * 0.5)];
-            const q3 = sorted[Math.floor(n * 0.75)];
-            const iqr = q3 - q1;
-
-            // Skewness and Kurtosis
-            const skewness = data.reduce((sum, x) => sum + Math.pow((x - mean) / stdDev, 3), 0) / n;
-            const kurtosis = (data.reduce((sum, x) => sum + Math.pow((x - mean) / stdDev, 4), 0) / n) - 3;
-
-            // Frequency distribution
-            const binWidth = range / binCount;
-            const bins = Array(binCount).fill(0);
-            const binEdges = [];
-
-            for (let i = 0; i <= binCount; i++) {
-                binEdges.push(min + i * binWidth);
+            for (let seq of sequences) {
+                frequencyMap[seq] = (frequencyMap[seq] || 0) + 1;
+                lengths.push(seq.length);
+                
+                const gcCount = (seq.match(/[GC]/g) || []).length;
+                const gcPercent = (gcCount / seq.length * 100).toFixed(2);
+                gcContents.push(parseFloat(gcPercent));
             }
 
-            data.forEach(value => {
-                let binIndex = Math.floor((value - min) / binWidth);
-                if (binIndex === binCount) binIndex = binCount - 1;
-                bins[binIndex]++;
-            });
-
             return {
-                n,
-                mean,
-                stdDev,
-                variance,
-                min,
-                max,
-                range,
-                q1,
-                median,
-                q3,
-                iqr,
-                skewness,
-                kurtosis,
-                bins,
-                binEdges,
-                binCount
+                frequency: frequencyMap,
+                lengths: lengths,
+                gcContents: gcContents,
+                totalSequences: sequences.length
             };
         }
 
-        // Display statistics table
-        function displayStatistics() {
-            const statsBody = document.getElementById('statsBody');
-            const stats = analysisResults;
+        function displayResults(data) {
+            displayFrequencyTable(data.frequency, data.totalSequences);
+            displayStatistics(data);
+            displayCharts(data);
+            document.getElementById('resultsSection').classList.remove('hidden');
+        }
 
-            const rows = [
-                ['Count', stats.n],
-                ['Mean', stats.mean.toFixed(4)],
-                ['Median', stats.median.toFixed(4)],
-                ['Std Dev', stats.stdDev.toFixed(4)],
-                ['Variance', stats.variance.toFixed(4)],
-                ['Min', stats.min.toFixed(4)],
-                ['Max', stats.max.toFixed(4)],
-                ['Range', stats.range.toFixed(4)],
-                ['Q1', stats.q1.toFixed(4)],
-                ['Q3', stats.q3.toFixed(4)],
-                ['IQR', stats.iqr.toFixed(4)],
-                ['Skewness', stats.skewness.toFixed(4)],
-                ['Kurtosis', stats.kurtosis.toFixed(4)]
+        function displayFrequencyTable(frequency, totalSequences) {
+            const tbody = document.querySelector('#frequencyTable tbody');
+            tbody.innerHTML = '';
+
+            const sorted = Object.entries(frequency)
+                .sort((a, b) => b[1] - a[1]);
+
+            for (let [seq, count] of sorted) {
+                const percentage = (count / totalSequences * 100).toFixed(2);
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td><code>${seq}</code></td>
+                    <td>${count}</td>
+                    <td>${percentage}%</td>
+                `;
+            }
+        }
+
+        function displayStatistics(data) {
+            const tbody = document.querySelector('#statsTable tbody');
+            tbody.innerHTML = '';
+
+            const stats = [
+                { metric: 'Total Sequences', value: data.totalSequences },
+                { metric: 'Unique Sequences', value: Object.keys(data.frequency).length },
+                { metric: 'Avg Length', value: (data.lengths.reduce((a,b) => a+b) / data.lengths.length).toFixed(2) },
+                { metric: 'Min Length', value: Math.min(...data.lengths) },
+                { metric: 'Max Length', value: Math.max(...data.lengths) },
+                { metric: 'Avg GC Content', value: (data.gcContents.reduce((a,b) => a+b) / data.gcContents.length).toFixed(2) + '%' }
             ];
 
-            statsBody.innerHTML = rows.map(([label, value]) => 
-                `<tr><td>${label}</td><td>${value}</td></tr>`
-            ).join('');
-
-            document.getElementById('statsTableContainer').style.display = 'block';
-        }
-
-        // Display frequency distribution table
-        function displayFrequencyTable() {
-            const freqBody = document.getElementById('freqBody');
-            const stats = analysisResults;
-
-            let cumulativeCount = 0;
-            const rows = [];
-
-            for (let i = 0; i < stats.binCount; i++) {
-                const lower = stats.binEdges[i].toFixed(4);
-                const upper = stats.binEdges[i + 1].toFixed(4);
-                const count = stats.bins[i];
-                cumulativeCount += count;
-                const cumulativePercent = ((cumulativeCount / stats.n) * 100).toFixed(2);
-
-                rows.push(`
-                    <tr>
-                        <td>${lower} - ${upper}</td>
-                        <td>${count}</td>
-                        <td>${cumulativePercent}%</td>
-                    </tr>
-                `);
+            for (let stat of stats) {
+                const row = tbody.insertRow();
+                row.innerHTML = `<td>${stat.metric}</td><td>${stat.value}</td>`;
             }
-
-            freqBody.innerHTML = rows.join('');
-            document.getElementById('freqTableContainer').style.display = 'block';
         }
 
-        // Display charts
-        function displayCharts() {
-            const grid = document.getElementById('chartsGrid');
-            grid.innerHTML = '';
+        function displayCharts(data) {
+            // Destroy existing charts
+            Object.values(charts).forEach(chart => {
+                if (chart) chart.destroy();
+            });
+            charts = {};
 
-            const stats = analysisResults;
-            const dataLabel = analysisResults.dataLabel;
-
-            // Histogram
-            const histogramContainer = createChartContainer('histogram', 'Histogram - Frequency Distribution');
-            grid.appendChild(histogramContainer);
-            createHistogram('histogramChart', stats, dataLabel);
-
-            // Box Plot
-            const boxplotContainer = createChartContainer('boxplot', 'Box Plot');
-            grid.appendChild(boxplotContainer);
-            createBoxPlot('boxplotChart', stats, dataLabel);
-
-            // Cumulative Distribution
-            const cdfContainer = createChartContainer('cdf', 'Cumulative Distribution Function (CDF)');
-            grid.appendChild(cdfContainer);
-            createCDF('cdfChart', dataArray, dataLabel);
-
-            // Normal Q-Q Plot
-            const qqContainer = createChartContainer('qq', 'Normal Q-Q Plot');
-            grid.appendChild(qqContainer);
-            createQQPlot('qqChart', dataArray, dataLabel);
-
-            // Distribution Curve
-            const curveContainer = createChartContainer('curve', 'Distribution Curve');
-            grid.appendChild(curveContainer);
-            createDistributionCurve('curveChart', stats, dataLabel);
-
-            // Density Plot
-            const densityContainer = createChartContainer('density', 'Density Plot');
-            grid.appendChild(densityContainer);
-            createDensityPlot('densityChart', dataArray, dataLabel);
-        }
-
-        // Create chart container
-        function createChartContainer(id, title) {
-            const container = document.createElement('div');
-            container.className = 'chart-container';
-            container.innerHTML = `
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <h3>${title}</h3>
-                    <button class="download-btn" onclick="downloadChartImage('${id}', '${title.toLowerCase().replace(/\s+/g, '-')}')">
-                        📥 Download
-                    </button>
-                </div>
-                <div class="chart-wrapper">
-                    <canvas id="${id}Chart"></canvas>
-                </div>
-            `;
-            return container;
-        }
-
-        // Chart creation functions
-        function createHistogram(canvasId, stats, dataLabel) {
-            const ctx = document.getElementById(canvasId).getContext('2d');
-            const labels = [];
-            for (let i = 0; i < stats.binCount; i++) {
-                labels.push(`${stats.binEdges[i].toFixed(2)}-${stats.binEdges[i + 1].toFixed(2)}`);
-            }
-
-            charts[canvasId] = new Chart(ctx, {
+            // Frequency Chart
+            const freqCtx = document.getElementById('frequencyChart').getContext('2d');
+            const sorted = Object.entries(data.frequency).sort((a, b) => b[1] - a[1]).slice(0, 15);
+            
+            charts.frequency = new Chart(freqCtx, {
                 type: 'bar',
                 data: {
-                    labels: labels,
+                    labels: sorted.map(([seq]) => seq.substring(0, 20) + (seq.length > 20 ? '...' : '')),
                     datasets: [{
                         label: 'Frequency',
-                        data: stats.bins,
-                        backgroundColor: 'rgba(102, 126, 234, 0.7)',
+                        data: sorted.map(([, count]) => count),
+                        backgroundColor: 'rgba(102, 126, 234, 0.8)',
                         borderColor: 'rgba(102, 126, 234, 1)',
                         borderWidth: 1
                     }]
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: true }
+                    },
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+
+            // Length Distribution Chart
+            const lengthCtx = document.getElementById('lengthChart').getContext('2d');
+            const lengthBuckets = createHistogram(data.lengths, 10);
+            
+            charts.length = new Chart(lengthCtx, {
+                type: 'bar',
+                data: {
+                    labels: lengthBuckets.labels,
+                    datasets: [{
+                        label: 'Sequence Count',
+                        data: lengthBuckets.data,
+                        backgroundColor: 'rgba(40, 167, 69, 0.8)',
+                        borderColor: 'rgba(40, 167, 69, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: true }
+                    },
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+
+            // GC Content Chart
+            const gcCtx = document.getElementById('gcChart').getContext('2d');
+            const gcBuckets = createHistogram(data.gcContents, 10);
+            
+            charts.gc = new Chart(gcCtx, {
+                type: 'line',
+                data: {
+                    labels: gcBuckets.labels,
+                    datasets: [{
+                        label: 'Sequence Count',
+                        data: gcBuckets.data,
+                        borderColor: 'rgba(23, 162, 184, 1)',
+                        backgroundColor: 'rgba(23, 162, 184, 0.1)',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
                     plugins: {
                         legend: { display: true }
                     },
@@ -676,415 +607,134 @@
             });
         }
 
-        function createBoxPlot(canvasId, stats, dataLabel) {
-            const ctx = document.getElementById(canvasId).getContext('2d');
+        function createHistogram(values, buckets) {
+            if (values.length === 0) return { labels: [], data: [] };
             
-            charts[canvasId] = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Data'],
-                    datasets: [
-                        {
-                            label: 'Min',
-                            data: [stats.min],
-                            backgroundColor: 'rgba(211, 84, 0, 0.5)'
-                        },
-                        {
-                            label: 'Q1',
-                            data: [stats.q1],
-                            backgroundColor: 'rgba(255, 154, 0, 0.5)'
-                        },
-                        {
-                            label: 'Median',
-                            data: [stats.median - stats.q1],
-                            backgroundColor: 'rgba(76, 175, 80, 0.7)'
-                        },
-                        {
-                            label: 'Q3',
-                            data: [stats.q3 - stats.median],
-                            backgroundColor: 'rgba(255, 154, 0, 0.5)'
-                        },
-                        {
-                            label: 'Max',
-                            data: [stats.max - stats.q3],
-                            backgroundColor: 'rgba(211, 84, 0, 0.5)'
-                        }
-                    ]
-                },
-                options: {
-                    indexAxis: 'y',
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: { stacked: true }
-                    }
-                }
-            });
-        }
-
-        function createCDF(canvasId, data, dataLabel) {
-            const ctx = document.getElementById(canvasId).getContext('2d');
-            const sorted = [...data].sort((a, b) => a - b);
+            const min = Math.min(...values);
+            const max = Math.max(...values);
+            const range = max - min || 1;
+            const bucketSize = range / buckets;
             
-            const cdfData = sorted.map((val, i) => ({
-                x: val,
-                y: ((i + 1) / sorted.length) * 100
-            }));
-
-            charts[canvasId] = new Chart(ctx, {
-                type: 'scatter',
-                data: {
-                    datasets: [{
-                        label: 'CDF',
-                        data: cdfData,
-                        borderColor: 'rgba(102, 126, 234, 1)',
-                        backgroundColor: 'rgba(102, 126, 234, 0.3)',
-                        showLine: true,
-                        fill: false,
-                        borderWidth: 2,
-                        pointRadius: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: true }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            max: 100,
-                            title: { display: true, text: 'Cumulative Percentage (%)' }
-                        },
-                        x: {
-                            title: { display: true, text: dataLabel }
-                        }
-                    }
-                }
-            });
-        }
-
-        function createQQPlot(canvasId, data, dataLabel) {
-            const ctx = document.getElementById(canvasId).getContext('2d');
-            const sorted = [...data].sort((a, b) => a - b);
-            const n = sorted.length;
+            const histogram = Array(buckets).fill(0);
             
-            // Calculate theoretical quantiles (normal distribution)
-            const qqData = [];
-            for (let i = 0; i < n; i++) {
-                const p = (i + 1) / (n + 1);
-                const theoretical = inverseNormalCDF(p);
-                qqData.push({
-                    x: theoretical,
-                    y: sorted[i]
-                });
+            for (let value of values) {
+                const bucketIndex = Math.min(
+                    Math.floor((value - min) / bucketSize),
+                    buckets - 1
+                );
+                histogram[bucketIndex]++;
             }
+            
+            const labels = [];
+            for (let i = 0; i < buckets; i++) {
+                const start = (min + i * bucketSize).toFixed(1);
+                const end = (min + (i + 1) * bucketSize).toFixed(1);
+                labels.push(`${start}-${end}`);
+            }
+            
+            return {
+                labels: labels,
+                data: histogram
+            };
+        }
 
-            charts[canvasId] = new Chart(ctx, {
-                type: 'scatter',
-                data: {
-                    datasets: [{
-                        label: 'Q-Q Plot',
-                        data: qqData,
-                        borderColor: 'rgba(102, 126, 234, 1)',
-                        backgroundColor: 'rgba(102, 126, 234, 0.5)',
-                        showLine: false,
-                        pointRadius: 4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: true }
-                    },
-                    scales: {
-                        y: {
-                            title: { display: true, text: 'Sample Quantiles' }
-                        },
-                        x: {
-                            title: { display: true, text: 'Theoretical Quantiles' }
-                        }
-                    }
-                }
+        function clearResults() {
+            document.getElementById('resultsSection').classList.add('hidden');
+            document.getElementById('fileInput').value = '';
+            document.getElementById('message').style.display = 'none';
+            analysisData = null;
+            Object.values(charts).forEach(chart => {
+                if (chart) chart.destroy();
             });
+            charts = {};
         }
 
-        function createDistributionCurve(canvasId, stats, dataLabel) {
-            const ctx = document.getElementById(canvasId).getContext('2d');
-            
-            const points = [];
-            const min = stats.min - stats.range * 0.1;
-            const max = stats.max + stats.range * 0.1;
-            
-            for (let x = min; x <= max; x += (max - min) / 100) {
-                const y = normalDistribution(x, stats.mean, stats.stdDev);
-                points.push({ x: x, y: y });
-            }
-
-            charts[canvasId] = new Chart(ctx, {
-                type: 'scatter',
-                data: {
-                    datasets: [{
-                        label: 'Normal Distribution',
-                        data: points,
-                        borderColor: 'rgba(102, 126, 234, 1)',
-                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
-                        showLine: true,
-                        fill: true,
-                        borderWidth: 2,
-                        pointRadius: 0,
-                        tension: 0.4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: true }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: { display: true, text: 'Density' }
-                        },
-                        x: {
-                            title: { display: true, text: dataLabel }
-                        }
-                    }
-                }
-            });
-        }
-
-        function createDensityPlot(canvasId, data, dataLabel) {
-            const ctx = document.getElementById(canvasId).getContext('2d');
-            const kernel = epanechnikovKernel;
-            const bandwidth = 1.06 * Math.sqrt(variance(data)) * Math.pow(data.length, -1/5);
-            
-            const min = Math.min(...data);
-            const max = Math.max(...data);
-            const range = max - min;
-            
-            const densityData = [];
-            for (let x = min - range * 0.1; x <= max + range * 0.1; x += range / 100) {
-                let density = 0;
-                data.forEach(d => {
-                    density += kernel((x - d) / bandwidth) / (bandwidth * data.length);
-                });
-                densityData.push({ x: x, y: density });
-            }
-
-            charts[canvasId] = new Chart(ctx, {
-                type: 'scatter',
-                data: {
-                    datasets: [{
-                        label: 'KDE',
-                        data: densityData,
-                        borderColor: 'rgba(118, 75, 162, 1)',
-                        backgroundColor: 'rgba(118, 75, 162, 0.1)',
-                        showLine: true,
-                        fill: true,
-                        borderWidth: 2,
-                        pointRadius: 0,
-                        tension: 0.4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: true }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: { display: true, text: 'Density' }
-                        },
-                        x: {
-                            title: { display: true, text: dataLabel }
-                        }
-                    }
-                }
-            });
-        }
-
-        // Utility functions for statistical calculations
-        function inverseNormalCDF(p) {
-            const a1 = -3.969683028665376e+01;
-            const a2 = 2.221222899801429e+02;
-            const a3 = -2.821152023902548e+02;
-            const a4 = 1.340426573720606e+02;
-            const a5 = -2.040352747538567e+01;
-            const a6 = 3.226671290700398e-01;
-            const b1 = -5.447609879822406e+01;
-            const b2 = 1.615858368580409e+02;
-            const b3 = -1.556989798598866e+02;
-            const b4 = 6.680131188771972e+01;
-            const b5 = -1.328068155288572e+01;
-            const c1 = -7.784894002430293e-03;
-            const c2 = -3.223964580411365e-01;
-            const c3 = -2.400758277161838e+00;
-            const c4 = -2.549732539343734e+00;
-            const c5 = 4.374664141464968e+00;
-            const c6 = 2.938163357918667e+00;
-            const d1 = 7.784695709041462e-03;
-            const d2 = 3.224671290700398e-01;
-            const d3 = 2.445134137142996e+00;
-            const d4 = 3.754408661907416e+00;
-            const p_low = 0.02425;
-            const p_high = 1 - p_low;
-            let q, r, val;
-
-            if ((p < 0) || (p > 1)) {
-                return NaN;
-            } else if (p < p_low) {
-                q = Math.sqrt(-2 * Math.log(p));
-                return (((((c1 * q + c2) * q + c3) * q + c4) * q + c5) * q + c6) / ((((d1 * q + d2) * q + d3) * q + d4) * q + 1);
-            } else if (p <= p_high) {
-                q = p - 0.5;
-                r = q * q;
-                return (((((a1 * r + a2) * r + a3) * r + a4) * r + a5) * r + a6) * q / (((((b1 * r + b2) * r + b3) * r + b4) * r + b5) * r + 1);
-            } else {
-                q = Math.sqrt(-2 * Math.log(1 - p));
-                return -(((((c1 * q + c2) * q + c3) * q + c4) * q + c5) * q + c6) / ((((d1 * q + d2) * q + d3) * q + d4) * q + 1);
-            }
-        }
-
-        function normalDistribution(x, mu, sigma) {
-            return (1 / (sigma * Math.sqrt(2 * Math.PI))) * Math.exp(-0.5 * Math.pow((x - mu) / sigma, 2));
-        }
-
-        function epanechnikovKernel(u) {
-            if (Math.abs(u) <= 1) {
-                return 0.75 * (1 - u * u);
-            }
-            return 0;
-        }
-
-        function variance(data) {
-            const mean = data.reduce((a, b) => a + b) / data.length;
-            return data.reduce((sq, n) => sq + Math.pow(n - mean, 2), 0) / data.length;
-        }
-
-        // Download functions
-        async function downloadChartImage(chartId, filename) {
+        async function downloadChartAsImage(canvasId, filename) {
             try {
-                const canvas = document.getElementById(chartId + 'Chart');
+                const canvas = document.getElementById(canvasId);
                 const link = document.createElement('a');
                 link.href = canvas.toDataURL('image/png');
-                link.download = `${filename}.png`;
+                link.download = filename;
                 link.click();
+                showMessage(`Downloaded ${filename}`, 'success');
             } catch (error) {
-                alert('Error downloading chart: ' + error.message);
+                showMessage(`Error downloading chart: ${error.message}`, 'error');
             }
         }
 
-        async function downloadTableImage(tableId, filename) {
+        async function downloadTableAsImage(elementId, filename) {
             try {
-                const table = document.getElementById(tableId);
-                const canvas = await html2canvas(table, {
+                const element = document.getElementById(elementId);
+                const canvas = await html2canvas(element, {
                     backgroundColor: '#ffffff',
                     scale: 2
                 });
                 const link = document.createElement('a');
                 link.href = canvas.toDataURL('image/png');
-                link.download = `${filename}.png`;
+                link.download = filename;
                 link.click();
+                showMessage(`Downloaded ${filename}`, 'success');
             } catch (error) {
-                alert('Error downloading table: ' + error.message);
+                showMessage(`Error downloading table: ${error.message}`, 'error');
             }
         }
 
         async function downloadAllAsZip() {
             try {
-                const zipButton = document.querySelector('.batch-download-btn');
-                const originalText = zipButton.textContent;
-                
-                // Show loading state
-                zipButton.innerHTML = '<span class="spinner"></span> Preparing files...';
-                zipButton.disabled = true;
+                const statusDiv = document.getElementById('downloadStatus');
+                statusDiv.textContent = 'Creating ZIP file...';
+                statusDiv.style.color = '#0c5460';
 
                 const zip = new JSZip();
-                const timestamp = new Date().toISOString().slice(0, 10);
 
-                // Add all chart images
-                const chartIds = ['histogramChart', 'boxplotChart', 'cdfChart', 'qqChart', 'curveChart', 'densityChart'];
-                const chartNames = ['histogram', 'box-plot', 'cumulative-distribution', 'qq-plot', 'distribution-curve', 'density-plot'];
+                // Download all charts
+                const chartIds = ['frequencyChart', 'lengthChart', 'gcChart'];
+                const chartFilenames = ['frequency-chart.png', 'length-chart.png', 'gc-chart.png'];
 
                 for (let i = 0; i < chartIds.length; i++) {
                     const canvas = document.getElementById(chartIds[i]);
-                    const dataUrl = canvas.toDataURL('image/png');
-                    const data = dataUrl.replace(/^data:image\/png;base64,/, '');
-                    zip.file(`charts/${chartNames[i]}.png`, data, { binary: true });
+                    const imageData = canvas.toDataURL('image/png').split(',')[1];
+                    zip.file(chartFilenames[i], imageData, { base64: true });
                 }
 
-                // Add table images
-                const tables = [
-                    { id: 'statsTable', name: 'statistics-table' },
-                    { id: 'freqTable', name: 'frequency-distribution' }
-                ];
+                // Download tables
+                const frequencyTableElement = document.getElementById('frequencyTableDiv');
+                const statsTableElement = document.getElementById('statsTableDiv');
 
-                for (const table of tables) {
-                    const element = document.getElementById(table.id);
-                    const canvas = await html2canvas(element, {
-                        backgroundColor: '#ffffff',
-                        scale: 2
-                    });
-                    const dataUrl = canvas.toDataURL('image/png');
-                    const data = dataUrl.replace(/^data:image\/png;base64,/, '');
-                    zip.file(`tables/${table.name}.png`, data, { binary: true });
-                }
+                const frequencyCanvas = await html2canvas(frequencyTableElement, {
+                    backgroundColor: '#ffffff',
+                    scale: 2
+                });
+                zip.file('frequency-table.png', frequencyCanvas.toDataURL('image/png').split(',')[1], { base64: true });
 
-                // Add a summary text file
-                const summary = `AAV Analysis Report
-Generated: ${new Date().toLocaleString()}
+                const statsCanvas = await html2canvas(statsTableElement, {
+                    backgroundColor: '#ffffff',
+                    scale: 2
+                });
+                zip.file('statistics-table.png', statsCanvas.toDataURL('image/png').split(',')[1], { base64: true });
 
-Total Data Points: ${analysisResults.n}
-Mean: ${analysisResults.mean.toFixed(4)}
-Median: ${analysisResults.median.toFixed(4)}
-Std Dev: ${analysisResults.stdDev.toFixed(4)}
-Min: ${analysisResults.min.toFixed(4)}
-Max: ${analysisResults.max.toFixed(4)}
-Range: ${analysisResults.range.toFixed(4)}
-
-Files included:
-- charts/: All distribution and analysis charts (PNG)
-- tables/: Statistical and frequency tables (PNG)
-`;
-                zip.file('README.txt', summary);
-
-                // Generate and download ZIP
-                const content = await zip.generateAsync({ type: 'blob' });
+                // Generate ZIP file
+                const zipBlob = await zip.generateAsync({ type: 'blob' });
                 const link = document.createElement('a');
-                link.href = URL.createObjectURL(content);
-                link.download = `aav-analysis-${timestamp}.zip`;
+                link.href = URL.createObjectURL(zipBlob);
+                link.download = 'AAV-Analysis-Results.zip';
                 link.click();
 
-                // Reset button
-                zipButton.textContent = originalText;
-                zipButton.disabled = false;
-
-                // Show success message
-                const statusDiv = document.getElementById('statusMessage');
-                statusDiv.innerHTML = '<div class="success">✅ ZIP file downloaded successfully!</div>';
+                statusDiv.textContent = '✓ ZIP file downloaded successfully!';
+                statusDiv.style.color = '#155724';
+                
                 setTimeout(() => {
-                    statusDiv.innerHTML = '';
-                }, 5000);
+                    statusDiv.textContent = '';
+                }, 3000);
 
+                showMessage('All files packaged and downloaded as ZIP!', 'success');
             } catch (error) {
-                console.error('Error creating ZIP:', error);
-                alert('Error creating ZIP file: ' + error.message);
-                const zipButton = document.querySelector('.batch-download-btn');
-                zipButton.textContent = originalText;
-                zipButton.disabled = false;
+                const statusDiv = document.getElementById('downloadStatus');
+                statusDiv.textContent = '✗ Error creating ZIP file';
+                statusDiv.style.color = '#721c24';
+                showMessage(`Error creating ZIP file: ${error.message}`, 'error');
             }
         }
-
-        // Initialize on page load
-        window.addEventListener('load', () => {
-            console.log('AAV Analysis Tool loaded successfully');
-        });
     </script>
 </body>
 </html>
