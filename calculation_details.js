@@ -16,8 +16,10 @@ function showCalculation(statId, datasetIndex) {
     let content = '';
     let title = '';
 
-    // Log để debug nếu cần
+    // Log để debug
     console.log('Showing calculation for:', statId);
+    if (!result) { console.error('Result not found for index:', datasetIndex); return; }
+    if (!groups) { console.error('Groups not found'); return; }
 
     switch(statId) {
         case 'mean':
