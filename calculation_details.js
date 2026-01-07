@@ -1,7 +1,7 @@
 
 /**
  * Cập nhật mới nhất: 07/01/2026
- * Bổ sung chi tiết các bước tính toán thống kê
+ * Bổ sung chi tiết các bước tính toán thống kê cho tất cả các chỉ số
  */
 function showCalculation(statId, datasetIndex) {
     const result = lastResults[datasetIndex];
@@ -37,6 +37,18 @@ function showCalculation(statId, datasetIndex) {
         case 'sd':
             title = 'Chi tiết tính Độ lệch chuẩn (s)';
             content = generateSDCalc(result, groups);
+            break;
+        case 'range':
+            title = 'Chi tiết tính Khoảng biến thiên (R)';
+            content = generateRangeCalc(result, groups);
+            break;
+        case 'iqr':
+            title = 'Chi tiết tính Khoảng tứ phân vị (IQR)';
+            content = generateIQRCalc(result, groups);
+            break;
+        case 'cv':
+            title = 'Chi tiết tính Hệ số biến thiên (CV)';
+            content = generateCVCalc(result, groups);
             break;
         default:
             content = 'Tính năng đang được cập nhật...';
@@ -172,7 +184,6 @@ function generateQ3Calc(r, groups) {
 }
 
 function generateModeCalc(r, groups) {
-    // Tìm nhóm có tần số lớn nhất
     let maxF = -1, j = -1;
     r.gStats.forEach((g, i) => {
         if(g.freq > maxF) { maxF = g.freq; j = i; }
@@ -244,6 +255,49 @@ function generateSDCalc(r, groups) {
     h += `<p class="mb-2">Ta đã tính được phương sai s² = ${fmt(r.s.variance)}.</p>`;
     h += `<p class="font-medium">Thay vào công thức:</p>`;
     h += `<div class="bg-indigo-50 p-3 rounded text-center font-serif">s = √${fmt(r.s.variance)} = <span class="text-indigo-700 font-bold">${fmt(r.s.sd)}</span></div>`;
+    return h;
+}
+
+function generateRangeCalc(r, groups) {
+    let h = `<p class="mb-2">Khoảng biến thiên (R) là hiệu số giữa giá trị lớn nhất và giá trị nhỏ nhất của mẫu số liệu:</p>`;
+    h += `<div class="bg-slate-50 p-3 rounded mb-4 text-center font-serif italic">R = xₘₐₓ - xₘᵢₙ</div>`;
+    
+    let minVal, maxVal;
+    if (r.rawData && r.rawData.length > 0) {
+        minVal = r.rawData[0];
+        maxVal = r.rawData[r.rawData.length - 1];
+        h += `<p class="mb-2">Dựa trên dữ liệu thô:</p>`;
+        h += `<ul class="list-disc ml-6 mb-4"><li>xₘₐₓ = ${fmt(maxVal)}</li><li>xₘᵢₙ = ${fmt(minVal)}</li></ul>`;
+    } else {
+        const activeGroups = groups.filter((g, i) => r.gStats[i].freq > 0);
+        minVal = activeGroups[0].lower;
+        maxVal = activeGroups[activeGroups.length - 1].upper;
+        h += `<p class="mb-2">Dựa trên các nhóm có dữ liệu:</p>`;
+        h += `<ul class="list-disc ml-6 mb-4"><li>Đầu mút trên của nhóm cuối cùng: ${fmt(maxVal)}</li><li>Đầu mút dưới của nhóm đầu tiên: ${fmt(minVal)}</li></ul>`;
+    }
+    
+    h += `<p class="font-medium">Thay vào công thức:</p>`;
+    h += `<div class="bg-indigo-50 p-3 rounded text-center font-serif">R = ${fmt(maxVal)} - ${fmt(minVal)} = <span class="text-indigo-700 font-bold">${fmt(r.s.range)}</span></div>`;
+    return h;
+}
+
+function generateIQRCalc(r, groups) {
+    let h = `<p class="mb-2">Khoảng tứ phân vị (IQR) là hiệu số giữa tứ phân vị thứ ba (Q₃) và tứ phân vị thứ nhất (Q₁):</p>`;
+    h += `<div class="bg-slate-50 p-3 rounded mb-4 text-center font-serif italic">IQR = Q₃ - Q₁</div>`;
+    h += `<p class="mb-2">Ta đã tính được:</p><ul class="list-disc ml-6 mb-4">`;
+    h += `<li>Q₃ = ${fmt(r.s.q3)}</li><li>Q₁ = ${fmt(r.s.q1)}</li></ul>`;
+    h += `<p class="font-medium">Thay vào công thức:</p>`;
+    h += `<div class="bg-indigo-50 p-3 rounded text-center font-serif">IQR = ${fmt(r.s.q3)} - ${fmt(r.s.q1)} = <span class="text-indigo-700 font-bold">${fmt(r.s.iqr)}</span></div>`;
+    return h;
+}
+
+function generateCVCalc(r, groups) {
+    let h = `<p class="mb-2">Hệ số biến thiên (CV) được tính bằng tỉ số giữa độ lệch chuẩn (s) và trị tuyệt đối của số trung bình (x̄), tính theo đơn vị phần trăm:</p>`;
+    h += `<div class="bg-slate-50 p-3 rounded mb-4 text-center font-serif italic">CV = (s / |x̄|) * 100%</div>`;
+    h += `<p class="mb-2">Ta đã tính được:</p><ul class="list-disc ml-6 mb-4">`;
+    h += `<li>s = ${fmt(r.s.sd)}</li><li>x̄ = ${fmt(r.s.mean)}</li></ul>`;
+    h += `<p class="font-medium">Thay vào công thức:</p>`;
+    h += `<div class="bg-indigo-50 p-3 rounded text-center font-serif">CV = (${fmt(r.s.sd)} / |${fmt(r.s.mean)}|) * 100% = <span class="text-indigo-700 font-bold">${fmt(r.s.cv)}%</span></div>`;
     return h;
 }
 
