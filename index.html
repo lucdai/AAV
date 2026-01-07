@@ -67,7 +67,9 @@
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap');
         body { font-family: 'Inter', sans-serif; }
+        .font-serif { font-family: 'Noto Serif', serif; }
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: #f1f5f9; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
@@ -89,6 +91,32 @@
     <div class="sr-only" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;">
         <p>Chào mừng bạn đến với AAV, giải pháp trực tuyến hàng đầu cho việc phân tích dữ liệu và trực quan hóa thông tin. Công cụ của chúng tôi hỗ trợ các nhà nghiên cứu, sinh viên và chuyên gia dữ liệu trong việc tính toán các chỉ số thống kê mô tả, lập bảng tần số và tạo ra hơn 12 loại biểu đồ tương tác chuyên nghiệp như biểu đồ cột, biểu đồ đường, biểu đồ tròn, và biểu đồ hộp (boxplot).</p>
         <p>Với AAV, bạn có thể dễ dàng nhập dữ liệu thô hoặc bảng tần số, tùy chỉnh các thông số tính toán và xuất kết quả dưới dạng hình ảnh chất lượng cao hoặc chia sẻ liên kết trực tiếp. Chúng tôi cam kết cung cấp một trải nghiệm phân tích dữ liệu nhanh chóng, chính xác và hoàn toàn miễn phí.</p>
+    </div>
+
+    <!-- MODAL FOR CALCULATION DETAILS -->
+    <div id="calcModal" class="fixed inset-0 bg-slate-900/50 z-50 hidden items-center justify-center p-4 backdrop-blur-sm">
+        <div id="calcModalContent" class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden border border-slate-200">
+            <div class="p-4 border-b border-slate-100 flex justify-between items-center bg-slate-50">
+                <h3 id="calcModalTitle" class="font-bold text-slate-800 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                    Chi tiết phép tính
+                </h3>
+                <div class="flex items-center gap-2">
+                    <button onclick="downloadCalcImage()" class="p-2 text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition" title="Tải ảnh phép tính">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    </button>
+                    <button onclick="closeCalcModal()" class="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+            </div>
+            <div id="calcModalBody" class="p-6 overflow-y-auto text-slate-700 leading-relaxed">
+                <!-- Content will be injected here -->
+            </div>
+            <div class="p-4 border-t border-slate-100 bg-slate-50 text-right">
+                <button onclick="closeCalcModal()" class="px-4 py-2 bg-white border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition font-medium text-sm">Đóng</button>
+            </div>
+        </div>
     </div>
 
     <div class="max-w-7xl mx-auto space-y-4">
@@ -531,17 +559,17 @@
 
         function renderTables(groups, results) {
             const m = [
-                {id:'N', l:'Tổng số (N)'}, {id:'trueMean', l:'Số đúng (x̄ gốc)', raw:1}, {id:'mean', l:'Số gần đúng (x̄ nhóm)'},
+                {id:'N', l:'Tổng số (N)'}, {id:'trueMean', l:'Số đúng (x̄ gốc)', raw:1}, {id:'mean', l:'Số gần đúng (x̄ nhóm)', calc:1},
                 {id:'absErr', l:'Sai số tuyệt đối', raw:1}, {id:'relErr', l:'Sai số tương đối (%)', raw:1},
-                {id:'q2', l:'Trung vị (Me)'}, {id:'q1', l:'Q1'}, {id:'q3', l:'Q3'}, {id:'mode', l:'Mốt (Mo)'},
-                {id:'range', l:'Khoảng biến thiên (R)'}, {id:'iqr', l:'IQR'}, {id:'variance', l:'Phương sai (s²)'},
-                {id:'sd', l:'Độ lệch chuẩn (s)'}, {id:'cv', l:'CV (%)'}, {id:'disp', l:'Mức độ phân tán', txt:1},
+                {id:'q2', l:'Trung vị (Me)', calc:1}, {id:'q1', l:'Q1', calc:1}, {id:'q3', l:'Q3', calc:1}, {id:'mode', l:'Mốt (Mo)', calc:1},
+                {id:'range', l:'Khoảng biến thiên (R)'}, {id:'iqr', l:'IQR'}, {id:'variance', l:'Phương sai (s²)', calc:1},
+                {id:'sd', l:'Độ lệch chuẩn (s)', calc:1}, {id:'cv', l:'CV (%)'}, {id:'disp', l:'Mức độ phân tán', txt:1},
                 {id:'outliers', l:'Ngoại lai (sl)', raw:1, len:1},
                 {id:'q1Loc', l:'Vị trí Q1', txt:1}, {id:'q2Loc', l:'Vị trí Me', txt:1}, {id:'q3Loc', l:'Vị trí Q3', txt:1}
             ];
             let h = `<thead><tr class="bg-indigo-50 border-b"><th class="px-4 py-2">Chỉ số</th>`+results.map(r=>`<th class="px-4 py-2 text-center" style="color:${r.color.border}">${r.name}</th>`).join('')+`</tr></thead><tbody>`;
             m.forEach(x => {
-                h += `<tr class="border-b last:border-0 hover:bg-slate-50"><td class="px-4 py-2 font-medium text-slate-600">${x.l}</td>` + results.map(r=>{
+                h += `<tr class="border-b last:border-0 hover:bg-slate-50"><td class="px-4 py-2 font-medium text-slate-600 flex items-center justify-between gap-2">${x.l} ${x.calc ? `<button onclick="showCalculation('${x.id}', 0)" class="p-1 text-indigo-400 hover:text-indigo-600 hover:bg-indigo-50 rounded transition" title="Xem chi tiết phép tính"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg></button>` : ''}</td>` + results.map((r, rIdx)=>{
                     let v = r.s[x.id];
                     if(x.raw && mode==='table') return `<td class="text-center text-slate-300 italic">N/A</td>`;
                     if(v===undefined) return `<td>-</td>`;
@@ -715,5 +743,6 @@
             calculate(); 
         };
     </script>
+    <script src="calculation_details.js"></script>
 </body>
 </html>
