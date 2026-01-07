@@ -1,4 +1,8 @@
 
+/**
+ * Cập nhật mới nhất: 07/01/2026
+ * Bổ sung chi tiết các bước tính toán thống kê
+ */
 function showCalculation(statId, datasetIndex) {
     const result = lastResults[datasetIndex];
     const groups = lastGroups;
