@@ -15,14 +15,16 @@ function frac(top, bot) {
     return `<div class="fraction"><span class="numerator">${top}</span><span class="denominator">${bot}</span></div>`;
 }
 
-function showCalculation(statId, datasetIndex) {
-    const result = lastResults[datasetIndex];
-    const groups = lastGroups;
+function showCalculation(statId, resultData, groupsData) {
+    // Nếu tham số là string (từ HTML onclick), ta cần parse nó
+    const result = typeof resultData === 'string' ? JSON.parse(decodeURIComponent(resultData)) : resultData;
+    const groups = typeof groupsData === 'string' ? JSON.parse(decodeURIComponent(groupsData)) : groupsData;
+    
     let content = '';
     let title = '';
 
-    if (!result) { console.error('Result not found for index:', datasetIndex); return; }
-    if (!groups) { console.error('Groups not found'); return; }
+    if (!result) { console.error('Result data not provided'); return; }
+    if (!groups) { console.error('Groups data not provided'); return; }
 
     const metricNames = {
         'mean': 'Số trung bình (x̄)',
