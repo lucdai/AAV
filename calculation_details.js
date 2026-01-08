@@ -3,6 +3,7 @@
  * Cập nhật mới nhất: 08/01/2026
  * Tích hợp hiển thị chi tiết Trung vị, Q1, Q3 với định dạng toán học chuyên nghiệp
  * Các chỉ số Mean, Mode, Variance, SD, Range, IQR, CV được khôi phục về định dạng hiển thị cũ.
+ * Cập nhật: Phương sai và Độ lệch chuẩn không sử dụng ký hiệu Σ.
  */
 
 // Hàm định dạng số nội bộ
@@ -162,9 +163,15 @@ function generateVarianceSDCalcOld(id, r, groups) {
     let h = `<p>Phương sai (s²) đo lường mức độ phân tán của các giá trị so với số trung bình cộng.</p>`;
     h += `<p class="font-bold mt-4">Công thức Phương sai:</p>`;
     h += `<div class="bg-slate-50 p-4 rounded-lg border border-slate-200 my-4 text-center font-serif text-xl">
-            s² = [ Σ nᵢ(cᵢ - x̄)² ] / N
+            s² = [ n₁(c₁ - x̄)² + n₂(c₂ - x̄)² + ... + nₖ(cₖ - x̄)² ] / N
           </div>`;
     h += `<p class="mt-4">Với x̄ = ${fmtInternal(r.s.mean)} và N = ${r.s.N}.</p>`;
+    h += `<p class="font-bold mt-4">Thay số:</p>`;
+    let sumStr = r.gStats.map((g, i) => `(${g.freq} × (${fmtInternal(groups[i].midpoint)} - ${fmtInternal(r.s.mean)})²)`).join(' + ');
+    if (sumStr.length > 300) sumStr = sumStr.substring(0, 300) + "...";
+    h += `<div class="bg-slate-50 p-4 rounded-lg border border-slate-200 my-4 text-center font-serif">
+            s² = [ ${sumStr} ] / ${r.s.N}
+          </div>`;
     h += `<p class="text-xl mt-4">Kết quả Phương sai: <strong>s² = ${fmtInternal(r.s.variance)}</strong></p>`;
     
     if(id === 'sd') {
