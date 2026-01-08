@@ -44,6 +44,7 @@
     <script src="https://unpkg.com/@sgratzl/chartjs-chart-boxplot@3.10.0/build/index.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="calculation_details.js"></script>
+    <script src="localStorage.js"></script>
     <script>
         // Hàm tạo chuỗi ngẫu nhiên 21 ký tự đa ngôn ngữ
         function generateRandomFilename() {
@@ -144,6 +145,30 @@
                 <div class="flex items-center gap-2 mr-2">
                     <span class="text-sm font-medium text-slate-600">Làm tròn:</span>
                     <input type="number" id="decimalPlaces" value="2" min="0" max="10" class="w-16 p-1.5 text-center border border-slate-300 rounded focus:ring-2 focus:ring-indigo-500 font-mono text-sm" onchange="calculate()">
+                </div>
+                <div class="relative group">
+                    <button class="flex items-center gap-2 bg-slate-600 hover:bg-slate-700 text-white px-4 py-2 rounded-lg shadow-sm font-medium transition text-sm" title="Quản lý sao lưu">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"></path></svg>
+                        Sao lưu
+                    </button>
+                    <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-slate-200 hidden group-hover:block z-50">
+                        <button onclick="saveToLocalStorage()" class="w-full text-left px-4 py-2 hover:bg-slate-50 text-slate-700 text-sm flex items-center gap-2 border-b border-slate-100">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
+                            Lưu ngay
+                        </button>
+                        <button onclick="exportBackupAsJSON()" class="w-full text-left px-4 py-2 hover:bg-slate-50 text-slate-700 text-sm flex items-center gap-2 border-b border-slate-100">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                            Xuất JSON
+                        </button>
+                        <button onclick="importBackupFromJSON()" class="w-full text-left px-4 py-2 hover:bg-slate-50 text-slate-700 text-sm flex items-center gap-2 border-b border-slate-100">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4-4m0 0l4-4m-4 4h12"></path></svg>
+                            Nhập JSON
+                        </button>
+                        <button onclick="clearBackup()" class="w-full text-left px-4 py-2 hover:bg-red-50 text-red-600 text-sm flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                            Xóa sao lưu
+                        </button>
+                    </div>
                 </div>
                 <button onclick="shareLink()" class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg shadow-sm font-medium transition text-sm">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 100-2.684 3 3 0 000 2.684zm0 9a3 3 0 100-2.684 3 3 0 000 2.684z"></path></svg>
@@ -406,6 +431,7 @@
             document.getElementById('rawSection').classList.toggle('hidden', mode!=='raw');
             document.getElementById('tableSection').classList.toggle('hidden', mode!=='table');
             calculate();
+            markAsChanged();
         }
 
         // --- Dataset Ops ---
@@ -413,10 +439,11 @@
             const newId = (datasets.length>0 ? Math.max(...datasets.map(d=>d.id)):0)+1;
             datasets.push({id:newId, name:`Mẫu ${String.fromCharCode(65+datasets.length)}`, dataStr:""});
             renderInputs(); calculate();
+            markAsChanged();
         }
-        function removeLastDataset() { if(datasets.length<=1)return; datasets.pop(); renderInputs(); calculate(); }
-        function updateRaw(id, val) { datasets.find(d=>d.id===id).dataStr=val; calculate(); }
-        function updateName(id, val) { datasets.find(d=>d.id===id).name=val; renderInputs(); calculate(); }
+        function removeLastDataset() { if(datasets.length<=1)return; datasets.pop(); renderInputs(); calculate(); markAsChanged(); }
+        function updateRaw(id, val) { datasets.find(d=>d.id===id).dataStr=val; calculate(); markAsChanged(); }
+        function updateName(id, val) { datasets.find(d=>d.id===id).name=val; renderInputs(); calculate(); markAsChanged(); }
         function renderInputs() {
             document.getElementById('datasetContainer').innerHTML = datasets.map(ds=>`
                 <div class="bg-white border rounded p-2"><div class="flex justify-between mb-1">
@@ -444,8 +471,9 @@
             const last = manualRows[manualRows.length-1];
             let l = last?last.upper:0, w = last?(last.upper-last.lower)||10:10;
             manualRows.push({id:Date.now(), lower:l, upper:l+w, freqs:{}}); renderManualBody(); calculate();
+            markAsChanged();
         }
-        function delRow(id) { if(manualRows.length>1) { manualRows=manualRows.filter(r=>r.id!==id); renderManualBody(); calculate(); } }
+        function delRow(id) { if(manualRows.length>1) { manualRows=manualRows.filter(r=>r.id!==id); renderManualBody(); calculate(); markAsChanged(); } }
         function updRow(id, f, val) {
             const r = manualRows.find(x=>x.id===id); if(!r)return;
             if(f.startsWith('freq')) r.freqs[parseInt(f.split('_')[1])] = parseInt(val)||0;
@@ -457,6 +485,7 @@
                 }
             }
             calculate();
+            markAsChanged();
         }
 
         // --- Core Calc ---
@@ -775,9 +804,26 @@
         }
 
         window.onload = () => { 
-            loadSharedData();
+            // Khôi phục từ localStorage trước
+            const restored = restoreFromLocalStorage();
+            
+            // Nếu không có dữ liệu từ localStorage, thử tải từ shared link
+            if (!restored) {
+                loadSharedData();
+            }
+            
+            // Khởi tạo hệ thống auto-backup
+            initAutoBackup();
+            
             renderInputs(); 
-            calculate(); 
+            calculate();
+            
+            // Thêm event listener cho decimalPlaces
+            document.getElementById('decimalPlaces').addEventListener('change', markAsChanged);
+            document.getElementById('method').addEventListener('change', markAsChanged);
+            document.getElementById('manualH').addEventListener('change', markAsChanged);
+            document.getElementById('manualK').addEventListener('change', markAsChanged);
+            document.getElementById('startValue').addEventListener('change', markAsChanged);
         };
     </script>
     <footer class="mt-12 py-8 border-t border-slate-200 text-center text-slate-500 text-sm">
