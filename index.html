@@ -673,6 +673,19 @@
             });
         }
 
+        function downloadTableImage(tableId, baseName, format) {
+            const element = document.getElementById(tableId);
+            const randomId = generateRandomFilename();
+            const fileName = `${randomId}.${format}`;
+
+            html2canvas(element, { scale: 2, backgroundColor: '#ffffff' }).then(canvas => {
+                const link = document.createElement('a');
+                link.href = canvas.toDataURL(`image/${format === 'jpg' ? 'jpeg' : format}`);
+                link.download = fileName;
+                link.click();
+            });
+        }
+
         function downloadChartImage(chartId, baseName, format) {
             const chart = charts[chartId];
             if (!chart) {
