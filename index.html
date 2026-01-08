@@ -581,13 +581,14 @@
             ];
             let h = `<thead><tr class="bg-indigo-50 border-b"><th class="px-4 py-2">Chỉ số</th>`+results.map(r=>`<th class="px-4 py-2 text-center" style="color:${r.color.border}">${r.name}</th>`).join('')+`</tr></thead><tbody>`;
             m.forEach(x => {
-                h += `<tr class="border-b last:border-0 hover:bg-slate-50"><td class="px-4 py-2 font-medium text-slate-600 flex items-center justify-between gap-2">${x.l} ${x.calc ? `<button onclick="showCalculation('${x.id}', 0)" class="p-1 text-indigo-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-full transition" title="Xem chi tiết phép tính"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></button>` : ''}</td>` + results.map((r, rIdx)=>{
+                h += `<tr class="border-b last:border-0 hover:bg-slate-50"><td class="px-4 py-2 font-medium text-slate-600 flex items-center justify-between gap-2">${x.l}</td>` + results.map((r, rIdx)=>{
                     let v = r.s[x.id];
+                    let calcBtn = x.calc ? `<button onclick="showCalculation('${x.id}', ${rIdx})" class="p-1 text-indigo-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-full transition ml-1" title="Xem chi tiết phép tính"><svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></button>` : '';
                     if(x.raw && mode==='table') return `<td class="text-center text-slate-300 italic">N/A</td>`;
                     if(v===undefined) return `<td>-</td>`;
                     if(x.len) return `<td class="text-center font-bold text-red-600">${v.length}</td>`;
                     if(x.txt) return `<td class="text-center text-slate-700">${v}</td>`;
-                    return `<td class="text-center font-bold text-slate-700">${fmt(v)}</td>`;
+                    return `<td class="text-center font-bold text-slate-700">${fmt(v)}${calcBtn}</td>`;
                 }).join('') + `</tr>`;
             });
             document.getElementById('statsTable').innerHTML = h+`</tbody>`;
