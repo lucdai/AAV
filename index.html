@@ -531,11 +531,16 @@
             }
 
             const getQ = (t) => {
-                const g = gStats.find(x=>x.cf>=t-0.000001);
-                if(!g) return {val:gStats[gStats.length-1].upper, grp:'>Max', idx: gStats.length-1};
+                const g = gStats.find(x => x.cf >= t - 0.000001);
+                if (!g) {
+                    const lastG = gStats[gStats.length - 1];
+                    return { val: lastG.upper, grp: `[${fmt(lastG.lower)}; ${fmt(lastG.upper)})`, idx: gStats.length - 1 };
+                }
                 const idx = gStats.indexOf(g);
-                const prev = idx > 0 ? gStats[idx-1].cf : 0;
-                return {val: g.lower + ((t-prev)/g.freq)*(g.upper-g.lower), grp:`[${fmt(g.lower)};${fmt(g.upper)})`, idx: idx};
+                const prev = idx > 0 ? gStats[idx - 1].cf : 0;
+                // Tránh chia cho 0 nếu tần số nhóm bằng 0 (dù cf >= t thì freq thường > 0)
+                const val = g.freq > 0 ? g.lower + ((t - prev) / g.freq) * (g.upper - g.lower) : g.lower;
+                return { val: val, grp: `[${fmt(g.lower)}; ${fmt(g.upper)})`, idx: idx };
             };
             const q1 = getQ(N/4), q2=getQ(N/2), q3=getQ(3*N/4);
             const iqr = q3.val - q1.val;

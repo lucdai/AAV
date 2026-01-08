@@ -107,7 +107,25 @@ function generateQuartileCalc(id, r, groups) {
     const idx = r.s[id + 'Idx'];
     
     if (idx === undefined || idx === -1 || !groups[idx]) {
-        return `<p class="text-red-500">Lỗi: Không xác định được nhóm chứa ${label}. Vui lòng kiểm tra lại dữ liệu đầu vào.</p>`;
+        // Fallback to last group if not found (should not happen with fixed getQ)
+        const fallbackIdx = groups.length - 1;
+        const g = groups[fallbackIdx];
+        const prevCf = fallbackIdx > 0 ? r.gStats[fallbackIdx-1].cf : 0;
+        const n_m = r.gStats[fallbackIdx].freq;
+        const h_val = g.upper - g.lower;
+        
+        let h = `<div><strong>1. Xác định nhóm chứa ${label}:</strong></div>`;
+        h += `<p class="text-amber-600 text-sm mb-2 italic">Lưu ý: Vị trí vượt quá tổng tần số, mặc định chọn nhóm cuối.</p>`;
+        h += `<ul class="list-disc ml-8 mb-4 text-sm">
+                <li>Tổng tần số N = ${r.s.N}</li>
+                <li>Vị trí: ${k}N/4 = ${pos}</li>
+                <li>Nhóm chứa ${label} là nhóm thứ ${fallbackIdx+1}: [${fmtInternal(g.lower)}; ${fmtInternal(g.upper)})</li>
+              </ul>`;
+        h += `<div><strong>2. Công thức tính:</strong></div>`;
+        h += `<div class="formula-container">${label} = u<span class="sub">m</span> + ${frac(`${k}N/4 - C`, 'n<span class="sub">m</span>')} &times; h</div>`;
+        h += `<div><strong>3. Thay số:</strong></div>`;
+        h += `<div class="formula-container">${label} = ${fmtInternal(g.lower)} + ${frac(`${pos} - ${prevCf}`, n_m)} &times; ${fmtInternal(h_val)} = <strong>${fmtInternal(r.s[id])}</strong></div>`;
+        return h;
     }
     
     const g = groups[idx];
