@@ -101,23 +101,14 @@ function generateQuartileCalc(id, r, groups) {
     const pos = r.s.N * k / 4;
     const label = id==='q2'?'M<span class="sub">e</span>':(id==='q1'?'Q<span class="sub">1</span>':'Q<span class="sub">3</span>');
     
-    // Tìm nhóm chứa Qk
-    let cf = 0;
-    let idx = -1;
-    for(let i=0; i<r.gStats.length; i++) {
-        cf += r.gStats[i].freq;
-        if(cf >= pos - 0.000001) { // Sử dụng epsilon để tránh lỗi làm tròn
-            idx = i;
-            break;
-        }
+    // Sử dụng index đã được tính toán sẵn từ processStats
+    const idx = r.s[id + 'Idx'];
+    
+    if (idx === undefined || idx === -1 || !groups[idx]) {
+        return `<p class="text-red-500">Lỗi: Không xác định được nhóm chứa ${label}. Vui lòng kiểm tra lại dữ liệu đầu vào.</p>`;
     }
     
-    // Fallback nếu không tìm thấy (thường là nhóm cuối)
-    if (idx === -1) idx = r.gStats.length - 1;
-    
     const g = groups[idx];
-    if (!g) return `<p class="text-red-500">Lỗi: Không xác định được nhóm chứa dữ liệu. Vui lòng kiểm tra lại bảng tần số.</p>`;
-    
     const prevCf = idx > 0 ? r.gStats[idx-1].cf : 0;
     const n_m = r.gStats[idx].freq;
     const h_val = g.upper - g.lower;

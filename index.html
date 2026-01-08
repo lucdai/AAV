@@ -531,10 +531,11 @@
             }
 
             const getQ = (t) => {
-                const g = gStats.find(x=>x.cf>=t);
-                if(!g) return {val:gStats[gStats.length-1].upper, grp:'>Max'};
-                const prev = gStats[g.id-2]?gStats[g.id-2].cf:0;
-                return {val: g.lower + ((t-prev)/g.freq)*(g.upper-g.lower), grp:`[${fmt(g.lower)};${fmt(g.upper)})`};
+                const g = gStats.find(x=>x.cf>=t-0.000001);
+                if(!g) return {val:gStats[gStats.length-1].upper, grp:'>Max', idx: gStats.length-1};
+                const idx = gStats.indexOf(g);
+                const prev = idx > 0 ? gStats[idx-1].cf : 0;
+                return {val: g.lower + ((t-prev)/g.freq)*(g.upper-g.lower), grp:`[${fmt(g.lower)};${fmt(g.upper)})`, idx: idx};
             };
             const q1 = getQ(N/4), q2=getQ(N/2), q3=getQ(3*N/4);
             const iqr = q3.val - q1.val;
@@ -553,7 +554,9 @@
 
             return { name, color, gStats, rawData: rawData || generateSimulatedData(gStats), s: {
                 N, mean, trueMean, absErr, relErr, variance, sd, cv, range,
-                q1:q1.val, q2:q2.val, q3:q3.val, iqr, mode, q1Loc:q1.grp, q2Loc:q2.grp, q3Loc:q3.grp,
+                q1:q1.val, q2:q2.val, q3:q3.val, iqr, mode, 
+                q1Loc:q1.grp, q2Loc:q2.grp, q3Loc:q3.grp,
+                q1Idx:q1.idx, q2Idx:q2.idx, q3Idx:q3.idx,
                 outliers, disp: cv<10?"Thấp":cv<30?"TB":"Cao"
             }};
         }
