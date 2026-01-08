@@ -2,6 +2,7 @@
 /**
  * Cập nhật mới nhất: 08/01/2026
  * Tích hợp hiển thị chi tiết Trung vị, Q1, Q3 với định dạng toán học chuyên nghiệp
+ * Các chỉ số khác giữ nguyên định dạng cũ theo yêu cầu.
  */
 
 // Hàm định dạng số nội bộ
@@ -16,7 +17,6 @@ function frac(top, bot) {
 }
 
 function showCalculation(statId, resultData, groupsData) {
-    // Nếu tham số là string (từ HTML onclick), ta cần parse nó
     const result = typeof resultData === 'string' ? JSON.parse(decodeURIComponent(resultData)) : resultData;
     const groups = typeof groupsData === 'string' ? JSON.parse(decodeURIComponent(groupsData)) : groupsData;
     
@@ -43,28 +43,28 @@ function showCalculation(statId, resultData, groupsData) {
 
     switch(statId) {
         case 'mean':
-            content = generateMeanCalc(result, groups);
+            content = generateMeanCalcOld(result, groups);
             break;
         case 'q2':
         case 'q1':
         case 'q3':
-            content = generateQuartileCalc(statId, result, groups);
+            content = generateQuartileCalcNew(statId, result, groups);
             break;
         case 'mode':
-            content = generateModeCalc(result, groups);
+            content = generateModeCalcOld(result, groups);
             break;
         case 'variance':
         case 'sd':
-            content = generateVarianceSDCalc(statId, result, groups);
+            content = generateVarianceSDCalcOld(statId, result, groups);
             break;
         case 'range':
-            content = generateRangeCalc(result, groups);
+            content = generateRangeCalcOld(result, groups);
             break;
         case 'iqr':
-            content = generateIQRCalc(result, groups);
+            content = generateIQRCalcOld(result, groups);
             break;
         case 'cv':
-            content = generateCVCalc(result, groups);
+            content = generateCVCalcOld(result, groups);
             break;
         default:
             content = 'Tính năng đang được cập nhật cho chỉ số: ' + statId;
@@ -87,45 +87,18 @@ function closeCalcModal() {
     }
 }
 
-function generateMeanCalc(r, groups) {
-    let h = `<div><strong>1. Công thức số trung bình cộng (<span class="math-symbol">x̄</span>):</strong></div>`;
-    h += `<div class="formula-container"><span class="math-symbol">x̄</span> = ${frac('1','N')} &sum; n<span class="sub">i</span>c<span class="sub">i</span></div>`;
-    
-    let sumStr = groups.map((g, i) => `${r.gStats[i].freq}&times;${fmtInternal(g.midpoint)}`).join(' + ');
-    if(sumStr.length > 100) sumStr = sumStr.substring(0,100) + "...";
-    
-    h += `<div class="formula-container"><span class="math-symbol">x̄</span> = ${frac(sumStr, r.s.N)} = <strong>${fmtInternal(r.s.mean)}</strong></div>`;
-    return h;
-}
-
-function generateQuartileCalc(id, r, groups) {
+// --- ĐỊNH DẠNG MỚI CHO TRUNG VỊ, Q1, Q3 ---
+function generateQuartileCalcNew(id, r, groups) {
     const k = id==='q1'?1:(id==='q3'?3:2);
     const pos = r.s.N * k / 4;
     const label = id==='q2'?'M<span class="sub">e</span>':(id==='q1'?'Q<span class="sub">1</span>':'Q<span class="sub">3</span>');
     
-    // Sử dụng index đã được tính toán sẵn từ processStats
-    const idx = r.s[id + 'Idx'];
-    
+    let idx = r.s[id + 'Idx'];
+    let isFallback = false;
+
     if (idx === undefined || idx === -1 || !groups[idx]) {
-        // Fallback to last group if not found (should not happen with fixed getQ)
-        const fallbackIdx = groups.length - 1;
-        const g = groups[fallbackIdx];
-        const prevCf = fallbackIdx > 0 ? r.gStats[fallbackIdx-1].cf : 0;
-        const n_m = r.gStats[fallbackIdx].freq;
-        const h_val = g.upper - g.lower;
-        
-        let h = `<div><strong>1. Xác định nhóm chứa ${label}:</strong></div>`;
-        h += `<p class="text-amber-600 text-sm mb-2 italic">Lưu ý: Vị trí vượt quá tổng tần số, mặc định chọn nhóm cuối.</p>`;
-        h += `<ul class="list-disc ml-8 mb-4 text-sm">
-                <li>Tổng tần số N = ${r.s.N}</li>
-                <li>Vị trí: ${k}N/4 = ${pos}</li>
-                <li>Nhóm chứa ${label} là nhóm thứ ${fallbackIdx+1}: [${fmtInternal(g.lower)}; ${fmtInternal(g.upper)})</li>
-              </ul>`;
-        h += `<div><strong>2. Công thức tính:</strong></div>`;
-        h += `<div class="formula-container">${label} = u<span class="sub">m</span> + ${frac(`${k}N/4 - C`, 'n<span class="sub">m</span>')} &times; h</div>`;
-        h += `<div><strong>3. Thay số:</strong></div>`;
-        h += `<div class="formula-container">${label} = ${fmtInternal(g.lower)} + ${frac(`${pos} - ${prevCf}`, n_m)} &times; ${fmtInternal(h_val)} = <strong>${fmtInternal(r.s[id])}</strong></div>`;
-        return h;
+        idx = groups.length - 1;
+        isFallback = true;
     }
     
     const g = groups[idx];
@@ -134,6 +107,7 @@ function generateQuartileCalc(id, r, groups) {
     const h_val = g.upper - g.lower;
 
     let h = `<div><strong>1. Xác định nhóm chứa ${label}:</strong></div>`;
+    if (isFallback) h += `<p class="text-amber-600 text-sm mb-2 italic">Lưu ý: Vị trí vượt quá tổng tần số, mặc định chọn nhóm cuối.</p>`;
     h += `<ul class="list-disc ml-8 mb-4 text-sm">
             <li>Tổng tần số N = ${r.s.N}</li>
             <li>Vị trí: ${k}N/4 = ${pos}</li>
@@ -146,31 +120,35 @@ function generateQuartileCalc(id, r, groups) {
     return h;
 }
 
-function generateModeCalc(r, groups) {
-    let maxF = -1, idx = -1;
-    r.gStats.forEach((g, i) => {
-        if(g.freq > maxF) { maxF = g.freq; idx = i; }
-    });
-    
-    const g = groups[idx];
-    const np = idx > 0 ? r.gStats[idx-1].freq : 0;
-    const nn = idx < r.gStats.length - 1 ? r.gStats[idx+1].freq : 0;
-    const h_val = g.upper - g.lower;
-
-    let h = `<div><strong>1. Nhóm chứa Mốt (M<span class="sub">o</span>):</strong></div>`;
-    h += `<p class="ml-4 mb-4">Nhóm có tần số lớn nhất (${maxF}) là nhóm thứ ${idx+1}: [${fmtInternal(g.lower)}; ${fmtInternal(g.upper)})</p>`;
-    h += `<div><strong>2. Công thức tính:</strong></div>`;
-    h += `<div class="formula-container">M<span class="sub">o</span> = u<span class="sub">o</span> + ${frac('n<span class="sub">o</span> - n<span class="sub">o-1</span>', '(n<span class="sub">o</span> - n<span class="sub">o-1</span>) + (n<span class="sub">o</span> - n<span class="sub">o+1</span>)')} &times; h</div>`;
-    h += `<div><strong>3. Thay số:</strong></div>`;
-    h += `<div class="formula-container">M<span class="sub">o</span> = ${fmtInternal(g.lower)} + ${frac(`${r.gStats[idx].freq} - ${np}`, `(${r.gStats[idx].freq} - ${np}) + (${r.gStats[idx].freq} - ${nn})`)} &times; ${fmtInternal(h_val)} = <strong>${fmtInternal(r.s.mode)}</strong></div>`;
+// --- ĐỊNH DẠNG CŨ CHO CÁC CHỈ SỐ KHÁC ---
+function generateMeanCalcOld(r, groups) {
+    let h = `<div><strong>1. Công thức số trung bình cộng (<span class="math-symbol">x&#772;</span>):</strong></div>`;
+    h += `<div class="formula-container"><span class="math-symbol">x&#772;</span> = ${frac('1','N')} &sum; n<span class="sub">i</span>c<span class="sub">i</span></div>`;
+    let sumStr = r.gStats.map((g, i) => `${g.freq}&times;${groups[i].midpoint}`).join(' + ');
+    if(sumStr.length > 60) sumStr = sumStr.substring(0,60) + "...";
+    h += `<div class="formula-container"><span class="math-symbol">x&#772;</span> = ${frac(sumStr, r.s.N)} = <strong>${fmtInternal(r.s.mean)}</strong></div>`;
     return h;
 }
 
-function generateVarianceSDCalc(id, r, groups) {
+function generateModeCalcOld(r, groups) {
+    let maxF = -1, idx = -1;
+    r.gStats.forEach((g, i) => { if(g.freq > maxF) { maxF = g.freq; idx = i; } });
+    const g = groups[idx];
+    const np = idx > 0 ? r.gStats[idx-1].freq : 0;
+    const nn = idx < r.gStats.length - 1 ? r.gStats[idx+1].freq : 0;
+    let h = `<div><strong>1. Nhóm chứa Mốt (M<span class="sub">o</span>):</strong></div>`;
+    h += `<p class="ml-4 mb-4">Nhóm có tần số lớn nhất (${maxF}) là [${g.lower}; ${g.upper})</p>`;
+    h += `<div><strong>2. Công thức tính:</strong></div>`;
+    h += `<div class="formula-container">M<span class="sub">o</span> = u<span class="sub">o</span> + ${frac('n<span class="sub">o</span> - n<span class="sub">o-1</span>', '(n<span class="sub">o</span> - n<span class="sub">o-1</span>) + (n<span class="sub">o</span> - n<span class="sub">o+1</span>)')} &times; h</div>`;
+    h += `<div><strong>3. Thay số:</strong></div>`;
+    h += `<div class="formula-container">M<span class="sub">o</span> = ${g.lower} + ${frac(`${g.freq} - ${np}`, `(${g.freq} - ${np}) + (${g.freq} - ${nn})`)} &times; ${g.upper-g.lower} = <strong>${fmtInternal(r.s.mode)}</strong></div>`;
+    return h;
+}
+
+function generateVarianceSDCalcOld(id, r, groups) {
     let h = `<div><strong>1. Công thức Phương sai (s<span class="sup">2</span>):</strong></div>`;
-    h += `<div class="formula-container">s<span class="sup">2</span> = ${frac('1','N')} &sum; n<span class="sub">i</span>(c<span class="sub">i</span> - <span class="math-symbol">x̄</span>)<span class="sup">2</span></div>`;
+    h += `<div class="formula-container">s<span class="sup">2</span> = ${frac('1','N')} &sum; n<span class="sub">i</span>(c<span class="sub">i</span> - <span class="math-symbol">x&#772;</span>)<span class="sup">2</span></div>`;
     h += `<div class="formula-container">s<span class="sup">2</span> = <strong>${fmtInternal(r.s.variance)}</strong></div>`;
-    
     if(id === 'sd') {
         h += `<div class="mt-4 border-t pt-4"><strong>2. Độ lệch chuẩn (s):</strong></div>`;
         h += `<div class="formula-container">s = &radic;<span style="border-top:1.5px solid #000">s<span class="sup">2</span></span> = &radic;<span style="border-top:1.5px solid #000">${fmtInternal(r.s.variance)}</span> = <strong>${fmtInternal(r.s.sd)}</strong></div>`;
@@ -178,33 +156,29 @@ function generateVarianceSDCalc(id, r, groups) {
     return h;
 }
 
-function generateRangeCalc(r, groups) {
+function generateRangeCalcOld(r, groups) {
     let h = `<div><strong>1. Công thức Khoảng biến thiên (R):</strong></div>`;
     h += `<div class="formula-container">R = x<span class="sub">max</span> - x<span class="sub">min</span></div>`;
-    
-    if(r.rawData && r.rawData.length > 0 && !lastGroups.isManual) {
-        const min = Math.min(...r.rawData);
-        const max = Math.max(...r.rawData);
-        h += `<div class="formula-container">R = ${fmtInternal(max)} - ${fmtInternal(min)} = <strong>${fmtInternal(r.s.range)}</strong></div>`;
+    if(r.rawData && r.rawData.length){
+        const min = Math.min(...r.rawData), max = Math.max(...r.rawData);
+        h += `<div class="formula-container">R = ${max} - ${min} = <strong>${fmtInternal(r.s.range)}</strong></div>`;
     } else {
-        const first = groups[0];
-        const last = groups[groups.length-1];
-        h += `<p class="text-sm italic text-indigo-600 mb-2 text-center">Ước lượng: Cận trên nhóm cuối - Cận dưới nhóm đầu</p>`;
-        h += `<div class="formula-container">R &approx; ${fmtInternal(last.upper)} - ${fmtInternal(first.lower)} = <strong>${fmtInternal(r.s.range)}</strong></div>`;
+        h += `<p class="text-sm italic text-indigo-600 mb-2">Ước lượng: Cận trên nhóm cuối - Cận dưới nhóm đầu</p>`;
+        h += `<div class="formula-container">R &approx; ${groups[groups.length-1].upper} - ${groups[0].lower} = <strong>${fmtInternal(r.s.range)}</strong></div>`;
     }
     return h;
 }
 
-function generateIQRCalc(r, groups) {
+function generateIQRCalcOld(r, groups) {
     let h = `<div><strong>1. Công thức Khoảng tứ phân vị (<span class="delta-symbol">&Delta;</span><span class="sub">Q</span>):</strong></div>`;
     h += `<div class="formula-container"><span class="delta-symbol">&Delta;</span><span class="sub">Q</span> = Q<span class="sub">3</span> - Q<span class="sub">1</span></div>`;
     h += `<div class="formula-container"><span class="delta-symbol">&Delta;</span><span class="sub">Q</span> = ${fmtInternal(r.s.q3)} - ${fmtInternal(r.s.q1)} = <strong>${fmtInternal(r.s.iqr)}</strong></div>`;
     return h;
 }
 
-function generateCVCalc(r, groups) {
+function generateCVCalcOld(r, groups) {
     let h = `<div><strong>1. Công thức Hệ số biến thiên (CV):</strong></div>`;
-    h += `<div class="formula-container">CV = ${frac('s', '|x̄|')} &times; 100%</div>`;
+    h += `<div class="formula-container">CV = ${frac('s', '|x&#772;|')} &times; 100%</div>`;
     h += `<div class="formula-container">CV = ${frac(fmtInternal(r.s.sd), fmtInternal(Math.abs(r.s.mean)))} &times; 100% = <strong>${fmtInternal(r.s.cv)}%</strong></div>`;
     return h;
 }
