@@ -637,7 +637,7 @@
             document.getElementById('statsTable').innerHTML = h+`</tbody>`;
 
             let groupTitle = document.getElementById('groupColumnTitle')?.innerText || "Nhóm";
-            let fh = `<thead><tr class="bg-indigo-50 border-b"><th class="px-4 py-2 outline-none focus:ring-2 focus:ring-indigo-500" contenteditable="true" id="groupColumnTitle" onblur="calculate()">${groupTitle}</th><th class="px-4 py-2 text-center">Giá Trị Đại Diện</th>`+results.map(r=>`<th class="px-4 py-2 text-center" style="color:${r.color.border}">Tần Số (${r.name})</th>`).join('')+`</tr></thead><tbody>`;
+            let fh = `<thead><tr class="bg-indigo-50 border-b"><th class="px-4 py-2 outline-none focus:ring-2 focus:ring-indigo-500" contenteditable="true" id="groupColumnTitle" onblur="calculate()">${groupTitle}</th><th class="px-4 py-2 text-center">Giá Trị Đại Diện</th>`+results.map(r=>`<th class="px-4 py-2 text-center" style="color:${r.color.border}">Tần Số</th>`).join('')+`</tr></thead><tbody>`;
             groups.forEach((g,i)=>{
                 fh += `<tr class="border-b hover:bg-slate-50"><td class="px-4 py-2 text-slate-800">[${fmt(g.lower)}; ${fmt(g.upper)})</td><td class="px-4 py-2 text-center text-slate-500">${fmt(g.midpoint)}</td>`+results.map(r=>`<td class="px-4 py-2 text-center font-bold">${r.gStats[i].freq}</td>`).join('')+`</tr>`;
             });
