@@ -28,19 +28,19 @@ function showCalculation(statId, resultData, groupsData) {
     if (!groups) { console.error('Groups data not provided'); return; }
 
     const metricNames = {
-        'mean': 'Số trung bình (x̄)',
-        'q2': 'Trung vị (Me)',
-        'q1': 'Tứ phân vị 1 (Q1)',
-        'q3': 'Tứ phân vị 3 (Q3)',
-        'mode': 'Mốt (Mo)',
-        'variance': 'Phương sai (s²)',
-        'sd': 'Độ lệch chuẩn (s)',
-        'range': 'Khoảng biến thiên (R)',
-        'iqr': 'Khoảng tứ phân vị (ΔQ)',
-        'cv': 'Hệ số biến thiên (CV)'
+        'mean': t('mean'),
+        'q2': t('median'),
+        'q1': t('q1'),
+        'q3': t('q3'),
+        'mode': t('mode'),
+        'variance': t('variance'),
+        'sd': t('sd'),
+        'range': t('range'),
+        'iqr': t('iqr'),
+        'cv': t('cv')
     };
 
-    title = `Chi tiết tính ${metricNames[statId] || statId} - ${result.name}`;
+    title = t('calc_detail_for', {metric: metricNames[statId] || statId, name: result.name});
 
     switch(statId) {
         case 'mean':
@@ -68,7 +68,7 @@ function showCalculation(statId, resultData, groupsData) {
             content = generateCVCalcOld(result, groups);
             break;
         default:
-            content = 'Tính năng đang được cập nhật cho chỉ số: ' + statId;
+            content = t('updating_feature') + statId;
     }
 
     const modal = document.getElementById('calcModal');
@@ -107,16 +107,16 @@ function generateQuartileCalcNew(id, r, groups) {
     const n_m = r.gStats[idx].freq;
     const h_val = g.upper - g.lower;
 
-    let h = `<div><strong>1. Xác định nhóm chứa ${label}:</strong></div>`;
+    let h = t('determine_group', {label: label});
     if (isFallback) h += `<p class="text-amber-600 text-sm mb-2 italic">Lưu ý: Vị trí vượt quá tổng tần số, mặc định chọn nhóm cuối.</p>`;
     h += `<ul class="list-disc ml-8 mb-4 text-sm">
             <li>Tổng tần số N = ${r.s.N}</li>
             <li>Vị trí: ${k}N/4 = ${pos}</li>
             <li>Nhóm chứa ${label} là nhóm thứ ${idx+1}: [${fmtInternal(g.lower)}; ${fmtInternal(g.upper)})</li>
           </ul>`;
-    h += `<div><strong>2. Công thức tính:</strong></div>`;
+    h += t('formula');
     h += `<div class="formula-container">${label} = u<span class="sub">m</span> + ${frac(`${k}N/4 - C`, 'n<span class="sub">m</span>')} &times; h</div>`;
-    h += `<div><strong>3. Thay số:</strong></div>`;
+    h += t('substitute');
     h += `<div class="formula-container">${label} = ${fmtInternal(g.lower)} + ${frac(`${pos} - ${prevCf}`, n_m)} &times; ${fmtInternal(h_val)} = <strong>${fmtInternal(r.s[id])}</strong></div>`;
     return h;
 }

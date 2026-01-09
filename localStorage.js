@@ -148,7 +148,7 @@ function showAutoSaveNotification() {
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
             </svg>
-            <span>Đã sao lưu dữ liệu</span>
+            <span>${t('data_saved')}</span>
         `;
         document.body.appendChild(notification);
     }
@@ -168,12 +168,12 @@ function showAutoSaveNotification() {
  * Xóa dữ liệu sao lưu
  */
 function clearBackup() {
-    if (confirm('Bạn có chắc muốn xóa tất cả dữ liệu sao lưu? Hành động này không thể hoàn tác.')) {
+    if (confirm(t('confirm_clear_backup'))) {
         try {
             localStorage.removeItem(STORAGE_KEY);
             localStorage.removeItem(BACKUP_TIMESTAMP_KEY);
             console.log('[AAV Auto-Backup] Dữ liệu sao lưu đã được xóa');
-            alert('Dữ liệu sao lưu đã được xóa thành công');
+            alert(t('backup_cleared'));
         } catch (e) {
             console.error('[AAV Auto-Backup] Lỗi khi xóa dữ liệu:', e);
         }
@@ -202,7 +202,7 @@ function getLastBackupInfo() {
         const date = new Date(timestamp);
         return {
             timestamp: timestamp,
-            formatted: date.toLocaleString('vi-VN'),
+            formatted: date.toLocaleString(currentLang === 'vi' ? 'vi-VN' : 'en-US'),
             exists: true
         };
     }
@@ -215,7 +215,7 @@ function getLastBackupInfo() {
 function exportBackupAsJSON() {
     const state = loadFromLocalStorage();
     if (!state) {
-        alert('Không có dữ liệu sao lưu để xuất');
+        alert(t('no_backup_to_export'));
         return;
     }
     
@@ -247,14 +247,14 @@ function importBackupFromJSON() {
                 
                 // Validate dữ liệu
                 if (!state.ds || !Array.isArray(state.ds)) {
-                    throw new Error('Định dạng file không hợp lệ');
+                    throw new Error(t('invalid_file_format'));
                 }
                 
                 // Lưu vào localStorage
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
                 localStorage.setItem(BACKUP_TIMESTAMP_KEY, new Date().toISOString());
                 
-                alert('Dữ liệu sao lưu đã được nhập thành công. Vui lòng tải lại trang để áp dụng.');
+                alert(t('import_success'));
                 console.log('[AAV Auto-Backup] Dữ liệu sao lưu đã được nhập');
             } catch (e) {
                 alert('Lỗi khi nhập dữ liệu: ' + e.message);
