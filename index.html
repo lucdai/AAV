@@ -213,7 +213,7 @@
                             <select id="method" onchange="toggleInputs(); calculate()" class="w-full p-2 border border-slate-300 rounded text-sm bg-white"><option value="auto" data-i18n="auto">Tự động</option><option value="manual_width" data-i18n="fixed_width">Cố định độ rộng (h)</option><option value="manual_count" data-i18n="fixed_count">Cố định số nhóm (k)</option></select>
                             <div id="inputH" class="hidden"><input type="number" id="manualH" value="5" min="0.1" step="0.1" class="w-full p-2 border border-slate-300 rounded text-sm" placeholder="Độ rộng (h)" data-i18n-placeholder="width_h" onchange="calculate()"></div>
                             <div id="inputK" class="hidden"><input type="number" id="manualK" value="6" min="1" max="50" class="w-full p-2 border border-slate-300 rounded text-sm" placeholder="Số nhóm (k)" data-i18n-placeholder="count_k" onchange="calculate()"></div>
-                            <input type="number" id="startValue" placeholder="<th data-i18n="value_col">Giá trị</th> bắt đầu" class="w-full p-2 border border-slate-300 rounded text-sm" onchange="calculate()">
+                            <div id="inputStart" class="hidden"><input type="number" id="startValue" placeholder="Giá trị bắt đầu" data-i18n-placeholder="start_val_placeholder" class="w-full p-2 border border-slate-300 rounded text-sm" onchange="calculate()"></div>
                         </div>
                     </div>
                 </div>
@@ -735,7 +735,7 @@
         }
 
         function fmt(n) { const d=parseInt(document.getElementById('decimalPlaces').value)||2; return (n===undefined||n===null)?"-":new Intl.NumberFormat('vi-VN',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n); }
-        function toggleInputs() { const m=document.getElementById('method').value; document.getElementById('inputH').classList.toggle('hidden', m!=='manual_width'); document.getElementById('inputK').classList.toggle('hidden', m!=='manual_count'); }
+        function toggleInputs() { const m=document.getElementById('method').value; document.getElementById('inputH').classList.toggle('hidden', m!=='manual_width'); document.getElementById('inputK').classList.toggle('hidden', m!=='manual_count'); document.getElementById('inputStart').classList.toggle('hidden', m==='auto'); }
         function copyTable() { 
             const el = document.getElementById('freqTable'); let range, sel;
             if (document.createRange && window.getSelection) { range = document.createRange(); sel = window.getSelection(); sel.removeAllRanges(); try { range.selectNodeContents(el); sel.addRange(range); } catch (e) { range.selectNode(el); sel.addRange(range); } document.execCommand("copy"); sel.removeAllRanges(); alert(t("copied")); }
