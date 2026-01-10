@@ -139,7 +139,7 @@
         <header class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="flex items-center gap-3 cursor-pointer logo-container" onclick="goHome()">
                 <img src="logo.png" alt="AAV - Công cụ phân tích và trực quan hóa dữ liệu thống kê chuyên nghiệp" class="h-12 w-auto">
-                <h1 class="text-xl font-bold text-slate-900">AAV - Phân Tích & Trực Quan Hóa Dữ Liệu</h1>
+                <h1 class="text-xl font-bold text-slate-900" data-i18n="title">AAV - Phân Tích & Trực Quan Hóa Dữ Liệu</h1>
             </div>
             
             <div id="languageSwitcher" class="mr-2"></div><div class="flex items-center gap-3">
@@ -284,7 +284,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
                         <div class="flex justify-between items-center mb-4">
-                            <h3 class="font-bold text-slate-700 text-center flex-1">Grouped Bar Chart (Cột Nhóm)</h3>
+                            <h3 class="font-bold text-slate-700 text-center flex-1" data-i18n="histogram_name">Grouped Bar Chart (Cột Nhóm)</h3>
                             <div class="flex gap-1">
                                 <button onclick="downloadChartImage('chartHistogram', 'Grouped_Bar_Chart', 'png')" class="text-xs border bg-white px-2 py-1 rounded hover:text-green-600">PNG</button>
                                 <button onclick="downloadChartImage('chartHistogram', 'Grouped_Bar_Chart', 'jpeg')" class="text-xs border bg-white px-2 py-1 rounded hover:text-blue-600">JPEG</button>
@@ -294,7 +294,7 @@
                     </div>
                     <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
                         <div class="flex justify-between items-center mb-4">
-                            <h3 class="font-bold text-slate-700 text-center flex-1">Line Chart (Đường/Polygon)</h3>
+                            <h3 class="font-bold text-slate-700 text-center flex-1" data-i18n="polygon_name">Line Chart (Đường/Polygon)</h3>
                             <div class="flex gap-1">
                                 <button onclick="downloadChartImage('chartPolygon', 'Line_Chart', 'png')" class="text-xs border bg-white px-2 py-1 rounded hover:text-green-600">PNG</button>
                                 <button onclick="downloadChartImage('chartPolygon', 'Line_Chart', 'jpeg')" class="text-xs border bg-white px-2 py-1 rounded hover:text-blue-600">JPEG</button>
@@ -304,7 +304,7 @@
                     </div>
                     <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
                         <div class="flex justify-between items-center mb-4">
-                            <h3 class="font-bold text-slate-700 text-center flex-1">Stacked Column (Cột Chồng)</h3>
+                            <h3 class="font-bold text-slate-700 text-center flex-1" data-i18n="stacked_bar_name">Stacked Column (Cột Chồng)</h3>
                             <div class="flex gap-1">
                                 <button onclick="downloadChartImage('chartStacked', 'Stacked_Column', 'png')" class="text-xs border bg-white px-2 py-1 rounded hover:text-green-600">PNG</button>
                                 <button onclick="downloadChartImage('chartStacked', 'Stacked_Column', 'jpeg')" class="text-xs border bg-white px-2 py-1 rounded hover:text-blue-600">JPEG</button>
@@ -314,7 +314,7 @@
                     </div>
                     <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
                         <div class="flex justify-between items-center mb-4">
-                            <h3 class="font-bold text-slate-700 text-center flex-1">Relative Frequency (<th data-i18n="frequency">Tần số</th> tương đối %)</h3>
+                            <h3 class="font-bold text-slate-700 text-center flex-1" data-i18n="rel_freq_bar_name">Relative Frequency (Tần số tương đối %)</h3>
                             <div class="flex gap-1">
                                 <button onclick="downloadChartImage('chartRelFreq', 'Relative_Frequency', 'png')" class="text-xs border bg-white px-2 py-1 rounded hover:text-green-600">PNG</button>
                                 <button onclick="downloadChartImage('chartRelFreq', 'Relative_Frequency', 'jpeg')" class="text-xs border bg-white px-2 py-1 rounded hover:text-blue-600">JPEG</button>
@@ -328,7 +328,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
                         <div class="flex justify-between items-center mb-4">
-                            <h3 class="font-bold text-slate-700 text-center flex-1">Violin Plot (Vi-ô-lông)</h3>
+                            <h3 class="font-bold text-slate-700 text-center flex-1" data-i18n="violin_name">Violin Plot (Vi-ô-lông)</h3>
                             <div class="flex gap-1">
                                 <button onclick="downloadChartImage('chartViolin', 'Violin_Plot', 'png')" class="text-xs border bg-white px-2 py-1 rounded hover:text-green-600">PNG</button>
                                 <button onclick="downloadChartImage('chartViolin', 'Violin_Plot', 'jpeg')" class="text-xs border bg-white px-2 py-1 rounded hover:text-blue-600">JPEG</button>
@@ -338,7 +338,7 @@
                     </div>
                     <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
                         <div class="flex justify-between items-center mb-4">
-                            <h3 class="font-bold text-slate-700 text-center flex-1">Box Plot (Hộp)</h3>
+                            <h3 class="font-bold text-slate-700 text-center flex-1" data-i18n="boxplot_name">Box Plot (Hộp)</h3>
                             <div class="flex gap-1">
                                 <button onclick="downloadChartImage('chartBox', 'Box_Plot', 'png')" class="text-xs border bg-white px-2 py-1 rounded hover:text-green-600">PNG</button>
                                 <button onclick="downloadChartImage('chartBox', 'Box_Plot', 'jpeg')" class="text-xs border bg-white px-2 py-1 rounded hover:text-blue-600">JPEG</button>
@@ -348,7 +348,7 @@
                     </div>
                     <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 md:col-span-2">
                         <div class="flex justify-between items-center mb-4">
-                            <h3 class="font-bold text-slate-700 text-center flex-1">Scatter Plot (Phân Tán)</h3>
+                            <h3 class="font-bold text-slate-700 text-center flex-1" data-i18n="scatter_name">Scatter Plot (Phân Tán)</h3>
                             <div class="flex gap-1">
                                 <button onclick="downloadChartImage('chartScatter', 'Scatter_Plot', 'png')" class="text-xs border bg-white px-2 py-1 rounded hover:text-green-600">PNG</button>
                                 <button onclick="downloadChartImage('chartScatter', 'Scatter_Plot', 'jpeg')" class="text-xs border bg-white px-2 py-1 rounded hover:text-blue-600">JPEG</button>
@@ -363,7 +363,7 @@
                     <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
                         <div class="flex justify-between items-center mb-4">
                             <div class="flex-1">
-                                <h3 class="font-bold text-slate-700 text-sm">Pie/Donut</h3>
+                                <h3 class="font-bold text-slate-700 text-sm" data-i18n="pie_chart_name">Pie/Donut</h3>
                                 <select id="pieDatasetSelect" onchange="updatePieChart()" class="text-xs border rounded p-1 w-full mt-1"></select>
                             </div>
                             <div class="flex gap-1 ml-2">
@@ -375,7 +375,7 @@
                     </div>
                     <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
                         <div class="flex justify-between items-center mb-4">
-                            <h3 class="font-bold text-slate-700 text-center flex-1">Stacked Area (Miền)</h3>
+                            <h3 class="font-bold text-slate-700 text-center flex-1" data-i18n="area_chart_name">Stacked Area (Miền)</h3>
                             <div class="flex gap-1">
                                 <button onclick="downloadChartImage('chartArea', 'Stacked_Area', 'png')" class="text-xs border bg-white px-2 py-1 rounded hover:text-green-600">PNG</button>
                                 <button onclick="downloadChartImage('chartArea', 'Stacked_Area', 'jpeg')" class="text-xs border bg-white px-2 py-1 rounded hover:text-blue-600">JPEG</button>
@@ -385,7 +385,7 @@
                     </div>
                     <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
                         <div class="flex justify-between items-center mb-4">
-                            <h3 class="font-bold text-slate-700 text-center flex-1">Ogive (Tích lũy)</h3>
+                            <h3 class="font-bold text-slate-700 text-center flex-1" data-i18n="ogive_chart_name">Ogive (Tích lũy)</h3>
                             <div class="flex gap-1">
                                 <button onclick="downloadChartImage('chartOgive', 'Ogive', 'png')" class="text-xs border bg-white px-2 py-1 rounded hover:text-green-600">PNG</button>
                                 <button onclick="downloadChartImage('chartOgive', 'Ogive', 'jpeg')" class="text-xs border bg-white px-2 py-1 rounded hover:text-blue-600">JPEG</button>
@@ -451,7 +451,7 @@
                 <input value="${ds.name}" onchange="updateName(${ds.id}, this.value)" class="text-xs font-bold w-20 border-b outline-none focus:border-indigo-500"></div>
                 <textarea oninput="updateRaw(${ds.id}, this.value)" class="w-full h-12 text-[10px] font-mono border rounded p-1 resize-none">${ds.dataStr}</textarea></div>`).join('');
             const h = document.getElementById('manualHeaderRow');
-            h.innerHTML = `<th class="p-2 w-12">Dưới</th><th class="p-2 w-12">Trên</th>` + datasets.map(d=>`<th class="p-2 text-center text-indigo-700">${d.name}</th>`).join('') + `<th class="w-6"></th>`;
+            h.innerHTML = `<th class="p-2 w-12" data-i18n="lower_bound">${t('lower_bound')}</th><th class="p-2 w-12" data-i18n="upper_bound">${t('upper_bound')}</th>` + datasets.map(d=>`<th class="p-2 text-center text-indigo-700">${d.name}</th>`).join('') + `<th class="w-6"></th>`;
             renderManualBody();
             updatePieSelect();
         }

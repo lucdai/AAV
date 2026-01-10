@@ -6,8 +6,20 @@ async function initI18n() {
     try {
         const response = await fetch('translations.json');
         translations = await response.json();
+        
+        // Ensure currentLang is valid
+        if (!translations[currentLang]) {
+            currentLang = 'vi';
+            localStorage.setItem('aav_lang', 'vi');
+        }
+        
         applyTranslations();
         updateLanguageSwitcher();
+        
+        // Trigger calculation to update dynamic elements
+        if (typeof calculate === 'function') {
+            calculate();
+        }
     } catch (error) {
         console.error('Error loading translations:', error);
     }
