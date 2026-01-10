@@ -90,10 +90,27 @@ function changeLanguage(lang) {
     // Update Chart.js labels if charts exist
     if (typeof Chart !== 'undefined') {
         Chart.helpers.each(Chart.instances, function(instance) {
-            // Re-render charts to apply new translations for labels and titles
-            if (instance.config.options.scales && instance.config.options.scales.x && instance.config.options.scales.x.title) {
-                instance.config.options.scales.x.title.text = t('value_col');
+            // Update specific labels based on chart type or context
+            if (instance.config.options.scales) {
+                if (instance.config.options.scales.x && instance.config.options.scales.x.title) {
+                    instance.config.options.scales.x.title.text = t('value_col');
+                }
+                if (instance.config.options.scales.y && instance.config.options.scales.y.title) {
+                    // For relative frequency chart
+                    if (instance.canvas.id === 'chartRelFreq') {
+                        instance.config.options.scales.y.title.text = '%';
+                    }
+                }
             }
+            
+            // Update labels for Boxplot and Violin
+            if (instance.config.type === 'boxplot' || instance.config.type === 'violin') {
+                const key = instance.config.type === 'boxplot' ? 'distribution' : 'density';
+                if (instance.config.data.labels && instance.config.data.labels.length > 0) {
+                    instance.config.data.labels[0] = t(key);
+                }
+            }
+            
             instance.update();
         });
     }

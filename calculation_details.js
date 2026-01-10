@@ -7,7 +7,12 @@
 // Hàm định dạng số nội bộ
 function fmtInternal(n) { 
     const d = (document.getElementById('decimalPlaces') ? parseInt(document.getElementById('decimalPlaces').value) : 2) || 2; 
-    return (n === undefined || n === null) ? "-" : new Intl.NumberFormat('vi-VN', { minimumFractionDigits: d, maximumFractionDigits: d }).format(n); 
+    const lang = localStorage.getItem('aav_lang') || 'vi';
+    const localeMap = {
+        'vi': 'vi-VN', 'en': 'en-US', 'zh': 'zh-CN', 'hi': 'hi-IN', 'es': 'es-ES',
+        'fr': 'fr-FR', 'ar': 'ar-SA', 'bn': 'bn-BD', 'pt': 'pt-PT', 'ru': 'ru-RU', 'ur': 'ur-PK'
+    };
+    return (n === undefined || n === null) ? "-" : new Intl.NumberFormat(localeMap[lang] || 'en-US', { minimumFractionDigits: d, maximumFractionDigits: d }).format(n); 
 }
 
 // Hàm tạo phân số HTML

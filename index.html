@@ -150,7 +150,7 @@
                 <div class="relative group">
                     <button class="flex items-center gap-2 bg-slate-600 hover:bg-slate-700 text-white px-4 py-2 rounded-lg shadow-sm font-medium transition text-sm" data-i18n-title="backup_mgmt">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"></path></svg>
-                        <span data-i18n="backup">Sao lưu</span>
+                        <span data-i18n="backup"></span>
                     </button>
                     <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-slate-200 hidden group-hover:block z-50">
                         <button onclick="saveToLocalStorage()" class="w-full text-left px-4 py-2 hover:bg-slate-50 text-slate-700 text-sm flex items-center gap-2 border-b border-slate-100">
@@ -173,7 +173,7 @@
                 </div>
                 <button onclick="shareLink()" class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg shadow-sm font-medium transition text-sm">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 100-2.684 3 3 0 000 2.684zm0 9a3 3 0 100-2.684 3 3 0 000 2.684z"></path></svg>
-                    <span data-i18n="share">Chia sẻ</span>
+                    <span data-i18n="share"></span>
                 </button>
             </div>
         </header>
@@ -236,7 +236,7 @@
                         <div class="p-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center">
                             <h2 class="font-bold text-slate-800 text-sm uppercase" data-i18n="freq_analysis_title">Phân Tích Bảng Phân Bố Tần Số Thống Kê</h2>
                             <div class="flex gap-2">
-                                <button onclick="copyTable()" class="text-xs border bg-white px-3 py-1 rounded hover:text-indigo-600" data-i18n="copy">Copy</button>
+                                <button onclick="copyTable()" class="text-xs border bg-white px-3 py-1 rounded hover:text-indigo-600" data-i18n="copy"></button>
                                 <button onclick="downloadTableImage('freqTable', 'Bảng_Phân_Bố_Tần_Số', 'png')" class="text-xs border bg-white px-3 py-1 rounded hover:text-green-600 flex items-center gap-1">
                                     <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                                     <span data-i18n="export_png">PNG</span>
@@ -734,7 +734,15 @@
             link.click();
         }
 
-        function fmt(n) { const d=parseInt(document.getElementById('decimalPlaces').value)||2; return (n===undefined||n===null)?"-":new Intl.NumberFormat('vi-VN',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n); }
+        function fmt(n) { 
+            const d = parseInt(document.getElementById('decimalPlaces').value) || 2; 
+            const lang = typeof currentLang !== 'undefined' ? currentLang : (localStorage.getItem('aav_lang') || 'vi');
+            const localeMap = {
+                'vi': 'vi-VN', 'en': 'en-US', 'zh': 'zh-CN', 'hi': 'hi-IN', 'es': 'es-ES',
+                'fr': 'fr-FR', 'ar': 'ar-SA', 'bn': 'bn-BD', 'pt': 'pt-PT', 'ru': 'ru-RU', 'ur': 'ur-PK'
+            };
+            return (n === undefined || n === null) ? "-" : new Intl.NumberFormat(localeMap[lang] || 'en-US', { minimumFractionDigits: d, maximumFractionDigits: d }).format(n); 
+        }
         function toggleInputs() { const m=document.getElementById('method').value; document.getElementById('inputH').classList.toggle('hidden', m!=='manual_width'); document.getElementById('inputK').classList.toggle('hidden', m!=='manual_count'); document.getElementById('inputStart').classList.toggle('hidden', m==='auto'); }
         function copyTable() { 
             const el = document.getElementById('freqTable'); let range, sel;

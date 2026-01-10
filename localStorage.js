@@ -202,7 +202,14 @@ function getLastBackupInfo() {
         const date = new Date(timestamp);
         return {
             timestamp: timestamp,
-            formatted: date.toLocaleString(currentLang === 'vi' ? 'vi-VN' : 'en-US'),
+            formatted: date.toLocaleString((() => {
+                const lang = typeof currentLang !== 'undefined' ? currentLang : (localStorage.getItem('aav_lang') || 'vi');
+                const localeMap = {
+                    'vi': 'vi-VN', 'en': 'en-US', 'zh': 'zh-CN', 'hi': 'hi-IN', 'es': 'es-ES',
+                    'fr': 'fr-FR', 'ar': 'ar-SA', 'bn': 'bn-BD', 'pt': 'pt-PT', 'ru': 'ru-RU', 'ur': 'ur-PK'
+                };
+                return localeMap[lang] || 'en-US';
+            })()),
             exists: true
         };
     }
