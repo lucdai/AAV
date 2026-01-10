@@ -51,7 +51,15 @@ function applyTranslations() {
         } else if (el.tagName === 'INPUT' && el.type === 'button') {
             el.value = t(key);
         } else {
-            el.innerText = t(key);
+            // Check if it's a dynamic table header or has specific content to preserve
+            if (el.id === 'groupColumnTitle') {
+                // Preserve user-edited title if it's not the default
+                if (el.innerText === t('group', {lang: currentLang === 'vi' ? 'en' : 'vi'})) {
+                    el.innerText = t(key);
+                }
+            } else {
+                el.innerText = t(key);
+            }
         }
     });
 
