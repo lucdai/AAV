@@ -144,7 +144,7 @@
             
             <div id="languageSwitcher" class="mr-2"></div><div class="flex items-center gap-3">
                 <div class="flex items-center gap-2 mr-2">
-                    <span class="text-sm font-medium text-slate-600"><span data-i18n="rounding">Làm tròn:</span></span>
+                    <span class="text-sm font-medium text-slate-600"><span data-i18n="rounding"></span></span>
                     <input type="number" id="decimalPlaces" value="2" min="0" max="10" class="w-16 p-1.5 text-center border border-slate-300 rounded focus:ring-2 focus:ring-indigo-500 font-mono text-sm" onchange="calculate()">
                 </div>
                 <div class="relative group">
@@ -208,7 +208,7 @@
                 <div id="rawSection" class="space-y-3">
                     <div id="datasetContainer" class="space-y-3 max-h-[400px] overflow-y-auto pr-1"></div>
                     <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
-                        <div class="font-bold text-slate-700 mb-3 text-xs uppercase" data-i18n="group_config">Cấu hình ghép nhóm</div>
+                        <div class="font-bold text-slate-700 mb-3 text-xs uppercase" data-i18n="group_config"></div>
                         <div class="space-y-3">
                             <select id="method" onchange="toggleInputs(); calculate()" class="w-full p-2 border border-slate-300 rounded text-sm bg-white"><option value="auto" data-i18n="auto">Tự động</option><option value="manual_width" data-i18n="fixed_width">Cố định độ rộng (h)</option><option value="manual_count" data-i18n="fixed_count">Cố định số nhóm (k)</option></select>
                             <div id="inputH" class="hidden"><input type="number" id="manualH" value="5" min="0.1" step="0.1" class="w-full p-2 border border-slate-300 rounded text-sm" placeholder="Độ rộng (h)" data-i18n-placeholder="width_h" onchange="calculate()"></div>
@@ -280,11 +280,11 @@
             
             <!-- Charts Wrapper -->
             <div id="chartsWrapper" class="hidden space-y-6">
-                <h3 class="text-lg font-bold text-slate-800 border-b pb-2" data-i18n="basic_dist_comp">1. Phân Phối & So Sánh Cơ Bản</h3>
+                <h3 class="text-lg font-bold text-slate-800 border-b pb-2" data-i18n="basic_dist_comp"></h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
                         <div class="flex justify-between items-center mb-4">
-                            <h3 class="font-bold text-slate-700 text-center flex-1" data-i18n="histogram_name">Grouped Bar Chart (Cột Nhóm)</h3>
+                            <h3 class="font-bold text-slate-700 text-center flex-1" data-i18n="histogram_name"></h3>
                             <div class="flex gap-1">
                                 <button onclick="downloadChartImage('chartHistogram', 'Grouped_Bar_Chart', 'png')" class="text-xs border bg-white px-2 py-1 rounded hover:text-green-600">PNG</button>
                                 <button onclick="downloadChartImage('chartHistogram', 'Grouped_Bar_Chart', 'jpeg')" class="text-xs border bg-white px-2 py-1 rounded hover:text-blue-600">JPEG</button>
@@ -294,7 +294,7 @@
                     </div>
                     <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
                         <div class="flex justify-between items-center mb-4">
-                            <h3 class="font-bold text-slate-700 text-center flex-1" data-i18n="polygon_name">Line Chart (Đường/Polygon)</h3>
+                            <h3 class="font-bold text-slate-700 text-center flex-1" data-i18n="polygon_name"></h3>
                             <div class="flex gap-1">
                                 <button onclick="downloadChartImage('chartPolygon', 'Line_Chart', 'png')" class="text-xs border bg-white px-2 py-1 rounded hover:text-green-600">PNG</button>
                                 <button onclick="downloadChartImage('chartPolygon', 'Line_Chart', 'jpeg')" class="text-xs border bg-white px-2 py-1 rounded hover:text-blue-600">JPEG</button>
@@ -304,7 +304,7 @@
                     </div>
                     <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
                         <div class="flex justify-between items-center mb-4">
-                            <h3 class="font-bold text-slate-700 text-center flex-1" data-i18n="stacked_bar_name">Stacked Column (Cột Chồng)</h3>
+                            <h3 class="font-bold text-slate-700 text-center flex-1" data-i18n="stacked_bar_name"></h3>
                             <div class="flex gap-1">
                                 <button onclick="downloadChartImage('chartStacked', 'Stacked_Column', 'png')" class="text-xs border bg-white px-2 py-1 rounded hover:text-green-600">PNG</button>
                                 <button onclick="downloadChartImage('chartStacked', 'Stacked_Column', 'jpeg')" class="text-xs border bg-white px-2 py-1 rounded hover:text-blue-600">JPEG</button>
@@ -314,7 +314,7 @@
                     </div>
                     <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
                         <div class="flex justify-between items-center mb-4">
-                            <h3 class="font-bold text-slate-700 text-center flex-1" data-i18n="rel_freq_bar_name">Relative Frequency (Tần số tương đối %)</h3>
+                            <h3 class="font-bold text-slate-700 text-center flex-1" data-i18n="rel_freq_bar_name"></h3>
                             <div class="flex gap-1">
                                 <button onclick="downloadChartImage('chartRelFreq', 'Relative_Frequency', 'png')" class="text-xs border bg-white px-2 py-1 rounded hover:text-green-600">PNG</button>
                                 <button onclick="downloadChartImage('chartRelFreq', 'Relative_Frequency', 'jpeg')" class="text-xs border bg-white px-2 py-1 rounded hover:text-blue-600">JPEG</button>
@@ -324,11 +324,11 @@
                     </div>
                 </div>
 
-                <h3 class="text-lg font-bold text-slate-800 border-b pb-2 pt-4" data-i18n="advanced_stats">2. Thống Kê Nâng Cao</h3>
+                <h3 class="text-lg font-bold text-slate-800 border-b pb-2 pt-4" data-i18n="advanced_stats"></h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
                         <div class="flex justify-between items-center mb-4">
-                            <h3 class="font-bold text-slate-700 text-center flex-1" data-i18n="violin_name">Violin Plot (Vi-ô-lông)</h3>
+                            <h3 class="font-bold text-slate-700 text-center flex-1" data-i18n="violin_name"></h3>
                             <div class="flex gap-1">
                                 <button onclick="downloadChartImage('chartViolin', 'Violin_Plot', 'png')" class="text-xs border bg-white px-2 py-1 rounded hover:text-green-600">PNG</button>
                                 <button onclick="downloadChartImage('chartViolin', 'Violin_Plot', 'jpeg')" class="text-xs border bg-white px-2 py-1 rounded hover:text-blue-600">JPEG</button>
@@ -338,7 +338,7 @@
                     </div>
                     <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
                         <div class="flex justify-between items-center mb-4">
-                            <h3 class="font-bold text-slate-700 text-center flex-1" data-i18n="boxplot_name">Box Plot (Hộp)</h3>
+                            <h3 class="font-bold text-slate-700 text-center flex-1" data-i18n="boxplot_name"></h3>
                             <div class="flex gap-1">
                                 <button onclick="downloadChartImage('chartBox', 'Box_Plot', 'png')" class="text-xs border bg-white px-2 py-1 rounded hover:text-green-600">PNG</button>
                                 <button onclick="downloadChartImage('chartBox', 'Box_Plot', 'jpeg')" class="text-xs border bg-white px-2 py-1 rounded hover:text-blue-600">JPEG</button>
@@ -348,7 +348,7 @@
                     </div>
                     <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 md:col-span-2">
                         <div class="flex justify-between items-center mb-4">
-                            <h3 class="font-bold text-slate-700 text-center flex-1" data-i18n="scatter_name">Scatter Plot (Phân Tán)</h3>
+                            <h3 class="font-bold text-slate-700 text-center flex-1" data-i18n="scatter_name"></h3>
                             <div class="flex gap-1">
                                 <button onclick="downloadChartImage('chartScatter', 'Scatter_Plot', 'png')" class="text-xs border bg-white px-2 py-1 rounded hover:text-green-600">PNG</button>
                                 <button onclick="downloadChartImage('chartScatter', 'Scatter_Plot', 'jpeg')" class="text-xs border bg-white px-2 py-1 rounded hover:text-blue-600">JPEG</button>
@@ -358,7 +358,7 @@
                     </div>
                 </div>
 
-                <h3 class="text-lg font-bold text-slate-800 border-b pb-2 pt-4" data-i18n="structure_cum">3. Cơ Cấu & Tích Lũy</h3>
+                <h3 class="text-lg font-bold text-slate-800 border-b pb-2 pt-4" data-i18n="structure_cum"></h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
                         <div class="flex justify-between items-center mb-4">
@@ -375,7 +375,7 @@
                     </div>
                     <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
                         <div class="flex justify-between items-center mb-4">
-                            <h3 class="font-bold text-slate-700 text-center flex-1" data-i18n="area_chart_name">Stacked Area (Miền)</h3>
+                            <h3 class="font-bold text-slate-700 text-center flex-1" data-i18n="area_chart_name"></h3>
                             <div class="flex gap-1">
                                 <button onclick="downloadChartImage('chartArea', 'Stacked_Area', 'png')" class="text-xs border bg-white px-2 py-1 rounded hover:text-green-600">PNG</button>
                                 <button onclick="downloadChartImage('chartArea', 'Stacked_Area', 'jpeg')" class="text-xs border bg-white px-2 py-1 rounded hover:text-blue-600">JPEG</button>
@@ -385,7 +385,7 @@
                     </div>
                     <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
                         <div class="flex justify-between items-center mb-4">
-                            <h3 class="font-bold text-slate-700 text-center flex-1" data-i18n="ogive_chart_name">Ogive (Tích lũy)</h3>
+                            <h3 class="font-bold text-slate-700 text-center flex-1" data-i18n="ogive_chart_name"></h3>
                             <div class="flex gap-1">
                                 <button onclick="downloadChartImage('chartOgive', 'Ogive', 'png')" class="text-xs border bg-white px-2 py-1 rounded hover:text-green-600">PNG</button>
                                 <button onclick="downloadChartImage('chartOgive', 'Ogive', 'jpeg')" class="text-xs border bg-white px-2 py-1 rounded hover:text-blue-600">JPEG</button>

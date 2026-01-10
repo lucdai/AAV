@@ -86,6 +86,17 @@ function changeLanguage(lang) {
     if (typeof calculate === 'function') {
         calculate();
     }
+    
+    // Update Chart.js labels if charts exist
+    if (typeof Chart !== 'undefined') {
+        Chart.helpers.each(Chart.instances, function(instance) {
+            // Re-render charts to apply new translations for labels and titles
+            if (instance.config.options.scales && instance.config.options.scales.x && instance.config.options.scales.x.title) {
+                instance.config.options.scales.x.title.text = t('value_col');
+            }
+            instance.update();
+        });
+    }
 }
 
 function updateLanguageSwitcher() {
