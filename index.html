@@ -448,6 +448,14 @@
         function updateRaw(id, val) { datasets.find(d=>d.id===id).dataStr=val; calculate(); markAsChanged(); }
         function updateName(id, val) { datasets.find(d=>d.id===id).name=val; renderInputs(); calculate(); markAsChanged(); }
         
+        function deleteDataset(id) {
+            if (datasets.length <= 1) return;
+            datasets = datasets.filter(d => d.id !== id);
+            renderInputs();
+            calculate();
+            markAsChanged();
+        }
+        
         function handleCSV(input) {
             const file = input.files[0];
             if (!file) return;
@@ -505,9 +513,15 @@
         }
         function renderInputs() {
             document.getElementById('datasetContainer').innerHTML = datasets.map(ds=>`
-                <div class="bg-white border rounded p-2"><div class="flex justify-between mb-1">
-                <input value="${ds.name}" onchange="updateName(${ds.id}, this.value)" class="text-xs font-bold w-20 border-b outline-none focus:border-indigo-500"></div>
-                <textarea oninput="updateRaw(${ds.id}, this.value)" class="w-full h-12 text-[10px] font-mono border rounded p-1 resize-none">${ds.dataStr}</textarea></div>`).join('');
+              <div class="bg-white border rounded p-2">
+                    <div class="flex justify-between items-center mb-1">
+                        <input value="${ds.name}" onchange="updateName(${ds.id}, this.value)" class="text-xs font-bold w-20 border-b outline-none focus:border-indigo-500">
+                        <button onclick="deleteDataset(${ds.id})" class="text-red-400 hover:text-red-600 transition p-1" title="${t('remove_sample')}">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        </button>
+                    </div>
+                    <textarea oninput="updateRaw(${ds.id}, this.value)" class="w-full h-12 text-[10px] font-mono border rounded p-1 resize-none">${ds.dataStr}</textarea>
+                </div>`).join('');
             const h = document.getElementById('manualHeaderRow');
             h.innerHTML = `<th class="p-2 w-12" data-i18n="lower_bound">${t('lower_bound')}</th><th class="p-2 w-12" data-i18n="upper_bound">${t('upper_bound')}</th>` + datasets.map(d=>`<th class="p-2 text-center text-indigo-700">${d.name}</th>`).join('') + `<th class="w-6"></th>`;
             renderManualBody();
