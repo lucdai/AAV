@@ -848,37 +848,50 @@
             const json = JSON.stringify(state);
             const compressed = LZString.compressToEncodedURIComponent(json);
             
-            // Link dài với fragment
-            const url = new URL(window.location.origin + window.location.pathname);
-            url.hash = 'share=' + compressed;
-            const fullUrl = url.toString();
+            // Luôn đảm bảo URL gốc sạch sẽ
+            const baseUrl = window.location.origin + window.location.pathname;
+            const fullUrl = baseUrl + '#share=' + compressed;
             
-            // Thử rút gọn qua is.gd trước
+            // Ưu tiên hiển thị trạng thái đang xử lý
+            const btn = event.currentTarget;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = `<svg class="animate-spin h-4 w-4 mr-2" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> ${t("share")}`;
+            btn.disabled = true;
+
+            const finalizeShare = (urlToCopy) => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                navigator.clipboard.writeText(urlToCopy).then(() => {
+                    alert(t("share_link_copied") + "\n\n" + urlToCopy);
+                }).catch(err => {
+                    prompt(t("copy_share_link_here"), urlToCopy);
+                });
+            };
+
+            // Thử rút gọn qua is.gd
             const callbackName = 'shortenCallback_' + Date.now();
             window[callbackName] = function(response) {
                 delete window[callbackName];
-                let shortUrl = fullUrl;
-                if (response.shorturl) {
-                    shortUrl = response.shorturl;
+                if (response.shorturl && response.shorturl.length <= (baseUrl.length + 15)) {
+                    finalizeShare(response.shorturl);
+                } else {
+                    // Nếu is.gd lỗi hoặc link vẫn dài, dùng TinyURL như fallback
+                    fetch(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(fullUrl)}`)
+                        .then(res => res.text())
+                        .then(short => finalizeShare(short))
+                        .catch(() => finalizeShare(fullUrl));
                 }
-                
-                const markdownLink = `[AAV Content](${shortUrl})`;
-                navigator.clipboard.writeText(shortUrl).then(() => {
-                    alert(t("share_link_copied") + "\n\n" + shortUrl);
-                }).catch(err => {
-                    prompt(t("copy_share_link_here"), shortUrl);
-                });
             };
             
             const script = document.createElement('script');
             script.src = `https://is.gd/create.php?format=json&callback=${callbackName}&url=${encodeURIComponent(fullUrl)}`;
             script.onerror = function() {
                 delete window[callbackName];
-                navigator.clipboard.writeText(fullUrl).then(() => {
-                    alert(t("share_link_copied") + "\n\n" + fullUrl);
-                }).catch(err => {
-                    prompt(t("copy_share_link_here"), fullUrl);
-                });
+                // Fallback TinyURL
+                fetch(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(fullUrl)}`)
+                    .then(res => res.text())
+                    .then(short => finalizeShare(short))
+                    .catch(() => finalizeShare(fullUrl));
             };
             document.head.appendChild(script);
         }
