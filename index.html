@@ -46,6 +46,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <script src="https://unpkg.com/@sgratzl/chartjs-chart-boxplot@3.10.0/build/index.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.5.0/lz-string.min.js"></script>
     <script src="calculation_details.js"></script>
     <script src="localStorage.js"></script>
     <script src="i18n.js"></script>
@@ -833,10 +834,28 @@
                 k: document.getElementById('manualK').value,
                 sv: document.getElementById('startValue').value
             };
+
+            // Tối ưu hóa: Loại bỏ các giá trị mặc định để giảm kích thước
+            if (state.dp == "2") delete state.dp;
+            if (state.meth == "auto") {
+                delete state.meth;
+                delete state.h;
+                delete state.k;
+                delete state.sv;
+                delete state.mr;
+            } else {
+                if (state.h == "5") delete state.h;
+                if (state.k == "6") delete state.k;
+                if (state.sv === "" || state.sv === null) delete state.sv;
+            }
+            if (state.m === 'raw') delete state.m;
+
             const json = JSON.stringify(state);
-            const base64 = btoa(unescape(encodeURIComponent(json)));
+            // Sử dụng LZString để nén dữ liệu, giúp rút gọn URI đáng kể
+            const compressed = LZString.compressToEncodedURIComponent(json);
+            
             const url = new URL(window.location.href);
-            url.searchParams.set('share', base64);
+            url.searchParams.set('share', compressed);
             
             navigator.clipboard.writeText(url.toString()).then(() => {
                 alert(t("share_link_copied"));
@@ -852,7 +871,17 @@
             if (!sharedData) return;
 
             try {
-                const json = decodeURIComponent(escape(atob(sharedData)));
+                let json;
+                // Thử giải nén bằng LZString trước
+                const decompressed = LZString.decompressFromEncodedURIComponent(sharedData);
+                
+                if (decompressed) {
+                    json = decompressed;
+                } else {
+                    // Nếu thất bại, thử giải mã Base64 (tương thích ngược với các link cũ)
+                    json = decodeURIComponent(escape(atob(sharedData)));
+                }
+
                 const state = JSON.parse(json);
                 
                 if (state.m) mode = state.m;
@@ -889,9 +918,13 @@
             // Khôi phục từ localStorage trước
             const restored = restoreFromLocalStorage();
             
-            // Nếu không có dữ liệu từ localStorage, thử tải từ shared link
-            if (!restored) {
+            // Ưu tiên tải dữ liệu từ shared link nếu có
+            const params = new URLSearchParams(window.location.search);
+            if (params.has('share')) {
                 loadSharedData();
+            } else if (!restored) {
+                // Nếu không có link chia sẻ, mới khôi phục từ localStorage
+                // (Điều này tránh việc dữ liệu cũ đè lên dữ liệu mới được chia sẻ)
             }
             
             // Khởi tạo hệ thống auto-backup
@@ -912,6 +945,7 @@
         <p data-i18n="footer_text">© 2026 AAV - Công cụ Phân Tích Dữ Liệu. Cập nhật mới nhất: 07/01/2026</p>
         <p class="mt-1"><span data-i18n="developed_by">Phát triển bởi</span> <a href="https://github.com/lucdai" class="text-indigo-600 hover:underline">lucdai</a></p>
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.5.0/lz-string.min.js"></script>
     <script src="calculation_details.js"></script>
 </body>
 </html>
