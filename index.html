@@ -835,14 +835,9 @@
                 sv: document.getElementById('startValue').value
             };
 
-            // Tối ưu hóa: Loại bỏ các giá trị mặc định để giảm kích thước
             if (state.dp == "2") delete state.dp;
             if (state.meth == "auto") {
-                delete state.meth;
-                delete state.h;
-                delete state.k;
-                delete state.sv;
-                delete state.mr;
+                delete state.meth; delete state.h; delete state.k; delete state.sv; delete state.mr;
             } else {
                 if (state.h == "5") delete state.h;
                 if (state.k == "6") delete state.k;
@@ -851,23 +846,42 @@
             if (state.m === 'raw') delete state.m;
 
             const json = JSON.stringify(state);
-            // Sử dụng LZString để nén dữ liệu, giúp rút gọn URI đáng kể
             const compressed = LZString.compressToEncodedURIComponent(json);
-            
-            // Sử dụng fragment identifier (#) thay vì query parameter (?) để tránh lỗi "URI Too Long"
-            // Fragment không được gửi đến server, chỉ xử lý phía client
             const url = new URL(window.location.href);
             url.hash = 'share=' + compressed;
+            const fullUrl = url.toString();
             
-            // Định dạng link dưới dạng Markdown để "ẩn" link dài
-            const markdownLink = `[AAV Content](${url.toString()})`;
+            const callbackName = 'shortenCallback_' + Date.now();
+            window[callbackName] = function(response) {
+                delete window[callbackName];
+                let shortUrl = fullUrl;
+                if (response.shorturl) {
+                    shortUrl = response.shorturl;
+                } else if (response.errorcode) {
+                    console.error('is.gd API error:', response.errormessage);
+                }
+                const markdownLink = `[AAV Content](${shortUrl})`;
+                navigator.clipboard.writeText(markdownLink).then(() => {
+                    alert(t("share_link_copied"));
+                }).catch(err => {
+                    console.error('Could not copy text: ', err);
+                    prompt(t("copy_share_link_here"), markdownLink);
+                });
+            };
             
-            navigator.clipboard.writeText(markdownLink).then(() => {
-                alert(t("share_link_copied"));
-            }).catch(err => {
-                console.error('Could not copy text: ', err);
-                prompt(t("copy_share_link_here"), markdownLink);
-            });
+            const script = document.createElement('script');
+            script.src = `https://is.gd/create.php?format=json&callback=${callbackName}&url=${encodeURIComponent(fullUrl)}`;
+            script.onerror = function() {
+                delete window[callbackName];
+                const markdownLink = `[AAV Content](${fullUrl})`;
+                navigator.clipboard.writeText(markdownLink).then(() => {
+                    alert(t("share_link_copied"));
+                }).catch(err => {
+                    console.error('Could not copy text: ', err);
+                    prompt(t("copy_share_link_here"), markdownLink);
+                });
+            };
+            document.head.appendChild(script);
         }
 
         function loadSharedData() {
