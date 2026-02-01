@@ -202,6 +202,8 @@
                 <div class="flex gap-2">
                     <button onclick="addDataset()" class="flex-1 text-xs bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded shadow-sm font-medium transition" data-i18n="add_sample">Thêm Mẫu</button>
                     <button onclick="removeLastDataset()" class="flex-1 text-xs bg-white border border-slate-300 text-slate-600 hover:text-red-600 py-2 rounded shadow-sm font-medium transition" data-i18n="remove_sample">Xóa Mẫu</button>
+                    <button onclick="document.getElementById('csvInput').click()" class="flex-1 text-xs bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded shadow-sm font-medium transition" data-i18n="import_csv">Nhập CSV</button>
+                    <input type="file" id="csvInput" accept=".csv" class="hidden" onchange="handleCSV(this)">
                 </div>
 
                 <!-- RAW INPUT -->
@@ -445,6 +447,62 @@
         function removeLastDataset() { if(datasets.length<=1)return; datasets.pop(); renderInputs(); calculate(); markAsChanged(); }
         function updateRaw(id, val) { datasets.find(d=>d.id===id).dataStr=val; calculate(); markAsChanged(); }
         function updateName(id, val) { datasets.find(d=>d.id===id).name=val; renderInputs(); calculate(); markAsChanged(); }
+        
+        function handleCSV(input) {
+            const file = input.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const text = e.target.result;
+                try {
+                    const rows = text.split(/\r?\n/).filter(row => row.trim() !== "");
+                    if (rows.length === 0) return;
+                    
+                    // Simple CSV parsing (handling commas, semicolons)
+                    const delimiter = text.includes(";") ? ";" : ",";
+                    const data = rows.map(row => row.split(delimiter).map(cell => cell.trim()));
+                    
+                    // Check if first row is header (contains non-numeric values)
+                    const firstRow = data[0];
+                    const isHeader = firstRow.some(cell => isNaN(parseFloat(cell)) && cell !== "");
+                    
+                    let newDatasets = [];
+                    const startIdx = isHeader ? 1 : 0;
+                    const colCount = data[0].length;
+                    
+                    for (let col = 0; col < colCount; col++) {
+                        const name = isHeader ? firstRow[col] : `${t("sample_prefix")}${String.fromCharCode(65 + datasets.length + col)}`;
+                        const values = [];
+                        for (let row = startIdx; row < data.length; row++) {
+                            if (data[row][col] !== undefined && data[row][col] !== "") {
+                                values.push(data[row][col]);
+                            }
+                        }
+                        if (values.length > 0) {
+                            newDatasets.push({
+                                id: (datasets.length + newDatasets.length + 1),
+                                name: name,
+                                dataStr: values.join(", ")
+                            });
+                        }
+                    }
+                    
+                    if (newDatasets.length > 0) {
+                        datasets = [...datasets, ...newDatasets];
+                        renderInputs();
+                        calculate();
+                        markAsChanged();
+                        alert(t("csv_import_success"));
+                    }
+                } catch (err) {
+                    console.error(err);
+                    alert(t("csv_parse_error"));
+                }
+                input.value = ""; // Reset input
+            };
+            reader.readAsText(file);
+        }
         function renderInputs() {
             document.getElementById('datasetContainer').innerHTML = datasets.map(ds=>`
                 <div class="bg-white border rounded p-2"><div class="flex justify-between mb-1">
