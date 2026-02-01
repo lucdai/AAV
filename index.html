@@ -847,25 +847,26 @@
 
             const json = JSON.stringify(state);
             const compressed = LZString.compressToEncodedURIComponent(json);
-            const url = new URL(window.location.href);
+            
+            // Link dài với fragment
+            const url = new URL(window.location.origin + window.location.pathname);
             url.hash = 'share=' + compressed;
             const fullUrl = url.toString();
             
+            // Thử rút gọn qua is.gd trước
             const callbackName = 'shortenCallback_' + Date.now();
             window[callbackName] = function(response) {
                 delete window[callbackName];
                 let shortUrl = fullUrl;
                 if (response.shorturl) {
                     shortUrl = response.shorturl;
-                } else if (response.errorcode) {
-                    console.error('is.gd API error:', response.errormessage);
                 }
+                
                 const markdownLink = `[AAV Content](${shortUrl})`;
-                navigator.clipboard.writeText(markdownLink).then(() => {
-                    alert(t("share_link_copied"));
+                navigator.clipboard.writeText(shortUrl).then(() => {
+                    alert(t("share_link_copied") + "\n\n" + shortUrl);
                 }).catch(err => {
-                    console.error('Could not copy text: ', err);
-                    prompt(t("copy_share_link_here"), markdownLink);
+                    prompt(t("copy_share_link_here"), shortUrl);
                 });
             };
             
@@ -873,12 +874,10 @@
             script.src = `https://is.gd/create.php?format=json&callback=${callbackName}&url=${encodeURIComponent(fullUrl)}`;
             script.onerror = function() {
                 delete window[callbackName];
-                const markdownLink = `[AAV Content](${fullUrl})`;
-                navigator.clipboard.writeText(markdownLink).then(() => {
-                    alert(t("share_link_copied"));
+                navigator.clipboard.writeText(fullUrl).then(() => {
+                    alert(t("share_link_copied") + "\n\n" + fullUrl);
                 }).catch(err => {
-                    console.error('Could not copy text: ', err);
-                    prompt(t("copy_share_link_here"), markdownLink);
+                    prompt(t("copy_share_link_here"), fullUrl);
                 });
             };
             document.head.appendChild(script);
