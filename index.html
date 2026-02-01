@@ -854,20 +854,38 @@
             // Sử dụng LZString để nén dữ liệu, giúp rút gọn URI đáng kể
             const compressed = LZString.compressToEncodedURIComponent(json);
             
+            // Sử dụng fragment identifier (#) thay vì query parameter (?) để tránh lỗi "URI Too Long"
+            // Fragment không được gửi đến server, chỉ xử lý phía client
             const url = new URL(window.location.href);
-            url.searchParams.set('share', compressed);
+            url.hash = 'share=' + compressed;
             
-            navigator.clipboard.writeText(url.toString()).then(() => {
+            // Định dạng link dưới dạng Markdown để "ẩn" link dài
+            const markdownLink = `[AAV Content](${url.toString()})`;
+            
+            navigator.clipboard.writeText(markdownLink).then(() => {
                 alert(t("share_link_copied"));
             }).catch(err => {
                 console.error('Could not copy text: ', err);
-                prompt(t("copy_share_link_here"), url.toString());
+                prompt(t("copy_share_link_here"), markdownLink);
             });
         }
 
         function loadSharedData() {
-            const params = new URLSearchParams(window.location.search);
-            const sharedData = params.get('share');
+            // Ho tro ca query parameter (?) va fragment identifier (#)
+            let sharedData = null;
+            
+            // Kiem tra fragment identifier truoc (uu tien)
+            if (window.location.hash) {
+                const hashParams = new URLSearchParams(window.location.hash.substring(1));
+                sharedData = hashParams.get('share');
+            }
+            
+            // Neu khong co fragment, kiem tra query parameter (tuong thich nguoc)
+            if (!sharedData) {
+                const params = new URLSearchParams(window.location.search);
+                sharedData = params.get('share');
+            }
+            
             if (!sharedData) return;
 
             try {
@@ -918,13 +936,16 @@
             // Khôi phục từ localStorage trước
             const restored = restoreFromLocalStorage();
             
-            // Ưu tiên tải dữ liệu từ shared link nếu có
+            // Uu tien tai du lieu tu shared link neu co (ho tro ca fragment va query parameter)
+            const hasFragmentShare = window.location.hash && window.location.hash.includes('share=');
             const params = new URLSearchParams(window.location.search);
-            if (params.has('share')) {
+            const hasQueryShare = params.has('share');
+            
+            if (hasFragmentShare || hasQueryShare) {
                 loadSharedData();
             } else if (!restored) {
-                // Nếu không có link chia sẻ, mới khôi phục từ localStorage
-                // (Điều này tránh việc dữ liệu cũ đè lên dữ liệu mới được chia sẻ)
+                // Neu khong co link chia se, moi khoi phuc tu localStorage
+                // (Dieu nay tranh viec du lieu cu de len du lieu moi duoc chia se)
             }
             
             // Khởi tạo hệ thống auto-backup
