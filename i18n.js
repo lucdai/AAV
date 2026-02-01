@@ -79,6 +79,19 @@ function applyTranslations() {
 function changeLanguage(lang) {
     currentLang = lang;
     localStorage.setItem('aav_lang', lang);
+    // Update dataset names if they are default samples
+    if (typeof datasets !== 'undefined') {
+        datasets.forEach(ds => {
+            if (ds.name.startsWith('Mẫu ') || ds.name.startsWith('Sample ') || ds.name.startsWith('样本 ') || ds.name.startsWith('Muestra ') || ds.name.startsWith('Échantillon ')) {
+                const letter = ds.name.match(/[A-Z]$/);
+                if (letter) {
+                    ds.name = t('sample_prefix') + letter[0];
+                }
+            }
+        });
+        if (typeof renderInputs === 'function') renderInputs();
+    }
+
     applyTranslations();
     updateLanguageSwitcher();
     
