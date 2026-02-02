@@ -916,7 +916,16 @@
                         const shortUrl = baseUrl + 's/' + shortId;
                         finalizeShare(shortUrl);
                     } else {
-                        // Nếu không có, sử dụng link hash nén (giữ domain gốc)
+                        // Nếu không có, kiểm tra độ dài
+                        if (fullUrl.length > 1000) {
+                            // Nếu link quá dài (>1000 ký tự), thông báo cho admin hoặc dùng link gốc nhưng cảnh báo
+                            console.warn("URL is very long. Consider adding it to shorts.json for a cleaner link.");
+                            
+                            // Hiển thị thông báo đặc biệt nếu là môi trường dev hoặc có flag admin
+                            if (window.location.hostname === 'localhost' || window.location.hostname.includes('manus.computer')) {
+                                console.log("Admin Hint: Run 'node scripts/generate_short_link.js " + compressed + "' to create a short link.");
+                            }
+                        }
                         finalizeShare(fullUrl);
                     }
                 })
