@@ -16,6 +16,9 @@ async function initI18n() {
         applyTranslations();
         updateLanguageSwitcher();
         
+        // Fetch and update last updated date
+        updateLastUpdatedDate();
+        
         // Trigger calculation to update dynamic elements
         if (typeof calculate === 'function') {
             calculate();
@@ -191,5 +194,40 @@ window.addEventListener('click', function(e) {
         dropdown.classList.add('hidden');
     }
 });
+
+async function updateLastUpdatedDate() {
+    try {
+        const repo = "lucdai/AAV";
+        const response = await fetch(`https://api.github.com/repos/${repo}/commits/main`);
+        const data = await response.json();
+        const lastCommitDate = new Date(data.commit.committer.date);
+        
+        const day = String(lastCommitDate.getDate()).padStart(2, '0');
+        const month = String(lastCommitDate.getMonth() + 1).padStart(2, '0');
+        const year = lastCommitDate.getFullYear();
+        
+        const dateSlash = `${day}/${month}/${year}`;
+        const dateDot = `${day}.${month}.${year}`;
+        const dateChinese = `${year}年${lastCommitDate.getMonth() + 1}月${lastCommitDate.getDate()}日`;
+        
+        for (let lang in translations) {
+            if (translations[lang].footer_text) {
+                let text = translations[lang].footer_text;
+                if (lang === 'zh') {
+                    translations[lang].footer_text = text.replace(/\d{4}年\d{1,2}月\d{1,2}日/, dateChinese);
+                } else if (lang === 'ru') {
+                    translations[lang].footer_text = text.replace(/\d{2}\.\d{2}\.\d{4}/, dateDot);
+                } else {
+                    translations[lang].footer_text = text.replace(/\d{2}\/\d{2}\/\d{4}/, dateSlash);
+                }
+            }
+        }
+        
+        // Re-apply translations to update the footer
+        applyTranslations();
+    } catch (error) {
+        console.error('Error fetching last commit date:', error);
+    }
+}
 
 document.addEventListener('DOMContentLoaded', initI18n);
