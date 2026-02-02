@@ -213,6 +213,9 @@ async function updateLastUpdatedDate() {
         for (let lang in translations) {
             if (translations[lang].footer_text) {
                 let text = translations[lang].footer_text;
+                // Update year
+                text = text.replace(/© \d{4}/, `© ${year}`);
+                
                 if (lang === 'zh') {
                     translations[lang].footer_text = text.replace(/\d{4}年\d{1,2}月\d{1,2}日/, dateChinese);
                 } else if (lang === 'ru') {
