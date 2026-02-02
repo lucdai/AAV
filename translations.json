@@ -558,7 +558,8 @@
         "png": "PNG",
         "jpeg": "JPEG",
         "clear_all": "清除全部",
-        "confirm_clear_all": "您确定要清除所有数据和样本吗？此操作无法撤销。"
+        "confirm_clear_all": "您确定要清除所有数据和样本吗？此操作无法撤销。",
+        "import_csv": "导入 CSV"
     },
     "hi": {
         "title": "AAV - ऑनलाइन डेटा विश्लेषण और विज़ुअलाइज़ेशन टूल",
@@ -743,7 +744,8 @@
         "png": "PNG",
         "jpeg": "JPEG",
         "clear_all": "सभी साफ़ करें",
-        "confirm_clear_all": "क्या आप वाकई सभी डेटा और नमूने साफ़ करना चाहते हैं? यह कार्रवाई पूर्ववत नहीं की जा सकती।"
+        "confirm_clear_all": "क्या आप वाकई सभी डेटा और नमूने साफ़ करना चाहते हैं? यह कार्रवाई पूर्ववत नहीं की जा सकती।",
+        "import_csv": "CSV आयात करें"
     },
     "es": {
         "title": "AAV - Herramienta de Análisis y Visualización de Datos en Línea",
@@ -928,7 +930,8 @@
         "png": "PNG",
         "jpeg": "JPEG",
         "clear_all": "Limpiar Todo",
-        "confirm_clear_all": "¿Está seguro de que desea borrar todos los datos y muestras? Esta acción no se puede deshacer."
+        "confirm_clear_all": "¿Está seguro de que desea borrar todos los datos y muestras? Esta acción no se puede deshacer.",
+        "import_csv": "Importar CSV"
     },
     "fr": {
         "title": "AAV - Outil d'Analyse et de Visualisation de Données en Ligne",
@@ -1113,7 +1116,8 @@
         "png": "PNG",
         "jpeg": "JPEG",
         "clear_all": "Tout Effacer",
-        "confirm_clear_all": "Êtes-vous sûr de vouloir effacer toutes les données et tous les échantillons ? Cette action est irréversible."
+        "confirm_clear_all": "Êtes-vous sûr de vouloir effacer toutes les données et tous les échantillons ? Cette action est irréversible.",
+        "import_csv": "Importer CSV"
     },
     "ar": {
         "title": "AAV - أداة تحليل البيانات والتصور عبر الإنترنت",
@@ -1298,7 +1302,8 @@
         "png": "PNG",
         "jpeg": "JPEG",
         "clear_all": "مسح الكل",
-        "confirm_clear_all": "هل أنت متأكد أنك تريد مسح جميع البيانات والعينات؟ لا يمكن التراجع عن هذا الإجراء."
+        "confirm_clear_all": "هل أنت متأكد أنك تريد مسح جميع البيانات والعينات؟ لا يمكن التراجع عن هذا الإجراء.",
+        "import_csv": "استيراد CSV"
     },
     "bn": {
         "title": "AAV - অনলাইন ডেটা বিশ্লেষণ এবং ভিজ্যুয়ালাইজেশন টুল",
@@ -1483,7 +1488,8 @@
         "png": "PNG",
         "jpeg": "JPEG",
         "clear_all": "সব মুছুন",
-        "confirm_clear_all": "আপনি কি নিশ্চিত যে আপনি সমস্ত ডেটা এবং নমুনা মুছতে চান? এই কাজটি আর ফিরিয়ে আনা যাবে না।"
+        "confirm_clear_all": "আপনি কি নিশ্চিত যে আপনি সমস্ত ডেটা এবং নমুনা মুছতে চান? এই কাজটি আর ফিরিয়ে আনা যাবে না।",
+        "import_csv": "CSV আমদানি করুন"
     },
     "pt": {
         "title": "AAV - Ferramenta Online de Análise e Visualização de Dados",
@@ -1668,7 +1674,8 @@
         "png": "PNG",
         "jpeg": "JPEG",
         "clear_all": "Limpar Tudo",
-        "confirm_clear_all": "Tem certeza de que deseja limpar todos os dados e amostras? Esta ação não pode ser desfeita."
+        "confirm_clear_all": "Tem certeza de que deseja limpar todos os dữ liệu e amostras? Esta ação não pode ser desfeita.",
+        "import_csv": "Importar CSV"
     },
     "ru": {
         "title": "AAV - Онлайн-инструмент для анализа и визуализации данных",
@@ -1853,7 +1860,8 @@
         "png": "PNG",
         "jpeg": "JPEG",
         "clear_all": "Очистить всё",
-        "confirm_clear_all": "Вы уверены, что хотите очистить все данные и образцы? Это действие нельзя отменить."
+        "confirm_clear_all": "Вы уверены, что хотите очистить все данные и образцы? Это действие нельзя отменить.",
+        "import_csv": "Импорт CSV"
     },
     "ur": {
         "title": "AAV - آن لائن ڈیٹا تجزیہ اور تصور کا آلہ",
@@ -2038,6 +2046,7 @@
         "png": "PNG",
         "jpeg": "JPEG",
         "clear_all": "سب صاف کریں",
-        "confirm_clear_all": "کیا آپ واقعی تمام ڈیٹا اور نمونے صاف کرنا چاہتے ہیں؟ یہ عمل واپس نہیں لیا جا सकता۔"
+        "confirm_clear_all": "کیا آپ واقعی تمام ڈیٹا اور نمونے صاف کرنا चाहते हैं? یہ عمل واپس نہیں لیا जा सकता।",
+        "import_csv": "CSV درآمد کریں"
     }
 }
