@@ -463,6 +463,14 @@
             if(!confirm(t("confirm_clear_all"))) return;
             datasets = [{ id: 1, name: t("sample_prefix") + "A", dataStr: "" }];
             manualRows = [{ id: Date.now(), lower: 0, upper: 10, freqs: {} }];
+            
+            // Reset other UI elements if necessary
+            const startVal = document.getElementById('startValue');
+            if(startVal) startVal.value = "";
+            
+            const decimalPlaces = document.getElementById('decimalPlaces');
+            if(decimalPlaces) decimalPlaces.value = "2";
+            
             renderInputs();
             calculate();
             markAsChanged();
