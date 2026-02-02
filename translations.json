@@ -556,7 +556,9 @@
         "export_png": "PNG",
         "export_jpeg": "JPEG",
         "png": "PNG",
-        "jpeg": "JPEG"
+        "jpeg": "JPEG",
+        "clear_all": "清除全部",
+        "confirm_clear_all": "您确定要清除所有数据和样本吗？此操作无法撤销。"
     },
     "hi": {
         "title": "AAV - ऑनलाइन डेटा विश्लेषण और विज़ुअलाइज़ेशन टूल",
@@ -739,7 +741,9 @@
         "export_png": "PNG",
         "export_jpeg": "JPEG",
         "png": "PNG",
-        "jpeg": "JPEG"
+        "jpeg": "JPEG",
+        "clear_all": "सभी साफ़ करें",
+        "confirm_clear_all": "क्या आप वाकई सभी डेटा और नमूने साफ़ करना चाहते हैं? यह कार्रवाई पूर्ववत नहीं की जा सकती।"
     },
     "es": {
         "title": "AAV - Herramienta de Análisis y Visualización de Datos en Línea",
@@ -922,7 +926,9 @@
         "export_png": "PNG",
         "export_jpeg": "JPEG",
         "png": "PNG",
-        "jpeg": "JPEG"
+        "jpeg": "JPEG",
+        "clear_all": "Limpiar Todo",
+        "confirm_clear_all": "¿Está seguro de que desea borrar todos los datos y muestras? Esta acción no se puede deshacer."
     },
     "fr": {
         "title": "AAV - Outil d'Analyse et de Visualisation de Données en Ligne",
@@ -1105,7 +1111,9 @@
         "export_png": "PNG",
         "export_jpeg": "JPEG",
         "png": "PNG",
-        "jpeg": "JPEG"
+        "jpeg": "JPEG",
+        "clear_all": "Tout Effacer",
+        "confirm_clear_all": "Êtes-vous sûr de vouloir effacer toutes les données et tous les échantillons ? Cette action est irréversible."
     },
     "ar": {
         "title": "AAV - أداة تحليل البيانات والتصور عبر الإنترنت",
@@ -1288,7 +1296,9 @@
         "export_png": "PNG",
         "export_jpeg": "JPEG",
         "png": "PNG",
-        "jpeg": "JPEG"
+        "jpeg": "JPEG",
+        "clear_all": "مسح الكل",
+        "confirm_clear_all": "هل أنت متأكد أنك تريد مسح جميع البيانات والعينات؟ لا يمكن التراجع عن هذا الإجراء."
     },
     "bn": {
         "title": "AAV - অনলাইন ডেটা বিশ্লেষণ এবং ভিজ্যুয়ালাইজেশন টুল",
@@ -1471,7 +1481,9 @@
         "export_png": "PNG",
         "export_jpeg": "JPEG",
         "png": "PNG",
-        "jpeg": "JPEG"
+        "jpeg": "JPEG",
+        "clear_all": "সব মুছুন",
+        "confirm_clear_all": "আপনি কি নিশ্চিত যে আপনি সমস্ত ডেটা এবং নমুনা মুছতে চান? এই কাজটি আর ফিরিয়ে আনা যাবে না।"
     },
     "pt": {
         "title": "AAV - Ferramenta Online de Análise e Visualização de Dados",
@@ -1654,7 +1666,9 @@
         "export_png": "PNG",
         "export_jpeg": "JPEG",
         "png": "PNG",
-        "jpeg": "JPEG"
+        "jpeg": "JPEG",
+        "clear_all": "Limpar Tudo",
+        "confirm_clear_all": "Tem certeza de que deseja limpar todos os dados e amostras? Esta ação não pode ser desfeita."
     },
     "ru": {
         "title": "AAV - Онлайн-инструмент для анализа и визуализации данных",
@@ -1837,7 +1851,9 @@
         "export_png": "PNG",
         "export_jpeg": "JPEG",
         "png": "PNG",
-        "jpeg": "JPEG"
+        "jpeg": "JPEG",
+        "clear_all": "Очистить всё",
+        "confirm_clear_all": "Вы уверены, что хотите очистить все данные и образцы? Это действие нельзя отменить."
     },
     "ur": {
         "title": "AAV - آن لائن ڈیٹا تجزیہ اور تصور کا آلہ",
@@ -2020,6 +2036,8 @@
         "export_png": "PNG",
         "export_jpeg": "JPEG",
         "png": "PNG",
-        "jpeg": "JPEG"
+        "jpeg": "JPEG",
+        "clear_all": "سب صاف کریں",
+        "confirm_clear_all": "کیا آپ واقعی تمام ڈیٹا اور نمونے صاف کرنا چاہتے ہیں؟ یہ عمل واپس نہیں لیا جا सकता۔"
     }
 }
