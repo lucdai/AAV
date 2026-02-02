@@ -110,34 +110,41 @@ function generateQuartileCalcNew(id, r, groups) {
     const n_m = r.gStats[idx].freq;
     const h_val = g.upper - g.lower;
 
-    let h = t('determine_group', {label: label});
-    if (isFallback) h += `<p class="text-amber-600 text-sm mb-2 italic">${t('note_title')} ${t('fallback_note')}</p>`;
+    let h = safeT('determine_group', {label: label});
+    if (isFallback) h += `<p class="text-amber-600 text-sm mb-2 italic">${safeT('note_title')} ${safeT('fallback_note')}</p>`;
     h += `<ul class="list-disc ml-8 mb-4 text-sm">
-            <li>${t('total_freq')}${r.s.N}</li>
-            <li>${t('position')}${k}N/4 = ${pos}</li>
-            <li>${t('group_contains', {label: label, idx: idx+1, lower: fmtInternal(g.lower), upper: fmtInternal(g.upper)})}</li>
+            <li>${safeT('total_freq')}${r.s.N}</li>
+            <li>${safeT('position')}${k}N/4 = ${pos}</li>
+            <li>${safeT('group_contains', {label: label, idx: idx+1, lower: fmtInternal(g.lower), upper: fmtInternal(g.upper)})}</li>
           </ul>`;
-    h += t('formula');
+    h += safeT('formula');
     h += `<div class="formula-container">${label} = u<span class="sub">m</span> + ${frac(`${k}N/4 - C`, 'n<span class="sub">m</span>')} &times; h</div>`;
-    h += t('substitute');
+    h += safeT('substitute');
     h += `<div class="formula-container">${label} = ${fmtInternal(g.lower)} + ${frac(`${pos} - ${prevCf}`, n_m)} &times; ${fmtInternal(h_val)} = <strong>${fmtInternal(r.s[id])}</strong></div>`;
     return h;
 }
 
 // --- KHÔI PHỤC ĐỊNH DẠNG HIỂN THỊ CŨ CHO CÁC CHỈ SỐ KHÁC ---
 function generateMeanCalcOld(r, groups) {
-    let h = `<p>${t('mean_formula_desc')}</p>`;
-    h += `<p class="font-bold mt-4">${t('formula_title')}</p>`;
+    let h = `<p>${safeT('mean_formula_desc')}</p>`;
+    h += `<p class="font-bold mt-4">${safeT('formula_title')}</p>`;
     h += `<div class="bg-slate-50 p-4 rounded-lg border border-slate-200 my-4 text-center font-serif text-xl">
             x̄ = (n₁c₁ + n₂c₂ + ... + nₖcₖ) / N
           </div>`;
-    h += `<p class="font-bold mt-4">${t('substitute_title')}</p>`;
+    h += `<p class="font-bold mt-4">${safeT('substitute_title')}</p>`;
     let sumStr = r.gStats.map((g, i) => `(${g.freq} × ${fmtInternal(groups[i].midpoint)})`).join(' + ');
     h += `<div class="bg-slate-50 p-4 rounded-lg border border-slate-200 my-4 text-center font-serif">
             x̄ = (${sumStr}) / ${r.s.N}
           </div>`;
-    h += `<p class="text-xl mt-4">${t('result_title')} <strong>x̄ = ${fmtInternal(r.s.mean)}</strong></p>`;
+    h += `<p class="text-xl mt-4">${safeT('result_title')} <strong>x̄ = ${fmtInternal(r.s.mean)}</strong></p>`;
     return h;
+}
+
+// Ensure t() is available even if translations are not yet loaded
+const originalT = typeof t === 'function' ? t : (k) => k;
+function safeT(key, vars = {}) {
+    if (typeof t === 'function') return t(key, vars);
+    return key;
 }
 
 function generateModeCalcOld(r, groups) {
@@ -148,95 +155,95 @@ function generateModeCalcOld(r, groups) {
     const nn = idx < r.gStats.length - 1 ? r.gStats[idx+1].freq : 0;
     const h_val = g.upper - g.lower;
     
-    let h = `<p>${t('mode_desc')}</p>`;
-    h += `<p class="mt-2">${t('mode_group_desc', {idx: idx+1, lower: fmtInternal(g.lower), upper: fmtInternal(g.upper), freq: maxF})}</p>`;
-    h += `<p class="font-bold mt-4">${t('formula_title')}</p>`;
+    let h = `<p>${safeT('mode_desc')}</p>`;
+    h += `<p class="mt-2">${safeT('mode_group_desc', {idx: idx+1, lower: fmtInternal(g.lower), upper: fmtInternal(g.upper), freq: maxF})}</p>`;
+    h += `<p class="font-bold mt-4">${safeT('formula_title')}</p>`;
     h += `<div class="bg-slate-50 p-4 rounded-lg border border-slate-200 my-4 text-center font-serif text-xl">
             Mo = uₒ + [ (nₒ - nₒ₋₁) / ((nₒ - nₒ₋₁) + (nₒ - nₒ₊₁)) ] × h
           </div>`;
-    h += `<p class="font-bold mt-4">${t('substitute_title')}</p>`;
+    h += `<p class="font-bold mt-4">${safeT('substitute_title')}</p>`;
     h += `<div class="bg-slate-50 p-4 rounded-lg border border-slate-200 my-4 text-center font-serif">
             Mo = ${fmtInternal(g.lower)} + [ (${maxF} - ${np}) / ((${maxF} - ${np}) + (${maxF} - ${nn})) ] × ${fmtInternal(h_val)}
           </div>`;
-    h += `<p class="text-xl mt-4">${t('result_title')} <strong>Mo = ${fmtInternal(r.s.mode)}</strong></p>`;
+    h += `<p class="text-xl mt-4">${safeT('result_title')} <strong>Mo = ${fmtInternal(r.s.mode)}</strong></p>`;
     return h;
 }
 
 function generateVarianceSDCalcOld(id, r, groups) {
-    let h = `<p>${t('variance_desc')}</p>`;
-    h += `<p class="font-bold mt-4">${t('formula_title')} ${t('variance')}:</p>`;
+    let h = `<p>${safeT('variance_desc')}</p>`;
+    h += `<p class="font-bold mt-4">${safeT('formula_title')} ${safeT('variance')}:</p>`;
     h += `<div class="bg-slate-50 p-4 rounded-lg border border-slate-200 my-4 text-center font-serif text-xl">
             s² = [ n₁(c₁ - x̄)² + n₂(c₂ - x̄)² + ... + nₖ(cₖ - x̄)² ] / N
           </div>`;
-    h += `<p class="mt-4">${t('variance_sd_desc', {mean: fmtInternal(r.s.mean), n: r.s.N})}</p>`;
-    h += `<p class="font-bold mt-4">${t('substitute_title')}</p>`;
+    h += `<p class="mt-4">${safeT('variance_sd_desc', {mean: fmtInternal(r.s.mean), n: r.s.N})}</p>`;
+    h += `<p class="font-bold mt-4">${safeT('substitute_title')}</p>`;
     let sumStr = r.gStats.map((g, i) => `(${g.freq} × (${fmtInternal(groups[i].midpoint)} - ${fmtInternal(r.s.mean)})²)`).join(' + ');
     if (sumStr.length > 300) sumStr = sumStr.substring(0, 300) + "...";
     h += `<div class="bg-slate-50 p-4 rounded-lg border border-slate-200 my-4 text-center font-serif">
             s² = [ ${sumStr} ] / ${r.s.N}
           </div>`;
-    h += `<p class="text-xl mt-4">${t('result_title')} ${t('variance')}: <strong>s² = ${fmtInternal(r.s.variance)}</strong></p>`;
+    h += `<p class="text-xl mt-4">${safeT('result_title')} ${safeT('variance')}: <strong>s² = ${fmtInternal(r.s.variance)}</strong></p>`;
     
     if(id === 'sd') {
         h += `<div class="mt-6 pt-6 border-t border-slate-100">`;
-        h += `<p>${t('sd_desc')}</p>`;
-        h += `<p class="font-bold mt-4">${t('formula_title')}</p>`;
+        h += `<p>${safeT('sd_desc')}</p>`;
+        h += `<p class="font-bold mt-4">${safeT('formula_title')}</p>`;
         h += `<div class="bg-slate-50 p-4 rounded-lg border border-slate-200 my-4 text-center font-serif text-xl">
                 s = √s²
               </div>`;
-        h += `<p class="text-xl mt-4">${t('result_title')} ${t('sd')}: <strong>s = √${fmtInternal(r.s.variance)} = ${fmtInternal(r.s.sd)}</strong></p>`;
+        h += `<p class="text-xl mt-4">${safeT('result_title')} ${safeT('sd')}: <strong>s = √${fmtInternal(r.s.variance)} = ${fmtInternal(r.s.sd)}</strong></p>`;
         h += `</div>`;
     }
     return h;
 }
 
 function generateRangeCalcOld(r, groups) {
-    let h = `<p>${t('range_raw_desc')}</p>`;
-    h += `<p class="font-bold mt-4">${t('formula_title')}</p>`;
+    let h = `<p>${safeT('range_raw_desc')}</p>`;
+    h += `<p class="font-bold mt-4">${safeT('formula_title')}</p>`;
     h += `<div class="bg-slate-50 p-4 rounded-lg border border-slate-200 my-4 text-center font-serif text-xl">
             R = xₘₐₓ - xₘᵢₙ
           </div>`;
     
     if(r.rawData && r.rawData.length){
         const min = Math.min(...r.rawData), max = Math.max(...r.rawData);
-        h += `<p class="font-bold mt-4">${t('substitute_title')}</p>`;
+        h += `<p class="font-bold mt-4">${safeT('substitute_title')}</p>`;
         h += `<div class="bg-slate-50 p-4 rounded-lg border border-slate-200 my-4 text-center font-serif">
                 R = ${fmtInternal(max)} - ${fmtInternal(min)}
               </div>`;
     } else {
-        h += `<p class="mt-4 italic text-slate-500">${t('range_grouped_desc')}</p>`;
+        h += `<p class="mt-4 italic text-slate-500">${safeT('range_grouped_desc')}</p>`;
         h += `<div class="bg-slate-50 p-4 rounded-lg border border-slate-200 my-4 text-center font-serif">
                 R ≈ ${fmtInternal(groups[groups.length-1].upper)} - ${fmtInternal(groups[0].lower)}
               </div>`;
     }
-    h += `<p class="text-xl mt-4">${t('result_title')} <strong>R = ${fmtInternal(r.s.range)}</strong></p>`;
+    h += `<p class="text-xl mt-4">${safeT('result_title')} <strong>R = ${fmtInternal(r.s.range)}</strong></p>`;
     return h;
 }
 
 function generateIQRCalcOld(r, groups) {
-    let h = `<p>${t('iqr_desc')}</p>`;
-    h += `<p class="font-bold mt-4">${t('formula_title')}</p>`;
+    let h = `<p>${safeT('iqr_desc')}</p>`;
+    h += `<p class="font-bold mt-4">${safeT('formula_title')}</p>`;
     h += `<div class="bg-slate-50 p-4 rounded-lg border border-slate-200 my-4 text-center font-serif text-xl">
             IQR = Q₃ - Q₁
           </div>`;
-    h += `<p class="font-bold mt-4">${t('substitute_title')}</p>`;
+    h += `<p class="font-bold mt-4">${safeT('substitute_title')}</p>`;
     h += `<div class="bg-slate-50 p-4 rounded-lg border border-slate-200 my-4 text-center font-serif">
             IQR = ${fmtInternal(r.s.q3)} - ${fmtInternal(r.s.q1)}
           </div>`;
-    h += `<p class="text-xl mt-4">${t('result_title')} <strong>IQR = ${fmtInternal(r.s.iqr)}</strong></p>`;
+    h += `<p class="text-xl mt-4">${safeT('result_title')} <strong>IQR = ${fmtInternal(r.s.iqr)}</strong></p>`;
     return h;
 }
 
 function generateCVCalcOld(r, groups) {
-    let h = `<p>${t('cv_desc')}</p>`;
-    h += `<p class="font-bold mt-4">${t('formula_title')}</p>`;
+    let h = `<p>${safeT('cv_desc')}</p>`;
+    h += `<p class="font-bold mt-4">${safeT('formula_title')}</p>`;
     h += `<div class="bg-slate-50 p-4 rounded-lg border border-slate-200 my-4 text-center font-serif text-xl">
             CV = (s / |x̄|) × 100%
           </div>`;
-    h += `<p class="font-bold mt-4">${t('substitute_title')}</p>`;
+    h += `<p class="font-bold mt-4">${safeT('substitute_title')}</p>`;
     h += `<div class="bg-slate-50 p-4 rounded-lg border border-slate-200 my-4 text-center font-serif">
             CV = (${fmtInternal(r.s.sd)} / ${fmtInternal(Math.abs(r.s.mean))}) × 100%
           </div>`;
-    h += `<p class="text-xl mt-4">${t('result_title')} <strong>CV = ${fmtInternal(r.s.cv)}%</strong></p>`;
+    h += `<p class="text-xl mt-4">${safeT('result_title')} <strong>CV = ${fmtInternal(r.s.cv)}%</strong></p>`;
     return h;
 }

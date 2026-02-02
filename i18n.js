@@ -20,6 +20,9 @@ async function initI18n() {
         if (typeof calculate === 'function') {
             calculate();
         }
+        
+        // Dispatch event to notify that translations are ready
+        window.dispatchEvent(new CustomEvent('i18nReady'));
     } catch (error) {
         console.error('Error loading translations:', error);
     }
