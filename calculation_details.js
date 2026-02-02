@@ -6,13 +6,30 @@
 
 // Hàm định dạng số nội bộ
 function fmtInternal(n) { 
-    const d = (document.getElementById('decimalPlaces') ? parseInt(document.getElementById('decimalPlaces').value) : 2) || 2; 
+    if (n === undefined || n === null) return "-";
+    let d = (document.getElementById('decimalPlaces') ? parseInt(document.getElementById('decimalPlaces').value) : 2);
+    if (isNaN(d)) d = 2;
+
+    let val = n;
+    let minFD = d > 0 ? d : 0;
+    let maxFD = d > 0 ? d : 0;
+
+    if (d < 0) {
+        const factor = Math.pow(10, Math.abs(d));
+        val = Math.round(n / factor) * factor;
+        minFD = 0;
+        maxFD = 0;
+    }
+
     const lang = localStorage.getItem('aav_lang') || 'vi';
     const localeMap = {
         'vi': 'vi-VN', 'en': 'en-US', 'zh': 'zh-CN', 'hi': 'hi-IN', 'es': 'es-ES',
         'fr': 'fr-FR', 'ar': 'ar-SA', 'bn': 'bn-BD', 'pt': 'pt-PT', 'ru': 'ru-RU', 'ur': 'ur-PK'
     };
-    return (n === undefined || n === null) ? "-" : new Intl.NumberFormat(localeMap[lang] || 'en-US', { minimumFractionDigits: d, maximumFractionDigits: d }).format(n); 
+    return new Intl.NumberFormat(localeMap[lang] || 'en-US', { 
+        minimumFractionDigits: minFD, 
+        maximumFractionDigits: maxFD 
+    }).format(val); 
 }
 
 // Hàm tạo phân số HTML
