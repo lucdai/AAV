@@ -873,7 +873,14 @@
             const compressed = LZString.compressToEncodedURIComponent(json);
             
             // Luôn đảm bảo URL gốc sạch sẽ
-            const baseUrl = window.location.origin + window.location.pathname;
+            let baseUrl = window.location.origin + window.location.pathname;
+            if (!baseUrl.endsWith('/')) {
+                if (baseUrl.endsWith('index.html')) {
+                    baseUrl = baseUrl.replace('index.html', '');
+                } else {
+                    baseUrl += '/';
+                }
+            }
             const fullUrl = baseUrl + '#share=' + compressed;
             
             // Ưu tiên hiển thị trạng thái đang xử lý
@@ -892,32 +899,31 @@
                 });
             };
 
-            // Thử rút gọn qua is.gd
-            const callbackName = 'shortenCallback_' + Date.now();
-            window[callbackName] = function(response) {
-                delete window[callbackName];
-                if (response.shorturl && response.shorturl.length <= (baseUrl.length + 15)) {
-                    finalizeShare(response.shorturl);
-                } else {
-                    // Nếu is.gd lỗi hoặc link vẫn dài, dùng TinyURL như fallback
-                    fetch(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(fullUrl)}`)
-                        .then(res => res.text())
-                        .then(short => finalizeShare(short))
-                        .catch(() => finalizeShare(fullUrl));
-                }
-            };
-            
-            const script = document.createElement('script');
-            script.src = `https://is.gd/create.php?format=json&callback=${callbackName}&url=${encodeURIComponent(fullUrl)}`;
-            script.onerror = function() {
-                delete window[callbackName];
-                // Fallback TinyURL
-                fetch(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(fullUrl)}`)
-                    .then(res => res.text())
-                    .then(short => finalizeShare(short))
-                    .catch(() => finalizeShare(fullUrl));
-            };
-            document.head.appendChild(script);
+            // Kiểm tra trong shorts.json xem đã có ID rút gọn chưa
+            fetch(window.location.pathname.replace('index.html', '') + 'shorts.json')
+                .then(response => response.ok ? response.json() : {})
+                .then(map => {
+                    let shortId = null;
+                    for (const [id, long] of Object.entries(map)) {
+                        if (long === compressed) {
+                            shortId = id;
+                            break;
+                        }
+                    }
+                    
+                    if (shortId) {
+                        // Nếu tìm thấy ID rút gọn, sử dụng link /s/id
+                        const shortUrl = baseUrl + 's/' + shortId;
+                        finalizeShare(shortUrl);
+                    } else {
+                        // Nếu không có, sử dụng link hash nén (giữ domain gốc)
+                        finalizeShare(fullUrl);
+                    }
+                })
+                .catch(() => {
+                    // Fallback nếu không đọc được shorts.json
+                    finalizeShare(fullUrl);
+                });
         }
 
         function loadSharedData() {
