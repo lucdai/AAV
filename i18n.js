@@ -1,5 +1,6 @@
 
-let currentLang = localStorage.getItem('aav_lang') || 'vi';
+const urlParams = new URLSearchParams(window.location.search);
+let currentLang = urlParams.get('lang') || localStorage.getItem('aav_lang') || 'vi';
 let translations = {};
 
 async function initI18n() {
