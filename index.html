@@ -460,6 +460,23 @@
             markAsChanged();
         }
         
+        function clearAllData() {
+            if(!confirm(t("confirm_clear_all"))) return;
+            datasets = [{ id: 1, name: t("sample_prefix") + "A", dataStr: "" }];
+            manualRows = [{ id: Date.now(), lower: 0, upper: 10, freqs: {} }];
+            
+            // Reset other UI elements if necessary
+            const startVal = document.getElementById('startValue');
+            if(startVal) startVal.value = "";
+            
+            const decimalPlaces = document.getElementById('decimalPlaces');
+            if(decimalPlaces) decimalPlaces.value = "2";
+            
+            renderInputs();
+            calculate();
+            markAsChanged();
+        }
+        
         function handleCSV(input) {
             const file = input.files[0];
             if (!file) return;
@@ -850,32 +867,33 @@
 
         // --- Sharing Feature ---
         function shareLink() {
+            // Tối ưu hóa state để giảm kích thước dữ liệu tối đa
             const state = {
-                m: mode,
+                m: mode === 'raw' ? undefined : mode,
                 ds: datasets.map(d => ({ n: d.name, s: d.dataStr })),
-                mr: manualRows.map(r => ({ l: r.lower, u: r.upper, f: r.freqs })),
-                dp: document.getElementById('decimalPlaces').value,
-                meth: document.getElementById('method').value,
-                h: document.getElementById('manualH').value,
-                k: document.getElementById('manualK').value,
-                sv: document.getElementById('startValue').value
+                mr: (document.getElementById('method').value === 'auto') ? undefined : manualRows.map(r => ({ l: r.lower, u: r.upper, f: r.freqs })),
+                dp: document.getElementById('decimalPlaces').value === "2" ? undefined : document.getElementById('decimalPlaces').value,
+                meth: document.getElementById('method').value === "auto" ? undefined : document.getElementById('method').value,
+                h: (document.getElementById('method').value !== 'auto' && document.getElementById('manualH').value !== "5") ? document.getElementById('manualH').value : undefined,
+                k: (document.getElementById('method').value !== 'auto' && document.getElementById('manualK').value !== "6") ? document.getElementById('manualK').value : undefined,
+                sv: (document.getElementById('method').value !== 'auto' && document.getElementById('startValue').value) ? document.getElementById('startValue').value : undefined
             };
 
-            if (state.dp == "2") delete state.dp;
-            if (state.meth == "auto") {
-                delete state.meth; delete state.h; delete state.k; delete state.sv; delete state.mr;
-            } else {
-                if (state.h == "5") delete state.h;
-                if (state.k == "6") delete state.k;
-                if (state.sv === "" || state.sv === null) delete state.sv;
-            }
-            if (state.m === 'raw') delete state.m;
+            // Xóa các trường undefined/null để link ngắn nhất có thể
+            Object.keys(state).forEach(key => (state[key] === undefined || state[key] === null) && delete state[key]);
 
             const json = JSON.stringify(state);
             const compressed = LZString.compressToEncodedURIComponent(json);
             
             // Luôn đảm bảo URL gốc sạch sẽ
-            const baseUrl = window.location.origin + window.location.pathname;
+            let baseUrl = window.location.origin + window.location.pathname;
+            if (!baseUrl.endsWith('/')) {
+                if (baseUrl.endsWith('index.html')) {
+                    baseUrl = baseUrl.replace('index.html', '');
+                } else {
+                    baseUrl += '/';
+                }
+            }
             const fullUrl = baseUrl + '#share=' + compressed;
             
             // Ưu tiên hiển thị trạng thái đang xử lý
@@ -894,32 +912,40 @@
                 });
             };
 
-            // Thử rút gọn qua is.gd
-            const callbackName = 'shortenCallback_' + Date.now();
-            window[callbackName] = function(response) {
-                delete window[callbackName];
-                if (response.shorturl && response.shorturl.length <= (baseUrl.length + 15)) {
-                    finalizeShare(response.shorturl);
-                } else {
-                    // Nếu is.gd lỗi hoặc link vẫn dài, dùng TinyURL như fallback
-                    fetch(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(fullUrl)}`)
-                        .then(res => res.text())
-                        .then(short => finalizeShare(short))
-                        .catch(() => finalizeShare(fullUrl));
-                }
-            };
-            
-            const script = document.createElement('script');
-            script.src = `https://is.gd/create.php?format=json&callback=${callbackName}&url=${encodeURIComponent(fullUrl)}`;
-            script.onerror = function() {
-                delete window[callbackName];
-                // Fallback TinyURL
-                fetch(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(fullUrl)}`)
-                    .then(res => res.text())
-                    .then(short => finalizeShare(short))
-                    .catch(() => finalizeShare(fullUrl));
-            };
-            document.head.appendChild(script);
+            // Kiểm tra trong shorts.json xem đã có ID rút gọn chưa
+            fetch(window.location.pathname.replace('index.html', '') + 'shorts.json')
+                .then(response => response.ok ? response.json() : {})
+                .then(map => {
+                    let shortId = null;
+                    for (const [id, long] of Object.entries(map)) {
+                        if (long === compressed) {
+                            shortId = id;
+                            break;
+                        }
+                    }
+                    
+                    if (shortId) {
+                        // Nếu tìm thấy ID rút gọn, sử dụng link /s/id
+                        const shortUrl = baseUrl + 's/' + shortId;
+                        finalizeShare(shortUrl);
+                    } else {
+                        // Nếu không có, kiểm tra độ dài
+                        if (fullUrl.length > 1000) {
+                            // Nếu link quá dài (>1000 ký tự), thông báo cho admin hoặc dùng link gốc nhưng cảnh báo
+                            console.warn("URL is very long. Consider adding it to shorts.json for a cleaner link.");
+                            
+                            // Hiển thị thông báo đặc biệt nếu là môi trường dev hoặc có flag admin
+                            if (window.location.hostname === 'localhost' || window.location.hostname.includes('manus.computer')) {
+                                console.log("Admin Hint: Run 'node scripts/generate_short_link.js " + compressed + "' to create a short link.");
+                            }
+                        }
+                        finalizeShare(fullUrl);
+                    }
+                })
+                .catch(() => {
+                    // Fallback nếu không đọc được shorts.json
+                    finalizeShare(fullUrl);
+                });
         }
 
         function loadSharedData() {
