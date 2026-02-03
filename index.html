@@ -162,9 +162,13 @@
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4-4m0 0l4-4m-4 4h12"></path></svg>
                             <span data-i18n="import_json_btn">Nhập JSON</span>
                         </button>
-                        <button onclick="clearBackup()" class="w-full text-left px-4 py-2 hover:bg-red-50 text-red-600 text-sm flex items-center gap-2">
+                        <button onclick="clearBackup()" class="w-full text-left px-4 py-2 hover:bg-red-50 text-red-600 text-sm flex items-center gap-2 border-b border-slate-100">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                             <span data-i18n="clear_backup">Xóa sao lưu</span>
+                        </button>
+                        <button onclick="clearAllData()" class="w-full text-left px-4 py-2 hover:bg-red-50 text-red-600 text-sm flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M3 12l6.414 6.414a2 2 0 001.414.586H19a2 2 0 002-2V7a2 2 0 00-2-2h-8.172a2 2 0 00-1.414.586L3 12z"></path></svg>
+                            <span data-i18n="clear_all">Xóa sạch</span>
                         </button>
                     </div>
                 </div>
@@ -198,10 +202,11 @@
                     <button onclick="switchInputMode('table')" id="btnTable" class="flex-1 py-2.5 text-sm font-bold rounded-xl transition-all duration-200 text-slate-500 hover:bg-white/50"><span data-i18n="freq_table_tab">Bảng tần số</span></button>
                 </div>
 
-                <div class="grid grid-cols-3 gap-2">
+                <div class="grid grid-cols-2 gap-2">
                     <button onclick="addDataset()" class="btn-primary !text-[10px] !px-2 !py-2 justify-center" data-i18n="add_sample">Thêm Mẫu</button>
                     <button onclick="removeLastDataset()" class="btn-secondary !text-[10px] !px-2 !py-2 justify-center border-red-100 text-red-500 hover:bg-red-50" data-i18n="remove_sample">Xóa Mẫu</button>
                     <button onclick="document.getElementById('csvInput').click()" class="btn-primary !bg-emerald-600 hover:!bg-emerald-700 !text-[10px] !px-2 !py-2 justify-center shadow-emerald-100" data-i18n="import_csv">Nhập CSV</button>
+                    <button onclick="clearAllData()" class="btn-secondary !text-[10px] !px-2 !py-2 justify-center border-red-100 text-red-500 hover:bg-red-50" data-i18n="clear_all">Xóa Sạch</button>
                     <input type="file" id="csvInput" accept=".csv" class="hidden" onchange="handleCSV(this)">
                 </div>
 
@@ -466,13 +471,23 @@
             datasets = [{ id: 1, name: t("sample_prefix") + "A", dataStr: "" }];
             manualRows = [{ id: Date.now(), lower: 0, upper: 10, freqs: {} }];
             
-            // Reset other UI elements if necessary
+            // Reset other UI elements
+            const methodSelect = document.getElementById('method');
+            if(methodSelect) methodSelect.value = "auto";
+            
+            const manualH = document.getElementById('manualH');
+            if(manualH) manualH.value = "5";
+            
+            const manualK = document.getElementById('manualK');
+            if(manualK) manualK.value = "6";
+            
             const startVal = document.getElementById('startValue');
             if(startVal) startVal.value = "";
             
             const decimalPlaces = document.getElementById('decimalPlaces');
             if(decimalPlaces) decimalPlaces.value = "2";
             
+            toggleInputs();
             renderInputs();
             calculate();
             markAsChanged();
