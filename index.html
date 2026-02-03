@@ -925,21 +925,33 @@
                     }
                     
                     if (shortId) {
-                        // Nếu tìm thấy ID rút gọn, sử dụng link /s/id
                         const shortUrl = baseUrl + 's/' + shortId;
                         finalizeShare(shortUrl);
                     } else {
-                        // Nếu không có, kiểm tra độ dài
-                        if (fullUrl.length > 1000) {
-                            // Nếu link quá dài (>1000 ký tự), thông báo cho admin hoặc dùng link gốc nhưng cảnh báo
-                            console.warn("URL is very long. Consider adding it to shorts.json for a cleaner link.");
+                        // TỰ ĐỘNG RÚT GỌN NGẦM NẾU DỮ LIỆU LỚN
+                        if (compressed.length > 100) { // Ngưỡng dữ liệu lớn
+                            const newId = Math.random().toString(36).substring(2, 8);
+                            const shortUrl = baseUrl + 's/' + newId;
                             
-                            // Hiển thị thông báo đặc biệt nếu là môi trường dev hoặc có flag admin
-                            if (window.location.hostname === 'localhost' || window.location.hostname.includes('manus.computer')) {
-                                console.log("Admin Hint: Run 'node scripts/generate_short_link.js " + compressed + "' to create a short link.");
-                            }
+                            // Gửi yêu cầu rút gọn ngầm đến GitHub Action
+                            // Lưu ý: Cần cấu hình GITHUB_TOKEN trong repo để trigger này hoạt động
+                            // Ở đây chúng ta trả về link ngắn ngay, nó sẽ hoạt động sau ~30s khi Action chạy xong
+                            fetch(`https://api.github.com/repos/lucdai/AAV/dispatches`, {
+                                method: 'POST',
+                                headers: {
+                                    'Accept': 'application/vnd.github.v3+json',
+                                    'Authorization': 'token GITHUB_PAT_PLACEHOLDER', // Người dùng cần thay PAT của mình vào đây
+                                },
+                                body: JSON.stringify({
+                                    event_type: 'shorten_link',
+                                    client_payload: { id: newId, data: compressed }
+                                })
+                            }).catch(e => console.error("Auto-shorten request failed:", e));
+
+                            finalizeShare(shortUrl);
+                        } else {
+                            finalizeShare(fullUrl);
                         }
-                        finalizeShare(fullUrl);
                     }
                 })
                 .catch(() => {
