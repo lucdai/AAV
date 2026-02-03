@@ -78,5 +78,11 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Also show the click ripple at touch point
         createClickEffect(x, y);
+
+        // 4. Haptic Feedback (Vibration)
+        if (window.navigator && window.navigator.vibrate) {
+            // Vibrate for 10ms (very light tap)
+            window.navigator.vibrate(10);
+        }
     }, { passive: true });
 });
