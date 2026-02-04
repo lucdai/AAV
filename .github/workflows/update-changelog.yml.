@@ -1,0 +1,52 @@
+name: Update Changelog
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    # Chạy mỗi ngày vào lúc 00:00 UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-changelog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Lấy toàn bộ lịch sử commit để tạo changelog
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Generate changelog
+        run: python3 update_changelog.py
+
+      - name: Check if changelog changed
+        id: check_changes
+        run: |
+          if git diff --quiet changelog.json; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit and push changelog
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add changelog.json
+          git commit -m "chore: update changelog from commits"
+          git push
+
+      - name: Create deployment artifact
+        run: |
+          echo "Changelog updated successfully at $(date)" > changelog_status.txt
+          cat changelog_status.txt
