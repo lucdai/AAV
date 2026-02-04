@@ -1,12 +1,20 @@
 {
-  "generated_at": "2026-02-04T05:14:17.522053",
-  "total_commits": 81,
+  "generated_at": "2026-02-04T05:27:25.708835",
+  "total_commits": 82,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-02-04",
-      "commit_count": 1,
+      "commit_count": 2,
       "categories": {
+        "Features": [
+          {
+            "sha": "25d9c7e",
+            "message": "feat: add automatic changelog feature with icon and modal",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/25d9c7e8c4a3d8e708bec0636e4e2e18e66b6a8a"
+          }
+        ],
         "Other": [
           {
             "sha": "64025cc",
