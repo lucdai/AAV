@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-02-04T10:45:15.861155",
-  "total_commits": 85,
+  "generated_at": "2026-02-04T18:16:45.266568",
+  "total_commits": 87,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-02-04",
-      "commit_count": 5,
+      "commit_count": 7,
       "categories": {
         "Features": [
           {
@@ -21,7 +21,21 @@
             "url": "https://github.com/lucdai/AAV/commit/25d9c7e8c4a3d8e708bec0636e4e2e18e66b6a8a"
           }
         ],
+        "Bug Fixes": [
+          {
+            "sha": "9864aaf",
+            "message": "fix: fix z-index issue for language dropdown",
+            "author": "Manus AI",
+            "url": "https://github.com/lucdai/AAV/commit/9864aafd16533274bda032be7b8032e6fec52385"
+          }
+        ],
         "Other": [
+          {
+            "sha": "70a351c",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/70a351c2f6beccab68df85258f6c8301c17a1a68"
+          },
           {
             "sha": "f8020af",
             "message": "Rename update-changelog.yml. to update-changelog.yml",
