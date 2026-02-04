@@ -185,7 +185,17 @@
         "export_png": "PNG",
         "export_jpeg": "JPEG",
         "png": "PNG",
-        "jpeg": "JPEG"
+        "jpeg": "JPEG",
+        "changelog": "Lịch sử cập nhật",
+        "changelog_title": "Lịch sử cập nhật phiên bản",
+        "changelog_description": "Xem tất cả các cập nhật và thay đổi từ trước đến nay",
+        "version": "Phiên bản",
+        "release_date": "Ngày phát hành",
+        "changes": "Thay đổi",
+        "no_changelog": "Không có dữ liệu lịch sử cập nhật",
+        "loading_changelog": "Đang tải lịch sử cập nhật...",
+        "changelog_error": "Lỗi khi tải lịch sử cập nhật",
+        "view_on_github": "Xem trên GitHub"
     },
     "en": {
         "title": "AAV - Online Data Analysis & Visualization Tool",
@@ -373,7 +383,17 @@
         "export_png": "PNG",
         "export_jpeg": "JPEG",
         "png": "PNG",
-        "jpeg": "JPEG"
+        "jpeg": "JPEG",
+        "changelog": "Update History",
+        "changelog_title": "Version Update History",
+        "changelog_description": "View all updates and changes from the beginning",
+        "version": "Version",
+        "release_date": "Release Date",
+        "changes": "Changes",
+        "no_changelog": "No update history available",
+        "loading_changelog": "Loading update history...",
+        "changelog_error": "Error loading update history",
+        "view_on_github": "View on GitHub"
     },
     "zh": {
         "title": "AAV - 在线数据分析与可视化工具",
@@ -559,7 +579,17 @@
         "jpeg": "JPEG",
         "clear_all": "清除全部",
         "confirm_clear_all": "您确定要清除所有数据和样本吗？此操作无法撤销。",
-        "import_csv": "导入 CSV"
+        "import_csv": "导入 CSV",
+        "changelog": "更新历史",
+        "changelog_title": "版本更新历史",
+        "changelog_description": "查看从开始到现在的所有更新和更改",
+        "version": "版本",
+        "release_date": "发布日期",
+        "changes": "更改",
+        "no_changelog": "没有可用的更新历史",
+        "loading_changelog": "加载更新历史...",
+        "changelog_error": "加载更新历史出错",
+        "view_on_github": "在GitHub上查看"
     },
     "hi": {
         "title": "AAV - ऑनलाइन डेटा विश्लेषण और विज़ुअलाइज़ेशन टूल",
@@ -745,7 +775,17 @@
         "jpeg": "JPEG",
         "clear_all": "सभी साफ़ करें",
         "confirm_clear_all": "क्या आप वाकई सभी डेटा और नमूने साफ़ करना चाहते हैं? यह कार्रवाई पूर्ववत नहीं की जा सकती।",
-        "import_csv": "CSV आयात करें"
+        "import_csv": "CSV आयात करें",
+        "changelog": "अपडेट इतिहास",
+        "changelog_title": "संस्करण अपडेट इतिहास",
+        "changelog_description": "शुरुआत से अब तक के सभी अपडेट और परिवर्तन देखें",
+        "version": "संस्करण",
+        "release_date": "रिलीज़ की तारीख",
+        "changes": "परिवर्तन",
+        "no_changelog": "कोई अपडेट इतिहास उपलब्ध नहीं",
+        "loading_changelog": "अपडेट इतिहास लोड हो रहा है...",
+        "changelog_error": "अपडेट इतिहास लोड करने में त्रुटि",
+        "view_on_github": "GitHub पर देखें"
     },
     "es": {
         "title": "AAV - Herramienta de Análisis y Visualización de Datos en Línea",
@@ -931,7 +971,17 @@
         "jpeg": "JPEG",
         "clear_all": "Limpiar Todo",
         "confirm_clear_all": "¿Está seguro de que desea borrar todos los datos y muestras? Esta acción no se puede deshacer.",
-        "import_csv": "Importar CSV"
+        "import_csv": "Importar CSV",
+        "changelog": "Historial de actualizaciones",
+        "changelog_title": "Historial de actualizaciones de versión",
+        "changelog_description": "Ver todas las actualizaciones y cambios desde el principio",
+        "version": "Versión",
+        "release_date": "Fecha de lanzamiento",
+        "changes": "Cambios",
+        "no_changelog": "No hay historial de actualizaciones disponible",
+        "loading_changelog": "Cargando historial de actualizaciones...",
+        "changelog_error": "Error al cargar el historial de actualizaciones",
+        "view_on_github": "Ver en GitHub"
     },
     "fr": {
         "title": "AAV - Outil d'Analyse et de Visualisation de Données en Ligne",
@@ -1117,7 +1167,17 @@
         "jpeg": "JPEG",
         "clear_all": "Tout Effacer",
         "confirm_clear_all": "Êtes-vous sûr de vouloir effacer toutes les données et tous les échantillons ? Cette action est irréversible.",
-        "import_csv": "Importer CSV"
+        "import_csv": "Importer CSV",
+        "changelog": "Historique des mises à jour",
+        "changelog_title": "Historique des mises à jour de version",
+        "changelog_description": "Voir toutes les mises à jour et les modifications du début à maintenant",
+        "version": "Version",
+        "release_date": "Date de sortie",
+        "changes": "Modifications",
+        "no_changelog": "Aucun historique de mise à jour disponible",
+        "loading_changelog": "Chargement de l'historique des mises à jour...",
+        "changelog_error": "Erreur lors du chargement de l'historique des mises à jour",
+        "view_on_github": "Voir sur GitHub"
     },
     "ar": {
         "title": "AAV - أداة تحليل البيانات والتصور عبر الإنترنت",
@@ -1303,7 +1363,17 @@
         "jpeg": "JPEG",
         "clear_all": "مسح الكل",
         "confirm_clear_all": "هل أنت متأكد أنك تريد مسح جميع البيانات والعينات؟ لا يمكن التراجع عن هذا الإجراء.",
-        "import_csv": "استيراد CSV"
+        "import_csv": "استيراد CSV",
+        "changelog": "سجل التحديثات",
+        "changelog_title": "سجل تحديثات الإصدار",
+        "changelog_description": "عرض جميع التحديثات والتغييرات من البداية إلى الآن",
+        "version": "الإصدار",
+        "release_date": "تاريخ الإصدار",
+        "changes": "التغييرات",
+        "no_changelog": "لا يوجد سجل تحديثات متاح",
+        "loading_changelog": "جاري تحميل سجل التحديثات...",
+        "changelog_error": "خطأ في تحميل سجل التحديثات",
+        "view_on_github": "عرض على GitHub"
     },
     "bn": {
         "title": "AAV - অনলাইন ডেটা বিশ্লেষণ এবং ভিজ্যুয়ালাইজেশন টুল",
@@ -1489,7 +1559,17 @@
         "jpeg": "JPEG",
         "clear_all": "সব মুছুন",
         "confirm_clear_all": "আপনি কি নিশ্চিত যে আপনি সমস্ত ডেটা এবং নমুনা মুছতে চান? এই কাজটি আর ফিরিয়ে আনা যাবে না।",
-        "import_csv": "CSV আমদানি করুন"
+        "import_csv": "CSV আমদানি করুন",
+        "changelog": "আপডেট ইতিহাস",
+        "changelog_title": "সংস্করণ আপডেট ইতিহাস",
+        "changelog_description": "শুরু থেকে এখন পর্যন্ত সমস্ত আপডেট এবং পরিবর্তন দেখুন",
+        "version": "সংস্করণ",
+        "release_date": "রিলিজ তারিখ",
+        "changes": "পরিবর্তন",
+        "no_changelog": "কোনো আপডেট ইতিহাস উপলব্ধ নেই",
+        "loading_changelog": "আপডেট ইতিহাস লোড হচ্ছে...",
+        "changelog_error": "আপডেট ইতিহাস লোড করতে ত্রুটি",
+        "view_on_github": "GitHub এ দেখুন"
     },
     "pt": {
         "title": "AAV - Ferramenta Online de Análise e Visualização de Dados",
@@ -1675,7 +1755,17 @@
         "jpeg": "JPEG",
         "clear_all": "Limpar Tudo",
         "confirm_clear_all": "Tem certeza de que deseja limpar todos os dữ liệu e amostras? Esta ação não pode ser desfeita.",
-        "import_csv": "Importar CSV"
+        "import_csv": "Importar CSV",
+        "changelog": "Histórico de atualizações",
+        "changelog_title": "Histórico de atualizações de versão",
+        "changelog_description": "Ver todas as atualizações e alterações desde o início",
+        "version": "Versão",
+        "release_date": "Data de lançamento",
+        "changes": "Alterações",
+        "no_changelog": "Nenhum histórico de atualizações disponível",
+        "loading_changelog": "Carregando histórico de atualizações...",
+        "changelog_error": "Erro ao carregar o histórico de atualizações",
+        "view_on_github": "Ver no GitHub"
     },
     "ru": {
         "title": "AAV - Онлайн-инструмент для анализа и визуализации данных",
@@ -1861,7 +1951,17 @@
         "jpeg": "JPEG",
         "clear_all": "Очистить всё",
         "confirm_clear_all": "Вы уверены, что хотите очистить все данные и образцы? Это действие нельзя отменить.",
-        "import_csv": "Импорт CSV"
+        "import_csv": "Импорт CSV",
+        "changelog": "История обновлений",
+        "changelog_title": "История обновлений версии",
+        "changelog_description": "Просмотрите все обновления и изменения с начала",
+        "version": "Версия",
+        "release_date": "Дата выпуска",
+        "changes": "Изменения",
+        "no_changelog": "История обновлений недоступна",
+        "loading_changelog": "Загрузка истории обновлений...",
+        "changelog_error": "Ошибка при загрузке истории обновлений",
+        "view_on_github": "Просмотреть на GitHub"
     },
     "ur": {
         "title": "AAV - آن لائن ڈیٹا تجزیہ اور تصور کا آلہ",
@@ -2047,6 +2147,16 @@
         "jpeg": "JPEG",
         "clear_all": "سب صاف کریں",
         "confirm_clear_all": "کیا آپ واقعی تمام ڈیٹا اور نمونے صاف کرنا चाहते हैं? یہ عمل واپس نہیں لیا जा सकता।",
-        "import_csv": "CSV درآمد کریں"
+        "import_csv": "CSV درآمد کریں",
+        "changelog": "اپڈیٹ کی تاریخ",
+        "changelog_title": "ورژن اپڈیٹ کی تاریخ",
+        "changelog_description": "شروع سے اب تک تمام اپڈیٹس اور تبدیلیاں دیکھیں",
+        "version": "ورژن",
+        "release_date": "ریلیز کی تاریخ",
+        "changes": "تبدیلیاں",
+        "no_changelog": "کوئی اپڈیٹ کی تاریخ دستیاب نہیں",
+        "loading_changelog": "اپڈیٹ کی تاریخ لوڈ ہو رہی ہے...",
+        "changelog_error": "اپڈیٹ کی تاریخ لوڈ کرنے میں خرابی",
+        "view_on_github": "GitHub پر دیکھیں"
     }
 }

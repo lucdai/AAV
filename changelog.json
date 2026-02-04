@@ -1,0 +1,633 @@
+{
+  "generated_at": "2026-02-04T05:14:17.522053",
+  "total_commits": 81,
+  "repository": "lucdai/AAV",
+  "entries": [
+    {
+      "date": "2026-02-04",
+      "commit_count": 1,
+      "categories": {
+        "Other": [
+          {
+            "sha": "64025cc",
+            "message": "Fix GitHub link in footer and remove 'Built with for Data Science' line",
+            "author": "Manus AI",
+            "url": "https://github.com/lucdai/AAV/commit/64025ccf01c43cf0105135e7d748bbe1d58ad551"
+          }
+        ]
+      }
+    },
+    {
+      "date": "2026-02-03",
+      "commit_count": 7,
+      "categories": {
+        "Features": [
+          {
+            "sha": "78a3967",
+            "message": "Restore and sync Clear All feature with current UI",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/78a3967374bf7790857e58ffc66e44b40e9f18d4"
+          },
+          {
+            "sha": "2b1b6d5",
+            "message": "Add haptic feedback (vibration) on touch",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/2b1b6d5f6c4703665aeda7b798acb0ffd5523954"
+          },
+          {
+            "sha": "dea39f1",
+            "message": "Add interactive cursor and touch animations",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/dea39f134dd88392cffd80ad648e4b455c6f150a"
+          },
+          {
+            "sha": "c188226",
+            "message": "feat: add automatic background shortening logic to index.html",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/c188226978aa05dca01590c3b45dd8aa3a858f3d"
+          }
+        ],
+        "Improvements": [
+          {
+            "sha": "a53089d",
+            "message": "UI: Major upgrade with modern design, glassmorphism, and improved UX",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/a53089dfff8ffefecd482424b619731cdcdf3b44"
+          }
+        ],
+        "Other": [
+          {
+            "sha": "2a7185e",
+            "message": "Update last updated date",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/2a7185e793d8be6d7e4eeb3018d21561f776ed2a"
+          },
+          {
+            "sha": "e67ad35",
+            "message": "UI: Merge remote changes and apply modern design",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/e67ad3541037465033c8ed018584ecba50fc3e7f"
+          }
+        ]
+      }
+    },
+    {
+      "date": "2026-02-02",
+      "commit_count": 16,
+      "categories": {
+        "Features": [
+          {
+            "sha": "4a00526",
+            "message": "Add import_csv and clear_all translations for all languages",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/4a00526467b1fadc9222b4d6b71a6558d93f9c8c"
+          },
+          {
+            "sha": "e0a4f0a",
+            "message": "Improve Clear All feature and sync with UI",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/e0a4f0a240c145bbccc0f3ed07580dc9a36e4575"
+          },
+          {
+            "sha": "f4427eb",
+            "message": "Add Clear All feature to reset all datasets and samples",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/f4427eb5de347e78f821b95ab928f3e3da77c527"
+          },
+          {
+            "sha": "e24cec6",
+            "message": "feat: optimize data compression for shorter share links",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/e24cec624137dc7c201700ad89833a374dd1c46e"
+          },
+          {
+            "sha": "3df6ef0",
+            "message": "feat: update share link logic to use internal shorts.json and remove external services",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/3df6ef05b1a75f3a99e3c250feae6e1bf8d49d93"
+          },
+          {
+            "sha": "d0fb371",
+            "message": "Feat: Support lang parameter in URL for easier language switching",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/d0fb371270ac96454774bda630d1c0dde19a0e6a"
+          },
+          {
+            "sha": "7758ee8",
+            "message": "Add support for rounding to units, tens, hundreds (negative decimal places)",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/7758ee8f40919b0d37c31334dd10d6f4707f5df4"
+          },
+          {
+            "sha": "2c5c1b7",
+            "message": "Add support for rational and irrational numbers using math.js",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/2c5c1b71746b7362722135ff589a1c874ffb07fd"
+          },
+          {
+            "sha": "1ded66a",
+            "message": "feat: also automate year in footer",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/1ded66aacebe8669ecbfb2bf3a48390a29971fd8"
+          },
+          {
+            "sha": "d74d095",
+            "message": "feat: automate last updated date using GitHub API",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/d74d09532f9e48261e4aa3eaa07009261feca6ce"
+          },
+          {
+            "sha": "769ae80",
+            "message": "feat: add auto-update date mechanism (script only)",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/769ae806c404c2f6f0c8d12270ff8d9b6fa5264a"
+          }
+        ],
+        "Bug Fixes": [
+          {
+            "sha": "280a126",
+            "message": "Fix: Ensure translations are fully loaded and used in calculation details",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/280a126645198a143c59fde0b1c6e6f0031a4e4b"
+          },
+          {
+            "sha": "d8e252b",
+            "message": "Fix: Complete translation for all languages, removing remaining English strings",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/d8e252b1b363c3457a5fd41cb8fcd44abdccfcda"
+          },
+          {
+            "sha": "2d4a46c",
+            "message": "Fix: Unified language across all translations for calculation details",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/2d4a46caef5b39cfa8ea3729c0e3c28186101c0c"
+          }
+        ],
+        "Improvements": [
+          {
+            "sha": "7f673a4",
+            "message": "perf: optimize short link logic for large datasets and update generator script",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/7f673a44803f8aa566cde3b64e0758adcada5d8b"
+          }
+        ],
+        "Other": [
+          {
+            "sha": "5f5bd95",
+            "message": "Sync clear_all translations across all languages",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/5f5bd95e5a07434792482e6e89eb8be025b02327"
+          }
+        ]
+      }
+    },
+    {
+      "date": "2026-02-01",
+      "commit_count": 7,
+      "categories": {
+        "Features": [
+          {
+            "sha": "fd3b8e0",
+            "message": "Integrate is.gd URL shortener and Markdown format for sharing feature",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/fd3b8e029eebd25c1a5648c962423ffe2fe0762c"
+          },
+          {
+            "sha": "6df4803",
+            "message": "Update sharing feature: use fragment identifier and Markdown link format to avoid URI Too Long error",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/6df48038fc5924e8fab3d6ae29c0bdc9ed61a2d5"
+          },
+          {
+            "sha": "d42e63b",
+            "message": "Add specific dataset deletion feature",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/d42e63b825ed05cdcd5fd3c753fbd0bdd6392689"
+          },
+          {
+            "sha": "1aa31a7",
+            "message": "Add CSV import feature",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/1aa31a73d3e55f7356c52befa9a421bd5c27c220"
+          }
+        ],
+        "Improvements": [
+          {
+            "sha": "3b56fcf",
+            "message": "Optimize share URI using LZString and default value filtering",
+            "author": "Manus AI",
+            "url": "https://github.com/lucdai/AAV/commit/3b56fcf09b9f27abdb4282149ad083e196c312ff"
+          }
+        ],
+        "Other": [
+          {
+            "sha": "6de600a",
+            "message": "Cải thiện tính năng rút gọn link: Thêm trạng thái loading và fallback TinyURL để đảm bảo link luôn ngắn gọn",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/6de600a8d4debfd58f10aacc1c8cc7a7a48c1b2d"
+          },
+          {
+            "sha": "97e4a4c",
+            "message": "Triển khai tính năng rút gọn link chia sẻ theo báo cáo Grok",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/97e4a4ccea038fb51155353b5b454af505c506b0"
+          }
+        ]
+      }
+    },
+    {
+      "date": "2026-01-31",
+      "commit_count": 2,
+      "categories": {
+        "Other": [
+          {
+            "sha": "59051c5",
+            "message": "Xóa file script tạm",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/59051c5ed436661e4d66b036d32877d69eb461b1"
+          },
+          {
+            "sha": "22168b9",
+            "message": "Dịch toàn bộ nội dung sang tiếng Việt và đảm bảo tính nhất quán ngôn ngữ",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/22168b96195fc946e6842666933eff9044704d9b"
+          }
+        ]
+      }
+    },
+    {
+      "date": "2026-01-10",
+      "commit_count": 3,
+      "categories": {
+        "Other": [
+          {
+            "sha": "76de89f",
+            "message": "Fix i18n issues: remove hardcoded strings, update translations, and fix chart/modal localization",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/76de89fc76ccb45e971ad6491d2d928bbd96de86"
+          },
+          {
+            "sha": "d8928d3",
+            "message": "Final i18n synchronization and cleanup based on browser review",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/d8928d37590e9fe32fac0c753db1ba35e876ae38"
+          },
+          {
+            "sha": "c60cc3e",
+            "message": "Complete i18n implementation for all dynamic content and calculation details",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/c60cc3e01f1823fae55f8de9613915e0fa1e5765"
+          }
+        ]
+      }
+    },
+    {
+      "date": "2026-01-09",
+      "commit_count": 10,
+      "categories": {
+        "Features": [
+          {
+            "sha": "87b7e5a",
+            "message": "Add multi-language support (11 languages) and language switcher",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/87b7e5a9819511d23fe2f6ba4b8c4656b223425e"
+          }
+        ],
+        "Bug Fixes": [
+          {
+            "sha": "cef42d7",
+            "message": "Fix: Thoroughly internationalize all static and dynamic text based on screenshot feedback",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/cef42d7887ea33426c6a807aa1d7cc07773a6c61"
+          },
+          {
+            "sha": "c76fc10",
+            "message": "Fix: Complete internationalization for all static text and fix language persistence",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/c76fc109dacc4405af840cd717502e2e9f000693"
+          },
+          {
+            "sha": "bd32a93",
+            "message": "Fix: Remove broken HTML tags and hide startValue input when in auto mode",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/bd32a93c83de204647e6dbf48ad6e179d88df605"
+          },
+          {
+            "sha": "896ff00",
+            "message": "Fix: Update favicons and HTML meta tags for Google Search",
+            "author": "Manus AI",
+            "url": "https://github.com/lucdai/AAV/commit/896ff0001a9c346eeac62b14a5faf869e2dc4597"
+          }
+        ],
+        "Other": [
+          {
+            "sha": "85bdaac",
+            "message": "Fix i18n issues and remove redundant text",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/85bdaac3e62259b9215fadc79d6fad10f4a89789"
+          },
+          {
+            "sha": "607bf66",
+            "message": "UI: Simplify frequency table header to just 'Tần Số'",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/607bf669a006d68033cefcad35461fc1523d664c"
+          },
+          {
+            "sha": "1beda9c",
+            "message": "UI: Make 'Nhóm' column header editable in frequency table",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/1beda9cbc658abd74ecd36e3c29d5d6457e33453"
+          },
+          {
+            "sha": "9a6cdde",
+            "message": "UI: Change 'f (...)' to 'Tần Số (...)' in frequency table",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/9a6cddea637fc9785e8cf15f8abe9662e9216244"
+          },
+          {
+            "sha": "6ff0310",
+            "message": "UI: Change 'c_i' to 'Giá Trị Đại Diện' in frequency table",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/6ff03106262d6974d380d65a077994e299d9037e"
+          }
+        ]
+      }
+    },
+    {
+      "date": "2026-01-08",
+      "commit_count": 10,
+      "categories": {
+        "Features": [
+          {
+            "sha": "42a87fc",
+            "message": "feat: Add auto-backup feature with localStorage",
+            "author": "Manus Bot",
+            "url": "https://github.com/lucdai/AAV/commit/42a87fc3c49e783c6eda495fadb58ac938518131"
+          },
+          {
+            "sha": "8b8a439",
+            "message": "Fix: Add missing downloadTableImage function to enable JPEG/PNG downloads for tables",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/8b8a4396757d86a433a4b839f30fc005c01a56fb"
+          },
+          {
+            "sha": "afa0132",
+            "message": "Apply new formula format only for Median, Q1, Q3; keep old format for others",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/afa013201cf231c84893dc3b52c27c8316866ab7"
+          }
+        ],
+        "Bug Fixes": [
+          {
+            "sha": "956d95d",
+            "message": "Fix: eliminate global state dependency for calculation details",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/956d95d1ede8a6521f7d20b9035d2a7919ba9cfe"
+          },
+          {
+            "sha": "da1a7ab",
+            "message": "Fix: robust group indexing for quartile calculations",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/da1a7ab9d25bcc48aafb22c39d364beca7ccefaa"
+          },
+          {
+            "sha": "3eb764a",
+            "message": "Fix: calculation details group search logic and dataset index",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/3eb764a4b6d807b85dae2844bf88d02ce4361e26"
+          }
+        ],
+        "Other": [
+          {
+            "sha": "b44c5d0",
+            "message": "Update Variance and SD formula display to not use Sigma symbol",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/b44c5d03506cfbb574d64714008d8e8eb379d959"
+          },
+          {
+            "sha": "82fb77b",
+            "message": "Restore old formula display format for Mean, Mode, Variance, SD, Range, IQR, CV",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/82fb77bd4ccb5471bfc10256d7051f249c92d056"
+          },
+          {
+            "sha": "e093c29",
+            "message": "Update Median, Q1, Q3 calculation and fix 'group not found' error",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/e093c29557cf5784627ea93895a9bec6bb63e78d"
+          },
+          {
+            "sha": "915261e",
+            "message": "Update calculation details UI for Median, Q1, Q3 and update icons",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/915261eecac636bfa0d9458300a26ea8dbfb2cb9"
+          }
+        ]
+      }
+    },
+    {
+      "date": "2026-01-07",
+      "commit_count": 7,
+      "categories": {
+        "Features": [
+          {
+            "sha": "6a23296",
+            "message": "Fix and add debug logs for calculation details",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/6a232967e95c31f8f7039eeb34b94ca1eb27dcc8"
+          },
+          {
+            "sha": "40e26bf",
+            "message": "Fix calculation details for Q1, Q2, Q3 and add internal fmt function",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/40e26bfa65d246c2891c202ff224d90ff71de02f"
+          },
+          {
+            "sha": "9ec84e6",
+            "message": "Add calculation details for Range, IQR, and CV",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/9ec84e6a11db4ca70824a992642b68ad9197fcee"
+          },
+          {
+            "sha": "9822c8c",
+            "message": "Add files via upload",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/9822c8c63a146c9d22ea23365b39da5995d2b6ea"
+          }
+        ],
+        "Other": [
+          {
+            "sha": "c8c2453",
+            "message": "Update website footer and calculation details with latest timestamp",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/c8c245347f41360a1b2b723f5e79b3ae72f0ef05"
+          },
+          {
+            "sha": "0c8fb3e",
+            "message": "Update website files and remove temporary rebuild file",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/0c8fb3e7ffa378fefaf412b4d827e361661a9adb"
+          },
+          {
+            "sha": "d8cea90",
+            "message": "Trigger rebuild",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/d8cea900a32558c762af6b07847b0e5d97037470"
+          }
+        ]
+      }
+    },
+    {
+      "date": "2026-01-06",
+      "commit_count": 2,
+      "categories": {
+        "Features": [
+          {
+            "sha": "d508d9b",
+            "message": "Add Cloudflare Pages headers for security and caching",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/d508d9b9ea47fbc64a36bcfdf3e4f90ceed9725b"
+          }
+        ],
+        "Other": [
+          {
+            "sha": "0be25de",
+            "message": "Advanced SEO optimization based on Google SEO Starter Guide",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/0be25def16ff3f9d2e39250353c80becea8efe1e"
+          }
+        ]
+      }
+    },
+    {
+      "date": "2026-01-05",
+      "commit_count": 2,
+      "categories": {
+        "Features": [
+          {
+            "sha": "a761032",
+            "message": "Optimize SEO: Add meta tags, JSON-LD, sitemap, and robots.txt",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/a761032c87c0ff094b0b936c4095983f43e842bd"
+          },
+          {
+            "sha": "b152b6e",
+            "message": "Add Google Site Verification meta tag",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/b152b6e055aa66ce9f425bfebb57e477bb5e8994"
+          }
+        ]
+      }
+    },
+    {
+      "date": "2026-01-04",
+      "commit_count": 1,
+      "categories": {
+        "Features": [
+          {
+            "sha": "9463eb4",
+            "message": "Add favicon and update index.html",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/9463eb48a48f079ff0a43edaacbc5df553469a01"
+          }
+        ]
+      }
+    },
+    {
+      "date": "2026-01-03",
+      "commit_count": 12,
+      "categories": {
+        "Features": [
+          {
+            "sha": "f99a367",
+            "message": "Update logo with transparent background and add modern scale-up hover effect",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/f99a3672e451174080efd8e7f3a369b3f35afbb9"
+          },
+          {
+            "sha": "66fb722",
+            "message": "Add home navigation when clicking logo or title",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/66fb7223fcef5306fda69527e4960c7032c21685"
+          },
+          {
+            "sha": "65d194c",
+            "message": "Add multilingual random filename generation for image downloads (21 characters with Latin, Cyrillic, Devanagari, Roman, Greek, Hangul, Hanzi, Japanese, Vietnamese, and mathematical symbols)",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/65d194c04cb2c91105acacab8baa2db8b6c5f202"
+          },
+          {
+            "sha": "f0b7f81",
+            "message": "Add PNG/JPEG download feature for tables and charts",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/f0b7f812fee055b012e4ca3e56e9dd1126e2ae30"
+          },
+          {
+            "sha": "ea9ec13",
+            "message": "Update index.html with new statistical analysis and visualization application",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/ea9ec13a7706749bcf8bcfd9991318c581cad737"
+          },
+          {
+            "sha": "3b32c03",
+            "message": "Add image download features for tables and charts with batch ZIP export",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/3b32c035ea7249f5817ff8fe1dcd843900f7bf1c"
+          },
+          {
+            "sha": "2c6f4a1",
+            "message": "Restore original code and add download image features with batch ZIP export using html2canvas and jszip",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/2c6f4a1473b3f49f1cb5776afcd44c9c8b005fe6"
+          },
+          {
+            "sha": "139b4e8",
+            "message": "Add bulk image download feature for visualizations using html2canvas and jszip",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/139b4e8fcd8a69fd3150a7c8813501b9dda509ce"
+          },
+          {
+            "sha": "b17371f",
+            "message": "Add files via upload",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/b17371fe56c1e298d21f0c2748080d15c90cd984"
+          }
+        ],
+        "Other": [
+          {
+            "sha": "777a21a",
+            "message": "Update website logo with the provided image",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/777a21aa8be953dca7ad047183c0fea503d7e6e4"
+          },
+          {
+            "sha": "bdd4529",
+            "message": "Update index.html with complete HTML and JavaScript content",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/bdd45297ae0de89f6ee8f04775cec817ac0fac24"
+          },
+          {
+            "sha": "5399419",
+            "message": "Create index.html - Statistics and visualization application in Vietnamese",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/539941959976cdf8ee0a8663f6762246289e3657"
+          }
+        ]
+      }
+    },
+    {
+      "date": "2025-12-24",
+      "commit_count": 1,
+      "categories": {
+        "Features": [
+          {
+            "sha": "f0d367a",
+            "message": "Initial commit: Add index.html for website",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/f0d367af75d80d2db0f23a29238af1f60f6faa7a"
+          }
+        ]
+      }
+    }
+  ]
+}
