@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-02-04T18:16:45.266568",
-  "total_commits": 87,
+  "generated_at": "2026-02-04T18:21:03.008745",
+  "total_commits": 89,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-02-04",
-      "commit_count": 7,
+      "commit_count": 9,
       "categories": {
         "Features": [
           {
@@ -23,6 +23,12 @@
         ],
         "Bug Fixes": [
           {
+            "sha": "95d51b2",
+            "message": "fix: use standard inline z-index for better compatibility",
+            "author": "Manus AI",
+            "url": "https://github.com/lucdai/AAV/commit/95d51b24d51d71b397aaf8ea4f0d926218db30d6"
+          },
+          {
             "sha": "9864aaf",
             "message": "fix: fix z-index issue for language dropdown",
             "author": "Manus AI",
@@ -30,6 +36,12 @@
           }
         ],
         "Other": [
+          {
+            "sha": "da66f11",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/da66f11547f8961a9195993b3b133e781f751f0e"
+          },
           {
             "sha": "70a351c",
             "message": "chore: update changelog from commits",
