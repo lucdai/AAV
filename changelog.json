@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-02-04T18:21:03.008745",
-  "total_commits": 89,
+  "generated_at": "2026-02-04T18:24:05.362718",
+  "total_commits": 91,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-02-04",
-      "commit_count": 9,
+      "commit_count": 11,
       "categories": {
         "Features": [
           {
@@ -23,6 +23,12 @@
         ],
         "Bug Fixes": [
           {
+            "sha": "66b3bca",
+            "message": "fix: use standard Tailwind z-50 class and adjust header stacking context",
+            "author": "Manus AI",
+            "url": "https://github.com/lucdai/AAV/commit/66b3bca203f23f90ea0fcdfc23358fc9f332b095"
+          },
+          {
             "sha": "95d51b2",
             "message": "fix: use standard inline z-index for better compatibility",
             "author": "Manus AI",
@@ -36,6 +42,12 @@
           }
         ],
         "Other": [
+          {
+            "sha": "4051779",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/4051779484292311be3da310b92bcf180582ccd8"
+          },
           {
             "sha": "da66f11",
             "message": "chore: update changelog from commits",
