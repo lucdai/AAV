@@ -276,7 +276,7 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="overflow-x-auto p-2"><table class="modern-table" id="statsTable"></table></div>
+                        <div class="overflow-x-auto"><table class="modern-table w-full border-collapse" id="statsTable"></table></div>
                     </div>
                 </div>
                 
@@ -735,7 +735,7 @@
             ];
             let h = `<thead><tr class="bg-indigo-50 border-b"><th class="px-4 py-2" data-i18n="metric_col">${t('metric_col')}</th>`+results.map(r=>`<th class="px-4 py-2 text-center" style="color:${r.color.border}">${r.name}</th>`).join('')+`</tr></thead><tbody>`;
             m.forEach(x => {
-                h += `<tr class="border-b last:border-0 hover:bg-slate-50"><td class="px-4 py-2 font-medium text-slate-600 flex items-center justify-between gap-2">${x.l}</td>` + results.map((r, rIdx)=>{
+                h += `<tr class="border-b last:border-0 hover:bg-slate-50"><td class="px-4 py-3 font-medium text-slate-600">${x.l}</td>` + results.map((r, rIdx)=>{
                     let v = r.s[x.id];
                     // Mã hóa dữ liệu để truyền an toàn qua HTML attribute
                     const rData = encodeURIComponent(JSON.stringify({name: r.name, s: r.s, gStats: r.gStats}));
@@ -745,7 +745,7 @@
                     if(v===undefined) return `<td>-</td>`;
                     if(x.len) return `<td class="text-center font-bold text-red-600">${v.length}</td>`;
                     if(x.txt) return `<td class="text-center text-slate-700">${v}</td>`;
-                    return `<td class="text-center font-bold text-slate-700">${fmt(v)}${calcBtn}</td>`;
+                    return `<td class="text-center font-bold text-slate-700 px-4 py-3">${fmt(v)}${calcBtn}</td>`;
                 }).join('') + `</tr>`;
             });
             document.getElementById('statsTable').innerHTML = h+`</tbody>`;

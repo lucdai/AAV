@@ -133,8 +133,7 @@ input:focus, textarea:focus, select:focus {
 /* Table Styling */
 .modern-table {
     width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
+    border-collapse: collapse;
 }
 
 .modern-table th {
