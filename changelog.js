@@ -143,6 +143,7 @@ async function fetchChangelogFromGitHub() {
 // Display changelog in modal
 function displayChangelog(changelog) {
     const modalBody = document.getElementById('changelogModalBody');
+    const lang = typeof currentLang !== 'undefined' ? currentLang : 'vi';
     
     if (!changelog || !changelog.entries || changelog.entries.length === 0) {
         modalBody.innerHTML = `
@@ -176,11 +177,19 @@ function displayChangelog(changelog) {
                 }
                 
                 commits.forEach(commit => {
+                    // Get translated message if available
+                    let displayMessage = commit.message;
+                    if (commit.translations && commit.translations[lang]) {
+                        displayMessage = commit.translations[lang];
+                    } else if (lang === 'vi' && commit.message.startsWith('feat: ') || commit.message.startsWith('fix: ') || commit.message.startsWith('chore: ')) {
+                        // Keep original if it's already in a standard format and no translation found
+                    }
+                    
                     html += `
                         <div class="bg-slate-50 p-3 rounded-lg hover:bg-slate-100 transition-colors">
                             <div class="flex items-start justify-between gap-2">
                                 <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-medium text-slate-900 break-words">${escapeHtml(commit.message)}</p>
+                                    <p class="text-sm font-medium text-slate-900 break-words">${escapeHtml(displayMessage)}</p>
                                     <div class="flex items-center gap-2 mt-1 text-xs text-slate-500">
                                         <span class="font-mono bg-slate-200 px-2 py-1 rounded">${commit.sha}</span>
                                         <span>${commit.author}</span>

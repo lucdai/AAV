@@ -58,13 +58,37 @@
             "sha": "56b7e91",
             "message": "Add GitHub Actions workflow to update changelog",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/56b7e91b4140cad3dfcbf69b108b6fc2bcdf6295"
+            "url": "https://github.com/lucdai/AAV/commit/56b7e91b4140cad3dfcbf69b108b6fc2bcdf6295",
+            "translations": {
+              "en": "Add GitHub Actions workflow to update changelog",
+              "zh": "添加 GitHub Actions 工作流程以更新变更日志",
+              "hi": "चेंजलॉग को अद्यतन करने के लिए GitHub क्रियाएँ वर्कफ़्लो जोड़ें",
+              "es": "Agregue el flujo de trabajo de GitHub Actions para actualizar el registro de cambios",
+              "fr": "Ajouter le workflow GitHub Actions pour mettre à jour le journal des modifications",
+              "ar": "أضف سير عمل GitHub Actions لتحديث سجل التغيير",
+              "bn": "চেঞ্জলগ আপডেট করতে GitHub অ্যাকশন ওয়ার্কফ্লো যোগ করুন",
+              "pt": "Adicione o fluxo de trabalho do GitHub Actions para atualizar o changelog",
+              "ru": "Добавьте рабочий процесс GitHub Actions для обновления журнала изменений.",
+              "ur": "چینجلاگ کو اپ ڈیٹ کرنے کے لئے گٹ ہب ایکشن ورک فلو شامل کریں"
+            }
           },
           {
             "sha": "25d9c7e",
             "message": "feat: add automatic changelog feature with icon and modal",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/25d9c7e8c4a3d8e708bec0636e4e2e18e66b6a8a"
+            "url": "https://github.com/lucdai/AAV/commit/25d9c7e8c4a3d8e708bec0636e4e2e18e66b6a8a",
+            "translations": {
+              "en": "feat: add automatic changelog feature with icon and modal",
+              "zh": "壮举：添加带有图标和模式的自动更改日志功能",
+              "hi": "उपलब्धि: आइकन और मोडल के साथ स्वचालित चेंजलॉग सुविधा जोड़ें",
+              "es": "hazaña: agregue la función de registro de cambios automático con ícono y modal",
+              "fr": "exploit : ajouter une fonctionnalité de journal des modifications automatique avec icône et modal",
+              "ar": "الفذ: إضافة ميزة سجل التغيير التلقائي مع أيقونة ومشروط",
+              "bn": "বৈশিষ্ট্য: আইকন এবং মডেল সহ স্বয়ংক্রিয় চেঞ্জলগ বৈশিষ্ট্য যুক্ত করুন",
+              "pt": "façanha: adicionar recurso de changelog automático com ícone e modal",
+              "ru": "подвиг: добавить функцию автоматического журнала изменений со значком и модальным окном",
+              "ur": "کارنامہ: آئیکن اور موڈل کے ساتھ خودکار چینلوگ کی خصوصیت شامل کریں"
+            }
           }
         ],
         "Bug Fixes": [
@@ -72,25 +96,73 @@
             "sha": "cd12e6a",
             "message": "fix: increase z-index for language dropdown to prevent being hidden by other elements",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/cd12e6a3a2e7595c09d119e6e36c27943fb923c3"
+            "url": "https://github.com/lucdai/AAV/commit/cd12e6a3a2e7595c09d119e6e36c27943fb923c3",
+            "translations": {
+              "en": "fix: increase z-index for language dropdown to prevent being hidden by other elements",
+              "zh": "修复：增加语言下拉列表的 z-index 以防止被其他元素隐藏",
+              "hi": "ठीक करें: अन्य तत्वों द्वारा छिपाए जाने से रोकने के लिए भाषा ड्रॉपडाउन के लिए z-इंडेक्स बढ़ाएँ",
+              "es": "solución: aumente el índice z para el menú desplegable de idiomas para evitar que otros elementos lo oculten",
+              "fr": "correctif : augmentez le z-index pour la liste déroulante des langues pour éviter d'être masqué par d'autres éléments",
+              "ar": "الإصلاح: زيادة مؤشر z للقائمة المنسدلة للغة لمنع إخفائها بواسطة عناصر أخرى",
+              "bn": "ঠিক করুন: অন্যান্য উপাদান দ্বারা লুকানো রোধ করতে ভাষার ড্রপডাউনের জন্য z-সূচক বাড়ান",
+              "pt": "correção: aumente o índice z da lista suspensa de idiomas para evitar ser ocultado por outros elementos",
+              "ru": "исправлено: увеличить z-индекс для раскрывающегося списка языков, чтобы его не скрывали другие элементы.",
+              "ur": "درست کریں: دوسرے عناصر کے ذریعہ پوشیدہ ہونے سے بچنے کے لئے زبان کے ڈراپ ڈاؤن کے لئے زیڈ انڈیکس میں اضافہ کریں"
+            }
           },
           {
             "sha": "66b3bca",
             "message": "fix: use standard Tailwind z-50 class and adjust header stacking context",
             "author": "Manus AI",
-            "url": "https://github.com/lucdai/AAV/commit/66b3bca203f23f90ea0fcdfc23358fc9f332b095"
+            "url": "https://github.com/lucdai/AAV/commit/66b3bca203f23f90ea0fcdfc23358fc9f332b095",
+            "translations": {
+              "en": "fix: use standard Tailwind z-50 class and adjust header stacking context",
+              "zh": "修复：使用标准 Tailwind z-50 类并调整标头堆叠上下文",
+              "hi": "ठीक करें: मानक टेलविंड z-50 क्लास का उपयोग करें और हेडर स्टैकिंग संदर्भ को समायोजित करें",
+              "es": "solución: use la clase estándar Tailwind z-50 y ajuste el contexto de apilamiento del encabezado",
+              "fr": "correctif : utilisez la classe standard Tailwind z-50 et ajustez le contexte d'empilement d'en-tête",
+              "ar": "الإصلاح: استخدم فئة Tailwind z-50 القياسية واضبط سياق تكديس الرأس",
+              "bn": "ঠিক করুন: স্ট্যান্ডার্ড Tailwind z-50 ক্লাস ব্যবহার করুন এবং হেডার স্ট্যাকিং প্রসঙ্গ সামঞ্জস্য করুন",
+              "pt": "correção: use a classe Tailwind z-50 padrão e ajuste o contexto de empilhamento do cabeçalho",
+              "ru": "исправлено: используйте стандартный класс Tailwind z-50 и настройте контекст стека заголовков.",
+              "ur": "درست کریں: معیاری ٹیل ونڈ Z-50 کلاس کا استعمال کریں اور ہیڈر اسٹیکنگ سیاق و سباق کو ایڈجسٹ کریں"
+            }
           },
           {
             "sha": "95d51b2",
             "message": "fix: use standard inline z-index for better compatibility",
             "author": "Manus AI",
-            "url": "https://github.com/lucdai/AAV/commit/95d51b24d51d71b397aaf8ea4f0d926218db30d6"
+            "url": "https://github.com/lucdai/AAV/commit/95d51b24d51d71b397aaf8ea4f0d926218db30d6",
+            "translations": {
+              "en": "fix: use standard inline z-index for better compatibility",
+              "zh": "修复：使用标准内联 z 索引以获得更好的兼容性",
+              "hi": "समाधान: बेहतर अनुकूलता के लिए मानक इनलाइन z-इंडेक्स का उपयोग करें",
+              "es": "solución: use el índice z en línea estándar para una mejor compatibilidad",
+              "fr": "correctif : utilisez le z-index en ligne standard pour une meilleure compatibilité",
+              "ar": "الإصلاح: استخدم مؤشر z القياسي المضمّن لتحسين التوافق",
+              "bn": "ঠিক করুন: ভাল সামঞ্জস্যের জন্য স্ট্যান্ডার্ড ইনলাইন z-সূচক ব্যবহার করুন",
+              "pt": "correção: use o índice z in-line padrão para melhor compatibilidade",
+              "ru": "исправлено: используйте стандартный встроенный z-индекс для лучшей совместимости.",
+              "ur": "درست کریں: بہتر مطابقت کے لئے معیاری ان لائن زیڈ انڈیکس کا استعمال کریں"
+            }
           },
           {
             "sha": "9864aaf",
             "message": "fix: fix z-index issue for language dropdown",
             "author": "Manus AI",
-            "url": "https://github.com/lucdai/AAV/commit/9864aafd16533274bda032be7b8032e6fec52385"
+            "url": "https://github.com/lucdai/AAV/commit/9864aafd16533274bda032be7b8032e6fec52385",
+            "translations": {
+              "en": "fix: fix z-index issue for language dropdown",
+              "zh": "修复：修复语言下拉列表的 z-index 问题",
+              "hi": "ठीक करें: भाषा ड्रॉपडाउन के लिए z-इंडेक्स समस्या ठीक करें",
+              "es": "solución: soluciona el problema del índice z para el menú desplegable de idiomas",
+              "fr": "correctif : correction du problème de z-index pour la liste déroulante des langues",
+              "ar": "الإصلاح: إصلاح مشكلة z-index الخاصة بالقائمة المنسدلة للغة",
+              "bn": "ঠিক করুন: ভাষার ড্রপডাউনের জন্য z-সূচক সমস্যা ঠিক করুন",
+              "pt": "correção: corrige problema de índice z para menu suspenso de idiomas",
+              "ru": "fix: исправлена ​​проблема с z-индексом для раскрывающегося списка языков.",
+              "ur": "درست کریں: زبان کے ڈراپ ڈاؤن کے لئے زیڈ انڈیکس ایشو کو ٹھیک کریں"
+            }
           }
         ],
         "Other": [
@@ -98,43 +170,127 @@
             "sha": "dbfbe66",
             "message": "chore: update changelog from commits",
             "author": "GitHub Action",
-            "url": "https://github.com/lucdai/AAV/commit/dbfbe66c929b29c6de34e19531592ee01fa21238"
+            "url": "https://github.com/lucdai/AAV/commit/dbfbe66c929b29c6de34e19531592ee01fa21238",
+            "translations": {
+              "en": "chore: update changelog from commits",
+              "zh": "杂务：从提交更新变更日志",
+              "hi": "घर का काम: कमिट से चेंजलॉग अपडेट करें",
+              "es": "tarea: actualizar el registro de cambios desde las confirmaciones",
+              "fr": "corvée : mettre à jour le journal des modifications à partir des commits",
+              "ar": "العمل الرتيب: تحديث سجل التغيير من الالتزامات",
+              "bn": "কাজ: কমিট থেকে চেঞ্জলগ আপডেট করুন",
+              "pt": "chore: atualizar changelog de commits",
+              "ru": "рутинная работа: обновить журнал изменений из коммитов",
+              "ur": "CHORE: Commits سے چینلوگ کو اپ ڈیٹ کریں"
+            }
           },
           {
             "sha": "4051779",
             "message": "chore: update changelog from commits",
             "author": "GitHub Action",
-            "url": "https://github.com/lucdai/AAV/commit/4051779484292311be3da310b92bcf180582ccd8"
+            "url": "https://github.com/lucdai/AAV/commit/4051779484292311be3da310b92bcf180582ccd8",
+            "translations": {
+              "en": "chore: update changelog from commits",
+              "zh": "杂务：从提交更新变更日志",
+              "hi": "घर का काम: कमिट से चेंजलॉग अपडेट करें",
+              "es": "tarea: actualizar el registro de cambios desde las confirmaciones",
+              "fr": "corvée : mettre à jour le journal des modifications à partir des commits",
+              "ar": "العمل الرتيب: تحديث سجل التغيير من الالتزامات",
+              "bn": "কাজ: কমিট থেকে চেঞ্জলগ আপডেট করুন",
+              "pt": "chore: atualizar changelog de commits",
+              "ru": "рутинная работа: обновить журнал изменений из коммитов",
+              "ur": "CHORE: Commits سے چینلوگ کو اپ ڈیٹ کریں"
+            }
           },
           {
             "sha": "da66f11",
             "message": "chore: update changelog from commits",
             "author": "GitHub Action",
-            "url": "https://github.com/lucdai/AAV/commit/da66f11547f8961a9195993b3b133e781f751f0e"
+            "url": "https://github.com/lucdai/AAV/commit/da66f11547f8961a9195993b3b133e781f751f0e",
+            "translations": {
+              "en": "chore: update changelog from commits",
+              "zh": "杂务：从提交更新变更日志",
+              "hi": "घर का काम: कमिट से चेंजलॉग अपडेट करें",
+              "es": "tarea: actualizar el registro de cambios desde las confirmaciones",
+              "fr": "corvée : mettre à jour le journal des modifications à partir des commits",
+              "ar": "العمل الرتيب: تحديث سجل التغيير من الالتزامات",
+              "bn": "কাজ: কমিট থেকে চেঞ্জলগ আপডেট করুন",
+              "pt": "chore: atualizar changelog de commits",
+              "ru": "рутинная работа: обновить журнал изменений из коммитов",
+              "ur": "CHORE: Commits سے چینلوگ کو اپ ڈیٹ کریں"
+            }
           },
           {
             "sha": "70a351c",
             "message": "chore: update changelog from commits",
             "author": "GitHub Action",
-            "url": "https://github.com/lucdai/AAV/commit/70a351c2f6beccab68df85258f6c8301c17a1a68"
+            "url": "https://github.com/lucdai/AAV/commit/70a351c2f6beccab68df85258f6c8301c17a1a68",
+            "translations": {
+              "en": "chore: update changelog from commits",
+              "zh": "杂务：从提交更新变更日志",
+              "hi": "घर का काम: कमिट से चेंजलॉग अपडेट करें",
+              "es": "tarea: actualizar el registro de cambios desde las confirmaciones",
+              "fr": "corvée : mettre à jour le journal des modifications à partir des commits",
+              "ar": "العمل الرتيب: تحديث سجل التغيير من الالتزامات",
+              "bn": "কাজ: কমিট থেকে চেঞ্জলগ আপডেট করুন",
+              "pt": "chore: atualizar changelog de commits",
+              "ru": "рутинная работа: обновить журнал изменений из коммитов",
+              "ur": "CHORE: Commits سے چینلوگ کو اپ ڈیٹ کریں"
+            }
           },
           {
             "sha": "f8020af",
             "message": "Rename update-changelog.yml. to update-changelog.yml",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/f8020afedb481f583350a47e9ee9ee48dc67ddd7"
+            "url": "https://github.com/lucdai/AAV/commit/f8020afedb481f583350a47e9ee9ee48dc67ddd7",
+            "translations": {
+              "en": "Rename update-changelog.yml. to update-changelog.yml",
+              "zh": "重命名 update-changelog.yml。更新-changelog.yml",
+              "hi": "update-changelog.yml का नाम बदलें। update-changelog.yml पर",
+              "es": "Cambie el nombre de update-changelog.yml. para actualizar-changelog.yml",
+              "fr": "Renommez update-changelog.yml. mettre à jour-changelog.yml",
+              "ar": "إعادة تسمية update-changelog.yml. لتحديث-changelog.yml",
+              "bn": "update-changelog.yml নাম পরিবর্তন করুন। আপডেট করতে-changelog.yml",
+              "pt": "Renomeie update-changelog.yml. para atualizar-changelog.yml",
+              "ru": "Переименуйте update-changelog.yml. обновить-changelog.yml",
+              "ur": "اپ ڈیٹ- changelog.yml کا نام تبدیل کریں۔ اپ ڈیٹ- changelog.yml"
+            }
           },
           {
             "sha": "f70784b",
             "message": "chore: update changelog.json",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/f70784b0da4e3ef6d558b1acb76a2a31ab567b54"
+            "url": "https://github.com/lucdai/AAV/commit/f70784b0da4e3ef6d558b1acb76a2a31ab567b54",
+            "translations": {
+              "en": "chore: update changelog.json",
+              "zh": "琐事：更新changelog.json",
+              "hi": "घर का काम: चेंजलॉग.जेसन को अपडेट करें",
+              "es": "tarea: actualizar changelog.json",
+              "fr": "corvée : mettre à jour changelog.json",
+              "ar": "العمل الرتيب: تحديث سجل التغيير.json",
+              "bn": "কাজ: changelog.json আপডেট করুন",
+              "pt": "tarefa: atualizar changelog.json",
+              "ru": "рутинная работа: обновить файл Changelog.json",
+              "ur": "CHORE: Changelog.json کو اپ ڈیٹ کریں"
+            }
           },
           {
             "sha": "64025cc",
             "message": "Fix GitHub link in footer and remove 'Built with for Data Science' line",
             "author": "Manus AI",
-            "url": "https://github.com/lucdai/AAV/commit/64025ccf01c43cf0105135e7d748bbe1d58ad551"
+            "url": "https://github.com/lucdai/AAV/commit/64025ccf01c43cf0105135e7d748bbe1d58ad551",
+            "translations": {
+              "en": "Fix GitHub link in footer and remove 'Built with for Data Science' line",
+              "zh": "修复页脚中的 GitHub 链接并删除“为数据科学而构建”行",
+              "hi": "पादलेख में GitHub लिंक को ठीक करें और 'डेटा विज्ञान के लिए निर्मित' पंक्ति को हटा दें",
+              "es": "Se corrige el enlace de GitHub en el pie de página y se elimina la línea 'Creado con para ciencia de datos'",
+              "fr": "Corrigez le lien GitHub dans le pied de page et supprimez la ligne « Construit avec pour la science des données »",
+              "ar": "أصلح رابط GitHub في التذييل وأزل السطر \"Built with for Data Science\".",
+              "bn": "ফুটারে গিটহাব লিঙ্কটি ঠিক করুন এবং 'ডেটা বিজ্ঞানের জন্য নির্মিত' লাইনটি সরান",
+              "pt": "Corrija o link do GitHub no rodapé e remova a linha ‘Built with for Data Science’",
+              "ru": "Исправьте ссылку GitHub в нижнем колонтитуле и удалите строку «Создано для науки о данных».",
+              "ur": "فوٹر میں گٹ ہب لنک کو ٹھیک کریں اور 'ڈیٹا سائنس فار ڈیٹا سائنس' لائن کو ہٹا دیں"
+            }
           }
         ]
       }
@@ -148,25 +304,73 @@
             "sha": "78a3967",
             "message": "Restore and sync Clear All feature with current UI",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/78a3967374bf7790857e58ffc66e44b40e9f18d4"
+            "url": "https://github.com/lucdai/AAV/commit/78a3967374bf7790857e58ffc66e44b40e9f18d4",
+            "translations": {
+              "en": "Restore and sync Clear All feature with current UI",
+              "zh": "恢复并与当前 UI 同步“清除全部”功能",
+              "hi": "मौजूदा यूआई के साथ क्लियर ऑल फीचर को पुनर्स्थापित और सिंक करें",
+              "es": "Restaurar y sincronizar la función Borrar todo con la interfaz de usuario actual",
+              "fr": "Restaurer et synchroniser la fonctionnalité Effacer tout avec l'interface utilisateur actuelle",
+              "ar": "استعادة ومزامنة ميزة مسح الكل مع واجهة المستخدم الحالية",
+              "bn": "বর্তমান UI এর সাথে সমস্ত বৈশিষ্ট্য ক্লিয়ার করুন এবং সিঙ্ক করুন",
+              "pt": "Restaurar e sincronizar o recurso Limpar tudo com a IU atual",
+              "ru": "Восстановление и синхронизация функции «Очистить все» с текущим пользовательским интерфейсом.",
+              "ur": "موجودہ UI کے ساتھ تمام خصوصیت کو بحال کریں اور مطابقت پذیر ہوں"
+            }
           },
           {
             "sha": "2b1b6d5",
             "message": "Add haptic feedback (vibration) on touch",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/2b1b6d5f6c4703665aeda7b798acb0ffd5523954"
+            "url": "https://github.com/lucdai/AAV/commit/2b1b6d5f6c4703665aeda7b798acb0ffd5523954",
+            "translations": {
+              "en": "Add haptic feedback (vibration) on touch",
+              "zh": "添加触摸时的触觉反馈（振动）",
+              "hi": "स्पर्श पर हैप्टिक फीडबैक (कंपन) जोड़ें",
+              "es": "Agregue retroalimentación háptica (vibración) al tacto",
+              "fr": "Ajouter un retour haptique (vibration) au toucher",
+              "ar": "أضف ردود فعل لمسية (اهتزاز) عند اللمس",
+              "bn": "স্পর্শে হ্যাপটিক প্রতিক্রিয়া (কম্পন) যোগ করুন",
+              "pt": "Adicione feedback tátil (vibração) ao toque",
+              "ru": "Добавьте тактильную обратную связь (вибрацию) при прикосновении",
+              "ur": "رابطے پر ہپٹک آراء (کمپن) شامل کریں"
+            }
           },
           {
             "sha": "dea39f1",
             "message": "Add interactive cursor and touch animations",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/dea39f134dd88392cffd80ad648e4b455c6f150a"
+            "url": "https://github.com/lucdai/AAV/commit/dea39f134dd88392cffd80ad648e4b455c6f150a",
+            "translations": {
+              "en": "Add interactive cursor and touch animations",
+              "zh": "添加交互式光标和触摸动画",
+              "hi": "इंटरैक्टिव कर्सर जोड़ें और एनिमेशन स्पर्श करें",
+              "es": "Agregue cursor interactivo y animaciones táctiles",
+              "fr": "Ajoutez un curseur interactif et des animations tactiles",
+              "ar": "أضف المؤشر التفاعلي والرسوم المتحركة التي تعمل باللمس",
+              "bn": "ইন্টারেক্টিভ কার্সার এবং স্পর্শ অ্যানিমেশন যোগ করুন",
+              "pt": "Adicione cursor interativo e animações de toque",
+              "ru": "Добавьте интерактивный курсор и анимацию касания.",
+              "ur": "انٹرایکٹو کرسر اور ٹچ متحرک تصاویر شامل کریں"
+            }
           },
           {
             "sha": "c188226",
             "message": "feat: add automatic background shortening logic to index.html",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/c188226978aa05dca01590c3b45dd8aa3a858f3d"
+            "url": "https://github.com/lucdai/AAV/commit/c188226978aa05dca01590c3b45dd8aa3a858f3d",
+            "translations": {
+              "en": "feat: add automatic background shortening logic to index.html",
+              "zh": "壮举：向index.html添加自动背景缩短逻辑",
+              "hi": "उपलब्धि: Index.html में स्वचालित पृष्ठभूमि छोटा करने का तर्क जोड़ें",
+              "es": "Hazaña: agregue lógica automática de acortamiento de fondo a index.html",
+              "fr": "exploit : ajouter une logique de raccourcissement automatique de l'arrière-plan à index.html",
+              "ar": "الفذ: إضافة منطق تقصير الخلفية التلقائي إلى ملف Index.html",
+              "bn": "বৈশিষ্ট্য: index.html এ স্বয়ংক্রিয় পটভূমি সংক্ষিপ্তকরণ যুক্তি যোগ করুন",
+              "pt": "façanha: adicionar lógica automática de encurtamento de plano de fundo ao index.html",
+              "ru": "подвиг: добавить логику автоматического сокращения фона в index.html",
+              "ur": "کارنامہ: انڈیکس ایچ ٹی ایم ایل میں خودکار پس منظر کو مختصر کرنے والی منطق شامل کریں"
+            }
           }
         ],
         "Improvements": [
@@ -174,7 +378,19 @@
             "sha": "a53089d",
             "message": "UI: Major upgrade with modern design, glassmorphism, and improved UX",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/a53089dfff8ffefecd482424b619731cdcdf3b44"
+            "url": "https://github.com/lucdai/AAV/commit/a53089dfff8ffefecd482424b619731cdcdf3b44",
+            "translations": {
+              "en": "UI: Major upgrade with modern design, glassmorphism, and improved UX",
+              "zh": "UI：重大升级，采用现代设计、玻璃形态和改进的用户体验",
+              "hi": "यूआई: आधुनिक डिजाइन, ग्लासमोर्फिज्म और बेहतर यूएक्स के साथ प्रमुख उन्नयन",
+              "es": "UI: actualización importante con diseño moderno, morfismo de vidrio y UX mejorada",
+              "fr": "UI : mise à niveau majeure avec un design moderne, un glassmorphisme et une UX améliorée",
+              "ar": "واجهة المستخدم: ترقية كبيرة مع التصميم الحديث والشكل الزجاجي وتجربة المستخدم المحسنة",
+              "bn": "UI: আধুনিক ডিজাইন, গ্লাসমর্ফিজম এবং উন্নত UX সহ প্রধান আপগ্রেড",
+              "pt": "UI: grande atualização com design moderno, glassmorphism e UX aprimorado",
+              "ru": "Пользовательский интерфейс: значительное обновление с современным дизайном, стеклянным морфизмом и улучшенным пользовательским интерфейсом.",
+              "ur": "UI: جدید ڈیزائن ، گلاسمورفزم ، اور بہتر UX کے ساتھ اہم اپ گریڈ"
+            }
           }
         ],
         "Other": [
@@ -182,13 +398,37 @@
             "sha": "2a7185e",
             "message": "Update last updated date",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/2a7185e793d8be6d7e4eeb3018d21561f776ed2a"
+            "url": "https://github.com/lucdai/AAV/commit/2a7185e793d8be6d7e4eeb3018d21561f776ed2a",
+            "translations": {
+              "en": "Update last updated date",
+              "zh": "更新上次更新日期",
+              "hi": "अंतिम अद्यतन तिथि अपडेट करें",
+              "es": "Actualizar la última fecha de actualización",
+              "fr": "Mettre à jour la date de la dernière mise à jour",
+              "ar": "تحديث تاريخ آخر تحديث",
+              "bn": "সর্বশেষ আপডেট তারিখ আপডেট",
+              "pt": "Atualizar data da última atualização",
+              "ru": "Обновить дату последнего обновления",
+              "ur": "آخری تازہ ترین تاریخ کو اپ ڈیٹ کریں"
+            }
           },
           {
             "sha": "e67ad35",
             "message": "UI: Merge remote changes and apply modern design",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/e67ad3541037465033c8ed018584ecba50fc3e7f"
+            "url": "https://github.com/lucdai/AAV/commit/e67ad3541037465033c8ed018584ecba50fc3e7f",
+            "translations": {
+              "en": "UI: Merge remote changes and apply modern design",
+              "zh": "UI：合并远程更改并应用现代设计",
+              "hi": "यूआई: दूरस्थ परिवर्तनों को मर्ज करें और आधुनिक डिज़ाइन लागू करें",
+              "es": "UI: fusiona cambios remotos y aplica un diseño moderno",
+              "fr": "Interface utilisateur : fusionnez les modifications à distance et appliquez un design moderne",
+              "ar": "واجهة المستخدم: دمج التغييرات عن بعد وتطبيق التصميم الحديث",
+              "bn": "UI: দূরবর্তী পরিবর্তনগুলি একত্রিত করুন এবং আধুনিক নকশা প্রয়োগ করুন৷",
+              "pt": "UI: Mesclar alterações remotas e aplicar design moderno",
+              "ru": "Пользовательский интерфейс: объединяйте удаленные изменения и применяйте современный дизайн.",
+              "ur": "UI: دور دراز کی تبدیلیوں کو ضم کریں اور جدید ڈیزائن کا اطلاق کریں"
+            }
           }
         ]
       }
@@ -202,67 +442,199 @@
             "sha": "4a00526",
             "message": "Add import_csv and clear_all translations for all languages",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/4a00526467b1fadc9222b4d6b71a6558d93f9c8c"
+            "url": "https://github.com/lucdai/AAV/commit/4a00526467b1fadc9222b4d6b71a6558d93f9c8c",
+            "translations": {
+              "en": "Add import_csv and clear_all translations for all languages",
+              "zh": "添加所有语言的 import_csv 和clear_all 翻译",
+              "hi": "सभी भाषाओं के लिए आयात_सीएसवी और क्लियर_सभी अनुवाद जोड़ें",
+              "es": "Agregue traducciones import_csv y clear_all para todos los idiomas",
+              "fr": "Ajouter des traductions import_csv et clear_all pour toutes les langues",
+              "ar": "أضف ترجمات import_csv وclear_all لجميع اللغات",
+              "bn": "সব ভাষার জন্য import_csv এবং clear_all অনুবাদ যোগ করুন",
+              "pt": "Adicione traduções import_csv e clear_all para todos os idiomas",
+              "ru": "Добавьте переводы import_csv иclear_all для всех языков.",
+              "ur": "تمام زبانوں کے لئے امپورٹ_ سی ایس وی اور کلیئر_ال ترجمے شامل کریں"
+            }
           },
           {
             "sha": "e0a4f0a",
             "message": "Improve Clear All feature and sync with UI",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/e0a4f0a240c145bbccc0f3ed07580dc9a36e4575"
+            "url": "https://github.com/lucdai/AAV/commit/e0a4f0a240c145bbccc0f3ed07580dc9a36e4575",
+            "translations": {
+              "en": "Improve Clear All feature and sync with UI",
+              "zh": "改进“清除全部”功能并与 UI 同步",
+              "hi": "क्लियर ऑल फीचर में सुधार करें और यूआई के साथ सिंक करें",
+              "es": "Mejorar la función Borrar todo y sincronizar con la interfaz de usuario",
+              "fr": "Améliorer la fonctionnalité Effacer tout et synchroniser avec l'interface utilisateur",
+              "ar": "تحسين ميزة مسح الكل والمزامنة مع واجهة المستخدم",
+              "bn": "UI এর সাথে ক্লিয়ার অল ফিচার এবং সিঙ্ক উন্নত করুন",
+              "pt": "Melhore o recurso Limpar tudo e sincronize com a IU",
+              "ru": "Улучшение функции «Очистить все» и синхронизация с пользовательским интерфейсом.",
+              "ur": "واضح طور پر تمام خصوصیت کو بہتر بنائیں اور UI کے ساتھ ہم آہنگی کریں"
+            }
           },
           {
             "sha": "f4427eb",
             "message": "Add Clear All feature to reset all datasets and samples",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/f4427eb5de347e78f821b95ab928f3e3da77c527"
+            "url": "https://github.com/lucdai/AAV/commit/f4427eb5de347e78f821b95ab928f3e3da77c527",
+            "translations": {
+              "en": "Add Clear All feature to reset all datasets and samples",
+              "zh": "添加“全部清除”功能以重置所有数据集和样本",
+              "hi": "सभी डेटासेट और नमूनों को रीसेट करने के लिए सभी साफ़ करें सुविधा जोड़ें",
+              "es": "Agregue la función Borrar todo para restablecer todos los conjuntos de datos y muestras",
+              "fr": "Ajoutez la fonctionnalité Effacer tout pour réinitialiser tous les ensembles de données et échantillons",
+              "ar": "أضف ميزة مسح الكل لإعادة ضبط كافة مجموعات البيانات والعينات",
+              "bn": "সমস্ত ডেটাসেট এবং নমুনাগুলি পুনরায় সেট করতে ক্লিয়ার অল বৈশিষ্ট্য যুক্ত করুন৷",
+              "pt": "Adicione o recurso Limpar tudo para redefinir todos os conjuntos de dados e amostras",
+              "ru": "Добавьте функцию «Очистить все» для сброса всех наборов данных и образцов.",
+              "ur": "تمام ڈیٹاسیٹس اور نمونے دوبارہ ترتیب دینے کے لئے تمام خصوصیت کو شامل کریں"
+            }
           },
           {
             "sha": "e24cec6",
             "message": "feat: optimize data compression for shorter share links",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/e24cec624137dc7c201700ad89833a374dd1c46e"
+            "url": "https://github.com/lucdai/AAV/commit/e24cec624137dc7c201700ad89833a374dd1c46e",
+            "translations": {
+              "en": "feat: optimize data compression for shorter share links",
+              "zh": "壮举：优化数据压缩以缩短共享链接",
+              "hi": "उपलब्धि: छोटे शेयर लिंक के लिए डेटा संपीड़न को अनुकूलित करें",
+              "es": "Hazaña: optimizar la compresión de datos para enlaces compartidos más cortos",
+              "fr": "exploit : optimiser la compression des données pour des liens de partage plus courts",
+              "ar": "الفذ: تحسين ضغط البيانات لروابط المشاركة الأقصر",
+              "bn": "বৈশিষ্ট্য: সংক্ষিপ্ত শেয়ার লিঙ্কের জন্য ডেটা কম্প্রেশন অপ্টিমাইজ করুন",
+              "pt": "façanha: otimizar a compactação de dados para links de compartilhamento mais curtos",
+              "ru": "Подвиг: оптимизировать сжатие данных для более коротких ссылок на общий доступ",
+              "ur": "کارنامہ: مختصر شیئر لنکس کے لئے ڈیٹا کمپریشن کو بہتر بنائیں"
+            }
           },
           {
             "sha": "3df6ef0",
             "message": "feat: update share link logic to use internal shorts.json and remove external services",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/3df6ef05b1a75f3a99e3c250feae6e1bf8d49d93"
+            "url": "https://github.com/lucdai/AAV/commit/3df6ef05b1a75f3a99e3c250feae6e1bf8d49d93",
+            "translations": {
+              "en": "feat: update share link logic to use internal shorts.json and remove external services",
+              "zh": "壮举：更新共享链接逻辑以使用内部 Shorts.json 并删除外部服务",
+              "hi": "उपलब्धि: आंतरिक शॉर्ट्स.जेसन का उपयोग करने और बाहरी सेवाओं को हटाने के लिए शेयर लिंक तर्क को अपडेट करें",
+              "es": "Hazaña: actualizar la lógica del enlace compartido para usar shorts.json interno y eliminar servicios externos",
+              "fr": "exploit : mettre à jour la logique du lien de partage pour utiliser shorts.json interne et supprimer les services externes",
+              "ar": "العمل الفذ: تحديث منطق رابط المشاركة لاستخدام Shorts.json الداخلي وإزالة الخدمات الخارجية",
+              "bn": "কৃতিত্ব: অভ্যন্তরীণ shorts.json ব্যবহার করতে এবং বাহ্যিক পরিষেবাগুলি সরাতে শেয়ার লিঙ্ক লজিক আপডেট করুন",
+              "pt": "façanha: atualizar a lógica do link de compartilhamento para usar shorts.json interno e remover serviços externos",
+              "ru": "Подвиг: обновить логику ссылок общего доступа для использования внутреннего shorts.json и удалить внешние сервисы",
+              "ur": "کارنامہ: داخلی شارٹس کو استعمال کرنے کے لئے لنک لنک کی منطق کو اپ ڈیٹ کریں۔"
+            }
           },
           {
             "sha": "d0fb371",
             "message": "Feat: Support lang parameter in URL for easier language switching",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/d0fb371270ac96454774bda630d1c0dde19a0e6a"
+            "url": "https://github.com/lucdai/AAV/commit/d0fb371270ac96454774bda630d1c0dde19a0e6a",
+            "translations": {
+              "en": "Feat: Support lang parameter in URL for easier language switching",
+              "zh": "Feat：支持 URL 中的 lang 参数，以便更轻松地进行语言切换",
+              "hi": "उपलब्धि: आसान भाषा स्विचिंग के लिए यूआरएल में लैंग पैरामीटर का समर्थन करें",
+              "es": "Proeza: Admite el parámetro lang en la URL para facilitar el cambio de idioma",
+              "fr": "Exploit : prise en charge du paramètre lang dans l'URL pour un changement de langue plus facile",
+              "ar": "الفذ: دعم معلمة lang في عنوان URL لتسهيل تبديل اللغة",
+              "bn": "বৈশিষ্ট্য: সহজ ভাষা পরিবর্তনের জন্য URL-এ ল্যাং প্যারামিটার সমর্থন করুন",
+              "pt": "Proeza: Suporta parâmetro lang em URL para facilitar a troca de idioma",
+              "ru": "Особенность: Поддержка параметра lang в URL-адресе для упрощения переключения языка.",
+              "ur": "کارنامہ: آسان زبان میں سوئچنگ کے لئے یو آر ایل میں لینگ پیرامیٹر کی حمایت کریں"
+            }
           },
           {
             "sha": "7758ee8",
             "message": "Add support for rounding to units, tens, hundreds (negative decimal places)",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/7758ee8f40919b0d37c31334dd10d6f4707f5df4"
+            "url": "https://github.com/lucdai/AAV/commit/7758ee8f40919b0d37c31334dd10d6f4707f5df4",
+            "translations": {
+              "en": "Add support for rounding to units, tens, hundreds (negative decimal places)",
+              "zh": "添加对舍入到个位、十位、百位（负小数位）的支持",
+              "hi": "इकाइयों, दहाई, सैकड़ों (नकारात्मक दशमलव स्थानों) में पूर्णांकन के लिए समर्थन जोड़ें",
+              "es": "Agregue soporte para redondear a unidades, decenas, centenas (decimales negativos)",
+              "fr": "Ajout de la prise en charge des arrondis aux unités, dizaines, centaines (places décimales négatives)",
+              "ar": "إضافة دعم للتقريب إلى الوحدات والعشرات والمئات (المنازل العشرية السالبة)",
+              "bn": "একক, দশ, শত (নেতিবাচক দশমিক স্থান) রাউন্ডিংয়ের জন্য সমর্থন যোগ করুন",
+              "pt": "Adicionado suporte para arredondamento para unidades, dezenas, centenas (casas decimais negativas)",
+              "ru": "Добавлена ​​поддержка округления до единиц, десятков, сотен (отрицательные десятичные знаки).",
+              "ur": "یونٹوں ، دسیوں ، سیکڑوں (منفی اعشاریہ منفی مقامات) میں گول کرنے کے لئے مدد شامل کریں"
+            }
           },
           {
             "sha": "2c5c1b7",
             "message": "Add support for rational and irrational numbers using math.js",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/2c5c1b71746b7362722135ff589a1c874ffb07fd"
+            "url": "https://github.com/lucdai/AAV/commit/2c5c1b71746b7362722135ff589a1c874ffb07fd",
+            "translations": {
+              "en": "Add support for rational and irrational numbers using math.js",
+              "zh": "使用 math.js 添加对有理数和无理数的支持",
+              "hi": "Math.js का उपयोग करके परिमेय और अपरिमेय संख्याओं के लिए समर्थन जोड़ें",
+              "es": "Agregue soporte para números racionales e irracionales usando math.js",
+              "fr": "Ajoutez la prise en charge des nombres rationnels et irrationnels à l'aide de math.js",
+              "ar": "إضافة دعم للأرقام العقلانية وغير العقلانية باستخدام math.js",
+              "bn": "math.js ব্যবহার করে মূলদ এবং অমূলদ সংখ্যার জন্য সমর্থন যোগ করুন",
+              "pt": "Adicione suporte para números racionais e irracionais usando math.js",
+              "ru": "Добавьте поддержку рациональных и иррациональных чисел с помощью math.js.",
+              "ur": "ریاضی کے استعمال سے عقلی اور غیر معقول تعداد کے لئے مدد شامل کریں"
+            }
           },
           {
             "sha": "1ded66a",
             "message": "feat: also automate year in footer",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/1ded66aacebe8669ecbfb2bf3a48390a29971fd8"
+            "url": "https://github.com/lucdai/AAV/commit/1ded66aacebe8669ecbfb2bf3a48390a29971fd8",
+            "translations": {
+              "en": "feat: also automate year in footer",
+              "zh": "壮举：还自动化页脚中的年份",
+              "hi": "करतब: फ़ुटर में वर्ष को भी स्वचालित करें",
+              "es": "hazaña: también automatizar el año en el pie de página",
+              "fr": "exploit : automatiser également l'année en pied de page",
+              "ar": "الفذ: أيضًا أتمتة السنة في التذييل",
+              "bn": "কৃতিত্ব: এছাড়াও ফুটারে বছর স্বয়ংক্রিয় করুন",
+              "pt": "façanha: também automatizar o ano no rodapé",
+              "ru": "подвиг: также автоматизировать год в нижнем колонтитуле",
+              "ur": "کارنامہ: فوٹر میں خودکار سال بھی"
+            }
           },
           {
             "sha": "d74d095",
             "message": "feat: automate last updated date using GitHub API",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/d74d09532f9e48261e4aa3eaa07009261feca6ce"
+            "url": "https://github.com/lucdai/AAV/commit/d74d09532f9e48261e4aa3eaa07009261feca6ce",
+            "translations": {
+              "en": "feat: automate last updated date using GitHub API",
+              "zh": "壮举：使用 GitHub API 自动执行上次更新日期",
+              "hi": "उपलब्धि: GitHub API का उपयोग करके अंतिम अद्यतन तिथि को स्वचालित करें",
+              "es": "Hazaña: automatizar la fecha de la última actualización usando la API de GitHub",
+              "fr": "exploit : automatiser la date de dernière mise à jour à l'aide de l'API GitHub",
+              "ar": "العمل الفذ: أتمتة تاريخ آخر تحديث باستخدام GitHub API",
+              "bn": "কৃতিত্ব: GitHub API ব্যবহার করে সর্বশেষ আপডেট হওয়া তারিখ স্বয়ংক্রিয় করুন",
+              "pt": "façanha: automatizar a data da última atualização usando a API GitHub",
+              "ru": "подвиг: автоматизировать дату последнего обновления с помощью API GitHub",
+              "ur": "کارنامہ: گٹ ہب API کا استعمال کرتے ہوئے آخری تازہ ترین تاریخ کو خودکار کریں"
+            }
           },
           {
             "sha": "769ae80",
             "message": "feat: add auto-update date mechanism (script only)",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/769ae806c404c2f6f0c8d12270ff8d9b6fa5264a"
+            "url": "https://github.com/lucdai/AAV/commit/769ae806c404c2f6f0c8d12270ff8d9b6fa5264a",
+            "translations": {
+              "en": "feat: add auto-update date mechanism (script only)",
+              "zh": "壮举：添加自动更新日期机制（仅限脚本）",
+              "hi": "करतब: ऑटो-अपडेट दिनांक तंत्र जोड़ें (केवल स्क्रिप्ट)",
+              "es": "hazaña: agregar mecanismo de fecha de actualización automática (solo script)",
+              "fr": "exploit : ajouter un mécanisme de mise à jour automatique des dates (script uniquement)",
+              "ar": "العمل الفذ: إضافة آلية تاريخ التحديث التلقائي (البرنامج النصي فقط)",
+              "bn": "বৈশিষ্ট্য: স্বয়ংক্রিয়-আপডেট তারিখ প্রক্রিয়া যোগ করুন (শুধুমাত্র স্ক্রিপ্ট)",
+              "pt": "talento: adicionar mecanismo de atualização automática de data (somente script)",
+              "ru": "подвиг: добавить механизм автоматического обновления даты (только скрипт)",
+              "ur": "کارنامہ: آٹو اپ ڈیٹ ڈیٹ میکانزم (صرف اسکرپٹ) شامل کریں"
+            }
           }
         ],
         "Bug Fixes": [
@@ -270,19 +642,55 @@
             "sha": "280a126",
             "message": "Fix: Ensure translations are fully loaded and used in calculation details",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/280a126645198a143c59fde0b1c6e6f0031a4e4b"
+            "url": "https://github.com/lucdai/AAV/commit/280a126645198a143c59fde0b1c6e6f0031a4e4b",
+            "translations": {
+              "en": "Fix: Ensure translations are fully loaded and used in calculation details",
+              "zh": "修复：确保翻译已完全加载并在计算详细信息中使用",
+              "hi": "समाधान: सुनिश्चित करें कि अनुवाद पूरी तरह से लोड किए गए हैं और गणना विवरण में उपयोग किए गए हैं",
+              "es": "Solución: asegúrese de que las traducciones estén completamente cargadas y utilizadas en los detalles de cálculo",
+              "fr": "Correctif : assurez-vous que les traductions sont entièrement chargées et utilisées dans les détails du calcul",
+              "ar": "الإصلاح: تأكد من تحميل الترجمات بالكامل واستخدامها في تفاصيل الحساب",
+              "bn": "ঠিক করুন: অনুবাদগুলি সম্পূর্ণরূপে লোড হয়েছে এবং গণনার বিবরণে ব্যবহৃত হয়েছে তা নিশ্চিত করুন",
+              "pt": "Correção: certifique-se de que as traduções estejam totalmente carregadas e usadas nos detalhes do cálculo",
+              "ru": "Исправлено: убедитесь, что переводы полностью загружены и используются в деталях расчета.",
+              "ur": "درست کریں: اس بات کو یقینی بنائیں کہ ترجمہ مکمل طور پر بھری ہوئی ہیں اور حساب کتاب کی تفصیلات میں استعمال ہوں"
+            }
           },
           {
             "sha": "d8e252b",
             "message": "Fix: Complete translation for all languages, removing remaining English strings",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/d8e252b1b363c3457a5fd41cb8fcd44abdccfcda"
+            "url": "https://github.com/lucdai/AAV/commit/d8e252b1b363c3457a5fd41cb8fcd44abdccfcda",
+            "translations": {
+              "en": "Fix: Complete translation for all languages, removing remaining English strings",
+              "zh": "修复：完成所有语言的翻译，删除剩余的英文字符串",
+              "hi": "समाधान: शेष अंग्रेजी स्ट्रिंग्स को हटाकर सभी भाषाओं के लिए पूर्ण अनुवाद",
+              "es": "Solución: traducción completa para todos los idiomas, eliminando las cadenas restantes en inglés",
+              "fr": "Correctif : traduction complète pour toutes les langues, suppression des chaînes anglaises restantes",
+              "ar": "إصلاح: الترجمة الكاملة لجميع اللغات، وإزالة السلاسل الإنجليزية المتبقية",
+              "bn": "ঠিক করুন: বাকি ইংরেজি স্ট্রিংগুলি সরিয়ে সমস্ত ভাষার জন্য সম্পূর্ণ অনুবাদ",
+              "pt": "Correção: tradução completa para todos os idiomas, removendo as strings restantes em inglês",
+              "ru": "Исправлено: полный перевод для всех языков, удаление оставшихся английских строк.",
+              "ur": "درست کریں: تمام زبانوں کے لئے مکمل ترجمہ ، بقیہ انگریزی تار کو ہٹانا"
+            }
           },
           {
             "sha": "2d4a46c",
             "message": "Fix: Unified language across all translations for calculation details",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/2d4a46caef5b39cfa8ea3729c0e3c28186101c0c"
+            "url": "https://github.com/lucdai/AAV/commit/2d4a46caef5b39cfa8ea3729c0e3c28186101c0c",
+            "translations": {
+              "en": "Fix: Unified language across all translations for calculation details",
+              "zh": "修复：计算详细信息的所有翻译均采用统一语言",
+              "hi": "समाधान: गणना विवरण के लिए सभी अनुवादों में एकीकृत भाषा",
+              "es": "Solución: idioma unificado en todas las traducciones para detalles de cálculo",
+              "fr": "Correctif : langue unifiée dans toutes les traductions pour les détails des calculs",
+              "ar": "إصلاح: لغة موحدة عبر جميع الترجمات للحصول على تفاصيل الحساب",
+              "bn": "ঠিক করুন: গণনার বিবরণের জন্য সমস্ত অনুবাদ জুড়ে একীভূত ভাষা",
+              "pt": "Correção: idioma unificado em todas as traduções para detalhes de cálculo",
+              "ru": "Исправлено: единый язык для всех переводов для подробностей расчета.",
+              "ur": "درست کریں: حساب کتاب کی تفصیلات کے لئے تمام ترجموں میں متحد زبان"
+            }
           }
         ],
         "Improvements": [
@@ -290,7 +698,19 @@
             "sha": "7f673a4",
             "message": "perf: optimize short link logic for large datasets and update generator script",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/7f673a44803f8aa566cde3b64e0758adcada5d8b"
+            "url": "https://github.com/lucdai/AAV/commit/7f673a44803f8aa566cde3b64e0758adcada5d8b",
+            "translations": {
+              "en": "perf: optimize short link logic for large datasets and update generator script",
+              "zh": "perf：优化大型数据集的短链接逻辑并更新生成器脚本",
+              "hi": "पूर्ण: बड़े डेटासेट के लिए शॉर्ट लिंक लॉजिक को अनुकूलित करें और जनरेटर स्क्रिप्ट को अपडेट करें",
+              "es": "perf: optimiza la lógica de enlace corto para grandes conjuntos de datos y actualiza el script del generador",
+              "fr": "perf : optimise la logique des liens courts pour les grands ensembles de données et met à jour le script du générateur",
+              "ar": "الأداء: تحسين منطق الارتباط القصير لمجموعات البيانات الكبيرة وتحديث البرنامج النصي للمولد",
+              "bn": "perf: বড় ডেটাসেটের জন্য সংক্ষিপ্ত লিঙ্ক লজিক অপ্টিমাইজ করুন এবং জেনারেটর স্ক্রিপ্ট আপডেট করুন",
+              "pt": "perf: otimize a lógica de link curto para grandes conjuntos de dados e atualize o script do gerador",
+              "ru": "perf: оптимизировать логику коротких ссылок для больших наборов данных и обновить скрипт генератора.",
+              "ur": "پرف: بڑے ڈیٹاسیٹس کے لئے مختصر لنک منطق کو بہتر بنائیں اور جنریٹر اسکرپٹ کو اپ ڈیٹ کریں"
+            }
           }
         ],
         "Other": [
@@ -298,7 +718,19 @@
             "sha": "5f5bd95",
             "message": "Sync clear_all translations across all languages",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/5f5bd95e5a07434792482e6e89eb8be025b02327"
+            "url": "https://github.com/lucdai/AAV/commit/5f5bd95e5a07434792482e6e89eb8be025b02327",
+            "translations": {
+              "en": "Sync clear_all translations across all languages",
+              "zh": "同步所有语言的clear_all 翻译",
+              "hi": "सभी भाषाओं में क्लियर_ऑल अनुवाद सिंक करें",
+              "es": "Sincronizar las traducciones clear_all en todos los idiomas",
+              "fr": "Synchronisez les traductions clear_all dans toutes les langues",
+              "ar": "مزامنة Clear_all الترجمات عبر جميع اللغات",
+              "bn": "সমস্ত ভাষা জুড়ে পরিষ্কার_সমস্ত অনুবাদ সিঙ্ক করুন",
+              "pt": "Sincronize traduções clear_all em todos os idiomas",
+              "ru": "Синхронизировать переводыclear_all на все языки.",
+              "ur": "تمام زبانوں میں کلئیر_ال ترجمے کی مطابقت پذیری کریں"
+            }
           }
         ]
       }
@@ -312,25 +744,73 @@
             "sha": "fd3b8e0",
             "message": "Integrate is.gd URL shortener and Markdown format for sharing feature",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/fd3b8e029eebd25c1a5648c962423ffe2fe0762c"
+            "url": "https://github.com/lucdai/AAV/commit/fd3b8e029eebd25c1a5648c962423ffe2fe0762c",
+            "translations": {
+              "en": "Integrate is.gd URL shortener and Markdown format for sharing feature",
+              "zh": "集成 is.gd URL 缩短器和 Markdown 格式以实现共享功能",
+              "hi": "साझाकरण सुविधा के लिए is.gd URL शॉर्टनर और मार्कडाउन प्रारूप को एकीकृत करें",
+              "es": "Integre el acortador de URL is.gd y el formato Markdown para la función de compartir",
+              "fr": "Intégrez le raccourcisseur d'URL is.gd et le format Markdown pour la fonctionnalité de partage",
+              "ar": "دمج أداة تقصير عناوين URL is.gd وتنسيق Markdown لميزة المشاركة",
+              "bn": "শেয়ারিং বৈশিষ্ট্যের জন্য is.gd ইউআরএল শর্টনার এবং মার্কডাউন ফর্ম্যাট ইন্টিগ্রেট করুন",
+              "pt": "Integre o encurtador de URL is.gd e o formato Markdown para recurso de compartilhamento",
+              "ru": "Интегрируйте сокращатель URL-адресов is.gd и формат Markdown для функции обмена.",
+              "ur": "انضمام IS.GD URL شارٹینر اور شیئرنگ کی خصوصیت کے لئے مارک ڈاون فارمیٹ"
+            }
           },
           {
             "sha": "6df4803",
             "message": "Update sharing feature: use fragment identifier and Markdown link format to avoid URI Too Long error",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/6df48038fc5924e8fab3d6ae29c0bdc9ed61a2d5"
+            "url": "https://github.com/lucdai/AAV/commit/6df48038fc5924e8fab3d6ae29c0bdc9ed61a2d5",
+            "translations": {
+              "en": "Update sharing feature: use fragment identifier and Markdown link format to avoid URI Too Long error",
+              "zh": "更新分享功能：使用片段标识符和 Markdown 链接格式以避免 URI Too Long 错误",
+              "hi": "अद्यतन साझाकरण सुविधा: यूआरआई टू लॉन्ग त्रुटि से बचने के लिए खंड पहचानकर्ता और मार्कडाउन लिंक प्रारूप का उपयोग करें",
+              "es": "Función para compartir actualizaciones: use el identificador de fragmento y el formato de enlace Markdown para evitar el error de URI demasiado largo",
+              "fr": "Fonctionnalité de partage de mise à jour : utilisez l'identifiant de fragment et le format de lien Markdown pour éviter l'erreur URI trop longue",
+              "ar": "ميزة مشاركة التحديث: استخدم معرف الجزء وتنسيق رابط Markdown لتجنب خطأ URI الطويل جدًا",
+              "bn": "ভাগ করার বৈশিষ্ট্য আপডেট করুন: URI খুব দীর্ঘ ত্রুটি এড়াতে খণ্ড শনাক্তকারী এবং মার্কডাউন লিঙ্ক বিন্যাস ব্যবহার করুন",
+              "pt": "Recurso de compartilhamento de atualização: use identificador de fragmento e formato de link Markdown para evitar erro de URI muito longo",
+              "ru": "Функция совместного использования обновлений: используйте идентификатор фрагмента и формат ссылки Markdown, чтобы избежать ошибки URI Too Long.",
+              "ur": "شیئرنگ کی خصوصیت کو اپ ڈیٹ کریں: URI سے بہت لمبی غلطی سے بچنے کے لئے ٹکڑے کی شناخت کنندہ اور مارک ڈاون لنک فارمیٹ کا استعمال کریں"
+            }
           },
           {
             "sha": "d42e63b",
             "message": "Add specific dataset deletion feature",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/d42e63b825ed05cdcd5fd3c753fbd0bdd6392689"
+            "url": "https://github.com/lucdai/AAV/commit/d42e63b825ed05cdcd5fd3c753fbd0bdd6392689",
+            "translations": {
+              "en": "Add specific dataset deletion feature",
+              "zh": "添加特定数据集删除功能",
+              "hi": "विशिष्ट डेटासेट हटाने की सुविधा जोड़ें",
+              "es": "Agregar función de eliminación de conjuntos de datos específicos",
+              "fr": "Ajouter une fonctionnalité de suppression d'ensemble de données spécifique",
+              "ar": "إضافة ميزة حذف مجموعة بيانات محددة",
+              "bn": "নির্দিষ্ট ডেটাসেট মুছে ফেলার বৈশিষ্ট্য যোগ করুন",
+              "pt": "Adicionar recurso específico de exclusão de conjunto de dados",
+              "ru": "Добавить конкретную функцию удаления набора данных",
+              "ur": "مخصوص ڈیٹاسیٹ کو حذف کرنے کی خصوصیت شامل کریں"
+            }
           },
           {
             "sha": "1aa31a7",
             "message": "Add CSV import feature",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/1aa31a73d3e55f7356c52befa9a421bd5c27c220"
+            "url": "https://github.com/lucdai/AAV/commit/1aa31a73d3e55f7356c52befa9a421bd5c27c220",
+            "translations": {
+              "en": "Add CSV import feature",
+              "zh": "添加CSV导入功能",
+              "hi": "CSV आयात सुविधा जोड़ें",
+              "es": "Agregar función de importación CSV",
+              "fr": "Ajouter une fonctionnalité d'importation CSV",
+              "ar": "إضافة ميزة استيراد CSV",
+              "bn": "CSV আমদানি বৈশিষ্ট্য যোগ করুন",
+              "pt": "Adicionar recurso de importação de CSV",
+              "ru": "Добавить функцию импорта CSV",
+              "ur": "CSV درآمد کی خصوصیت شامل کریں"
+            }
           }
         ],
         "Improvements": [
@@ -338,7 +818,19 @@
             "sha": "3b56fcf",
             "message": "Optimize share URI using LZString and default value filtering",
             "author": "Manus AI",
-            "url": "https://github.com/lucdai/AAV/commit/3b56fcf09b9f27abdb4282149ad083e196c312ff"
+            "url": "https://github.com/lucdai/AAV/commit/3b56fcf09b9f27abdb4282149ad083e196c312ff",
+            "translations": {
+              "en": "Optimize share URI using LZString and default value filtering",
+              "zh": "使用 LZString 和默认值过滤优化共享 URI",
+              "hi": "LZString और डिफ़ॉल्ट मान फ़िल्टरिंग का उपयोग करके शेयर URI को अनुकूलित करें",
+              "es": "Optimice el URI compartido usando LZString y filtrado de valores predeterminados",
+              "fr": "Optimiser l'URI de partage à l'aide de LZString et du filtrage des valeurs par défaut",
+              "ar": "تحسين مشاركة URI باستخدام LZString وتصفية القيمة الافتراضية",
+              "bn": "LZString এবং ডিফল্ট মান ফিল্টারিং ব্যবহার করে শেয়ার URI অপ্টিমাইজ করুন",
+              "pt": "Otimize o URI de compartilhamento usando LZString e filtragem de valor padrão",
+              "ru": "Оптимизация общего URI с использованием LZString и фильтрации значений по умолчанию.",
+              "ur": "LZString اور ڈیفالٹ ویلیو فلٹرنگ کا استعمال کرتے ہوئے شیئر URI کو بہتر بنائیں"
+            }
           }
         ],
         "Other": [
@@ -346,13 +838,37 @@
             "sha": "6de600a",
             "message": "Cải thiện tính năng rút gọn link: Thêm trạng thái loading và fallback TinyURL để đảm bảo link luôn ngắn gọn",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/6de600a8d4debfd58f10aacc1c8cc7a7a48c1b2d"
+            "url": "https://github.com/lucdai/AAV/commit/6de600a8d4debfd58f10aacc1c8cc7a7a48c1b2d",
+            "translations": {
+              "en": "Improved link shortening feature: Add loading status and TinyURL fallback to ensure links are always short",
+              "zh": "改进的链接缩短功能：添加加载状态和 TinyURL 回退以确保链接始终较短",
+              "hi": "बेहतर लिंक छोटा करने की सुविधा: यह सुनिश्चित करने के लिए कि लिंक हमेशा छोटे हों, लोडिंग स्थिति और TinyURL फ़ॉलबैक जोड़ें",
+              "es": "Función mejorada de acortamiento de enlaces: agregue el estado de carga y el respaldo de TinyURL para garantizar que los enlaces sean siempre cortos",
+              "fr": "Fonctionnalité de raccourcissement de lien améliorée : ajoutez l'état de chargement et la solution de repli TinyURL pour garantir que les liens sont toujours courts",
+              "ar": "ميزة تقصير الروابط المحسنة: أضف حالة التحميل ورجوع TinyURL لضمان أن تكون الروابط قصيرة دائمًا",
+              "bn": "উন্নত লিঙ্ক সংক্ষিপ্তকরণ বৈশিষ্ট্য: লিঙ্কগুলি সর্বদা ছোট হয় তা নিশ্চিত করতে লোডিং স্থিতি এবং TinyURL ফলব্যাক যোগ করুন",
+              "pt": "Recurso aprimorado de encurtamento de link: adicione status de carregamento e substituto do TinyURL para garantir que os links sejam sempre curtos",
+              "ru": "Улучшенная функция сокращения ссылок: добавьте статус загрузки и резервный вариант TinyURL, чтобы ссылки всегда были короткими.",
+              "ur": "بہتر لنک مختصر کرنے کی خصوصیت: لنک ہمیشہ مختصر رہتے ہیں اس بات کو یقینی بنانے کے لئے لوڈنگ کی حیثیت اور ٹینیورل فال بیک شامل کریں"
+            }
           },
           {
             "sha": "97e4a4c",
             "message": "Triển khai tính năng rút gọn link chia sẻ theo báo cáo Grok",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/97e4a4ccea038fb51155353b5b454af505c506b0"
+            "url": "https://github.com/lucdai/AAV/commit/97e4a4ccea038fb51155353b5b454af505c506b0",
+            "translations": {
+              "en": "Deploy the shared link shortening feature according to the Grok report",
+              "zh": "根据 Grok 报告部署共享链接缩短功能",
+              "hi": "ग्रोक रिपोर्ट के अनुसार साझा लिंक शॉर्टिंग सुविधा को तैनात करें",
+              "es": "Implemente la función de acortamiento de enlaces compartidos según el informe de Grok",
+              "fr": "Déployer la fonctionnalité de raccourcissement des liens partagés selon le rapport Grok",
+              "ar": "نشر ميزة تقصير الروابط المشتركة وفقًا لتقرير Grok",
+              "bn": "Grok রিপোর্ট অনুযায়ী শেয়ার করা লিঙ্ক সংক্ষিপ্তকরণ বৈশিষ্ট্য স্থাপন করুন",
+              "pt": "Implante o recurso de encurtamento de link compartilhado de acordo com o relatório Grok",
+              "ru": "Разверните функцию сокращения общих ссылок согласно отчету Grok.",
+              "ur": "گروک کی رپورٹ کے مطابق مشترکہ لنک مختصر کرنے کی خصوصیت کو تعینات کریں"
+            }
           }
         ]
       }
@@ -366,13 +882,37 @@
             "sha": "59051c5",
             "message": "Xóa file script tạm",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/59051c5ed436661e4d66b036d32877d69eb461b1"
+            "url": "https://github.com/lucdai/AAV/commit/59051c5ed436661e4d66b036d32877d69eb461b1",
+            "translations": {
+              "en": "Delete temporary script file",
+              "zh": "删除临时脚本文件",
+              "hi": "अस्थायी स्क्रिप्ट फ़ाइल हटाएँ",
+              "es": "Eliminar archivo de script temporal",
+              "fr": "Supprimer le fichier de script temporaire",
+              "ar": "حذف ملف البرنامج النصي المؤقت",
+              "bn": "অস্থায়ী স্ক্রিপ্ট ফাইল মুছুন",
+              "pt": "Excluir arquivo de script temporário",
+              "ru": "Удалить временный файл сценария",
+              "ur": "عارضی اسکرپٹ فائل کو حذف کریں"
+            }
           },
           {
             "sha": "22168b9",
             "message": "Dịch toàn bộ nội dung sang tiếng Việt và đảm bảo tính nhất quán ngôn ngữ",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/22168b96195fc946e6842666933eff9044704d9b"
+            "url": "https://github.com/lucdai/AAV/commit/22168b96195fc946e6842666933eff9044704d9b",
+            "translations": {
+              "en": "Translate all content into Vietnamese and ensure language consistency",
+              "zh": "将所有内容翻译成越南语并确保语言一致性",
+              "hi": "सभी सामग्री का वियतनामी में अनुवाद करें और भाषा की एकरूपता सुनिश्चित करें",
+              "es": "Traducir todo el contenido al vietnamita y garantizar la coherencia del idioma.",
+              "fr": "Traduire tout le contenu en vietnamien et assurer la cohérence linguistique",
+              "ar": "ترجمة جميع المحتويات إلى اللغة الفيتنامية والتأكد من اتساق اللغة",
+              "bn": "সমস্ত বিষয়বস্তু ভিয়েতনামী ভাষায় অনুবাদ করুন এবং ভাষার সামঞ্জস্য নিশ্চিত করুন",
+              "pt": "Traduza todo o conteúdo para vietnamita e garanta a consistência do idioma",
+              "ru": "Переведите весь контент на вьетнамский язык и обеспечьте единообразие языка.",
+              "ur": "تمام مواد کو ویتنامی میں ترجمہ کریں اور زبان میں مستقل مزاجی کو یقینی بنائیں"
+            }
           }
         ]
       }
@@ -386,19 +926,55 @@
             "sha": "76de89f",
             "message": "Fix i18n issues: remove hardcoded strings, update translations, and fix chart/modal localization",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/76de89fc76ccb45e971ad6491d2d928bbd96de86"
+            "url": "https://github.com/lucdai/AAV/commit/76de89fc76ccb45e971ad6491d2d928bbd96de86",
+            "translations": {
+              "en": "Fix i18n issues: remove hardcoded strings, update translations, and fix chart/modal localization",
+              "zh": "修复 i18n 问题：删除硬编码字符串、更新翻译并修复图表/模式本地化",
+              "hi": "i18n समस्याओं को ठीक करें: हार्डकोडेड स्ट्रिंग्स को हटाएं, अनुवाद अपडेट करें और चार्ट/मोडल स्थानीयकरण को ठीक करें",
+              "es": "Solucione problemas de i18n: elimine cadenas codificadas, actualice traducciones y corrija la localización de gráficos/modales",
+              "fr": "Résoudre les problèmes i18n : supprimer les chaînes codées en dur, mettre à jour les traductions et corriger la localisation graphique/modale",
+              "ar": "إصلاح مشكلات i18n: إزالة السلاسل المشفرة، وتحديث الترجمات، وإصلاح ترجمة المخطط/الوسائط",
+              "bn": "i18n সমস্যাগুলি ঠিক করুন: হার্ডকোড করা স্ট্রিংগুলি সরান, অনুবাদগুলি আপডেট করুন এবং চার্ট/মডাল স্থানীয়করণ ঠিক করুন",
+              "pt": "Corrija problemas de i18n: remova strings codificadas, atualize traduções e corrija localização de gráfico/modal",
+              "ru": "Исправьте проблемы i18n: удалите жестко запрограммированные строки, обновите переводы и исправьте диаграммную/модальную локализацию.",
+              "ur": "I18N کے مسائل کو ٹھیک کریں: ہارڈ کوڈڈ ڈوروں کو ہٹا دیں ، ترجمے کو اپ ڈیٹ کریں ، اور چارٹ/موڈل لوکلائزیشن کو ٹھیک کریں"
+            }
           },
           {
             "sha": "d8928d3",
             "message": "Final i18n synchronization and cleanup based on browser review",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/d8928d37590e9fe32fac0c753db1ba35e876ae38"
+            "url": "https://github.com/lucdai/AAV/commit/d8928d37590e9fe32fac0c753db1ba35e876ae38",
+            "translations": {
+              "en": "Final i18n synchronization and cleanup based on browser review",
+              "zh": "基于浏览器审查的最终 i18n 同步和清理",
+              "hi": "ब्राउज़र समीक्षा के आधार पर अंतिम i18n सिंक्रनाइज़ेशन और सफ़ाई",
+              "es": "Sincronización y limpieza final de i18n según la revisión del navegador",
+              "fr": "Synchronisation et nettoyage i18n finaux basés sur l'examen du navigateur",
+              "ar": "مزامنة وتنظيف i18n النهائي بناءً على مراجعة المتصفح",
+              "bn": "ব্রাউজার পর্যালোচনার উপর ভিত্তি করে চূড়ান্ত i18n সিঙ্ক্রোনাইজেশন এবং ক্লিনআপ",
+              "pt": "Sincronização e limpeza final do i18n com base na revisão do navegador",
+              "ru": "Окончательная синхронизация и очистка i18n на основе проверки браузера.",
+              "ur": "براؤزر کے جائزے پر مبنی حتمی I18N ہم وقت سازی اور صفائی"
+            }
           },
           {
             "sha": "c60cc3e",
             "message": "Complete i18n implementation for all dynamic content and calculation details",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/c60cc3e01f1823fae55f8de9613915e0fa1e5765"
+            "url": "https://github.com/lucdai/AAV/commit/c60cc3e01f1823fae55f8de9613915e0fa1e5765",
+            "translations": {
+              "en": "Complete i18n implementation for all dynamic content and calculation details",
+              "zh": "所有动态内容和计算细节的完整 i18n 实现",
+              "hi": "सभी गतिशील सामग्री और गणना विवरणों के लिए पूर्ण i18n कार्यान्वयन",
+              "es": "Implementación completa de i18n para todo el contenido dinámico y detalles de cálculo",
+              "fr": "Implémentation complète d'i18n pour tous les contenus dynamiques et les détails de calcul",
+              "ar": "تنفيذ i18n الكامل لجميع المحتوى الديناميكي وتفاصيل الحساب",
+              "bn": "সমস্ত গতিশীল বিষয়বস্তু এবং গণনার বিবরণের জন্য i18n বাস্তবায়ন সম্পূর্ণ করুন",
+              "pt": "Implementação completa do i18n para todo o conteúdo dinâmico e detalhes de cálculo",
+              "ru": "Полная реализация i18n для всего динамического контента и деталей вычислений.",
+              "ur": "تمام متحرک مواد اور حساب کتاب کی تفصیلات کے لئے i18n عمل کو مکمل کریں"
+            }
           }
         ]
       }
@@ -412,7 +988,19 @@
             "sha": "87b7e5a",
             "message": "Add multi-language support (11 languages) and language switcher",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/87b7e5a9819511d23fe2f6ba4b8c4656b223425e"
+            "url": "https://github.com/lucdai/AAV/commit/87b7e5a9819511d23fe2f6ba4b8c4656b223425e",
+            "translations": {
+              "en": "Add multi-language support (11 languages) and language switcher",
+              "zh": "添加多语言支持（11 种语言）和语言切换器",
+              "hi": "बहु-भाषा समर्थन (11 भाषाएँ) और भाषा स्विचर जोड़ें",
+              "es": "Agregue soporte en varios idiomas (11 idiomas) y conmutador de idiomas",
+              "fr": "Ajoutez une prise en charge multilingue (11 langues) et un sélecteur de langue",
+              "ar": "إضافة دعم متعدد اللغات (11 لغة) ومحول اللغة",
+              "bn": "বহু-ভাষা সমর্থন (11 ভাষা) এবং ভাষা পরিবর্তনকারী যোগ করুন",
+              "pt": "Adicione suporte multilíngue (11 idiomas) e alternador de idioma",
+              "ru": "Добавьте поддержку нескольких языков (11 языков) и переключатель языков.",
+              "ur": "ملٹی لینگویج سپورٹ (11 زبانیں) اور زبان سوئچر شامل کریں"
+            }
           }
         ],
         "Bug Fixes": [
@@ -420,25 +1008,73 @@
             "sha": "cef42d7",
             "message": "Fix: Thoroughly internationalize all static and dynamic text based on screenshot feedback",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/cef42d7887ea33426c6a807aa1d7cc07773a6c61"
+            "url": "https://github.com/lucdai/AAV/commit/cef42d7887ea33426c6a807aa1d7cc07773a6c61",
+            "translations": {
+              "en": "Fix: Thoroughly internationalize all static and dynamic text based on screenshot feedback",
+              "zh": "修复：根据屏幕截图反馈彻底国际化所有静态和动态文本",
+              "hi": "फिक्स: स्क्रीनशॉट फीडबैक के आधार पर सभी स्थिर और गतिशील टेक्स्ट का पूरी तरह से अंतर्राष्ट्रीयकरण करें",
+              "es": "Solución: internacionalice completamente todo el texto estático y dinámico según los comentarios de las capturas de pantalla",
+              "fr": "Correctif : internationaliser complètement tout le texte statique et dynamique en fonction des commentaires de capture d'écran",
+              "ar": "الإصلاح: تدويل كل النصوص الثابتة والديناميكية بشكل كامل بناءً على تعليقات لقطة الشاشة",
+              "bn": "ঠিক করুন: স্ক্রিনশট প্রতিক্রিয়ার উপর ভিত্তি করে সমস্ত স্ট্যাটিক এবং গতিশীল পাঠ্যকে পুঙ্খানুপুঙ্খভাবে আন্তর্জাতিকীকরণ করুন",
+              "pt": "Correção: internacionalize completamente todos os textos estáticos e dinâmicos com base no feedback da captura de tela",
+              "ru": "Исправление: полностью интернационализировать весь статический и динамический текст на основе отзывов о скриншотах.",
+              "ur": "درست کریں: اسکرین شاٹ کی آراء پر مبنی تمام جامد اور متحرک متن کو اچھی طرح سے بین الاقوامی بنائیں"
+            }
           },
           {
             "sha": "c76fc10",
             "message": "Fix: Complete internationalization for all static text and fix language persistence",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/c76fc109dacc4405af840cd717502e2e9f000693"
+            "url": "https://github.com/lucdai/AAV/commit/c76fc109dacc4405af840cd717502e2e9f000693",
+            "translations": {
+              "en": "Fix: Complete internationalization for all static text and fix language persistence",
+              "zh": "修复：所有静态文本的完全国际化并修复语言持久性",
+              "hi": "फिक्स: सभी स्थिर पाठ के लिए पूर्ण अंतर्राष्ट्रीयकरण और भाषा दृढ़ता को ठीक करें",
+              "es": "Solución: internacionalización completa para todo el texto estático y corrección de la persistencia del idioma",
+              "fr": "Correctif : internationalisation complète de tous les textes statiques et correction de la persistance de la langue",
+              "ar": "الإصلاح: التدويل الكامل لجميع النصوص الثابتة وإصلاح ثبات اللغة",
+              "bn": "ঠিক করুন: সমস্ত স্ট্যাটিক টেক্সটের জন্য সম্পূর্ণ আন্তর্জাতিকীকরণ এবং ভাষার স্থিরতা ঠিক করুন",
+              "pt": "Correção: internacionalização completa para todos os textos estáticos e correção da persistência do idioma",
+              "ru": "Исправление: полная интернационализация всего статического текста и исправление сохранения языка.",
+              "ur": "درست کریں: تمام جامد متن کے لئے مکمل عالمگیریت اور زبان کی استقامت کو ٹھیک کریں"
+            }
           },
           {
             "sha": "bd32a93",
             "message": "Fix: Remove broken HTML tags and hide startValue input when in auto mode",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/bd32a93c83de204647e6dbf48ad6e179d88df605"
+            "url": "https://github.com/lucdai/AAV/commit/bd32a93c83de204647e6dbf48ad6e179d88df605",
+            "translations": {
+              "en": "Fix: Remove broken HTML tags and hide startValue input when in auto mode",
+              "zh": "修复：在自动模式下删除损坏的 HTML 标签并隐藏 startValue 输入",
+              "hi": "ठीक करें: टूटे हुए HTML टैग हटाएं और ऑटो मोड में होने पर स्टार्टवैल्यू इनपुट छुपाएं",
+              "es": "Solución: elimine las etiquetas HTML rotas y oculte la entrada startValue cuando esté en modo automático",
+              "fr": "Correctif : supprimez les balises HTML cassées et masquez l'entrée startValue en mode automatique",
+              "ar": "الإصلاح: إزالة علامات HTML المعطلة وإخفاء إدخال قيمة البداية عندما تكون في الوضع التلقائي",
+              "bn": "ঠিক করুন: ভাঙা HTML ট্যাগগুলি সরান এবং স্বয়ংক্রিয় মোডে থাকাকালীন startValue ইনপুট লুকান৷",
+              "pt": "Correção: remova tags HTML quebradas e oculte a entrada startValue quando estiver no modo automático",
+              "ru": "Исправлено: удаление неработающих HTML-тегов и скрытие ввода startValue в автоматическом режиме.",
+              "ur": "درست کریں: آٹو موڈ میں ہونے پر ٹوٹے ہوئے HTML ٹیگز کو ہٹا دیں اور اسٹارٹ ویلیو ان پٹ چھپائیں"
+            }
           },
           {
             "sha": "896ff00",
             "message": "Fix: Update favicons and HTML meta tags for Google Search",
             "author": "Manus AI",
-            "url": "https://github.com/lucdai/AAV/commit/896ff0001a9c346eeac62b14a5faf869e2dc4597"
+            "url": "https://github.com/lucdai/AAV/commit/896ff0001a9c346eeac62b14a5faf869e2dc4597",
+            "translations": {
+              "en": "Fix: Update favicons and HTML meta tags for Google Search",
+              "zh": "修复：更新 Google 搜索的网站图标和 HTML 元标记",
+              "hi": "समाधान: Google खोज के लिए फ़ेविकॉन और HTML मेटा टैग अपडेट करें",
+              "es": "Solución: actualice los favicons y las metaetiquetas HTML para la Búsqueda de Google",
+              "fr": "Correctif : mettre à jour les favicons et les balises méta HTML pour la recherche Google",
+              "ar": "إصلاح: تحديث الرموز المفضلة وعلامات HTML الوصفية لبحث Google",
+              "bn": "ঠিক করুন: Google অনুসন্ধানের জন্য ফেভিকন এবং HTML মেটা ট্যাগ আপডেট করুন",
+              "pt": "Correção: atualize favicons e metatags HTML para a Pesquisa Google",
+              "ru": "Исправлено: обновление значков и метатегов HTML для поиска Google.",
+              "ur": "درست کریں: گوگل سرچ کے لئے فیویکنز اور ایچ ٹی ایم ایل میٹا ٹیگز کو اپ ڈیٹ کریں"
+            }
           }
         ],
         "Other": [
@@ -446,31 +1082,91 @@
             "sha": "85bdaac",
             "message": "Fix i18n issues and remove redundant text",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/85bdaac3e62259b9215fadc79d6fad10f4a89789"
+            "url": "https://github.com/lucdai/AAV/commit/85bdaac3e62259b9215fadc79d6fad10f4a89789",
+            "translations": {
+              "en": "Fix i18n issues and remove redundant text",
+              "zh": "修复 i18n 问题并删除多余文本",
+              "hi": "i18n समस्याओं को ठीक करें और अनावश्यक पाठ हटा दें",
+              "es": "Solucione problemas de i18n y elimine texto redundante",
+              "fr": "Résolvez les problèmes i18n et supprimez le texte redondant",
+              "ar": "إصلاح مشكلات i18n وإزالة النص الزائد",
+              "bn": "i18n সমস্যা সমাধান করুন এবং অপ্রয়োজনীয় পাঠ্য সরান",
+              "pt": "Corrija problemas do i18n e remova texto redundante",
+              "ru": "Исправьте проблемы i18n и удалите лишний текст.",
+              "ur": "I18N کے مسائل کو ٹھیک کریں اور بے کار متن کو ہٹا دیں"
+            }
           },
           {
             "sha": "607bf66",
             "message": "UI: Simplify frequency table header to just 'Tần Số'",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/607bf669a006d68033cefcad35461fc1523d664c"
+            "url": "https://github.com/lucdai/AAV/commit/607bf669a006d68033cefcad35461fc1523d664c",
+            "translations": {
+              "en": "UI: Simplify frequency table header to just 'Tần Số'",
+              "zh": "UI：将频率表标题简化为“Tần Số”",
+              "hi": "यूआई: फ़्रीक्वेंसी टेबल हेडर को केवल 'Tần Số' तक सरल बनाएं",
+              "es": "Interfaz de usuario: simplifique el encabezado de la tabla de frecuencias a solo 'Tần Số'",
+              "fr": "Interface utilisateur : Simplifiez l'en-tête du tableau de fréquences en \"Tần Số\"",
+              "ar": "واجهة المستخدم: تبسيط رأس الجدول التكراري إلى \"Tần Số\" فقط",
+              "bn": "UI: শুধুমাত্র 'Tần Số'-এ ফ্রিকোয়েন্সি টেবিল হেডারকে সরল করুন",
+              "pt": "UI: Simplifique o cabeçalho da tabela de frequência para apenas 'Tần Số'",
+              "ru": "Пользовательский интерфейс: упростить заголовок таблицы частот до «Tần Số».",
+              "ur": "UI: تعدد ٹیبل ہیڈر کو صرف 'tần số' میں آسان بنائیں"
+            }
           },
           {
             "sha": "1beda9c",
             "message": "UI: Make 'Nhóm' column header editable in frequency table",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/1beda9cbc658abd74ecd36e3c29d5d6457e33453"
+            "url": "https://github.com/lucdai/AAV/commit/1beda9cbc658abd74ecd36e3c29d5d6457e33453",
+            "translations": {
+              "en": "UI: Make 'Nhóm' column header editable in frequency table",
+              "zh": "UI：使频率表中的“Nhóm”列标题可编辑",
+              "hi": "यूआई: फ़्रीक्वेंसी तालिका में 'नोम' कॉलम हेडर को संपादन योग्य बनाएं",
+              "es": "Interfaz de usuario: hacer que el encabezado de la columna 'Nhóm' sea editable en la tabla de frecuencia",
+              "fr": "Interface utilisateur : rendre l'en-tête de la colonne « Nhóm » modifiable dans le tableau des fréquences",
+              "ar": "واجهة المستخدم: جعل رأس العمود \"Nhóm\" قابلاً للتحرير في الجدول التكراري",
+              "bn": "UI: ফ্রিকোয়েন্সি টেবিলে 'Nhóm' কলাম হেডার সম্পাদনাযোগ্য করুন",
+              "pt": "UI: Tornar o cabeçalho da coluna 'Nhóm' editável na tabela de frequência",
+              "ru": "Пользовательский интерфейс: сделайте заголовок столбца «Nhóm» редактируемым в таблице частот.",
+              "ur": "UI: فریکوینسی ٹیبل میں 'NHóm' کالم ہیڈر کو قابل تدوین بنائیں"
+            }
           },
           {
             "sha": "9a6cdde",
             "message": "UI: Change 'f (...)' to 'Tần Số (...)' in frequency table",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/9a6cddea637fc9785e8cf15f8abe9662e9216244"
+            "url": "https://github.com/lucdai/AAV/commit/9a6cddea637fc9785e8cf15f8abe9662e9216244",
+            "translations": {
+              "en": "UI: Change 'f (...)' to 'Tần Số (...)' in frequency table",
+              "zh": "UI：将频率表中的“f (...)”更改为“Tần Số (...)”",
+              "hi": "यूआई: आवृत्ति तालिका में 'f (...)' को 'Tần Số (...)' में बदलें",
+              "es": "UI: Cambie 'f (...)' a 'Tần Số (...)' en la tabla de frecuencia",
+              "fr": "Interface utilisateur : remplacez « f (...) » par « Tần Số (...) » dans le tableau des fréquences",
+              "ar": "واجهة المستخدم: قم بتغيير \"f (...)\" إلى \"Tần Số (...)\" في الجدول التكراري",
+              "bn": "UI: ফ্রিকোয়েন্সি টেবিলে 'f (...)'কে 'Tần Số (...)' এ পরিবর্তন করুন",
+              "pt": "UI: Altere 'f (...)' para 'Tần Số (...)' na tabela de frequência",
+              "ru": "Пользовательский интерфейс: замените «f (...)» на «Tần Số (...)» в таблице частот.",
+              "ur": "UI: تعدد ٹیبل میں 'tần số (...)' میں 'f (...)' کو تبدیل کریں"
+            }
           },
           {
             "sha": "6ff0310",
             "message": "UI: Change 'c_i' to 'Giá Trị Đại Diện' in frequency table",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/6ff03106262d6974d380d65a077994e299d9037e"
+            "url": "https://github.com/lucdai/AAV/commit/6ff03106262d6974d380d65a077994e299d9037e",
+            "translations": {
+              "en": "UI: Change 'c_i' to 'Representative Value' in frequency table",
+              "zh": "UI：将频率表中的“c_i”更改为“代表值”",
+              "hi": "यूआई: आवृत्ति तालिका में 'c_i' को 'प्रतिनिधि मान' में बदलें",
+              "es": "UI: Cambie 'c_i' a 'Valor representativo' en la tabla de frecuencia",
+              "fr": "Interface utilisateur : remplacez « c_i » par « Valeur représentative » dans le tableau des fréquences",
+              "ar": "واجهة المستخدم: قم بتغيير \"c_i\" إلى \"القيمة التمثيلية\" في الجدول التكراري",
+              "bn": "UI: ফ্রিকোয়েন্সি টেবিলে 'c_i' কে 'প্রতিনিধি মান'-এ পরিবর্তন করুন",
+              "pt": "UI: Altere 'c_i' para 'Valor Representativo' na tabela de frequência",
+              "ru": "Пользовательский интерфейс: измените «c_i» на «Репрезентативное значение» в таблице частот.",
+              "ur": "UI: تعدد ٹیبل میں 'C_I' کو 'نمائندہ قدر' میں تبدیل کریں"
+            }
           }
         ]
       }
@@ -484,19 +1180,55 @@
             "sha": "42a87fc",
             "message": "feat: Add auto-backup feature with localStorage",
             "author": "Manus Bot",
-            "url": "https://github.com/lucdai/AAV/commit/42a87fc3c49e783c6eda495fadb58ac938518131"
+            "url": "https://github.com/lucdai/AAV/commit/42a87fc3c49e783c6eda495fadb58ac938518131",
+            "translations": {
+              "en": "feat: Add auto-backup feature with localStorage",
+              "zh": "壮举：使用 localStorage 添加自动备份功能",
+              "hi": "उपलब्धि: लोकलस्टोरेज के साथ ऑटो-बैकअप सुविधा जोड़ें",
+              "es": "hazaña: Agregar función de copia de seguridad automática con localStorage",
+              "fr": "exploit : ajouter une fonctionnalité de sauvegarde automatique avec localStorage",
+              "ar": "الفذ: إضافة ميزة النسخ الاحتياطي التلقائي مع localStorage",
+              "bn": "বৈশিষ্ট্য: লোকাল স্টোরেজের সাথে স্বয়ংক্রিয়-ব্যাকআপ বৈশিষ্ট্য যুক্ত করুন",
+              "pt": "façanha: Adicionar recurso de backup automático com localStorage",
+              "ru": "подвиг: Добавить функцию автоматического резервного копирования с помощью localStorage.",
+              "ur": "کارنامہ: لوکل اسٹورج کے ساتھ آٹو بیک اپ کی خصوصیت شامل کریں"
+            }
           },
           {
             "sha": "8b8a439",
             "message": "Fix: Add missing downloadTableImage function to enable JPEG/PNG downloads for tables",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/8b8a4396757d86a433a4b839f30fc005c01a56fb"
+            "url": "https://github.com/lucdai/AAV/commit/8b8a4396757d86a433a4b839f30fc005c01a56fb",
+            "translations": {
+              "en": "Fix: Add missing downloadTableImage function to enable JPEG/PNG downloads for tables",
+              "zh": "修复：添加缺少的 downloadTableImage 函数以启用表格的 JPEG/PNG 下载",
+              "hi": "ठीक करें: तालिकाओं के लिए JPEG/PNG डाउनलोड सक्षम करने के लिए अनुपलब्ध डाउनलोडटेबलइमेज फ़ंक्शन जोड़ें",
+              "es": "Solución: agregue la función downloadTableImage que falta para habilitar las descargas JPEG/PNG para tablas",
+              "fr": "Correctif : ajout de la fonction downloadTableImage manquante pour activer les téléchargements JPEG/PNG pour les tableaux",
+              "ar": "الإصلاح: إضافة وظيفة downloadTableImage المفقودة لتمكين تنزيلات JPEG/PNG للجداول",
+              "bn": "ঠিক করুন: টেবিলের জন্য JPEG/PNG ডাউনলোড সক্ষম করতে অনুপস্থিত downloadTableImage ফাংশন যোগ করুন",
+              "pt": "Correção: adição da função downloadTableImage ausente para permitir downloads de JPEG/PNG para tabelas",
+              "ru": "Исправлено: добавлена ​​отсутствующая функция downloadTableImage, чтобы включить загрузку таблиц в формате JPEG/PNG.",
+              "ur": "درست کریں: ٹیبلز کے لئے جے پی ای جی/پی این جی ڈاؤن لوڈ کو فعال کرنے کے لئے لاپتہ ڈاؤن لوڈ ٹیبل امیج فنکشن شامل کریں"
+            }
           },
           {
             "sha": "afa0132",
             "message": "Apply new formula format only for Median, Q1, Q3; keep old format for others",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/afa013201cf231c84893dc3b52c27c8316866ab7"
+            "url": "https://github.com/lucdai/AAV/commit/afa013201cf231c84893dc3b52c27c8316866ab7",
+            "translations": {
+              "en": "Apply new formula format only for Median, Q1, Q3; keep old format for others",
+              "zh": "仅对中位数、Q1、Q3 应用新的公式格式；为其他人保留旧格式",
+              "hi": "केवल माध्यिका, Q1, Q3 के लिए नया सूत्र प्रारूप लागू करें; दूसरों के लिए पुराना प्रारूप रखें",
+              "es": "Aplicar nuevo formato de fórmula solo para Mediana, Q1, Q3; mantener el formato antiguo para otros",
+              "fr": "Appliquez le nouveau format de formule uniquement pour la médiane, Q1, Q3 ; conserver l'ancien format pour les autres",
+              "ar": "تطبيق تنسيق الصيغة الجديد فقط على الوسيط، Q1، Q3؛ الاحتفاظ بالشكل القديم للآخرين",
+              "bn": "শুধুমাত্র মিডিয়ান, Q1, Q3 এর জন্য নতুন সূত্র বিন্যাস প্রয়োগ করুন; অন্যদের জন্য পুরানো বিন্যাস রাখুন",
+              "pt": "Aplicar novo formato de fórmula apenas para Mediana, Q1, Q3; manter o formato antigo para outros",
+              "ru": "Применить новый формат формулы только для медианы, Q1, Q3; сохранить старый формат для других",
+              "ur": "صرف میڈین ، Q1 ، Q3 کے لئے نیا فارمولا فارمیٹ لگائیں۔ دوسروں کے لئے پرانا فارمیٹ رکھیں"
+            }
           }
         ],
         "Bug Fixes": [
@@ -504,19 +1236,55 @@
             "sha": "956d95d",
             "message": "Fix: eliminate global state dependency for calculation details",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/956d95d1ede8a6521f7d20b9035d2a7919ba9cfe"
+            "url": "https://github.com/lucdai/AAV/commit/956d95d1ede8a6521f7d20b9035d2a7919ba9cfe",
+            "translations": {
+              "en": "Fix: eliminate global state dependency for calculation details",
+              "zh": "修复：消除计算细节的全局状态依赖",
+              "hi": "समाधान: गणना विवरण के लिए वैश्विक राज्य निर्भरता को समाप्त करें",
+              "es": "Solución: eliminar la dependencia del estado global para los detalles de cálculo",
+              "fr": "Correctif : éliminez la dépendance à l'état global pour les détails du calcul",
+              "ar": "الإصلاح: التخلص من تبعية الحالة العالمية للحصول على تفاصيل الحساب",
+              "bn": "ঠিক করুন: গণনার বিবরণের জন্য বিশ্বব্যাপী রাষ্ট্র নির্ভরতা দূর করুন",
+              "pt": "Correção: elimine a dependência de estado global para detalhes de cálculo",
+              "ru": "Исправлено: устранена глобальная зависимость от состояния для деталей расчета.",
+              "ur": "درست کریں: حساب کتاب کی تفصیلات کے لئے عالمی سطح پر انحصار کو ختم کریں"
+            }
           },
           {
             "sha": "da1a7ab",
             "message": "Fix: robust group indexing for quartile calculations",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/da1a7ab9d25bcc48aafb22c39d364beca7ccefaa"
+            "url": "https://github.com/lucdai/AAV/commit/da1a7ab9d25bcc48aafb22c39d364beca7ccefaa",
+            "translations": {
+              "en": "Fix: robust group indexing for quartile calculations",
+              "zh": "修复：四分位数计算的稳健组索引",
+              "hi": "समाधान: चतुर्थक गणना के लिए मजबूत समूह अनुक्रमण",
+              "es": "Solución: indexación de grupos sólida para cálculos de cuartiles",
+              "fr": "Correctif : indexation de groupe robuste pour les calculs de quartile",
+              "ar": "الإصلاح: فهرسة المجموعة القوية للحسابات الربعية",
+              "bn": "ঠিক করুন: কোয়ার্টাইল গণনার জন্য শক্তিশালী গ্রুপ ইন্ডেক্সিং",
+              "pt": "Correção: indexação robusta de grupo para cálculos de quartil",
+              "ru": "Исправлено: надежная групповая индексация для расчетов квартилей.",
+              "ur": "درست کریں: کوارٹائل حساب کے لئے مضبوط گروپ انڈیکسنگ"
+            }
           },
           {
             "sha": "3eb764a",
             "message": "Fix: calculation details group search logic and dataset index",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/3eb764a4b6d807b85dae2844bf88d02ce4361e26"
+            "url": "https://github.com/lucdai/AAV/commit/3eb764a4b6d807b85dae2844bf88d02ce4361e26",
+            "translations": {
+              "en": "Fix: calculation details group search logic and dataset index",
+              "zh": "修复：计算详细信息组搜索逻辑和数据集索引",
+              "hi": "ठीक करें: गणना विवरण समूह खोज तर्क और डेटासेट सूचकांक",
+              "es": "Solución: detalles de cálculo, lógica de búsqueda de grupo e índice de conjunto de datos",
+              "fr": "Correctif : logique de recherche de groupe de détails de calcul et index de l'ensemble de données",
+              "ar": "إصلاح: تفاصيل الحساب ومنطق البحث الجماعي وفهرس مجموعة البيانات",
+              "bn": "ঠিক করুন: গণনার বিবরণ গ্রুপ অনুসন্ধান যুক্তি এবং ডেটাসেট সূচক",
+              "pt": "Correção: lógica de pesquisa de grupo de detalhes de cálculo e índice de conjunto de dados",
+              "ru": "Исправлено: логика поиска группы деталей расчета и индекс набора данных.",
+              "ur": "درست کریں: حساب کتاب کی تفصیلات گروپ سرچ منطق اور ڈیٹاسیٹ انڈیکس"
+            }
           }
         ],
         "Other": [
@@ -524,25 +1292,73 @@
             "sha": "b44c5d0",
             "message": "Update Variance and SD formula display to not use Sigma symbol",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/b44c5d03506cfbb574d64714008d8e8eb379d959"
+            "url": "https://github.com/lucdai/AAV/commit/b44c5d03506cfbb574d64714008d8e8eb379d959",
+            "translations": {
+              "en": "Update Variance and SD formula display to not use Sigma symbol",
+              "zh": "更新方差和 SD 公式显示以不使用 Sigma 符号",
+              "hi": "सिग्मा प्रतीक का उपयोग न करने के लिए वेरिएंस और एसडी फॉर्मूला डिस्प्ले को अपडेट करें",
+              "es": "Actualice la visualización de la fórmula de varianza y SD para no usar el símbolo Sigma",
+              "fr": "Mettre à jour l'affichage de la variance et de la formule SD pour ne pas utiliser le symbole Sigma",
+              "ar": "قم بتحديث عرض التباين وصيغة SD لعدم استخدام رمز Sigma",
+              "bn": "সিগমা চিহ্ন ব্যবহার না করতে ভেরিয়েন্স এবং SD সূত্র প্রদর্শন আপডেট করুন",
+              "pt": "Atualize a exibição da variação e da fórmula SD para não usar o símbolo Sigma",
+              "ru": "Обновите отображение формулы отклонения и стандартного отклонения, чтобы не использовать символ сигмы.",
+              "ur": "سگما علامت کو استعمال نہ کرنے کے لئے تغیر اور ایس ڈی فارمولا ڈسپلے کو اپ ڈیٹ کریں"
+            }
           },
           {
             "sha": "82fb77b",
             "message": "Restore old formula display format for Mean, Mode, Variance, SD, Range, IQR, CV",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/82fb77bd4ccb5471bfc10256d7051f249c92d056"
+            "url": "https://github.com/lucdai/AAV/commit/82fb77bd4ccb5471bfc10256d7051f249c92d056",
+            "translations": {
+              "en": "Restore old formula display format for Mean, Mode, Variance, SD, Range, IQR, CV",
+              "zh": "恢复平均值、众数、方差、SD、范围、IQR、CV 的旧公式显示格式",
+              "hi": "मीन, मोड, वेरिएंस, एसडी, रेंज, आईक्यूआर, सीवी के लिए पुराने फॉर्मूला डिस्प्ले फॉर्मेट को पुनर्स्थापित करें",
+              "es": "Restaurar el formato de visualización de fórmulas antiguas para media, moda, varianza, SD, rango, IQR, CV",
+              "fr": "Restaurer l'ancien format d'affichage de la formule pour la moyenne, le mode, la variance, l'écart-type, la plage, l'IQR, le CV",
+              "ar": "استعادة تنسيق عرض الصيغة القديم للمتوسط، والوضع، والتباين، وSD، والمدى، وIQR، والسيرة الذاتية",
+              "bn": "গড়, মোড, ভ্যারিয়েন্স, SD, রেঞ্জ, IQR, CV-এর জন্য পুরানো সূত্র প্রদর্শন বিন্যাস পুনরুদ্ধার করুন",
+              "pt": "Restaure o antigo formato de exibição de fórmula para Média, Modo, Variância, SD, Faixa, IQR, CV",
+              "ru": "Восстановить старый формат отображения формул для среднего, режима, отклонения, SD, диапазона, IQR, CV.",
+              "ur": "مطلب ، موڈ ، تغیر ، ایس ڈی ، رینج ، آئی کیو آر ، سی وی کے لئے پرانے فارمولا ڈسپلے فارمیٹ کو بحال کریں"
+            }
           },
           {
             "sha": "e093c29",
             "message": "Update Median, Q1, Q3 calculation and fix 'group not found' error",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/e093c29557cf5784627ea93895a9bec6bb63e78d"
+            "url": "https://github.com/lucdai/AAV/commit/e093c29557cf5784627ea93895a9bec6bb63e78d",
+            "translations": {
+              "en": "Update Median, Q1, Q3 calculation and fix 'group not found' error",
+              "zh": "更新中位数、Q1、Q3 计算并修复“未找到组”错误",
+              "hi": "माध्यिका, Q1, Q3 गणना को अद्यतन करें और 'समूह नहीं मिला' त्रुटि को ठीक करें",
+              "es": "Actualice el cálculo de la mediana, el primer trimestre y el tercer trimestre y solucione el error \"grupo no encontrado\"",
+              "fr": "Mettre à jour le calcul de la médiane, du premier et du troisième trimestre et corriger l'erreur « groupe introuvable »",
+              "ar": "قم بتحديث حساب الوسيط وQ1 وQ3 وإصلاح الخطأ \"لم يتم العثور على المجموعة\".",
+              "bn": "মিডিয়ান, Q1, Q3 গণনা আপডেট করুন এবং 'গ্রুপ পাওয়া যায়নি' ত্রুটি ঠিক করুন",
+              "pt": "Atualize o cálculo da mediana, Q1, Q3 e corrija o erro 'grupo não encontrado'",
+              "ru": "Обновите расчет медианы, Q1, Q3 и исправьте ошибку «группа не найдена».",
+              "ur": "میڈین ، Q1 ، Q3 کا حساب کتاب اور 'گروپ نہیں ملا' غلطی کو اپ ڈیٹ کریں"
+            }
           },
           {
             "sha": "915261e",
             "message": "Update calculation details UI for Median, Q1, Q3 and update icons",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/915261eecac636bfa0d9458300a26ea8dbfb2cb9"
+            "url": "https://github.com/lucdai/AAV/commit/915261eecac636bfa0d9458300a26ea8dbfb2cb9",
+            "translations": {
+              "en": "Update calculation details UI for Median, Q1, Q3 and update icons",
+              "zh": "更新中位数、Q1、Q3 的计算详细信息 UI 并更新图标",
+              "hi": "मेडियन, Q1, Q3 और अपडेट आइकन के लिए गणना विवरण यूआई अपडेट करें",
+              "es": "Actualizar la interfaz de usuario de los detalles del cálculo para la mediana, el primer trimestre, el tercer trimestre y los íconos de actualización",
+              "fr": "Mettre à jour l'interface utilisateur des détails de calcul pour la médiane, le premier trimestre, le troisième trimestre et mettre à jour les icônes",
+              "ar": "تحديث واجهة المستخدم الخاصة بتفاصيل الحساب للمتوسط ​​وQ1 وQ3 وأيقونات التحديث",
+              "bn": "মিডিয়ান, Q1, Q3 এবং আপডেট আইকনগুলির জন্য গণনার বিবরণ UI আপডেট করুন",
+              "pt": "Atualizar interface de usuário de detalhes de cálculo para mediana, 1º, 3º trimestre e ícones de atualização",
+              "ru": "Обновить пользовательский интерфейс сведений о расчете для медианы, Q1, Q3 и значков обновления.",
+              "ur": "میڈین ، Q1 ، Q3 کے لئے حساب کتاب کی تفصیلات UI کو اپ ڈیٹ کریں اور شبیہیں کو اپ ڈیٹ کریں"
+            }
           }
         ]
       }
@@ -556,25 +1372,73 @@
             "sha": "6a23296",
             "message": "Fix and add debug logs for calculation details",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/6a232967e95c31f8f7039eeb34b94ca1eb27dcc8"
+            "url": "https://github.com/lucdai/AAV/commit/6a232967e95c31f8f7039eeb34b94ca1eb27dcc8",
+            "translations": {
+              "en": "Fix and add debug logs for calculation details",
+              "zh": "修复并添加计算详细信息的调试日志",
+              "hi": "गणना विवरण के लिए डिबग लॉग को ठीक करें और जोड़ें",
+              "es": "Corregir y agregar registros de depuración para obtener detalles de cálculo",
+              "fr": "Corrigez et ajoutez des journaux de débogage pour les détails du calcul",
+              "ar": "إصلاح وإضافة سجلات التصحيح للحصول على تفاصيل الحساب",
+              "bn": "গণনার বিবরণের জন্য ডিবাগ লগগুলি ঠিক করুন এবং যোগ করুন",
+              "pt": "Corrija e adicione logs de depuração para detalhes de cálculo",
+              "ru": "Исправьте и добавьте журналы отладки для получения подробной информации о расчетах.",
+              "ur": "حساب کتاب کی تفصیلات کے لئے ڈیبگ لاگز کو ٹھیک کریں اور شامل کریں"
+            }
           },
           {
             "sha": "40e26bf",
             "message": "Fix calculation details for Q1, Q2, Q3 and add internal fmt function",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/40e26bfa65d246c2891c202ff224d90ff71de02f"
+            "url": "https://github.com/lucdai/AAV/commit/40e26bfa65d246c2891c202ff224d90ff71de02f",
+            "translations": {
+              "en": "Fix calculation details for Q1, Q2, Q3 and add internal fmt function",
+              "zh": "修复 Q1、Q2、Q3 的计算细节并添加内部 fmt 函数",
+              "hi": "Q1, Q2, Q3 के लिए गणना विवरण ठीक करें और आंतरिक fmt फ़ंक्शन जोड़ें",
+              "es": "Corrija los detalles de cálculo para Q1, Q2, Q3 y agregue la función fmt interna",
+              "fr": "Correction des détails de calcul pour Q1, Q2, Q3 et ajout de la fonction fmt interne",
+              "ar": "إصلاح تفاصيل الحساب لQ1، Q2، Q3 وإضافة وظيفة FMT الداخلية",
+              "bn": "Q1, Q2, Q3 এর জন্য গণনার বিবরণ ঠিক করুন এবং অভ্যন্তরীণ fmt ফাংশন যোগ করুন",
+              "pt": "Corrigir detalhes de cálculo para Q1, Q2, Q3 e adicionar função fmt interna",
+              "ru": "Исправьте детали расчета для Q1, Q2, Q3 и добавьте внутреннюю функцию fmt.",
+              "ur": "Q1 ، Q2 ، Q3 کے لئے حساب کتاب کی تفصیلات درست کریں اور داخلی FMT فنکشن شامل کریں"
+            }
           },
           {
             "sha": "9ec84e6",
             "message": "Add calculation details for Range, IQR, and CV",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/9ec84e6a11db4ca70824a992642b68ad9197fcee"
+            "url": "https://github.com/lucdai/AAV/commit/9ec84e6a11db4ca70824a992642b68ad9197fcee",
+            "translations": {
+              "en": "Add calculation details for Range, IQR, and CV",
+              "zh": "添加范围、IQR 和 CV 的计算详细信息",
+              "hi": "रेंज, आईक्यूआर और सीवी के लिए गणना विवरण जोड़ें",
+              "es": "Agregue detalles de cálculo para rango, IQR y CV",
+              "fr": "Ajouter des détails de calcul pour Range, IQR et CV",
+              "ar": "أضف تفاصيل الحساب للنطاق وIQR والسيرة الذاتية",
+              "bn": "রেঞ্জ, আইকিউআর এবং সিভির জন্য গণনার বিবরণ যোগ করুন",
+              "pt": "Adicione detalhes de cálculo para Faixa, IQR e CV",
+              "ru": "Добавьте детали расчета для диапазона, IQR и CV.",
+              "ur": "رینج ، IQR ، اور CV کے لئے حساب کتاب کی تفصیلات شامل کریں"
+            }
           },
           {
             "sha": "9822c8c",
             "message": "Add files via upload",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/9822c8c63a146c9d22ea23365b39da5995d2b6ea"
+            "url": "https://github.com/lucdai/AAV/commit/9822c8c63a146c9d22ea23365b39da5995d2b6ea",
+            "translations": {
+              "en": "Add files via upload",
+              "zh": "通过上传添加文件",
+              "hi": "अपलोड के माध्यम से फ़ाइलें जोड़ें",
+              "es": "Agregar archivos mediante carga",
+              "fr": "Ajouter des fichiers via le téléchargement",
+              "ar": "إضافة الملفات عن طريق التحميل",
+              "bn": "আপলোড মাধ্যমে ফাইল যোগ করুন",
+              "pt": "Adicionar arquivos via upload",
+              "ru": "Добавить файлы через загрузку",
+              "ur": "اپ لوڈ کے ذریعے فائلیں شامل کریں"
+            }
           }
         ],
         "Other": [
@@ -582,19 +1446,55 @@
             "sha": "c8c2453",
             "message": "Update website footer and calculation details with latest timestamp",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/c8c245347f41360a1b2b723f5e79b3ae72f0ef05"
+            "url": "https://github.com/lucdai/AAV/commit/c8c245347f41360a1b2b723f5e79b3ae72f0ef05",
+            "translations": {
+              "en": "Update website footer and calculation details with latest timestamp",
+              "zh": "使用最新时间戳更新网站页脚和计算详细信息",
+              "hi": "नवीनतम टाइमस्टैम्प के साथ वेबसाइट पाद लेख और गणना विवरण अपडेट करें",
+              "es": "Actualice el pie de página del sitio web y los detalles de cálculo con la última marca de tiempo",
+              "fr": "Mettre à jour le pied de page du site Web et les détails de calcul avec le dernier horodatage",
+              "ar": "قم بتحديث تذييل موقع الويب وتفاصيل الحساب بأحدث طابع زمني",
+              "bn": "সাম্প্রতিক টাইমস্ট্যাম্প সহ ওয়েবসাইটের ফুটার এবং গণনার বিবরণ আপডেট করুন",
+              "pt": "Atualize o rodapé do site e os detalhes de cálculo com o carimbo de data/hora mais recente",
+              "ru": "Обновить нижний колонтитул веб-сайта и сведения о расчетах с учетом последней отметки времени.",
+              "ur": "تازہ ترین ٹائم اسٹیمپ کے ساتھ ویب سائٹ فوٹر اور حساب کتاب کی تفصیلات کو اپ ڈیٹ کریں"
+            }
           },
           {
             "sha": "0c8fb3e",
             "message": "Update website files and remove temporary rebuild file",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/0c8fb3e7ffa378fefaf412b4d827e361661a9adb"
+            "url": "https://github.com/lucdai/AAV/commit/0c8fb3e7ffa378fefaf412b4d827e361661a9adb",
+            "translations": {
+              "en": "Update website files and remove temporary rebuild file",
+              "zh": "更新网站文件并删除临时重建文件",
+              "hi": "वेबसाइट फ़ाइलें अद्यतन करें और अस्थायी पुनर्निर्माण फ़ाइल हटाएँ",
+              "es": "Actualice los archivos del sitio web y elimine el archivo de reconstrucción temporal",
+              "fr": "Mettre à jour les fichiers du site Web et supprimer le fichier de reconstruction temporaire",
+              "ar": "تحديث ملفات موقع الويب وإزالة ملف إعادة البناء المؤقت",
+              "bn": "ওয়েবসাইট ফাইল আপডেট করুন এবং অস্থায়ী পুনর্নির্মাণ ফাইল সরান",
+              "pt": "Atualize os arquivos do site e remova o arquivo de reconstrução temporário",
+              "ru": "Обновите файлы веб-сайта и удалите временный файл восстановления.",
+              "ur": "ویب سائٹ فائلوں کو اپ ڈیٹ کریں اور عارضی تعمیر نو فائل کو ہٹا دیں"
+            }
           },
           {
             "sha": "d8cea90",
             "message": "Trigger rebuild",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/d8cea900a32558c762af6b07847b0e5d97037470"
+            "url": "https://github.com/lucdai/AAV/commit/d8cea900a32558c762af6b07847b0e5d97037470",
+            "translations": {
+              "en": "Trigger rebuild",
+              "zh": "触发重建",
+              "hi": "ट्रिगर पुनर्निर्माण",
+              "es": "Reconstrucción del disparador",
+              "fr": "Reconstruction du déclencheur",
+              "ar": "إعادة بناء الزناد",
+              "bn": "ট্রিগার পুনর্নির্মাণ",
+              "pt": "Acionar reconstrução",
+              "ru": "Перестроить триггер",
+              "ur": "ٹرگر دوبارہ تعمیر"
+            }
           }
         ]
       }
@@ -608,7 +1508,19 @@
             "sha": "d508d9b",
             "message": "Add Cloudflare Pages headers for security and caching",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/d508d9b9ea47fbc64a36bcfdf3e4f90ceed9725b"
+            "url": "https://github.com/lucdai/AAV/commit/d508d9b9ea47fbc64a36bcfdf3e4f90ceed9725b",
+            "translations": {
+              "en": "Add Cloudflare Pages headers for security and caching",
+              "zh": "添加 Cloudflare Pages 标头以实现安全性和缓存",
+              "hi": "सुरक्षा और कैशिंग के लिए क्लाउडफ़ेयर पेज हेडर जोड़ें",
+              "es": "Agregue encabezados de páginas de Cloudflare para seguridad y almacenamiento en caché",
+              "fr": "Ajoutez des en-têtes Cloudflare Pages pour la sécurité et la mise en cache",
+              "ar": "أضف رؤوس صفحات Cloudflare للأمان والتخزين المؤقت",
+              "bn": "নিরাপত্তা এবং ক্যাশিংয়ের জন্য ক্লাউডফ্লেয়ার পেজ হেডার যোগ করুন",
+              "pt": "Adicione cabeçalhos de páginas da Cloudflare para segurança e armazenamento em cache",
+              "ru": "Добавьте заголовки страниц Cloudflare для обеспечения безопасности и кэширования.",
+              "ur": "سیکیورٹی اور کیچنگ کے لئے کلاؤڈ فلایر صفحات ہیڈر شامل کریں"
+            }
           }
         ],
         "Other": [
@@ -616,7 +1528,19 @@
             "sha": "0be25de",
             "message": "Advanced SEO optimization based on Google SEO Starter Guide",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/0be25def16ff3f9d2e39250353c80becea8efe1e"
+            "url": "https://github.com/lucdai/AAV/commit/0be25def16ff3f9d2e39250353c80becea8efe1e",
+            "translations": {
+              "en": "Advanced SEO optimization based on Google SEO Starter Guide",
+              "zh": "基于Google SEO入门指南的高级SEO优化",
+              "hi": "Google SEO स्टार्टर गाइड पर आधारित उन्नत SEO अनुकूलन",
+              "es": "Optimización SEO avanzada basada en la Guía de inicio de SEO de Google",
+              "fr": "Optimisation avancée du référencement basée sur le guide de démarrage Google SEO",
+              "ar": "تحسين SEO المتقدم بناءً على دليل Google SEO Starter",
+              "bn": "গুগল এসইও স্টার্টার গাইডের উপর ভিত্তি করে উন্নত এসইও অপ্টিমাইজেশান",
+              "pt": "Otimização avançada de SEO com base no Google SEO Starter Guide",
+              "ru": "Расширенная SEO-оптимизация на основе Google SEO Starter Guide.",
+              "ur": "گوگل SEO اسٹارٹر گائیڈ پر مبنی SEO کی اعلی درجے کی اصلاح"
+            }
           }
         ]
       }
@@ -630,13 +1554,37 @@
             "sha": "a761032",
             "message": "Optimize SEO: Add meta tags, JSON-LD, sitemap, and robots.txt",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/a761032c87c0ff094b0b936c4095983f43e842bd"
+            "url": "https://github.com/lucdai/AAV/commit/a761032c87c0ff094b0b936c4095983f43e842bd",
+            "translations": {
+              "en": "Optimize SEO: Add meta tags, JSON-LD, sitemap, and robots.txt",
+              "zh": "优化 SEO：添加元标记、JSON-LD、站点地图和 robots.txt",
+              "hi": "SEO अनुकूलित करें: मेटा टैग, JSON-LD, साइटमैप और robots.txt जोड़ें",
+              "es": "Optimice SEO: agregue metaetiquetas, JSON-LD, mapa del sitio y robots.txt",
+              "fr": "Optimiser le référencement : ajoutez des balises méta, JSON-LD, un plan du site et des robots.txt",
+              "ar": "تحسين محركات البحث: أضف العلامات الوصفية وJSON-LD وخريطة الموقع وملف robots.txt",
+              "bn": "SEO অপ্টিমাইজ করুন: মেটা ট্যাগ, JSON-LD, সাইটম্যাপ এবং robots.txt যোগ করুন",
+              "pt": "Otimize SEO: adicione meta tags, JSON-LD, mapa do site e robots.txt",
+              "ru": "Оптимизируйте SEO: добавьте метатеги, JSON-LD, карту сайта и robots.txt.",
+              "ur": "SEO کو بہتر بنائیں: میٹا ٹیگز ، JSON-LD ، سائٹ کا نقشہ ، اور روبوٹس ڈاٹ ٹی ایس ٹی شامل کریں"
+            }
           },
           {
             "sha": "b152b6e",
             "message": "Add Google Site Verification meta tag",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/b152b6e055aa66ce9f425bfebb57e477bb5e8994"
+            "url": "https://github.com/lucdai/AAV/commit/b152b6e055aa66ce9f425bfebb57e477bb5e8994",
+            "translations": {
+              "en": "Add Google Site Verification meta tag",
+              "zh": "添加 Google 网站验证元标记",
+              "hi": "Google साइट सत्यापन मेटा टैग जोड़ें",
+              "es": "Agregar metaetiqueta de verificación del sitio de Google",
+              "fr": "Ajouter la balise méta Google Site Verification",
+              "ar": "أضف علامة تعريف التحقق من موقع Google",
+              "bn": "Google সাইট যাচাইকরণ মেটা ট্যাগ যোগ করুন",
+              "pt": "Adicionar metatag de verificação de site do Google",
+              "ru": "Добавьте метатег проверки сайта Google",
+              "ur": "گوگل سائٹ کی توثیق میٹا ٹیگ شامل کریں"
+            }
           }
         ]
       }
@@ -650,7 +1598,19 @@
             "sha": "9463eb4",
             "message": "Add favicon and update index.html",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/9463eb48a48f079ff0a43edaacbc5df553469a01"
+            "url": "https://github.com/lucdai/AAV/commit/9463eb48a48f079ff0a43edaacbc5df553469a01",
+            "translations": {
+              "en": "Add favicon and update index.html",
+              "zh": "添加图标并更新index.html",
+              "hi": "फ़ेविकॉन जोड़ें और Index.html अपडेट करें",
+              "es": "Agregue favicon y actualice index.html",
+              "fr": "Ajoutez un favicon et mettez à jour index.html",
+              "ar": "قم بإضافة الأيقونة المفضلة وقم بتحديث ملف Index.html",
+              "bn": "ফেভিকন যোগ করুন এবং index.html আপডেট করুন",
+              "pt": "Adicione favicon e atualize index.html",
+              "ru": "Добавьте значок и обновите index.html.",
+              "ur": "فیوکون شامل کریں اور انڈیکس ایچ ٹی ایم ایل کو اپ ڈیٹ کریں"
+            }
           }
         ]
       }
@@ -664,55 +1624,163 @@
             "sha": "f99a367",
             "message": "Update logo with transparent background and add modern scale-up hover effect",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/f99a3672e451174080efd8e7f3a369b3f35afbb9"
+            "url": "https://github.com/lucdai/AAV/commit/f99a3672e451174080efd8e7f3a369b3f35afbb9",
+            "translations": {
+              "en": "Update logo with transparent background and add modern scale-up hover effect",
+              "zh": "更新徽标为透明背景并添加现代放大悬停效果",
+              "hi": "लोगो को पारदर्शी पृष्ठभूमि के साथ अपडेट करें और आधुनिक स्केल-अप होवर प्रभाव जोड़ें",
+              "es": "Actualice el logotipo con fondo transparente y agregue un moderno efecto de desplazamiento ampliado",
+              "fr": "Mettez à jour le logo avec un arrière-plan transparent et ajoutez un effet de survol moderne et à grande échelle.",
+              "ar": "قم بتحديث الشعار بخلفية شفافة وأضف تأثير التحويم الحديث الموسع",
+              "bn": "স্বচ্ছ ব্যাকগ্রাউন্ড সহ লোগো আপডেট করুন এবং আধুনিক স্কেল-আপ হোভার ইফেক্ট যোগ করুন",
+              "pt": "Atualize o logotipo com fundo transparente e adicione um efeito moderno de aumento de escala",
+              "ru": "Обновите логотип прозрачным фоном и добавьте современный эффект масштабирования при наведении",
+              "ur": "شفاف پس منظر کے ساتھ لوگو کو اپ ڈیٹ کریں اور جدید اسکیل اپ ہوور اثر شامل کریں"
+            }
           },
           {
             "sha": "66fb722",
             "message": "Add home navigation when clicking logo or title",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/66fb7223fcef5306fda69527e4960c7032c21685"
+            "url": "https://github.com/lucdai/AAV/commit/66fb7223fcef5306fda69527e4960c7032c21685",
+            "translations": {
+              "en": "Add home navigation when clicking logo or title",
+              "zh": "单击徽标或标题时添加主页导航",
+              "hi": "लोगो या शीर्षक पर क्लिक करते समय होम नेविगेशन जोड़ें",
+              "es": "Agregue navegación de inicio al hacer clic en el logotipo o título",
+              "fr": "Ajouter la navigation d'accueil en cliquant sur le logo ou le titre",
+              "ar": "أضف التنقل الرئيسي عند النقر على الشعار أو العنوان",
+              "bn": "লোগো বা শিরোনাম ক্লিক করার সময় হোম নেভিগেশন যোগ করুন",
+              "pt": "Adicione navegação inicial ao clicar no logotipo ou título",
+              "ru": "Добавьте навигацию по дому при нажатии на логотип или заголовок.",
+              "ur": "لوگو یا عنوان پر کلک کرتے وقت گھریلو نیویگیشن شامل کریں"
+            }
           },
           {
             "sha": "65d194c",
             "message": "Add multilingual random filename generation for image downloads (21 characters with Latin, Cyrillic, Devanagari, Roman, Greek, Hangul, Hanzi, Japanese, Vietnamese, and mathematical symbols)",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/65d194c04cb2c91105acacab8baa2db8b6c5f202"
+            "url": "https://github.com/lucdai/AAV/commit/65d194c04cb2c91105acacab8baa2db8b6c5f202",
+            "translations": {
+              "en": "Add multilingual random filename generation for image downloads (21 characters with Latin, Cyrillic, Devanagari, Roman, Greek, Hangul, Hanzi, Japanese, Vietnamese, and mathematical symbols)",
+              "zh": "添加用于图像下载的多语言随机文件名生成（包含拉丁文、西里尔文、梵文、罗马文、希腊文、韩文、汉字、日文、越南文和数学符号的 21 个字符）",
+              "hi": "छवि डाउनलोड के लिए बहुभाषी यादृच्छिक फ़ाइल नाम पीढ़ी जोड़ें (लैटिन, सिरिलिक, देवनागरी, रोमन, ग्रीक, हंगुल, हांजी, जापानी, वियतनामी और गणितीय प्रतीकों के साथ 21 अक्षर)",
+              "es": "Agregue generación de nombres de archivos aleatorios multilingües para descargas de imágenes (21 caracteres con símbolos latinos, cirílicos, devanagari, romanos, griegos, hangul, hanzi, japoneses, vietnamitas y matemáticos)",
+              "fr": "Ajoutez une génération de noms de fichiers aléatoires multilingues pour les téléchargements d'images (21 caractères avec des symboles latins, cyrilliques, devanagari, romains, grecs, hangul, hanzi, japonais, vietnamien et mathématiques)",
+              "ar": "إضافة إنشاء اسم ملف عشوائي متعدد اللغات لتنزيلات الصور (21 حرفًا بالرموز اللاتينية والسيريلية والديفاناغاري والرومانية واليونانية والهانغول والهانزي واليابانية والفيتنامية والرموز الرياضية)",
+              "bn": "ইমেজ ডাউনলোডের জন্য বহুভাষিক এলোমেলো ফাইলের নাম তৈরি করুন (ল্যাটিন, সিরিলিক, দেবনাগরী, রোমান, গ্রীক, হাঙ্গুল, হানজি, জাপানিজ, ভিয়েতনামী এবং গাণিতিক চিহ্ন সহ 21 অক্ষর)",
+              "pt": "Adicione geração de nome de arquivo aleatório multilíngue para downloads de imagens (21 caracteres com símbolos latinos, cirílicos, devanagari, romanos, gregos, hangul, hanzi, japoneses, vietnamitas e matemáticos)",
+              "ru": "Добавлена ​​генерация многоязычного случайного имени файла для загрузки изображений (21 символ латиницы, кириллицы, деванагари, римского, греческого, хангыля, ханзи, японского, вьетнамского и математических символов).",
+              "ur": "تصویری ڈاؤن لوڈ کے لئے کثیر لسانی بے ترتیب فائل کا نام جنریشن شامل کریں (لاطینی ، سیرلک ، دیواناگری ، رومن ، یونانی ، ہینگول ، ہنزی ، جاپانی ، ویتنامی ، اور ریاضی کی علامتوں کے ساتھ 21 حرف)"
+            }
           },
           {
             "sha": "f0b7f81",
             "message": "Add PNG/JPEG download feature for tables and charts",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/f0b7f812fee055b012e4ca3e56e9dd1126e2ae30"
+            "url": "https://github.com/lucdai/AAV/commit/f0b7f812fee055b012e4ca3e56e9dd1126e2ae30",
+            "translations": {
+              "en": "Add PNG/JPEG download feature for tables and charts",
+              "zh": "添加表格和图表的PNG/JPEG下载功能",
+              "hi": "तालिकाओं और चार्ट के लिए पीएनजी/जेपीईजी डाउनलोड सुविधा जोड़ें",
+              "es": "Agregue la función de descarga PNG/JPEG para tablas y gráficos",
+              "fr": "Ajouter une fonctionnalité de téléchargement PNG/JPEG pour les tableaux et les graphiques",
+              "ar": "إضافة ميزة تنزيل PNG/JPEG للجداول والرسوم البيانية",
+              "bn": "টেবিল এবং চার্টের জন্য PNG/JPEG ডাউনলোড বৈশিষ্ট্য যোগ করুন",
+              "pt": "Adicionar recurso de download PNG/JPEG para tabelas e gráficos",
+              "ru": "Добавлена ​​функция загрузки PNG/JPEG для таблиц и диаграмм.",
+              "ur": "ٹیبلز اور چارٹ کے لئے پی این جی/جے پی ای جی ڈاؤن لوڈ کی خصوصیت شامل کریں"
+            }
           },
           {
             "sha": "ea9ec13",
             "message": "Update index.html with new statistical analysis and visualization application",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/ea9ec13a7706749bcf8bcfd9991318c581cad737"
+            "url": "https://github.com/lucdai/AAV/commit/ea9ec13a7706749bcf8bcfd9991318c581cad737",
+            "translations": {
+              "en": "Update index.html with new statistical analysis and visualization application",
+              "zh": "使用新的统计分析和可视化应用程序更新index.html",
+              "hi": "नए सांख्यिकीय विश्लेषण और विज़ुअलाइज़ेशन एप्लिकेशन के साथ Index.html को अपडेट करें",
+              "es": "Actualización index.html con nueva aplicación de visualización y análisis estadístico",
+              "fr": "Mettre à jour index.html avec une nouvelle application d'analyse statistique et de visualisation",
+              "ar": "قم بتحديث ملف Index.html باستخدام تطبيق التحليل الإحصائي والتصور الجديد",
+              "bn": "নতুন পরিসংখ্যানগত বিশ্লেষণ এবং ভিজ্যুয়ালাইজেশন অ্যাপ্লিকেশন সহ index.html আপডেট করুন",
+              "pt": "Atualize index.html com novo aplicativo de análise estatística e visualização",
+              "ru": "Обновите index.html новым приложением статистического анализа и визуализации.",
+              "ur": "نئے شماریاتی تجزیہ اور تصو .ر کی درخواست کے ساتھ انڈیکس ایچ ٹی ایم ایل کو اپ ڈیٹ کریں"
+            }
           },
           {
             "sha": "3b32c03",
             "message": "Add image download features for tables and charts with batch ZIP export",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/3b32c035ea7249f5817ff8fe1dcd843900f7bf1c"
+            "url": "https://github.com/lucdai/AAV/commit/3b32c035ea7249f5817ff8fe1dcd843900f7bf1c",
+            "translations": {
+              "en": "Add image download features for tables and charts with batch ZIP export",
+              "zh": "通过批量 ZIP 导出为表格和图表添加图像下载功能",
+              "hi": "बैच ज़िप निर्यात के साथ तालिकाओं और चार्ट के लिए छवि डाउनलोड सुविधाएँ जोड़ें",
+              "es": "Agregue funciones de descarga de imágenes para tablas y gráficos con exportación ZIP por lotes",
+              "fr": "Ajoutez des fonctionnalités de téléchargement d'images pour les tableaux et les graphiques avec l'exportation ZIP par lots",
+              "ar": "أضف ميزات تنزيل الصور للجداول والرسوم البيانية من خلال تصدير دفعة ZIP",
+              "bn": "ব্যাচ জিপ এক্সপোর্ট সহ টেবিল এবং চার্টের জন্য ছবি ডাউনলোড বৈশিষ্ট্য যোগ করুন",
+              "pt": "Adicione recursos de download de imagens para tabelas e gráficos com exportação ZIP em lote",
+              "ru": "Добавьте функции загрузки изображений для таблиц и диаграмм с помощью пакетного экспорта ZIP.",
+              "ur": "بیچ زپ ایکسپورٹ کے ساتھ جدولوں اور چارٹ کے لئے تصویری ڈاؤن لوڈ کی خصوصیات شامل کریں"
+            }
           },
           {
             "sha": "2c6f4a1",
             "message": "Restore original code and add download image features with batch ZIP export using html2canvas and jszip",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/2c6f4a1473b3f49f1cb5776afcd44c9c8b005fe6"
+            "url": "https://github.com/lucdai/AAV/commit/2c6f4a1473b3f49f1cb5776afcd44c9c8b005fe6",
+            "translations": {
+              "en": "Restore original code and add download image features with batch ZIP export using html2canvas and jszip",
+              "zh": "恢复原始代码并添加使用 html2canvas 和 jszip 批量 ZIP 导出的下载图像功能",
+              "hi": "मूल कोड को पुनर्स्थापित करें और html2canvas और jszip का उपयोग करके बैच ज़िप निर्यात के साथ डाउनलोड छवि सुविधाएँ जोड़ें",
+              "es": "Restaure el código original y agregue funciones de descarga de imágenes con exportación ZIP por lotes usando html2canvas y jszip",
+              "fr": "Restaurez le code d'origine et ajoutez des fonctionnalités de téléchargement d'image avec l'exportation ZIP par lots à l'aide de html2canvas et jszip",
+              "ar": "قم باستعادة الكود الأصلي وإضافة ميزات تنزيل الصور من خلال تصدير دفعة ZIP باستخدام html2canvas وjszip",
+              "bn": "মূল কোড পুনরুদ্ধার করুন এবং html2canvas এবং jszip ব্যবহার করে ব্যাচ জিপ এক্সপোর্ট সহ ডাউনলোড চিত্র বৈশিষ্ট্য যোগ করুন",
+              "pt": "Restaure o código original e adicione recursos de download de imagem com exportação ZIP em lote usando html2canvas e jszip",
+              "ru": "Восстановите исходный код и добавьте функции загрузки изображений с помощью пакетного экспорта ZIP с использованием html2canvas и jszip.",
+              "ur": "اصل کوڈ کو بحال کریں اور HTML2CANVAS اور JSZIP کا استعمال کرتے ہوئے بیچ زپ ایکسپورٹ کے ساتھ ڈاؤن لوڈ امیج کی خصوصیات شامل کریں"
+            }
           },
           {
             "sha": "139b4e8",
             "message": "Add bulk image download feature for visualizations using html2canvas and jszip",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/139b4e8fcd8a69fd3150a7c8813501b9dda509ce"
+            "url": "https://github.com/lucdai/AAV/commit/139b4e8fcd8a69fd3150a7c8813501b9dda509ce",
+            "translations": {
+              "en": "Add bulk image download feature for visualizations using html2canvas and jszip",
+              "zh": "使用 html2canvas 和 jszip 添加批量图像下载功能以进行可视化",
+              "hi": "html2canvas और jszip का उपयोग करके विज़ुअलाइज़ेशन के लिए बल्क छवि डाउनलोड सुविधा जोड़ें",
+              "es": "Agregue la función de descarga masiva de imágenes para visualizaciones usando html2canvas y jszip",
+              "fr": "Ajouter une fonctionnalité de téléchargement d'images en masse pour les visualisations utilisant html2canvas et jszip",
+              "ar": "أضف ميزة تنزيل الصور المجمعة للمرئيات باستخدام html2canvas وjszip",
+              "bn": "html2canvas এবং jszip ব্যবহার করে ভিজ্যুয়ালাইজেশনের জন্য বাল্ক ইমেজ ডাউনলোড ফিচার যোগ করুন",
+              "pt": "Adicionar recurso de download de imagens em massa para visualizações usando html2canvas e jszip",
+              "ru": "Добавьте функцию массовой загрузки изображений для визуализаций с использованием html2canvas и jszip.",
+              "ur": "HTML2CANVAS اور JSZIP کا استعمال کرتے ہوئے تصورات کے لئے بلک امیج ڈاؤن لوڈ کی خصوصیت شامل کریں"
+            }
           },
           {
             "sha": "b17371f",
             "message": "Add files via upload",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/b17371fe56c1e298d21f0c2748080d15c90cd984"
+            "url": "https://github.com/lucdai/AAV/commit/b17371fe56c1e298d21f0c2748080d15c90cd984",
+            "translations": {
+              "en": "Add files via upload",
+              "zh": "通过上传添加文件",
+              "hi": "अपलोड के माध्यम से फ़ाइलें जोड़ें",
+              "es": "Agregar archivos mediante carga",
+              "fr": "Ajouter des fichiers via le téléchargement",
+              "ar": "إضافة الملفات عن طريق التحميل",
+              "bn": "আপলোড মাধ্যমে ফাইল যোগ করুন",
+              "pt": "Adicionar arquivos via upload",
+              "ru": "Добавить файлы через загрузку",
+              "ur": "اپ لوڈ کے ذریعے فائلیں شامل کریں"
+            }
           }
         ],
         "Other": [
@@ -720,19 +1788,55 @@
             "sha": "777a21a",
             "message": "Update website logo with the provided image",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/777a21aa8be953dca7ad047183c0fea503d7e6e4"
+            "url": "https://github.com/lucdai/AAV/commit/777a21aa8be953dca7ad047183c0fea503d7e6e4",
+            "translations": {
+              "en": "Update website logo with the provided image",
+              "zh": "使用提供的图像更新网站徽标",
+              "hi": "दी गई छवि के साथ वेबसाइट का लोगो अपडेट करें",
+              "es": "Actualizar el logotipo del sitio web con la imagen proporcionada",
+              "fr": "Mettre à jour le logo du site Web avec l'image fournie",
+              "ar": "تحديث شعار الموقع بالصورة المقدمة",
+              "bn": "প্রদত্ত ছবির সাথে ওয়েবসাইটের লোগো আপডেট করুন",
+              "pt": "Atualize o logotipo do site com a imagem fornecida",
+              "ru": "Обновить логотип сайта предоставленным изображением",
+              "ur": "فراہم کردہ شبیہہ کے ساتھ ویب سائٹ لوگو کو اپ ڈیٹ کریں"
+            }
           },
           {
             "sha": "bdd4529",
             "message": "Update index.html with complete HTML and JavaScript content",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/bdd45297ae0de89f6ee8f04775cec817ac0fac24"
+            "url": "https://github.com/lucdai/AAV/commit/bdd45297ae0de89f6ee8f04775cec817ac0fac24",
+            "translations": {
+              "en": "Update index.html with complete HTML and JavaScript content",
+              "zh": "使用完整的 HTML 和 JavaScript 内容更新 index.html",
+              "hi": "संपूर्ण HTML और जावास्क्रिप्ट सामग्री के साथ Index.html को अपडेट करें",
+              "es": "Actualice index.html con contenido HTML y JavaScript completo",
+              "fr": "Mettre à jour index.html avec un contenu HTML et JavaScript complet",
+              "ar": "قم بتحديث ملف Index.html بمحتوى HTML وJavaScript الكامل",
+              "bn": "সম্পূর্ণ HTML এবং JavaScript সামগ্রী সহ index.html আপডেট করুন৷",
+              "pt": "Atualize index.html com conteúdo HTML e JavaScript completo",
+              "ru": "Обновите index.html, добавив в него полный контент HTML и JavaScript.",
+              "ur": "مکمل HTML اور جاوا اسکرپٹ مواد کے ساتھ index.html کو اپ ڈیٹ کریں"
+            }
           },
           {
             "sha": "5399419",
             "message": "Create index.html - Statistics and visualization application in Vietnamese",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/539941959976cdf8ee0a8663f6762246289e3657"
+            "url": "https://github.com/lucdai/AAV/commit/539941959976cdf8ee0a8663f6762246289e3657",
+            "translations": {
+              "en": "Create index.html - Statistics and visualization application in Vietnamese",
+              "zh": "创建index.html - 越南语统计和可视化应用程序",
+              "hi": "Index.html बनाएं - वियतनामी में सांख्यिकी और विज़ुअलाइज़ेशन एप्लिकेशन",
+              "es": "Crear index.html - Aplicación de visualización y estadísticas en vietnamita",
+              "fr": "Create index.html - Application de statistiques et de visualisation en vietnamien",
+              "ar": "إنشاء ملف Index.html - تطبيق الإحصائيات والتصور باللغة الفيتنامية",
+              "bn": "index.html তৈরি করুন - ভিয়েতনামি ভাষায় পরিসংখ্যান এবং ভিজ্যুয়ালাইজেশন অ্যাপ্লিকেশন",
+              "pt": "Create index.html - Aplicativo de estatística e visualização em vietnamita",
+              "ru": "Create index.html — приложение для статистики и визуализации на вьетнамском языке.",
+              "ur": "انڈیکس ایچ ٹی ایم ایل بنائیں - ویتنامی میں اعداد و شمار اور تصو .ر کی درخواست"
+            }
           }
         ]
       }
@@ -746,7 +1850,19 @@
             "sha": "f0d367a",
             "message": "Initial commit: Add index.html for website",
             "author": "lucdai",
-            "url": "https://github.com/lucdai/AAV/commit/f0d367af75d80d2db0f23a29238af1f60f6faa7a"
+            "url": "https://github.com/lucdai/AAV/commit/f0d367af75d80d2db0f23a29238af1f60f6faa7a",
+            "translations": {
+              "en": "Initial commit: Add index.html for website",
+              "zh": "初始提交：为网站添加index.html",
+              "hi": "प्रारंभिक प्रतिबद्धता: वेबसाइट के लिए Index.html जोड़ें",
+              "es": "Confirmación inicial: agregue index.html para el sitio web",
+              "fr": "Validation initiale : ajouter index.html pour le site Web",
+              "ar": "الالتزام الأولي: أضف ملف Index.html لموقع الويب",
+              "bn": "প্রাথমিক প্রতিশ্রুতি: ওয়েবসাইটের জন্য index.html যোগ করুন",
+              "pt": "Confirmação inicial: adicione index.html para o site",
+              "ru": "Первоначальная фиксация: добавьте index.html для веб-сайта.",
+              "ur": "ابتدائی کمٹ: ویب سائٹ کے لئے انڈیکس ایچ ٹی ایم ایل شامل کریں"
+            }
           }
         ]
       }
