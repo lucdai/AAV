@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-02-05T12:49:15.337195",
-  "total_commits": 95,
+  "generated_at": "2026-02-05T12:56:58.621852",
+  "total_commits": 97,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-02-05",
-      "commit_count": 2,
+      "commit_count": 4,
       "categories": {
         "Bug Fixes": [
           {
@@ -16,6 +16,18 @@
           }
         ],
         "Other": [
+          {
+            "sha": "464a51b",
+            "message": "chore: remove unused subtitle element",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/464a51b2bca48dcc1bf937bc3c0a1d9ddd434723"
+          },
+          {
+            "sha": "126e56b",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/126e56bfe096059b4f9de6b378cda4ab757eed85"
+          },
           {
             "sha": "2b59d3b",
             "message": "chore: update changelog from commits",
