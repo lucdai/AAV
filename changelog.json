@@ -1,8 +1,30 @@
 {
-  "generated_at": "2026-02-05T01:53:15.793620",
-  "total_commits": 93,
+  "generated_at": "2026-02-05T12:49:15.337195",
+  "total_commits": 95,
   "repository": "lucdai/AAV",
   "entries": [
+    {
+      "date": "2026-02-05",
+      "commit_count": 2,
+      "categories": {
+        "Bug Fixes": [
+          {
+            "sha": "0d98ac3",
+            "message": "fix: fix table layout and line misalignment in Detailed Descriptive Statistics table",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/0d98ac30e2404e1890cb503b28d3aaee2cd4267b"
+          }
+        ],
+        "Other": [
+          {
+            "sha": "2b59d3b",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/2b59d3b332371f5f25ebcb0f87da5e28122cfced"
+          }
+        ]
+      }
+    },
     {
       "date": "2026-02-04",
       "commit_count": 13,
