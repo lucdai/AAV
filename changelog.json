@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-02-06T12:28:38.777229",
-  "total_commits": 108,
+  "generated_at": "2026-02-06T12:40:15.921546",
+  "total_commits": 110,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-02-06",
-      "commit_count": 6,
+      "commit_count": 8,
       "categories": {
         "Features": [
           {
@@ -21,7 +21,21 @@
             "url": "https://github.com/lucdai/AAV/commit/1743e3f02e4d1d038ea6641b567c5b5a7111e771"
           }
         ],
+        "Bug Fixes": [
+          {
+            "sha": "3118952",
+            "message": "fix: sửa lỗi triệt để việc đồng bộ màu sắc cho tất cả các loại biểu đồ",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/3118952f956d56e68e4db93b645cf581d9a36fd0"
+          }
+        ],
         "Other": [
+          {
+            "sha": "f66d68d",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/f66d68db6b5f3071ff33c0ab721d5eafdba6bcb9"
+          },
           {
             "sha": "efb59f5",
             "message": "chore: update changelog from commits",
