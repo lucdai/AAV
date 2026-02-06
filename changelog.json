@@ -1,13 +1,19 @@
 {
-  "generated_at": "2026-02-06T10:51:40.846155",
-  "total_commits": 106,
+  "generated_at": "2026-02-06T12:28:38.777229",
+  "total_commits": 108,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-02-06",
-      "commit_count": 4,
+      "commit_count": 6,
       "categories": {
         "Features": [
+          {
+            "sha": "ffb9224",
+            "message": "feat: đồng bộ màu sắc biểu đồ và thêm tính năng tùy chỉnh màu nền, màu chữ với mã HEX",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/ffb92243b24866aee46d33f1aca256ebc2b43e68"
+          },
           {
             "sha": "1743e3f",
             "message": "feat: add personalization features (theme, font, privacy, social sign-in)",
@@ -16,6 +22,12 @@
           }
         ],
         "Other": [
+          {
+            "sha": "efb59f5",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/efb59f5a53dc13a8e6fa481449d071bc6a892bd8"
+          },
           {
             "sha": "8c9cb49",
             "message": "chore: update changelog from commits",
