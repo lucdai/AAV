@@ -1,13 +1,27 @@
 {
-  "generated_at": "2026-02-06T10:00:29.131750",
-  "total_commits": 104,
+  "generated_at": "2026-02-06T10:51:40.846155",
+  "total_commits": 106,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-02-06",
-      "commit_count": 2,
+      "commit_count": 4,
       "categories": {
+        "Features": [
+          {
+            "sha": "1743e3f",
+            "message": "feat: add personalization features (theme, font, privacy, social sign-in)",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/1743e3f02e4d1d038ea6641b567c5b5a7111e771"
+          }
+        ],
         "Other": [
+          {
+            "sha": "8c9cb49",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/8c9cb49ad0dc823f27735fd225c8b9d318b4177f"
+          },
           {
             "sha": "b894b8f",
             "message": "Remove Cursor Follower effect as requested",
