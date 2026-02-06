@@ -1,8 +1,28 @@
 {
-  "generated_at": "2026-02-06T01:52:18.887180",
-  "total_commits": 102,
+  "generated_at": "2026-02-06T10:00:29.131750",
+  "total_commits": 104,
   "repository": "lucdai/AAV",
   "entries": [
+    {
+      "date": "2026-02-06",
+      "commit_count": 2,
+      "categories": {
+        "Other": [
+          {
+            "sha": "b894b8f",
+            "message": "Remove Cursor Follower effect as requested",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/b894b8fb0e03be4a4cb3e124b0265cf31351708b"
+          },
+          {
+            "sha": "e4a7692",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/e4a7692f3ed8ea9522424ba956109f87d55c3279"
+          }
+        ]
+      }
+    },
     {
       "date": "2026-02-05",
       "commit_count": 9,
