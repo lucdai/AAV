@@ -270,3 +270,102 @@ input:focus, textarea:focus, select:focus {
         opacity: 0;
     }
 }
+
+/* THEME MODES */
+:root.light-mode {
+    --background: #f8fafc;
+    --surface: #ffffff;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --primary-light: #eef2ff;
+}
+
+:root.dark-mode {
+    --background: #0f172a;
+    --surface: #1e293b;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --border: #334155;
+    --primary-light: rgba(99, 102, 241, 0.15);
+}
+
+:root.high-contrast-mode {
+    --background: #000000;
+    --surface: #000000;
+    --text-main: #ffffff;
+    --text-muted: #ffff00;
+    --border: #ffffff;
+    --primary: #ffff00;
+    --primary-hover: #ffffff;
+    --primary-light: rgba(255, 255, 255, 0.2);
+}
+
+/* Ensure smooth transitions */
+body {
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.modern-card, input, select, textarea {
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+/* Settings UI Styles */
+.settings-panel {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    max-width: 400px;
+    height: 100%;
+    background: var(--surface);
+    z-index: 1000;
+    box-shadow: var(--shadow-lg);
+    border-left: 1px solid var(--border);
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.settings-panel.active {
+    display: block;
+    animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+.settings-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+    backdrop-filter: blur(4px);
+}
+
+.settings-overlay.active {
+    display: block;
+}
+
+.color-swatch {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform 0.2s;
+}
+
+.color-swatch:hover {
+    transform: scale(1.1);
+}
+
+.color-swatch.active {
+    border-color: var(--text-main);
+}
