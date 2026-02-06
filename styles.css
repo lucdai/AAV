@@ -252,32 +252,7 @@ input:focus, textarea:focus, select:focus {
     }
 }
 
-.cursor-follower {
-    position: fixed;
-    width: 8px;
-    height: 8px;
-    background: var(--primary);
-    border-radius: 50%;
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-    transition: width 0.2s, height 0.2s, background 0.2s;
-    z-index: 9998;
-    opacity: 0.5;
-    display: none;
-}
 
-@media (hover: hover) and (pointer: fine) {
-    .cursor-follower {
-        display: block;
-    }
-}
-
-.cursor-follower.active {
-    width: 12px;
-    height: 12px;
-    background: var(--accent);
-    opacity: 0.8;
-}
 
 /* Touch feedback for mobile */
 .touch-ripple {

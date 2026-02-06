@@ -1,29 +1,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Cursor Follower (for Desktop)
-    const follower = document.createElement('div');
-    follower.className = 'cursor-follower';
-    document.body.appendChild(follower);
-
-    let mouseX = 0, mouseY = 0;
-    let followerX = 0, followerY = 0;
-
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    });
-
-    // Smooth animation for follower
-    const animateFollower = () => {
-        followerX += (mouseX - followerX) * 0.15;
-        followerY += (mouseY - followerY) * 0.15;
-        follower.style.left = followerX + 'px';
-        follower.style.top = followerY + 'px';
-        requestAnimationFrame(animateFollower);
-    };
-    animateFollower();
-
-    // 2. Click Effect (Ripple)
+    // 1. Click Effect (Ripple)
     const createClickEffect = (x, y) => {
         const effect = document.createElement('div');
         effect.className = 'click-effect';
@@ -38,14 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.addEventListener('mousedown', (e) => {
         createClickEffect(e.clientX, e.clientY);
-        follower.classList.add('active');
     });
 
-    document.addEventListener('mouseup', () => {
-        follower.classList.remove('active');
-    });
-
-    // 3. Touch Ripple Effect (for Mobile)
+    // 2. Touch Ripple Effect (for Mobile)
     document.addEventListener('touchstart', (e) => {
         const touch = e.touches[0];
         const x = touch.clientX;
@@ -79,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Also show the click ripple at touch point
         createClickEffect(x, y);
 
-        // 4. Haptic Feedback (Vibration)
+        // 3. Haptic Feedback (Vibration)
         if (window.navigator && window.navigator.vibrate) {
             // Vibrate for 10ms (very light tap)
             window.navigator.vibrate(10);
