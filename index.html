@@ -155,7 +155,29 @@
                             <div onclick="savePreferences({accentColor: '#f43f5e'})" class="color-swatch bg-[#f43f5e]"></div>
                             <div onclick="savePreferences({accentColor: '#10b981'})" class="color-swatch bg-[#10b981]"></div>
                             <div onclick="savePreferences({accentColor: '#f59e0b'})" class="color-swatch bg-[#f59e0b]"></div>
-                            <input type="color" onchange="savePreferences({accentColor: this.value})" class="w-8 h-8 p-0 border-none bg-transparent cursor-pointer">
+                            <div class="flex items-center gap-2 ml-auto">
+                                <span class="text-[10px] font-mono text-slate-400">HEX:</span>
+                                <input type="color" id="accentColorInput" onchange="savePreferences({accentColor: this.value})" class="w-8 h-8 p-0 border-none bg-transparent cursor-pointer">
+                                <input type="text" id="accentColorHex" onchange="if(/^#[0-9A-F]{6}$/i.test(this.value)) savePreferences({accentColor: this.value})" placeholder="#6366f1" class="w-20 text-xs font-mono p-1 border rounded">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2" data-i18n="bg_color">Màu nền hệ thống</label>
+                        <div class="flex items-center gap-3">
+                            <input type="color" id="bgColorInput" onchange="savePreferences({backgroundColor: this.value})" class="w-8 h-8 p-0 border-none bg-transparent cursor-pointer">
+                            <input type="text" id="bgColorHex" onchange="if(/^#[0-9A-F]{6}$/i.test(this.value)) savePreferences({backgroundColor: this.value})" placeholder="#f8fafc" class="w-24 text-xs font-mono p-1 border rounded">
+                            <button onclick="savePreferences({backgroundColor: ''})" class="text-xs text-indigo-600 hover:underline" data-i18n="reset">Đặt lại</button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2" data-i18n="text_color">Màu chữ hệ thống</label>
+                        <div class="flex items-center gap-3">
+                            <input type="color" id="textColorInput" onchange="savePreferences({textColor: this.value})" class="w-8 h-8 p-0 border-none bg-transparent cursor-pointer">
+                            <input type="text" id="textColorHex" onchange="if(/^#[0-9A-F]{6}$/i.test(this.value)) savePreferences({textColor: this.value})" placeholder="#0f172a" class="w-24 text-xs font-mono p-1 border rounded">
+                            <button onclick="savePreferences({textColor: ''})" class="text-xs text-indigo-600 hover:underline" data-i18n="reset">Đặt lại</button>
                         </div>
                     </div>
                 </div>
@@ -864,10 +886,25 @@
         function updateAllCharts(groups, results) {
             const l = groups.map(g=>`[${fmt(g.lower)}; ${fmt(g.upper)})`);
             const ol = [fmt(groups[0].lower), ...groups.map(g=>fmt(g.upper))]; 
-            const ds = (fn, type, fill) => results.map(r=>({
-                label: r.name, data: fn(r), backgroundColor: r.color.bg, borderColor: r.color.border, 
-                borderWidth: 1.5, tension: 0.3, fill: fill
-            }));
+            
+            // Lấy màu accent từ preferences nếu có, nếu không dùng màu mặc định của kết quả
+            const getColors = (r, i) => {
+                const accent = (typeof userPrefs !== 'undefined' && userPrefs.accentColor) ? userPrefs.accentColor : r.color.border;
+                // Nếu chỉ có 1 dataset, dùng màu accent. Nếu nhiều, dùng bảng màu xoay vòng để phân biệt
+                if (results.length === 1) {
+                    return { bg: accent + '80', border: accent };
+                }
+                // Bảng màu đa dạng cho nhiều dataset nhưng vẫn đồng bộ với accent nếu có thể
+                return { bg: r.color.bg, border: r.color.border };
+            };
+
+            const ds = (fn, type, fill) => results.map((r, i) => {
+                const c = getColors(r, i);
+                return {
+                    label: r.name, data: fn(r), backgroundColor: c.bg, borderColor: c.border, 
+                    borderWidth: 1.5, tension: 0.3, fill: fill
+                };
+            });
 
             draw('chartHistogram', 'bar', l, ds(r=>r.gStats.map(g=>g.freq), 'bar', false), {scales:{x:{stacked:false},y:{beginAtZero:true}}});
             draw('chartPolygon', 'line', groups.map(g=>fmt(g.midpoint)), ds(r=>r.gStats.map(g=>g.freq), 'line', false), {elements:{line:{tension:0}}});
@@ -877,13 +914,22 @@
             draw('chartOgive', 'line', ol, ds(r=>[0, ...r.gStats.map(g=>g.cf)], 'line', false), {elements:{line:{tension:0.2}}});
             updatePieChart();
 
-            const boxData = results.map(r => ({ label: r.name, backgroundColor: r.color.bg, borderColor: r.color.border, borderWidth: 1, outlierColor: '#ef4444', padding: 10, itemRadius: 0, data: [r.rawData] }));
+            const boxData = results.map((r, i) => {
+                const c = getColors(r, i);
+                return { label: r.name, backgroundColor: c.bg, borderColor: c.border, borderWidth: 1, outlierColor: '#ef4444', padding: 10, itemRadius: 0, data: [r.rawData] };
+            });
             draw('chartBox', 'boxplot', [t('distribution')], boxData, {});
 
-            const violinData = results.map(r => ({ label: r.name, backgroundColor: r.color.bg, borderColor: r.color.border, borderWidth: 1, data: [r.rawData] }));
+            const violinData = results.map((r, i) => {
+                const c = getColors(r, i);
+                return { label: r.name, backgroundColor: c.bg, borderColor: c.border, borderWidth: 1, data: [r.rawData] };
+            });
             draw('chartViolin', 'violin', [t('density')], violinData, {});
 
-            const scatterData = results.map(r => ({ label: r.name, backgroundColor: r.color.border, data: r.rawData.map((val, idx) => ({ x: val, y: Math.random() * 0.5 + results.indexOf(r) })) }));
+            const scatterData = results.map((r, i) => {
+                const c = getColors(r, i);
+                return { label: r.name, backgroundColor: c.border, data: r.rawData.map((val, idx) => ({ x: val, y: Math.random() * 0.5 + i })) };
+            });
             draw('chartScatter', 'scatter', null, scatterData, { scales: { x: { type: 'linear', position: 'bottom', title: {display:true, text: t('value_col')} }, y: { display: false } } });
         }
 
