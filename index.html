@@ -944,14 +944,70 @@
             } else {
                 gStats = lastGroups.map((g,i) => ({...g, freq: manualRows[i].freqs[dsId]||0}));
             }
-            const data = { labels: lastGroups.map(g => `[${fmt(g.lower)}; ${fmt(g.upper)})`), datasets: [{ data: gStats.map(g => g.freq), backgroundColor: ['#60a5fa','#f87171','#34d399','#fbbf24','#a78bfa','#f472b6','#9ca3af'] }] };
+            
+            // Tạo bảng màu dựa trên màu accent
+            const accent = (typeof userPrefs !== 'undefined' && userPrefs.accentColor) ? userPrefs.accentColor : '#6366f1';
+            const pieColors = [
+                accent, 
+                adjustColor(accent, -20), 
+                adjustColor(accent, 20), 
+                adjustColor(accent, -40), 
+                adjustColor(accent, 40),
+                adjustColor(accent, -60),
+                adjustColor(accent, 60)
+            ];
+            
+            const data = { labels: lastGroups.map(g => `[${fmt(g.lower)}; ${fmt(g.upper)})`), datasets: [{ data: gStats.map(g => g.freq), backgroundColor: pieColors }] };
             draw('chartPie', 'doughnut', data.labels, data.datasets, {});
         }
 
         function draw(id, type, l, d, opt) {
             const ctx = document.getElementById(id).getContext('2d');
             if(charts[id]) charts[id].destroy();
-            charts[id] = new Chart(ctx, {type, data:{labels:l, datasets:d}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom'}}, ...opt}});
+            
+            // Lấy màu chữ và màu lưới từ preferences
+            const isDark = document.documentElement.classList.contains('dark-mode') || 
+                          (typeof userPrefs !== 'undefined' && userPrefs.theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            const textColor = (typeof userPrefs !== 'undefined' && userPrefs.textColor) ? userPrefs.textColor : (isDark ? '#94a3b8' : '#64748b');
+            const gridColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+
+            const defaultOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { color: textColor }
+                    },
+                    title: { color: textColor }
+                },
+                scales: {
+                    x: {
+                        grid: { color: gridColor },
+                        ticks: { color: textColor },
+                        title: { color: textColor }
+                    },
+                    y: {
+                        grid: { color: gridColor },
+                        ticks: { color: textColor },
+                        title: { color: textColor }
+                    }
+                }
+            };
+
+            // Merge options sâu hơn để không mất config mặc định
+            const mergedOptions = JSON.parse(JSON.stringify(defaultOptions));
+            if (opt.scales) {
+                if (opt.scales.x) Object.assign(mergedOptions.scales.x, opt.scales.x);
+                if (opt.scales.y) Object.assign(mergedOptions.scales.y, opt.scales.y);
+            }
+            if (opt.plugins) {
+                if (opt.plugins.legend) Object.assign(mergedOptions.plugins.legend, opt.plugins.legend);
+                if (opt.plugins.title) Object.assign(mergedOptions.plugins.title, opt.plugins.title);
+            }
+            Object.assign(mergedOptions, { ...opt, scales: mergedOptions.scales, plugins: mergedOptions.plugins });
+
+            charts[id] = new Chart(ctx, {type, data:{labels:l, datasets:d}, options: mergedOptions});
         }
 
         // --- Download Functions ---

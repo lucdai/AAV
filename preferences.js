@@ -73,39 +73,18 @@ function applyTheme(theme) {
 function updateChartTheme(theme) {
     if (typeof Chart === 'undefined') return;
     
-    const isDark = theme === 'dark' || theme === 'high-contrast';
+    const isDark = theme === 'dark' || theme === 'high-contrast' || 
+                  (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
     
     // Determine colors based on theme or custom preferences
     let textColor = userPrefs.textColor || (isDark ? '#94a3b8' : '#64748b');
-    let gridColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
     
     Chart.defaults.color = textColor;
     
-    // Update existing charts
-    Chart.helpers.each(Chart.instances, function(instance) {
-        if (instance.options.scales) {
-            Object.keys(instance.options.scales).forEach(scaleId => {
-                const scale = instance.options.scales[scaleId];
-                if (scale.grid) scale.grid.color = gridColor;
-                if (scale.ticks) scale.ticks.color = textColor;
-                if (scale.title) scale.title.color = textColor;
-            });
-        }
-        
-        // Update dataset colors if they should match accent color
-        if (instance.config.type !== 'pie' && instance.config.type !== 'doughnut') {
-            instance.data.datasets.forEach((dataset, i) => {
-                // Only update if it's a single dataset or we want to sync all
-                // For now, let's ensure they use the accent color if it's a primary chart
-                if (instance.data.datasets.length === 1) {
-                    dataset.backgroundColor = userPrefs.accentColor + '80'; // 50% opacity
-                    dataset.borderColor = userPrefs.accentColor;
-                }
-            });
-        }
-        
-        instance.update();
-    });
+    // Force re-calculate and re-draw all charts to ensure full synchronization
+    if (typeof calculate === 'function' && typeof lastGroups !== 'undefined' && lastGroups.length > 0) {
+        calculate();
+    }
 }
 
 function setupSystemThemeListener() {
