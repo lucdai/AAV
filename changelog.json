@@ -1,13 +1,27 @@
 {
-  "generated_at": "2026-03-01T15:15:32.909782",
-  "total_commits": 135,
+  "generated_at": "2026-03-01T15:17:27.117081",
+  "total_commits": 137,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-01",
-      "commit_count": 2,
+      "commit_count": 4,
       "categories": {
+        "Features": [
+          {
+            "sha": "d73f302",
+            "message": "feat: add advanced personalization features (chart palettes, hotkeys, auto-save session)",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/d73f30294eb1b9d46f278b752d8dfe4528dd1df4"
+          }
+        ],
         "Other": [
+          {
+            "sha": "5b69b48",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/5b69b485095df06c9f6c0e5cc3b777cffdd54a17"
+          },
           {
             "sha": "2bf1319",
             "message": "style: đồng bộ màu sắc biểu đồ và container với theme hệ thống",
