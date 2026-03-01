@@ -120,11 +120,19 @@ function applyCustomColors(bgColor, textColor) {
     if (bgColor) {
         root.style.setProperty('--background', bgColor);
         // Also adjust surface color to be slightly different
-        const surfaceColor = adjustColor(bgColor, root.classList.contains('dark-mode') ? 10 : -5);
+        const isDark = root.classList.contains('dark-mode') || 
+                      (userPrefs.theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        const surfaceColor = adjustColor(bgColor, isDark ? 10 : -5);
+        const borderColor = adjustColor(bgColor, isDark ? 20 : -15);
+        const gridColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
         root.style.setProperty('--surface', surfaceColor);
+        root.style.setProperty('--border', borderColor);
+        root.style.setProperty('--grid', gridColor);
     } else {
         root.style.removeProperty('--background');
         root.style.removeProperty('--surface');
+        root.style.removeProperty('--border');
+        root.style.removeProperty('--grid');
     }
     
     if (textColor) {
@@ -149,9 +157,11 @@ function adjustColor(hex, percent) {
     let g = parseInt(hex.slice(3, 5), 16);
     let b = parseInt(hex.slice(5, 7), 16);
 
-    r = Math.floor(Math.min(255, Math.max(0, r * (100 + percent) / 100)));
-    g = Math.floor(Math.min(255, Math.max(0, g * (100 + percent) / 100)));
-    b = Math.floor(Math.min(255, Math.max(0, b * (100 + percent) / 100)));
+    // Use a more robust adjustment that works even for black (#000000)
+    const amt = Math.floor((2.55 * percent));
+    r = Math.floor(Math.min(255, Math.max(0, r + amt)));
+    g = Math.floor(Math.min(255, Math.max(0, g + amt)));
+    b = Math.floor(Math.min(255, Math.max(0, b + amt)));
 
     return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 }
