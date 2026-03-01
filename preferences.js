@@ -12,6 +12,10 @@ const DEFAULT_PREFS = {
     fontSize: 100, // percentage
     fontFamily: 'sans-serif', // 'sans-serif', 'serif'
     trackingEnabled: true,
+    autoSaveSession: true,
+    showDataLabels: true,
+    chartPalette: 'default',
+    hotkeysEnabled: true,
     featureFlags: {
         newCharts: true,
         betaFeatures: false
@@ -36,6 +40,11 @@ function initPreferences() {
     applyAllPreferences();
     setupSystemThemeListener();
     setupColorInputs();
+    
+    if (userPrefs.autoSaveSession) {
+        loadSessionData();
+        setInterval(saveSessionData, 30000);
+    }
 }
 
 /**
@@ -47,6 +56,8 @@ function applyAllPreferences() {
     applyCustomColors(userPrefs.backgroundColor, userPrefs.textColor);
     applyFontSize(userPrefs.fontSize);
     applyFontFamily(userPrefs.fontFamily);
+    applyChartPalette(userPrefs.chartPalette);
+    setupHotkeys(userPrefs.hotkeysEnabled);
 }
 
 /**
@@ -146,6 +157,99 @@ function applyCustomColors(bgColor, textColor) {
     
     // Refresh charts to pick up new text color
     updateChartTheme(userPrefs.theme);
+}
+
+/**
+ * Chart Palette Management
+ */
+const CHART_PALETTES = {
+    'default': ['#6366f1', '#f43f5e', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#06b6d4'],
+    'ocean': ['#0ea5e9', '#2dd4bf', '#3b82f6', '#06b6d4', '#6366f1', '#94a3b8', '#0f172a'],
+    'forest': ['#10b981', '#84cc16', '#059669', '#15803d', '#4d7c0f', '#166534', '#3f6212'],
+    'sunset': ['#f43f5e', '#f97316', '#fbbf24', '#e11d48', '#ea580c', '#d97706', '#be123c'],
+    'monochrome': ['#1e293b', '#334155', '#475569', '#64748b', '#94a3b8', '#cbd5e1', '#e2e8f0']
+};
+
+function applyChartPalette(paletteName) {
+    if (!CHART_PALETTES[paletteName]) return;
+    // This will be used by chart generation logic
+    if (typeof Chart !== 'undefined' && typeof calculate === 'function') {
+        calculate();
+    }
+}
+
+/**
+ * Hotkeys Management
+ */
+function setupHotkeys(enabled) {
+    if (!enabled) {
+        document.removeEventListener('keydown', handleGlobalHotkeys);
+        return;
+    }
+    document.addEventListener('keydown', handleGlobalHotkeys);
+}
+
+function handleGlobalHotkeys(e) {
+    // Alt + A: Add Sample
+    if (e.altKey && e.key === 'a') {
+        e.preventDefault();
+        const addBtn = document.querySelector('[onclick*="addSample"]');
+        if (addBtn) addBtn.click();
+    }
+    // Alt + C: Clear All
+    if (e.altKey && e.key === 'c') {
+        e.preventDefault();
+        const clearBtn = document.querySelector('[onclick*="clearAll"]');
+        if (clearBtn) clearBtn.click();
+    }
+    // Alt + S: Save Backup
+    if (e.altKey && e.key === 's') {
+        e.preventDefault();
+        const saveBtn = document.querySelector('[onclick*="saveBackup"]');
+        if (saveBtn) saveBtn.click();
+    }
+    // Alt + 1: Switch to Data Tab
+    if (e.altKey && e.key === '1') {
+        const tab = document.getElementById('tabDataBtn');
+        if (tab) tab.click();
+    }
+    // Alt + 2: Switch to Charts Tab
+    if (e.altKey && e.key === '2') {
+        const tab = document.getElementById('tabChartsBtn');
+        if (tab) tab.click();
+    }
+}
+
+/**
+ * Session Management
+ */
+function saveSessionData() {
+    if (!userPrefs.autoSaveSession) return;
+    // We need a way to get current datasets. Assuming a global function or variable exists.
+    if (typeof datasets !== 'undefined') {
+        const data = {
+            datasets: datasets,
+            timestamp: new Date().getTime()
+        };
+        localStorage.setItem('aav_last_session', JSON.stringify(data));
+    }
+}
+
+function loadSessionData() {
+    if (!userPrefs.autoSaveSession) return;
+    const saved = localStorage.getItem('aav_last_session');
+    if (saved) {
+        try {
+            const data = JSON.parse(saved);
+            // If datasets exist, we might want to restore them if current datasets are empty
+            if (data.datasets && data.datasets.length > 0 && (typeof datasets === 'undefined' || datasets.length === 0)) {
+                // Restore logic depends on how datasets are managed in the app
+                console.log('Session data found from:', new Date(data.timestamp).toLocaleString());
+            }
+        } catch (e) {
+            console.error('Error loading session:', e);
+        }
+    }
 }
 
 /**
