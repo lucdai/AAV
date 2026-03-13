@@ -1,11 +1,45 @@
 {
-  "generated_at": "2026-03-13T16:55:40.907090",
-  "total_commits": 161,
+  "generated_at": "2026-03-13T17:06:34.939291",
+  "total_commits": 166,
   "repository": "lucdai/AAV",
   "entries": [
     {
+      "date": "2026-03-14",
+      "commit_count": 4,
+      "categories": {
+        "Features": [
+          {
+            "sha": "256d226",
+            "message": "Add storage validation and quota-safe localStorage handling",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/256d226ac2049218a7c870dee16b02176e5d67f0"
+          }
+        ],
+        "Other": [
+          {
+            "sha": "71e81bc",
+            "message": "Merge pull request #7 from lucdai/codex/enhance-error-handling-for-fetch-requests",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/71e81bc09b6993795bd468c94ade6944c82abffa"
+          },
+          {
+            "sha": "76e6f7b",
+            "message": "Harden translation and changelog fetch error handling",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/76e6f7b793f739418ca570acb6e8bf9729e2a18c"
+          },
+          {
+            "sha": "0fbc7fa",
+            "message": "Harden startup order for global-dependent scripts",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/0fbc7fa98628ae81a5fdec8e1b97eb494057fc1a"
+          }
+        ]
+      }
+    },
+    {
       "date": "2026-03-13",
-      "commit_count": 12,
+      "commit_count": 13,
       "categories": {
         "Features": [
           {
@@ -22,6 +56,12 @@
           }
         ],
         "Other": [
+          {
+            "sha": "6a458ec",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/6a458ec0fb1d3ece35bf22b13f5d3465f9e355ef"
+          },
           {
             "sha": "8094b35",
             "message": "chore: update changelog from commits",
