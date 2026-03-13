@@ -12,7 +12,7 @@ const CACHE_DURATION = 3600000; // 1 hour in milliseconds
 // Initialize changelog modal
 function initChangelogModal() {
     const modalHTML = `
-        <div id="changelogModal" class="fixed inset-0 bg-slate-900/60 z-50 hidden items-center justify-center p-4 backdrop-blur-md animate-fade-in">
+        <div id="changelogModal" class="fixed inset-0 bg-slate-900/60 z-50 hidden items-center justify-center p-4 backdrop-blur-md animate-fade-in" role="dialog" aria-modal="true" aria-labelledby="changelogModalTitle">
             <div id="changelogModalContent" class="bg-white rounded-3xl shadow-2xl max-w-3xl w-full max-h-[85vh] flex flex-col overflow-hidden border border-white/20">
                 <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
                     <h3 id="changelogModalTitle" class="text-lg font-extrabold text-slate-900 flex items-center gap-3">
@@ -21,7 +21,7 @@ function initChangelogModal() {
                         </div>
                         <span data-i18n="changelog_title">Lịch sử cập nhật phiên bản</span>
                     </h3>
-                    <button onclick="closeChangelogModal()" class="p-2.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all duration-200">
+                    <button onclick="closeChangelogModal()" class="p-2.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all duration-200" data-modal-close aria-label="Close changelog">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                     </button>
                 </div>
@@ -235,8 +235,12 @@ async function openChangelogModal() {
     }
     
     const modal2 = document.getElementById('changelogModal');
-    modal2.classList.remove('hidden');
-    modal2.classList.add('flex');
+    if (typeof activateModal === 'function') {
+        activateModal('changelogModal', 'changelogModalContent', '#changelogModal [data-modal-close]');
+    } else {
+        modal2.classList.remove('hidden');
+        modal2.classList.add('flex');
+    }
     
     // Fetch and display changelog
     let changelog = await fetchChangelogFromJSON();
@@ -253,8 +257,12 @@ async function openChangelogModal() {
 function closeChangelogModal() {
     const modal = document.getElementById('changelogModal');
     if (modal) {
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
+        if (typeof deactivateModal === 'function') {
+            deactivateModal('changelogModal');
+        } else {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
     }
 }
 
@@ -268,6 +276,7 @@ function addChangelogIcon() {
         changelogIcon.href = '#';
         changelogIcon.className = 'w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 transition-all cursor-pointer';
         changelogIcon.title = 'View Update History';
+        changelogIcon.setAttribute('aria-label', 'View update history');
         changelogIcon.setAttribute('data-i18n-title', 'changelog');
         changelogIcon.onclick = (e) => {
             e.preventDefault();

@@ -95,16 +95,24 @@ function showCalculation(statId, resultData, groupsData) {
     if (modal) {
         document.getElementById('calcModalTitle').innerText = title;
         document.getElementById('calcModalBody').innerHTML = `<div class="math-text">${content}</div>`;
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
+        if (typeof activateModal === 'function') {
+            activateModal('calcModal', 'calcModalContent', '#calcModal [data-modal-close]');
+        } else {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
     }
 }
 
 function closeCalcModal() {
     const modal = document.getElementById('calcModal');
     if (modal) {
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
+        if (typeof deactivateModal === 'function') {
+            deactivateModal('calcModal');
+        } else {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
     }
 }
 

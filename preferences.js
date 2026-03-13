@@ -344,13 +344,17 @@ function exportUserData() {
     URL.revokeObjectURL(url);
 }
 
-function deleteUserData() {
-    if (confirm(t('confirm_delete_all_data'))) {
-        localStorage.removeItem(PREFS_STORAGE_KEY);
-        localStorage.removeItem('aav_backup_data');
-        localStorage.removeItem('aav_backup_timestamp');
-        location.reload();
-    }
+async function deleteUserData() {
+    const shouldDelete = typeof showConfirmModal === "function"
+        ? await showConfirmModal(t('confirm_delete_all_data'), { title: t('privacy_center'), confirmText: t('delete_data') })
+        : confirm(t('confirm_delete_all_data'));
+
+    if (!shouldDelete) return;
+
+    localStorage.removeItem(PREFS_STORAGE_KEY);
+    localStorage.removeItem('aav_backup_data');
+    localStorage.removeItem('aav_backup_timestamp');
+    location.reload();
 }
 
 /**
@@ -375,7 +379,7 @@ function loginWithGitHub() {
     const SCOPE = 'read:user';
     const authUrl = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=${SCOPE}&state=${Math.random().toString(36).substring(7)}`;
     console.log('Redirecting to GitHub:', authUrl);
-    alert('Đang chuyển hướng đến GitHub để xác thực...');
+    if (typeof showToast === 'function') showToast('Đang chuyển hướng đến GitHub để xác thực...'); else alert('Đang chuyển hướng đến GitHub để xác thực...');
     setTimeout(() => {
         const mockUser = { name: 'lucdai', avatar: 'https://github.com/lucdai.png' };
         localStorage.setItem('aav_user', JSON.stringify(mockUser));

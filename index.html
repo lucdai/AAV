@@ -95,7 +95,7 @@
     <div class="sr-only" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;"><p data-i18n="welcome_msg"></p><p data-i18n="welcome_msg_2"></p></div>
 
     <!-- MODAL FOR CALCULATION DETAILS -->
-    <div id="calcModal" class="fixed inset-0 bg-slate-900/60 z-50 hidden items-center justify-center p-4 backdrop-blur-md animate-fade-in">
+    <div id="calcModal" class="fixed inset-0 bg-slate-900/60 z-50 hidden items-center justify-center p-4 backdrop-blur-md animate-fade-in" role="dialog" aria-modal="true" aria-labelledby="calcModalTitle">
         <div id="calcModalContent" class="bg-[var(--surface)] rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden border border-white/20">
             <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
                 <h3 id="calcModalTitle" class="text-lg font-extrabold text-slate-900 flex items-center gap-3">
@@ -105,10 +105,10 @@
                     <span data-i18n="calc_details">Chi tiết phép tính</span>
                 </h3>
                 <div class="flex items-center gap-3">
-                    <button onclick="downloadCalcImage()" class="p-2.5 text-[var(--text-muted)] hover:text-indigo-600 hover:bg-[var(--primary-light)] rounded-xl transition-all duration-200" data-i18n-title="download_calc_img">
+                    <button onclick="downloadCalcImage()" class="p-2.5 text-[var(--text-muted)] hover:text-indigo-600 hover:bg-[var(--primary-light)] rounded-xl transition-all duration-200" data-i18n-title="download_calc_img" aria-label="Download calculation image">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                     </button>
-                    <button onclick="closeCalcModal()" class="p-2.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all duration-200">
+                    <button onclick="closeCalcModal()" class="p-2.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all duration-200" data-modal-close aria-label="Close calculation details">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                     </button>
                 </div>
@@ -127,7 +127,7 @@
     <div id="settingsPanel" class="settings-panel">
         <div class="flex justify-between items-center mb-8">
             <h2 class="text-xl font-extrabold text-slate-900" data-i18n="settings">Cài đặt</h2>
-            <button onclick="toggleSettings()" class="p-2 text-slate-400 hover:text-red-500 rounded-lg">
+            <button onclick="toggleSettings()" class="p-2 text-slate-400 hover:text-red-500 rounded-lg" aria-label="Close settings panel">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
         </div>
@@ -616,8 +616,11 @@
             markAsChanged();
         }
         
-        function clearAllData() {
-            if(!confirm(t("confirm_clear_all"))) return;
+        async function clearAllData() {
+            const shouldClear = typeof showConfirmModal === "function"
+                ? await showConfirmModal(t("confirm_clear_all"), { title: t("settings"), confirmText: t("clear_all") })
+                : confirm(t("confirm_clear_all"));
+            if(!shouldClear) return;
             datasets = [{ id: 1, name: t("sample_prefix") + "A", dataStr: "" }];
             manualRows = [{ id: Date.now(), lower: 0, upper: 10, freqs: {} }];
             
@@ -688,11 +691,11 @@
                         renderInputs();
                         calculate();
                         markAsChanged();
-                        alert(t("csv_import_success"));
+                        if (typeof showToast === "function") showToast(t("csv_import_success"), "success"); else alert(t("csv_import_success"));
                     }
                 } catch (err) {
                     console.error(err);
-                    alert(t("csv_parse_error"));
+                    if (typeof showToast === "function") showToast(t("csv_parse_error"), "error"); else alert(t("csv_parse_error"));
                 }
                 input.value = ""; // Reset input
             };
@@ -703,7 +706,7 @@
               <div class="bg-[var(--surface)] border rounded p-2">
                     <div class="flex justify-between items-center mb-1">
                         <input value="${ds.name}" onchange="updateName(${ds.id}, this.value)" class="text-xs font-bold w-20 border-b outline-none focus:border-indigo-500">
-                        <button onclick="deleteDataset(${ds.id})" class="text-red-400 hover:text-red-600 transition p-1" title="${t('remove_sample')}">
+                        <button onclick="deleteDataset(${ds.id})" class="text-red-400 hover:text-red-600 transition p-1" title="${t('remove_sample')}" aria-label="${t('remove_sample')}">
                             <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                         </button>
                     </div>

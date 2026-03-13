@@ -167,16 +167,21 @@ function showAutoSaveNotification() {
 /**
  * Xóa dữ liệu sao lưu
  */
-function clearBackup() {
-    if (confirm(t('confirm_clear_backup'))) {
-        try {
-            localStorage.removeItem(STORAGE_KEY);
-            localStorage.removeItem(BACKUP_TIMESTAMP_KEY);
-            console.log('[AAV Auto-Backup] Dữ liệu sao lưu đã được xóa');
-            alert(t('backup_cleared'));
-        } catch (e) {
-            console.error('[AAV Auto-Backup] Lỗi khi xóa dữ liệu:', e);
-        }
+async function clearBackup() {
+    const shouldClear = typeof showConfirmModal === "function"
+        ? await showConfirmModal(t('confirm_clear_backup'), { title: t('backup_mgmt'), confirmText: t('clear_all') })
+        : confirm(t('confirm_clear_backup'));
+
+    if (!shouldClear) return;
+
+    try {
+        localStorage.removeItem(STORAGE_KEY);
+        localStorage.removeItem(BACKUP_TIMESTAMP_KEY);
+        console.log('[AAV Auto-Backup] Dữ liệu sao lưu đã được xóa');
+        if (typeof showToast === "function") showToast(t('backup_cleared'), "success");
+        else alert(t('backup_cleared'));
+    } catch (e) {
+        console.error('[AAV Auto-Backup] Lỗi khi xóa dữ liệu:', e);
     }
 }
 
@@ -222,7 +227,7 @@ function getLastBackupInfo() {
 function exportBackupAsJSON() {
     const state = loadFromLocalStorage();
     if (!state) {
-        alert(t('no_backup_to_export'));
+        if (typeof showToast === "function") showToast(t('no_backup_to_export'), 'error'); else alert(t('no_backup_to_export'));
         return;
     }
     
@@ -261,10 +266,10 @@ function importBackupFromJSON() {
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
                 localStorage.setItem(BACKUP_TIMESTAMP_KEY, new Date().toISOString());
                 
-                alert(t('import_success'));
+                if (typeof showToast === "function") showToast(t('import_success'), 'success'); else alert(t('import_success'));
                 console.log('[AAV Auto-Backup] Dữ liệu sao lưu đã được nhập');
             } catch (e) {
-                alert('Lỗi khi nhập dữ liệu: ' + e.message);
+                if (typeof showToast === "function") showToast('Lỗi khi nhập dữ liệu: ' + e.message, 'error'); else alert('Lỗi khi nhập dữ liệu: ' + e.message);
                 console.error('[AAV Auto-Backup] Lỗi khi nhập:', e);
             }
         };
