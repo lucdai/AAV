@@ -1297,6 +1297,8 @@
             document.getElementById('manualH').addEventListener('change', markAsChanged);
             document.getElementById('manualK').addEventListener('change', markAsChanged);
             document.getElementById('startValue').addEventListener('change', markAsChanged);
+
+            window.dispatchEvent(new Event('appReady'));
         };
     </script>
     <footer class="mt-20 py-12 border-t border-[var(--border)] text-center animate-fade-in">

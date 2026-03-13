@@ -24,10 +24,27 @@ const DEFAULT_PREFS = {
 
 let userPrefs = { ...DEFAULT_PREFS };
 
+let preferencesInitialized = false;
+
+function getGlobal(name) {
+    return typeof globalThis[name] !== 'undefined' ? globalThis[name] : undefined;
+}
+
+function whenAppReady(callback) {
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', callback, { once: true });
+    } else {
+        callback();
+    }
+    window.addEventListener('appReady', callback, { once: true });
+}
+
 /**
  * Initialize preferences
  */
 function initPreferences() {
+    if (preferencesInitialized) return;
+    preferencesInitialized = true;
     const savedPrefs = localStorage.getItem(PREFS_STORAGE_KEY);
     if (savedPrefs) {
         try {
@@ -93,8 +110,10 @@ function updateChartTheme(theme) {
     Chart.defaults.color = textColor;
     
     // Force re-calculate and re-draw all charts to ensure full synchronization
-    if (typeof calculate === 'function' && typeof lastGroups !== 'undefined' && lastGroups.length > 0) {
-        calculate();
+    const calculateFn = getGlobal('calculate');
+    const groups = getGlobal('lastGroups');
+    if (typeof calculateFn === 'function' && Array.isArray(groups) && groups.length > 0) {
+        calculateFn();
     }
 }
 
@@ -118,7 +137,8 @@ function applyAccentColor(color) {
     document.documentElement.style.setProperty('--primary-light', `${color}20`);
     
     // Sync charts when accent color changes
-    if (typeof lastGroups !== 'undefined' && lastGroups.length > 0) {
+    const groups = getGlobal('lastGroups');
+    if (Array.isArray(groups) && groups.length > 0) {
         updateChartTheme(userPrefs.theme);
     }
 }
@@ -161,8 +181,9 @@ const CHART_PALETTES = {
 function applyChartPalette(paletteName) {
     if (!CHART_PALETTES[paletteName]) return;
     // This will be used by chart generation logic
-    if (typeof Chart !== 'undefined' && typeof calculate === 'function') {
-        calculate();
+    const calculateFn = getGlobal('calculate');
+    if (typeof Chart !== 'undefined' && typeof calculateFn === 'function') {
+        calculateFn();
     }
 }
 
@@ -214,9 +235,10 @@ function handleGlobalHotkeys(e) {
 function saveSessionData() {
     if (!userPrefs.autoSaveSession) return;
     // We need a way to get current datasets. Assuming a global function or variable exists.
-    if (typeof datasets !== 'undefined') {
+    const appDatasets = getGlobal('datasets');
+    if (Array.isArray(appDatasets)) {
         const data = {
-            datasets: datasets,
+            datasets: appDatasets,
             timestamp: new Date().getTime()
         };
         localStorage.setItem('aav_last_session', JSON.stringify(data));
@@ -230,7 +252,8 @@ function loadSessionData() {
         try {
             const data = JSON.parse(saved);
             // If datasets exist, we might want to restore them if current datasets are empty
-            if (data.datasets && data.datasets.length > 0 && (typeof datasets === 'undefined' || datasets.length === 0)) {
+            const appDatasets = getGlobal('datasets');
+            if (data.datasets && data.datasets.length > 0 && (!Array.isArray(appDatasets) || appDatasets.length === 0)) {
                 // Restore logic depends on how datasets are managed in the app
                 console.log('Session data found from:', new Date(data.timestamp).toLocaleString());
             }
@@ -345,7 +368,9 @@ function exportUserData() {
 }
 
 function deleteUserData() {
-    if (confirm(t('confirm_delete_all_data'))) {
+    const translate = getGlobal('t');
+    const confirmText = typeof translate === 'function' ? translate('confirm_delete_all_data') : 'Delete all saved data?';
+    if (confirm(confirmText)) {
         localStorage.removeItem(PREFS_STORAGE_KEY);
         localStorage.removeItem('aav_backup_data');
         localStorage.removeItem('aav_backup_timestamp');
@@ -387,22 +412,22 @@ function updateSyncStatus(user) {
     const statusText = document.getElementById('syncStatusText');
     if (statusText) {
         if (user) {
-            statusText.innerText = t('logged_in_as', { name: user.name });
+            const translate = getGlobal('t');
+            statusText.innerText = typeof translate === 'function' ? translate('logged_in_as', { name: user.name }) : `Logged in as ${user.name}`;
             statusText.classList.add('text-indigo-600', 'font-bold');
         } else {
-            statusText.innerText = t('not_logged_in');
+            const translate = getGlobal('t');
+            statusText.innerText = typeof translate === 'function' ? translate('not_logged_in') : 'Not logged in';
             statusText.classList.remove('text-indigo-600', 'font-bold');
         }
     }
 }
 
-// Check login status on load
-document.addEventListener('DOMContentLoaded', () => {
+// Check login status and initialize after app scripts are ready
+whenAppReady(() => {
     const savedUser = localStorage.getItem('aav_user');
     if (savedUser) {
         updateSyncStatus(JSON.parse(savedUser));
     }
+    initPreferences();
 });
-
-// Initialize on load
-document.addEventListener('DOMContentLoaded', initPreferences);

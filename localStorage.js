@@ -8,21 +8,43 @@ const BACKUP_TIMESTAMP_KEY = 'aav_backup_timestamp';
 const AUTO_SAVE_INTERVAL = 1000; // Lưu mỗi 1 giây khi có thay đổi
 let autoSaveTimer = null;
 let hasUnsavedChanges = false;
+let autoBackupInitialized = false;
+
+function getAppGlobal(name) {
+    return typeof globalThis[name] !== 'undefined' ? globalThis[name] : undefined;
+}
+
+function isCoreStateReady() {
+    return Array.isArray(getAppGlobal('datasets')) && Array.isArray(getAppGlobal('manualRows'));
+}
 
 /**
  * Lấy trạng thái hiện tại của ứng dụng
  */
 function getCurrentState() {
+    if (!isCoreStateReady()) {
+        return null;
+    }
+
+    const decimalPlaces = document.getElementById('decimalPlaces');
+    const method = document.getElementById('method');
+    const manualH = document.getElementById('manualH');
+    const manualK = document.getElementById('manualK');
+    const startValue = document.getElementById('startValue');
+
+    const datasets = getAppGlobal('datasets');
+    const manualRows = getAppGlobal('manualRows');
+
     return {
-        m: mode,
+        m: getAppGlobal('mode') || 'raw',
         ds: datasets.map(d => ({ n: d.name, s: d.dataStr })),
         mr: manualRows.map(r => ({ l: r.lower, u: r.upper, f: r.freqs })),
-        dp: document.getElementById('decimalPlaces').value,
-        meth: document.getElementById('method').value,
-        h: document.getElementById('manualH').value,
-        k: document.getElementById('manualK').value,
-        sv: document.getElementById('startValue').value,
-        ct: currentTab // Lưu tab hiện tại
+        dp: decimalPlaces ? decimalPlaces.value : '',
+        meth: method ? method.value : '',
+        h: manualH ? manualH.value : '',
+        k: manualK ? manualK.value : '',
+        sv: startValue ? startValue.value : '',
+        ct: getAppGlobal('currentTab') || 'data' // Lưu tab hiện tại
     };
 }
 
@@ -32,6 +54,7 @@ function getCurrentState() {
 function saveToLocalStorage() {
     try {
         const state = getCurrentState();
+        if (!state) return;
         const timestamp = new Date().toISOString();
         
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -48,7 +71,9 @@ function saveToLocalStorage() {
             console.warn('[AAV Auto-Backup] localStorage đầy, xóa dữ liệu cũ');
             clearOldBackups();
             try {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(getCurrentState()));
+                const fallbackState = getCurrentState();
+                if (!fallbackState) return;
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(fallbackState));
                 localStorage.setItem(BACKUP_TIMESTAMP_KEY, new Date().toISOString());
             } catch (e2) {
                 console.error('[AAV Auto-Backup] Không thể lưu dữ liệu:', e2);
@@ -85,16 +110,20 @@ function restoreFromLocalStorage() {
 
     try {
         // Khôi phục mode
-        if (state.m) mode = state.m;
+        if (state.m && typeof getAppGlobal('mode') !== 'undefined') globalThis.mode = state.m;
         
         // Khôi phục datasets
         if (state.ds) {
-            datasets = state.ds.map((d, i) => ({ id: i + 1, name: d.n, dataStr: d.s }));
+            if (Array.isArray(getAppGlobal('datasets'))) {
+                globalThis.datasets = state.ds.map((d, i) => ({ id: i + 1, name: d.n, dataStr: d.s }));
+            }
         }
         
         // Khôi phục manual rows
         if (state.mr) {
-            manualRows = state.mr.map((r, i) => ({ id: Date.now() + i, lower: r.l, upper: r.u, freqs: r.f }));
+            if (Array.isArray(getAppGlobal('manualRows'))) {
+                globalThis.manualRows = state.mr.map((r, i) => ({ id: Date.now() + i, lower: r.l, upper: r.u, freqs: r.f }));
+            }
         }
         
         // Khôi phục các giá trị input
@@ -105,7 +134,7 @@ function restoreFromLocalStorage() {
         if (state.sv) document.getElementById('startValue').value = state.sv;
         
         // Khôi phục tab hiện tại
-        if (state.ct) currentTab = state.ct;
+        if (state.ct && typeof getAppGlobal('currentTab') !== 'undefined') globalThis.currentTab = state.ct;
         
         console.log('[AAV Auto-Backup] Trạng thái đã được khôi phục thành công');
         return true;
@@ -148,7 +177,7 @@ function showAutoSaveNotification() {
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
             </svg>
-            <span>${t('data_saved')}</span>
+            <span>${typeof getAppGlobal('t') === 'function' ? getAppGlobal('t')('data_saved') : 'Data saved'}</span>
         `;
         document.body.appendChild(notification);
     }
@@ -168,12 +197,14 @@ function showAutoSaveNotification() {
  * Xóa dữ liệu sao lưu
  */
 function clearBackup() {
-    if (confirm(t('confirm_clear_backup'))) {
+    const translate = getAppGlobal('t');
+    const confirmText = typeof translate === 'function' ? translate('confirm_clear_backup') : 'Clear backup?';
+    if (confirm(confirmText)) {
         try {
             localStorage.removeItem(STORAGE_KEY);
             localStorage.removeItem(BACKUP_TIMESTAMP_KEY);
             console.log('[AAV Auto-Backup] Dữ liệu sao lưu đã được xóa');
-            alert(t('backup_cleared'));
+            alert(typeof translate === 'function' ? translate('backup_cleared') : 'Backup cleared');
         } catch (e) {
             console.error('[AAV Auto-Backup] Lỗi khi xóa dữ liệu:', e);
         }
@@ -222,7 +253,8 @@ function getLastBackupInfo() {
 function exportBackupAsJSON() {
     const state = loadFromLocalStorage();
     if (!state) {
-        alert(t('no_backup_to_export'));
+        const translate = getAppGlobal('t');
+        alert(typeof translate === 'function' ? translate('no_backup_to_export') : 'No backup to export');
         return;
     }
     
@@ -251,17 +283,18 @@ function importBackupFromJSON() {
         reader.onload = (event) => {
             try {
                 const state = JSON.parse(event.target.result);
+                const translate = getAppGlobal('t');
                 
                 // Validate dữ liệu
                 if (!state.ds || !Array.isArray(state.ds)) {
-                    throw new Error(t('invalid_file_format'));
+                    throw new Error(typeof translate === 'function' ? translate('invalid_file_format') : 'Invalid file format');
                 }
                 
                 // Lưu vào localStorage
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
                 localStorage.setItem(BACKUP_TIMESTAMP_KEY, new Date().toISOString());
                 
-                alert(t('import_success'));
+                alert(typeof translate === 'function' ? translate('import_success') : 'Import successful');
                 console.log('[AAV Auto-Backup] Dữ liệu sao lưu đã được nhập');
             } catch (e) {
                 alert('Lỗi khi nhập dữ liệu: ' + e.message);
@@ -277,6 +310,9 @@ function importBackupFromJSON() {
  * Khởi tạo hệ thống auto-backup
  */
 function initAutoBackup() {
+    if (autoBackupInitialized) return;
+    autoBackupInitialized = true;
+
     console.log('[AAV Auto-Backup] Khởi tạo hệ thống tự động sao lưu');
     
     // Lưu khi người dùng thay đổi dữ liệu
@@ -291,3 +327,6 @@ function initAutoBackup() {
     
     console.log('[AAV Auto-Backup] Hệ thống tự động sao lưu đã được khởi tạo');
 }
+
+document.addEventListener('DOMContentLoaded', initAutoBackup, { once: true });
+window.addEventListener('appReady', initAutoBackup, { once: true });
