@@ -1,18 +1,32 @@
 {
-  "generated_at": "2026-03-13T17:06:34.939291",
-  "total_commits": 166,
+  "generated_at": "2026-03-13T17:07:56.428183",
+  "total_commits": 169,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-14",
-      "commit_count": 4,
+      "commit_count": 6,
       "categories": {
         "Features": [
+          {
+            "sha": "4a09450",
+            "message": "Merge pull request #8 from lucdai/codex/add-fallbacks-for-browser-compatibility",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/4a0945089aa5e39774c841c9d9cfa401c111beef"
+          },
           {
             "sha": "256d226",
             "message": "Add storage validation and quota-safe localStorage handling",
             "author": "lucdai",
             "url": "https://github.com/lucdai/AAV/commit/256d226ac2049218a7c870dee16b02176e5d67f0"
+          }
+        ],
+        "Improvements": [
+          {
+            "sha": "600d660",
+            "message": "Improve browser compatibility in preferences handling",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/600d6608934ea09ce873d2c9f8be2eca5116ae6f"
           }
         ],
         "Other": [
@@ -39,7 +53,7 @@
     },
     {
       "date": "2026-03-13",
-      "commit_count": 13,
+      "commit_count": 14,
       "categories": {
         "Features": [
           {
@@ -56,6 +70,12 @@
           }
         ],
         "Other": [
+          {
+            "sha": "04ecc94",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/04ecc94ecf890caac0ec316f50077e754b5978d9"
+          },
           {
             "sha": "6a458ec",
             "message": "chore: update changelog from commits",
