@@ -572,6 +572,11 @@
         let mode = 'raw', currentTab = 'data';
         let datasets = [{ id: 1, name: t("sample_a"), dataStr: "45, 52, 60, 48, 55, 62, 49, 58, 65, 51" }];
         let manualRows = [{ id: 1, lower: 40, upper: 50, freqs: {} }, { id: 2, lower: 50, upper: 60, freqs: {} }, { id: 3, lower: 60, upper: 70, freqs: {} }];
+        function escapeHtml(text) {
+            if (text === undefined || text === null) return '';
+            return String(text).replace(/[&<>"']/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m]));
+        }
+
         const colors = [
             { bg: 'rgba(59, 130, 246, 0.5)', border: '#2563eb' }, { bg: 'rgba(239, 68, 68, 0.5)', border: '#dc2626' },
             { bg: 'rgba(16, 185, 129, 0.5)', border: '#059669' }, { bg: 'rgba(245, 158, 11, 0.5)', border: '#d97706' },
@@ -699,33 +704,133 @@
             reader.readAsText(file);
         }
         function renderInputs() {
-            document.getElementById('datasetContainer').innerHTML = datasets.map(ds=>`
-              <div class="bg-[var(--surface)] border rounded p-2">
-                    <div class="flex justify-between items-center mb-1">
-                        <input value="${ds.name}" onchange="updateName(${ds.id}, this.value)" class="text-xs font-bold w-20 border-b outline-none focus:border-indigo-500">
-                        <button onclick="deleteDataset(${ds.id})" class="text-red-400 hover:text-red-600 transition p-1" title="${t('remove_sample')}">
-                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                        </button>
-                    </div>
-                    <textarea oninput="updateRaw(${ds.id}, this.value)" class="w-full h-12 text-[10px] font-mono border rounded p-1 resize-none">${ds.dataStr}</textarea>
-                </div>`).join('');
+            const container = document.getElementById('datasetContainer');
+            container.replaceChildren();
+
+            datasets.forEach((ds) => {
+                const card = document.createElement('div');
+                card.className = 'bg-[var(--surface)] border rounded p-2';
+
+                const row = document.createElement('div');
+                row.className = 'flex justify-between items-center mb-1';
+
+                const nameInput = document.createElement('input');
+                nameInput.value = ds.name;
+                nameInput.className = 'text-xs font-bold w-20 border-b outline-none focus:border-indigo-500';
+                nameInput.addEventListener('change', function() { updateName(ds.id, this.value); });
+
+                const delBtn = document.createElement('button');
+                delBtn.className = 'text-red-400 hover:text-red-600 transition p-1';
+                delBtn.title = t('remove_sample');
+                delBtn.addEventListener('click', () => deleteDataset(ds.id));
+                delBtn.insertAdjacentHTML('beforeend', '<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>');
+
+                row.appendChild(nameInput);
+                row.appendChild(delBtn);
+
+                const textarea = document.createElement('textarea');
+                textarea.className = 'w-full h-12 text-[10px] font-mono border rounded p-1 resize-none';
+                textarea.value = ds.dataStr;
+                textarea.addEventListener('input', function() { updateRaw(ds.id, this.value); });
+
+                card.appendChild(row);
+                card.appendChild(textarea);
+                container.appendChild(card);
+            });
+
             const h = document.getElementById('manualHeaderRow');
-            h.innerHTML = `<th class="p-2 w-12" data-i18n="lower_bound">${t('lower_bound')}</th><th class="p-2 w-12" data-i18n="upper_bound">${t('upper_bound')}</th>` + datasets.map(d=>`<th class="p-2 text-center text-indigo-700">${d.name}</th>`).join('') + `<th class="w-6"></th>`;
+            h.replaceChildren();
+
+            const lowerTh = document.createElement('th');
+            lowerTh.className = 'p-2 w-12';
+            lowerTh.setAttribute('data-i18n', 'lower_bound');
+            lowerTh.textContent = t('lower_bound');
+            h.appendChild(lowerTh);
+
+            const upperTh = document.createElement('th');
+            upperTh.className = 'p-2 w-12';
+            upperTh.setAttribute('data-i18n', 'upper_bound');
+            upperTh.textContent = t('upper_bound');
+            h.appendChild(upperTh);
+
+            datasets.forEach((d) => {
+                const th = document.createElement('th');
+                th.className = 'p-2 text-center text-indigo-700';
+                th.textContent = d.name;
+                h.appendChild(th);
+            });
+
+            const actionTh = document.createElement('th');
+            actionTh.className = 'w-6';
+            h.appendChild(actionTh);
+
             renderManualBody();
             updatePieSelect();
         }
         function updatePieSelect() {
             const sel = document.getElementById('pieDatasetSelect');
-            sel.innerHTML = datasets.map(d => `<option value="${d.id}">${d.name}</option>`).join('');
+            sel.replaceChildren();
+            datasets.forEach((d) => {
+                const option = document.createElement('option');
+                option.value = d.id;
+                option.textContent = d.name;
+                sel.appendChild(option);
+            });
         }
 
         // --- Manual Table ---
         function renderManualBody() {
-            document.getElementById('manualBody').innerHTML = manualRows.map(r=>`
-                <tr class="border-b hover:bg-slate-50"><td class="p-1"><input type="text" value="${r.lower}" onchange="updRow(${r.id},'lower',this.value)" class="w-full p-1 border rounded text-center input-cell"></td>
-                <td class="p-1"><input type="text" value="${r.upper}" onchange="updRow(${r.id},'upper',this.value)" class="w-full p-1 border rounded text-center input-cell"></td>
-                ${datasets.map(ds=>`<td class="p-1"><input type="number" value="${r.freqs[ds.id]||0}" min="0" onchange="updRow(${r.id},'freq_${ds.id}',this.value)" class="w-full p-1 border rounded text-center font-bold text-indigo-600 input-cell"></td>`).join('')}
-                <td class="p-1"><button onclick="delRow(${r.id})" class="text-red-300 hover:text-red-500">x</button></td></tr>`).join('');
+            const body = document.getElementById('manualBody');
+            body.replaceChildren();
+
+            manualRows.forEach((r) => {
+                const tr = document.createElement('tr');
+                tr.className = 'border-b hover:bg-slate-50';
+
+                const lowerTd = document.createElement('td');
+                lowerTd.className = 'p-1';
+                const lowerInput = document.createElement('input');
+                lowerInput.type = 'text';
+                lowerInput.value = r.lower;
+                lowerInput.className = 'w-full p-1 border rounded text-center input-cell';
+                lowerInput.addEventListener('change', function() { updRow(r.id, 'lower', this.value); });
+                lowerTd.appendChild(lowerInput);
+                tr.appendChild(lowerTd);
+
+                const upperTd = document.createElement('td');
+                upperTd.className = 'p-1';
+                const upperInput = document.createElement('input');
+                upperInput.type = 'text';
+                upperInput.value = r.upper;
+                upperInput.className = 'w-full p-1 border rounded text-center input-cell';
+                upperInput.addEventListener('change', function() { updRow(r.id, 'upper', this.value); });
+                upperTd.appendChild(upperInput);
+                tr.appendChild(upperTd);
+
+                datasets.forEach((ds) => {
+                    const freqTd = document.createElement('td');
+                    freqTd.className = 'p-1';
+                    const freqInput = document.createElement('input');
+                    freqInput.type = 'number';
+                    freqInput.value = r.freqs[ds.id] || 0;
+                    freqInput.min = '0';
+                    freqInput.className = 'w-full p-1 border rounded text-center font-bold text-indigo-600 input-cell';
+                    freqInput.addEventListener('change', function() { updRow(r.id, `freq_${ds.id}`, this.value); });
+                    freqTd.appendChild(freqInput);
+                    tr.appendChild(freqTd);
+                });
+
+                const actionTd = document.createElement('td');
+                actionTd.className = 'p-1';
+                const delBtn = document.createElement('button');
+                delBtn.className = 'text-red-300 hover:text-red-500';
+                delBtn.textContent = 'x';
+                delBtn.addEventListener('click', () => delRow(r.id));
+                actionTd.appendChild(delBtn);
+                tr.appendChild(actionTd);
+
+                body.appendChild(tr);
+            });
         }
         function addManualRow() {
             const last = manualRows[manualRows.length-1];
@@ -882,7 +987,7 @@
                 {id:'outliers', l:t('outliers_count'), raw:1, len:1},
                 {id:'q1Loc', l:t('q1_loc'), txt:1}, {id:'q2Loc', l:t('q2_loc'), txt:1}, {id:'q3Loc', l:t('q3_loc'), txt:1}
             ];
-            let h = `<thead><tr class="bg-[var(--primary-light)] border-b"><th class="px-4 py-2" data-i18n="metric_col">${t('metric_col')}</th>`+results.map(r=>`<th class="px-4 py-2 text-center" style="color:${r.color.border}">${r.name}</th>`).join('')+`</tr></thead><tbody>`;
+            let h = `<thead><tr class="bg-[var(--primary-light)] border-b"><th class="px-4 py-2" data-i18n="metric_col">${t('metric_col')}</th>`+results.map(r=>`<th class="px-4 py-2 text-center" style="color:${r.color.border}">${escapeHtml(r.name)}</th>`).join('')+`</tr></thead><tbody>`;
             m.forEach(x => {
                 h += `<tr class="border-b last:border-0 hover:bg-slate-50"><td class="px-4 py-3 font-medium text-[var(--text-muted)]">${x.l}</td>` + results.map((r, rIdx)=>{
                     let v = r.s[x.id];
@@ -893,13 +998,14 @@
                     if(x.raw && mode==='table') return `<td class="text-center text-slate-300 italic">N/A</td>`;
                     if(v===undefined) return `<td>-</td>`;
                     if(x.len) return `<td class="text-center font-bold text-red-600">${v.length}</td>`;
-                    if(x.txt) return `<td class="text-center text-[var(--text-main)]">${v}</td>`;
+                    if(x.txt) return `<td class="text-center text-[var(--text-main)]">${escapeHtml(v)}</td>`;
                     return `<td class="text-center font-bold text-[var(--text-main)] px-4 py-3">${fmt(v)}${calcBtn}</td>`;
                 }).join('') + `</tr>`;
             });
             document.getElementById('statsTable').innerHTML = h+`</tbody>`;
 
             let groupTitle = document.getElementById('groupColumnTitle')?.innerText || t("group");
+            groupTitle = escapeHtml(groupTitle);
             let fh = `<thead><tr class="bg-[var(--primary-light)] border-b"><th class="px-4 py-2 outline-none focus:ring-2 focus:ring-indigo-500" contenteditable="true" id="groupColumnTitle" onblur="calculate()">${groupTitle}</th><th class="px-4 py-2 text-center" data-i18n="rep_val">${t('rep_val')}</th>`+results.map(r=>`<th class="px-4 py-2 text-center" style="color:${r.color.border}" data-i18n="freq">${t('freq')}</th>`).join('')+`</tr></thead><tbody>`;
             groups.forEach((g,i)=>{
                 fh += `<tr class="border-b hover:bg-slate-50"><td class="px-4 py-2 text-slate-800">[${fmt(g.lower)}; ${fmt(g.upper)})</td><td class="px-4 py-2 text-center text-[var(--text-muted)]">${fmt(g.midpoint)}</td>`+results.map(r=>`<td class="px-4 py-2 text-center font-bold">${r.gStats[i].freq}</td>`).join('')+`</tr>`;

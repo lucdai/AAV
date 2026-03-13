@@ -37,9 +37,67 @@ function frac(top, bot) {
     return `<div class="fraction"><span class="numerator">${top}</span><span class="denominator">${bot}</span></div>`;
 }
 
+function parseSerializedData(data) {
+    if (typeof data !== 'string') return data;
+    try {
+        return JSON.parse(decodeURIComponent(data));
+    } catch (error) {
+        console.error('Unable to parse serialized calculation data:', error);
+        return null;
+    }
+}
+
+function sanitizeNumber(value, fallback = 0) {
+    const num = Number(value);
+    return Number.isFinite(num) ? num : fallback;
+}
+
+function normalizeGroups(groups) {
+    if (!Array.isArray(groups)) return [];
+    return groups.map((group) => ({
+        lower: sanitizeNumber(group?.lower),
+        upper: sanitizeNumber(group?.upper),
+        midpoint: sanitizeNumber(group?.midpoint)
+    }));
+}
+
+function normalizeResult(result) {
+    if (!result || typeof result !== 'object') return null;
+
+    const safeStats = result.s || {};
+    const safeGroupStats = Array.isArray(result.gStats) ? result.gStats.map((groupStat) => ({
+        freq: sanitizeNumber(groupStat?.freq),
+        cf: sanitizeNumber(groupStat?.cf)
+    })) : [];
+
+    return {
+        ...result,
+        name: typeof result.name === 'string' ? result.name : String(result.name || ''),
+        rawData: Array.isArray(result.rawData) ? result.rawData.map((item) => sanitizeNumber(item)).filter((item) => Number.isFinite(item)) : [],
+        gStats: safeGroupStats,
+        s: {
+            ...safeStats,
+            N: sanitizeNumber(safeStats.N),
+            mean: sanitizeNumber(safeStats.mean),
+            q1: sanitizeNumber(safeStats.q1),
+            q2: sanitizeNumber(safeStats.q2),
+            q3: sanitizeNumber(safeStats.q3),
+            mode: sanitizeNumber(safeStats.mode),
+            variance: sanitizeNumber(safeStats.variance),
+            sd: sanitizeNumber(safeStats.sd),
+            range: sanitizeNumber(safeStats.range),
+            iqr: sanitizeNumber(safeStats.iqr),
+            cv: sanitizeNumber(safeStats.cv),
+            q1Idx: Number.isInteger(safeStats.q1Idx) ? safeStats.q1Idx : -1,
+            q2Idx: Number.isInteger(safeStats.q2Idx) ? safeStats.q2Idx : -1,
+            q3Idx: Number.isInteger(safeStats.q3Idx) ? safeStats.q3Idx : -1
+        }
+    };
+}
+
 function showCalculation(statId, resultData, groupsData) {
-    const result = typeof resultData === 'string' ? JSON.parse(decodeURIComponent(resultData)) : resultData;
-    const groups = typeof groupsData === 'string' ? JSON.parse(decodeURIComponent(groupsData)) : groupsData;
+    const result = normalizeResult(parseSerializedData(resultData));
+    const groups = normalizeGroups(parseSerializedData(groupsData));
     
     let content = '';
     let title = '';
@@ -94,7 +152,11 @@ function showCalculation(statId, resultData, groupsData) {
     const modal = document.getElementById('calcModal');
     if (modal) {
         document.getElementById('calcModalTitle').innerText = title;
-        document.getElementById('calcModalBody').innerHTML = `<div class="math-text">${content}</div>`;
+        const modalBody = document.getElementById('calcModalBody');
+        const contentContainer = document.createElement('div');
+        contentContainer.className = 'math-text';
+        contentContainer.innerHTML = content;
+        modalBody.replaceChildren(contentContainer);
         modal.classList.remove('hidden');
         modal.classList.add('flex');
     }
