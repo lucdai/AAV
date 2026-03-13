@@ -2,13 +2,34 @@
 const urlParams = new URLSearchParams(window.location.search);
 let currentLang = urlParams.get('lang') || localStorage.getItem('aav_lang') || 'vi';
 let translations = {};
+const loadedLanguages = new Set();
+
+async function loadLanguage(lang) {
+    if (loadedLanguages.has(lang)) return;
+
+    const response = await fetch(`translations/${lang}.json`);
+    if (!response.ok) {
+        throw new Error(`Failed to load language: ${lang}`);
+    }
+
+    translations[lang] = await response.json();
+    loadedLanguages.add(lang);
+}
 
 async function initI18n() {
     try {
-        const response = await fetch('translations.json');
-        translations = await response.json();
+        await loadLanguage('vi');
         
         // Ensure currentLang is valid
+        if (currentLang !== 'vi') {
+            try {
+                await loadLanguage(currentLang);
+            } catch {
+                currentLang = 'vi';
+                localStorage.setItem('aav_lang', 'vi');
+            }
+        }
+
         if (!translations[currentLang]) {
             currentLang = 'vi';
             localStorage.setItem('aav_lang', 'vi');
@@ -83,7 +104,14 @@ function applyTranslations() {
     });
 }
 
-function changeLanguage(lang) {
+async function changeLanguage(lang) {
+    try {
+        await loadLanguage(lang);
+    } catch (error) {
+        console.error('Error loading selected language:', error);
+        return;
+    }
+
     currentLang = lang;
     localStorage.setItem('aav_lang', lang);
     // Update dataset names if they are default samples
@@ -231,7 +259,7 @@ async function updateLastUpdatedDate() {
         const dateDot = `${day}.${month}.${year}`;
         const dateChinese = `${year}年${lastCommitDate.getMonth() + 1}月${lastCommitDate.getDate()}日`;
         
-        for (let lang in translations) {
+        for (let lang of loadedLanguages) {
             if (translations[lang].footer_text) {
                 let text = translations[lang].footer_text;
                 // Update year

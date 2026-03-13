@@ -1,6 +1,7 @@
 import json
 import re
 from datetime import datetime
+from pathlib import Path
 
 def update_dates():
     now = datetime.now()
@@ -18,28 +19,30 @@ def update_dates():
     with open("index.html", "w", encoding="utf-8") as f:
         f.write(content)
     
-    # Update translations.json
-    with open("translations.json", "r", encoding="utf-8") as f:
-        translations = json.load(f)
-    
-    for lang in translations:
-        if "footer_text" in translations[lang]:
-            text = translations[lang]["footer_text"]
+    # Update translation files
+    translation_dir = Path("translations")
+    for translation_file in translation_dir.glob("*.json"):
+        with open(translation_file, "r", encoding="utf-8") as f:
+            translation = json.load(f)
+
+        if "footer_text" in translation:
+            text = translation["footer_text"]
             # Handle different formats
             if "Cập nhật mới nhất:" in text:
-                translations[lang]["footer_text"] = re.sub(r"\d{2}/\d{2}/\d{4}", date_slash, text)
+                translation["footer_text"] = re.sub(r"\d{2}/\d{2}/\d{4}", date_slash, text)
             elif "Last updated:" in text:
-                translations[lang]["footer_text"] = re.sub(r"\d{2}/\d{2}/\d{4}", date_slash, text)
+                translation["footer_text"] = re.sub(r"\d{2}/\d{2}/\d{4}", date_slash, text)
             elif "最后更新：" in text:
-                translations[lang]["footer_text"] = re.sub(r"\d{4}年\d{1,2}月\d{1,2}日", date_chinese, text)
+                translation["footer_text"] = re.sub(r"\d{4}年\d{1,2}月\d{1,2}日", date_chinese, text)
             elif "Последнее обновление:" in text:
-                translations[lang]["footer_text"] = re.sub(r"\d{2}\.\d{2}\.\d{4}", date_dot, text)
+                translation["footer_text"] = re.sub(r"\d{2}\.\d{2}\.\d{4}", date_dot, text)
             else:
                 # Fallback for other languages using DD/MM/YYYY
-                translations[lang]["footer_text"] = re.sub(r"\d{2}/\d{2}/\d{4}", date_slash, text)
+                translation["footer_text"] = re.sub(r"\d{2}/\d{2}/\d{4}", date_slash, text)
 
-    with open("translations.json", "w", encoding="utf-8") as f:
-        json.dump(translations, f, ensure_ascii=False, indent=4)
+        with open(translation_file, "w", encoding="utf-8") as f:
+            json.dump(translation, f, ensure_ascii=False, indent=2)
+            f.write("\n")
 
 if __name__ == "__main__":
     update_dates()
