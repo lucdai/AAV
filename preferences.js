@@ -130,20 +130,8 @@ function applyCustomColors(bgColor, textColor) {
     const root = document.documentElement;
     if (bgColor) {
         root.style.setProperty('--background', bgColor);
-        // Also adjust surface color to be slightly different
-        const isDark = root.classList.contains('dark-mode') || 
-                      (userPrefs.theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
-        const surfaceColor = adjustColor(bgColor, isDark ? 10 : -5);
-        const borderColor = adjustColor(bgColor, isDark ? 20 : -15);
-        const gridColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
-        root.style.setProperty('--surface', surfaceColor);
-        root.style.setProperty('--border', borderColor);
-        root.style.setProperty('--grid', gridColor);
     } else {
         root.style.removeProperty('--background');
-        root.style.removeProperty('--surface');
-        root.style.removeProperty('--border');
-        root.style.removeProperty('--grid');
     }
     
     if (textColor) {
