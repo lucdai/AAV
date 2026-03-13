@@ -5,9 +5,15 @@
 
 const STORAGE_KEY = 'aav_backup_data';
 const BACKUP_TIMESTAMP_KEY = 'aav_backup_timestamp';
-const AUTO_SAVE_INTERVAL = 1000; // Lưu mỗi 1 giây khi có thay đổi
+const AUTO_SAVE_INTERVAL = 3000; // Lưu mỗi 3 giây khi có thay đổi
 let autoSaveTimer = null;
 let hasUnsavedChanges = false;
+
+function logAutoBackup(message, ...args) {
+    if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+        console.log(`[AAV Auto-Backup] ${message}`, ...args);
+    }
+}
 
 /**
  * Lấy trạng thái hiện tại của ứng dụng
@@ -40,7 +46,7 @@ function saveToLocalStorage() {
         // Hiển thị thông báo sao lưu ngắn gọn
         showAutoSaveNotification();
         
-        console.log('[AAV Auto-Backup] Dữ liệu đã được sao lưu lúc:', timestamp);
+        logAutoBackup('Dữ liệu đã được sao lưu lúc:', timestamp);
     } catch (e) {
         console.error('[AAV Auto-Backup] Lỗi khi lưu dữ liệu:', e);
         // Xử lý trường hợp localStorage đầy
@@ -67,7 +73,7 @@ function loadFromLocalStorage() {
         
         if (savedData) {
             const state = JSON.parse(savedData);
-            console.log('[AAV Auto-Backup] Dữ liệu được khôi phục từ:', timestamp);
+            logAutoBackup('Dữ liệu được khôi phục từ:', timestamp);
             return state;
         }
     } catch (e) {
@@ -107,7 +113,7 @@ function restoreFromLocalStorage() {
         // Khôi phục tab hiện tại
         if (state.ct) currentTab = state.ct;
         
-        console.log('[AAV Auto-Backup] Trạng thái đã được khôi phục thành công');
+        logAutoBackup('Trạng thái đã được khôi phục thành công');
         return true;
     } catch (e) {
         console.error('[AAV Auto-Backup] Lỗi khi khôi phục trạng thái:', e);
@@ -124,7 +130,7 @@ function markAsChanged() {
     // Xóa timer cũ nếu có
     if (autoSaveTimer) clearTimeout(autoSaveTimer);
     
-    // Thiết lập timer mới để lưu sau 1 giây
+    // Thiết lập timer mới để lưu sau khoảng nghỉ ngắn
     autoSaveTimer = setTimeout(() => {
         if (hasUnsavedChanges) {
             saveToLocalStorage();
@@ -172,7 +178,7 @@ function clearBackup() {
         try {
             localStorage.removeItem(STORAGE_KEY);
             localStorage.removeItem(BACKUP_TIMESTAMP_KEY);
-            console.log('[AAV Auto-Backup] Dữ liệu sao lưu đã được xóa');
+            logAutoBackup('Dữ liệu sao lưu đã được xóa');
             alert(t('backup_cleared'));
         } catch (e) {
             console.error('[AAV Auto-Backup] Lỗi khi xóa dữ liệu:', e);
@@ -187,7 +193,7 @@ function clearOldBackups() {
     try {
         localStorage.removeItem(STORAGE_KEY);
         localStorage.removeItem(BACKUP_TIMESTAMP_KEY);
-        console.log('[AAV Auto-Backup] Đã xóa backup cũ');
+        logAutoBackup('Đã xóa backup cũ');
     } catch (e) {
         console.error('[AAV Auto-Backup] Lỗi khi xóa backup cũ:', e);
     }
@@ -262,7 +268,7 @@ function importBackupFromJSON() {
                 localStorage.setItem(BACKUP_TIMESTAMP_KEY, new Date().toISOString());
                 
                 alert(t('import_success'));
-                console.log('[AAV Auto-Backup] Dữ liệu sao lưu đã được nhập');
+                logAutoBackup('Dữ liệu sao lưu đã được nhập');
             } catch (e) {
                 alert('Lỗi khi nhập dữ liệu: ' + e.message);
                 console.error('[AAV Auto-Backup] Lỗi khi nhập:', e);
@@ -277,7 +283,7 @@ function importBackupFromJSON() {
  * Khởi tạo hệ thống auto-backup
  */
 function initAutoBackup() {
-    console.log('[AAV Auto-Backup] Khởi tạo hệ thống tự động sao lưu');
+    logAutoBackup('Khởi tạo hệ thống tự động sao lưu');
     
     // Lưu khi người dùng thay đổi dữ liệu
     // Các hàm này sẽ được gọi từ các event handlers trong index.html
@@ -289,5 +295,5 @@ function initAutoBackup() {
         }
     });
     
-    console.log('[AAV Auto-Backup] Hệ thống tự động sao lưu đã được khởi tạo');
+    logAutoBackup('Hệ thống tự động sao lưu đã được khởi tạo');
 }

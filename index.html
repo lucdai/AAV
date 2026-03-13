@@ -698,8 +698,12 @@
             };
             reader.readAsText(file);
         }
-        function renderInputs() {
-            document.getElementById('datasetContainer').innerHTML = datasets.map(ds=>`
+        function setElementHTML(id, html) {
+            document.getElementById(id).innerHTML = html;
+        }
+
+        function renderDatasetCard(ds) {
+            return `
               <div class="bg-[var(--surface)] border rounded p-2">
                     <div class="flex justify-between items-center mb-1">
                         <input value="${ds.name}" onchange="updateName(${ds.id}, this.value)" class="text-xs font-bold w-20 border-b outline-none focus:border-indigo-500">
@@ -708,9 +712,16 @@
                         </button>
                     </div>
                     <textarea oninput="updateRaw(${ds.id}, this.value)" class="w-full h-12 text-[10px] font-mono border rounded p-1 resize-none">${ds.dataStr}</textarea>
-                </div>`).join('');
-            const h = document.getElementById('manualHeaderRow');
-            h.innerHTML = `<th class="p-2 w-12" data-i18n="lower_bound">${t('lower_bound')}</th><th class="p-2 w-12" data-i18n="upper_bound">${t('upper_bound')}</th>` + datasets.map(d=>`<th class="p-2 text-center text-indigo-700">${d.name}</th>`).join('') + `<th class="w-6"></th>`;
+                </div>`;
+        }
+
+        function renderManualHeader() {
+            return `<th class="p-2 w-12" data-i18n="lower_bound">${t('lower_bound')}</th><th class="p-2 w-12" data-i18n="upper_bound">${t('upper_bound')}</th>` + datasets.map(d=>`<th class="p-2 text-center text-indigo-700">${d.name}</th>`).join('') + `<th class="w-6"></th>`;
+        }
+
+        function renderInputs() {
+            setElementHTML('datasetContainer', datasets.map(renderDatasetCard).join(''));
+            setElementHTML('manualHeaderRow', renderManualHeader());
             renderManualBody();
             updatePieSelect();
         }
@@ -720,12 +731,16 @@
         }
 
         // --- Manual Table ---
-        function renderManualBody() {
-            document.getElementById('manualBody').innerHTML = manualRows.map(r=>`
+        function renderManualRow(r) {
+            return `
                 <tr class="border-b hover:bg-slate-50"><td class="p-1"><input type="text" value="${r.lower}" onchange="updRow(${r.id},'lower',this.value)" class="w-full p-1 border rounded text-center input-cell"></td>
                 <td class="p-1"><input type="text" value="${r.upper}" onchange="updRow(${r.id},'upper',this.value)" class="w-full p-1 border rounded text-center input-cell"></td>
                 ${datasets.map(ds=>`<td class="p-1"><input type="number" value="${r.freqs[ds.id]||0}" min="0" onchange="updRow(${r.id},'freq_${ds.id}',this.value)" class="w-full p-1 border rounded text-center font-bold text-indigo-600 input-cell"></td>`).join('')}
-                <td class="p-1"><button onclick="delRow(${r.id})" class="text-red-300 hover:text-red-500">x</button></td></tr>`).join('');
+                <td class="p-1"><button onclick="delRow(${r.id})" class="text-red-300 hover:text-red-500">x</button></td></tr>`;
+        }
+
+        function renderManualBody() {
+            setElementHTML('manualBody', manualRows.map(renderManualRow).join(''));
         }
         function addManualRow() {
             const last = manualRows[manualRows.length-1];

@@ -7,7 +7,8 @@ let changelogData = [];
 let changelogCache = null;
 const CACHE_KEY = 'aav_changelog_cache';
 const CACHE_EXPIRY_KEY = 'aav_changelog_cache_expiry';
-const CACHE_DURATION = 3600000; // 1 hour in milliseconds
+const ONE_HOUR_MS = 60 * 60 * 1000;
+const CACHE_DURATION = ONE_HOUR_MS;
 
 // Initialize changelog modal
 function initChangelogModal() {

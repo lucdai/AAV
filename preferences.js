@@ -232,7 +232,7 @@ function loadSessionData() {
             // If datasets exist, we might want to restore them if current datasets are empty
             if (data.datasets && data.datasets.length > 0 && (typeof datasets === 'undefined' || datasets.length === 0)) {
                 // Restore logic depends on how datasets are managed in the app
-                console.log('Session data found from:', new Date(data.timestamp).toLocaleString());
+                // Session data is available for restoration when needed.
             }
         } catch (e) {
             console.error('Error loading session:', e);
@@ -374,7 +374,6 @@ function loginWithGitHub() {
     const REDIRECT_URI = window.location.origin + window.location.pathname;
     const SCOPE = 'read:user';
     const authUrl = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=${SCOPE}&state=${Math.random().toString(36).substring(7)}`;
-    console.log('Redirecting to GitHub:', authUrl);
     alert('Đang chuyển hướng đến GitHub để xác thực...');
     setTimeout(() => {
         const mockUser = { name: 'lucdai', avatar: 'https://github.com/lucdai.png' };
