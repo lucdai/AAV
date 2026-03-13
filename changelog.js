@@ -9,6 +9,52 @@ const CACHE_KEY = 'aav_changelog_cache';
 const CACHE_EXPIRY_KEY = 'aav_changelog_cache_expiry';
 const CACHE_DURATION = 3600000; // 1 hour in milliseconds
 
+function wait(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function fetchWithRateLimitRetry(url, options = {}, maxRetries = 2) {
+    let attempt = 0;
+    while (attempt <= maxRetries) {
+        const response = await fetch(url, options);
+        const isRateLimited = response.status === 429 || response.headers.get('x-ratelimit-remaining') === '0';
+
+        if (!isRateLimited || attempt === maxRetries) {
+            return response;
+        }
+
+        const retryAfter = Number(response.headers.get('retry-after'));
+        const resetUnixSeconds = Number(response.headers.get('x-ratelimit-reset'));
+        let delay = Number.isFinite(retryAfter) && retryAfter > 0 ? retryAfter * 1000 : (2 ** attempt) * 1000;
+
+        if (Number.isFinite(resetUnixSeconds) && resetUnixSeconds > 0) {
+            const untilReset = (resetUnixSeconds * 1000) - Date.now();
+            if (untilReset > 0) {
+                delay = Math.max(delay, untilReset);
+            }
+        }
+
+        await wait(Math.min(delay, 10000));
+        attempt += 1;
+    }
+}
+
+async function parseJsonResponse(response, sourceName) {
+    const contentType = (response.headers.get('content-type') || '').toLowerCase();
+
+    if (!response.ok) {
+        const text = await response.text();
+        throw new Error(`${sourceName} request failed (${response.status}): ${text.slice(0, 200)}`);
+    }
+
+    if (!contentType.includes('application/json')) {
+        const text = await response.text();
+        throw new Error(`${sourceName} returned non-JSON content type: ${contentType || 'unknown'}. Body preview: ${text.slice(0, 200)}`);
+    }
+
+    return response.json();
+}
+
 // Initialize changelog modal
 function initChangelogModal() {
     const modalHTML = `
@@ -56,13 +102,11 @@ async function fetchChangelogFromJSON() {
         }
         
         // Fetch changelog.json
-        const response = await fetch(CHANGELOG_JSON_URL);
-        
-        if (!response.ok) {
-            throw new Error(`Failed to fetch changelog: ${response.status}`);
+        const response = await fetchWithRateLimitRetry(CHANGELOG_JSON_URL, { cache: 'no-cache' });
+        const changelog = await parseJsonResponse(response, 'changelog.json');
+        if (!changelog || typeof changelog !== 'object' || Array.isArray(changelog)) {
+            throw new Error('changelog.json returned an unexpected payload shape.');
         }
-        
-        const changelog = await response.json();
         
         // Cache the data
         localStorage.setItem(CACHE_KEY, JSON.stringify(changelog));
@@ -88,13 +132,13 @@ async function fetchChangelogFromGitHub() {
         }
         
         // Fetch commits from GitHub API
-        const response = await fetch(`${GITHUB_API_URL}/commits?per_page=50`);
-        
-        if (!response.ok) {
-            throw new Error(`GitHub API error: ${response.status}`);
+        const response = await fetchWithRateLimitRetry(`${GITHUB_API_URL}/commits?per_page=50`, {
+            headers: { 'Accept': 'application/vnd.github+json' }
+        });
+        const commits = await parseJsonResponse(response, 'GitHub commits API');
+        if (!Array.isArray(commits)) {
+            throw new Error('GitHub commits API returned an unexpected payload shape.');
         }
-        
-        const commits = await response.json();
         
         // Process commits into changelog format
         const changelog = {
@@ -106,6 +150,9 @@ async function fetchChangelogFromGitHub() {
         
         const grouped = {};
         commits.forEach(commit => {
+            if (!commit || !commit.commit || !commit.commit.author || !commit.sha || !commit.html_url) {
+                return;
+            }
             const date = new Date(commit.commit.author.date).toLocaleDateString('en-CA');
             if (!grouped[date]) {
                 grouped[date] = [];

@@ -2,17 +2,108 @@
 const urlParams = new URLSearchParams(window.location.search);
 let currentLang = urlParams.get('lang') || localStorage.getItem('aav_lang') || 'vi';
 let translations = {};
+const TRANSLATIONS_CACHE_KEY = 'aav_translations_cache';
+const TRANSLATIONS_CACHE_EXPIRY_KEY = 'aav_translations_cache_expiry';
+const TRANSLATIONS_CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours
+
+function wait(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function fetchWithRateLimitRetry(url, options = {}, maxRetries = 2) {
+    let attempt = 0;
+    while (attempt <= maxRetries) {
+        const response = await fetch(url, options);
+        const isRateLimited = response.status === 429 || response.headers.get('x-ratelimit-remaining') === '0';
+
+        if (!isRateLimited || attempt === maxRetries) {
+            return response;
+        }
+
+        const retryAfter = Number(response.headers.get('retry-after'));
+        const resetUnixSeconds = Number(response.headers.get('x-ratelimit-reset'));
+        let delay = Number.isFinite(retryAfter) && retryAfter > 0 ? retryAfter * 1000 : (2 ** attempt) * 1000;
+
+        if (Number.isFinite(resetUnixSeconds) && resetUnixSeconds > 0) {
+            const untilReset = (resetUnixSeconds * 1000) - Date.now();
+            if (untilReset > 0) {
+                delay = Math.max(delay, untilReset);
+            }
+        }
+
+        await wait(Math.min(delay, 10000));
+        attempt += 1;
+    }
+}
+
+async function parseJsonResponse(response, sourceName) {
+    const contentType = (response.headers.get('content-type') || '').toLowerCase();
+
+    if (!response.ok) {
+        const text = await response.text();
+        throw new Error(`${sourceName} request failed (${response.status}): ${text.slice(0, 200)}`);
+    }
+
+    if (!contentType.includes('application/json')) {
+        const text = await response.text();
+        throw new Error(`${sourceName} returned non-JSON content type: ${contentType || 'unknown'}. Body preview: ${text.slice(0, 200)}`);
+    }
+
+    return response.json();
+}
+
+function getCachedTranslations() {
+    try {
+        const cached = localStorage.getItem(TRANSLATIONS_CACHE_KEY);
+        const expiry = Number(localStorage.getItem(TRANSLATIONS_CACHE_EXPIRY_KEY));
+        if (cached && Number.isFinite(expiry) && Date.now() < expiry) {
+            const parsed = JSON.parse(cached);
+            if (parsed && typeof parsed === 'object') {
+                return parsed;
+            }
+        }
+    } catch (error) {
+        console.warn('Failed to read cached translations:', error);
+    }
+
+    return null;
+}
+
+function cacheTranslations(data) {
+    try {
+        localStorage.setItem(TRANSLATIONS_CACHE_KEY, JSON.stringify(data));
+        localStorage.setItem(TRANSLATIONS_CACHE_EXPIRY_KEY, String(Date.now() + TRANSLATIONS_CACHE_DURATION));
+    } catch (error) {
+        console.warn('Failed to cache translations:', error);
+    }
+}
+
+function ensureValidLanguage() {
+    if (!translations[currentLang]) {
+        currentLang = 'vi';
+        localStorage.setItem('aav_lang', 'vi');
+    }
+}
 
 async function initI18n() {
     try {
-        const response = await fetch('translations.json');
-        translations = await response.json();
-        
-        // Ensure currentLang is valid
-        if (!translations[currentLang]) {
-            currentLang = 'vi';
-            localStorage.setItem('aav_lang', 'vi');
+        const cachedTranslations = getCachedTranslations();
+        if (cachedTranslations) {
+            translations = cachedTranslations;
+            ensureValidLanguage();
+            applyTranslations();
+            updateLanguageSwitcher();
         }
+
+        const response = await fetchWithRateLimitRetry('translations.json', { cache: 'no-cache' });
+        const freshTranslations = await parseJsonResponse(response, 'translations.json');
+        if (!freshTranslations || typeof freshTranslations !== 'object' || Array.isArray(freshTranslations)) {
+            throw new Error('translations.json returned an unexpected payload shape.');
+        }
+
+        translations = freshTranslations;
+        cacheTranslations(freshTranslations);
+        ensureValidLanguage();
         
         applyTranslations();
         updateLanguageSwitcher();
@@ -199,9 +290,18 @@ window.addEventListener('click', function(e) {
 async function updateLastUpdatedDate() {
     try {
         const repo = "lucdai/AAV";
-        const response = await fetch(`https://api.github.com/repos/${repo}/commits/main`);
-        const data = await response.json();
+        const response = await fetchWithRateLimitRetry(`https://api.github.com/repos/${repo}/commits/main`, {
+            headers: { 'Accept': 'application/vnd.github+json' }
+        });
+        const data = await parseJsonResponse(response, 'GitHub commit API');
+        if (!data || !data.commit || !data.commit.committer || !data.commit.committer.date) {
+            throw new Error('GitHub commit API returned an unexpected payload shape.');
+        }
+
         const lastCommitDate = new Date(data.commit.committer.date);
+        if (Number.isNaN(lastCommitDate.getTime())) {
+            throw new Error('GitHub commit API returned an invalid commit date.');
+        }
         
         const day = String(lastCommitDate.getDate()).padStart(2, '0');
         const month = String(lastCommitDate.getMonth() + 1).padStart(2, '0');
