@@ -68,7 +68,7 @@ function applyTheme(theme) {
     let effectiveTheme = theme;
     
     if (theme === 'system') {
-        effectiveTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        effectiveTheme = isSystemDarkMode() ? 'dark' : 'light';
     }
     
     root.classList.remove('light-mode', 'dark-mode', 'high-contrast-mode');
@@ -78,6 +78,16 @@ function applyTheme(theme) {
     updateChartTheme(effectiveTheme);
 }
 
+function getSystemDarkMediaQuery() {
+    if (typeof window.matchMedia !== 'function') return null;
+    return window.matchMedia('(prefers-color-scheme: dark)');
+}
+
+function isSystemDarkMode() {
+    const mediaQuery = getSystemDarkMediaQuery();
+    return !!(mediaQuery && mediaQuery.matches);
+}
+
 /**
  * Update Chart.js defaults based on theme
  */
@@ -85,7 +95,7 @@ function updateChartTheme(theme) {
     if (typeof Chart === 'undefined') return;
     
     const isDark = theme === 'dark' || theme === 'high-contrast' || 
-                  (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                  (theme === 'system' && isSystemDarkMode());
     
     // Determine colors based on theme or custom preferences
     let textColor = userPrefs.textColor || (isDark ? '#94a3b8' : '#64748b');
@@ -99,11 +109,20 @@ function updateChartTheme(theme) {
 }
 
 function setupSystemThemeListener() {
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+    const mediaQuery = getSystemDarkMediaQuery();
+    if (!mediaQuery) return;
+
+    const onThemeChange = () => {
         if (userPrefs.theme === 'system') {
             applyTheme('system');
         }
-    });
+    };
+
+    if (typeof mediaQuery.addEventListener === 'function') {
+        mediaQuery.addEventListener('change', onThemeChange);
+    } else if (typeof mediaQuery.addListener === 'function') {
+        mediaQuery.addListener(onThemeChange);
+    }
 }
 
 /**
@@ -115,7 +134,8 @@ function applyAccentColor(color) {
     // Generate hover color (darken)
     const hoverColor = adjustColor(color, -20);
     document.documentElement.style.setProperty('--primary-hover', hoverColor); 
-    document.documentElement.style.setProperty('--primary-light', `${color}20`);
+    const primaryLight = hexToRgba(color, 0.125);
+    document.documentElement.style.setProperty('--primary-light', primaryLight || color);
     
     // Sync charts when accent color changes
     if (typeof lastGroups !== 'undefined' && lastGroups.length > 0) {
@@ -136,7 +156,7 @@ function applyCustomColors(bgColor, textColor) {
     
     if (textColor) {
         root.style.setProperty('--text-main', textColor);
-        const mutedColor = textColor + 'b3'; // ~70% opacity
+        const mutedColor = hexToRgba(textColor, 0.7) || textColor;
         root.style.setProperty('--text-muted', mutedColor);
     } else {
         root.style.removeProperty('--text-main');
@@ -258,6 +278,38 @@ function adjustColor(hex, percent) {
     return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 }
 
+function hexToRgba(hex, alpha) {
+    if (!hex || hex[0] !== '#') return null;
+
+    let normalizedHex = hex.slice(1);
+    if (normalizedHex.length === 3) {
+        normalizedHex = normalizedHex.split('').map(c => c + c).join('');
+    }
+
+    if (normalizedHex.length !== 6) return null;
+
+    const r = parseInt(normalizedHex.slice(0, 2), 16);
+    const g = parseInt(normalizedHex.slice(2, 4), 16);
+    const b = parseInt(normalizedHex.slice(4, 6), 16);
+    if (Number.isNaN(r) || Number.isNaN(g) || Number.isNaN(b)) return null;
+
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
+function generateRandomState() {
+    if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+        return crypto.randomUUID();
+    }
+
+    if (typeof crypto !== 'undefined' && typeof crypto.getRandomValues === 'function') {
+        const bytes = new Uint8Array(16);
+        crypto.getRandomValues(bytes);
+        return Array.from(bytes, b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    return Math.random().toString(36).slice(2);
+}
+
 /**
  * Setup color inputs to sync with preferences
  */
@@ -270,7 +322,7 @@ function setupColorInputs() {
     const textHex = document.getElementById('textColorHex');
     
     const isDark = document.documentElement.classList.contains('dark-mode') || 
-                  (userPrefs.theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                  (userPrefs.theme === 'system' && isSystemDarkMode());
     
     if (accentInput) accentInput.value = userPrefs.accentColor;
     if (accentHex) accentHex.value = userPrefs.accentColor;
@@ -373,7 +425,7 @@ function loginWithGitHub() {
     const CLIENT_ID = 'Ov23liYvG9H6gabDLa4Y';
     const REDIRECT_URI = window.location.origin + window.location.pathname;
     const SCOPE = 'read:user';
-    const authUrl = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=${SCOPE}&state=${Math.random().toString(36).substring(7)}`;
+    const authUrl = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=${SCOPE}&state=${generateRandomState()}`;
     console.log('Redirecting to GitHub:', authUrl);
     alert('Đang chuyển hướng đến GitHub để xác thực...');
     setTimeout(() => {
