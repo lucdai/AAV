@@ -1,13 +1,31 @@
 {
-  "generated_at": "2026-03-13T16:45:55.851941",
-  "total_commits": 155,
+  "generated_at": "2026-03-13T16:48:30.182671",
+  "total_commits": 158,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-13",
-      "commit_count": 6,
+      "commit_count": 9,
       "categories": {
         "Other": [
+          {
+            "sha": "f8fbcca",
+            "message": "Merge pull request #3 from lucdai/codex/secure-html-handling-to-prevent-xss",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/f8fbcca8bc50297167075ad23f3ecf9baf6b0756"
+          },
+          {
+            "sha": "4c50118",
+            "message": "Harden DOM rendering and backup input validation against XSS",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/4c50118aa65d5b546f8d2f0171eb02ffa49f72af"
+          },
+          {
+            "sha": "e5d0216",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/e5d02166b0397e77a6c2e4c46693a12c63ea4c05"
+          },
           {
             "sha": "1357933",
             "message": "Merge pull request #2 from lucdai/codex/update-generaterandomfilename-for-safety",
