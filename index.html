@@ -56,25 +56,28 @@
     <script src="interactive.js"></script>
     <script src="preferences.js"></script>
     <script>
-        // Hàm tạo chuỗi ngẫu nhiên 21 ký tự đa ngôn ngữ
-        function generateRandomFilename() {
-            const chars = 
-                '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' + // Latin/Digits
-                'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя' + // Cyrillic (Nga)
-                'अआइईउऊऋएऐओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरलवशषसह' + // Devanagari (Phạn Ngữ)
-                'IVXLCDM' + // Roman Numerals (La Mã)
-                'ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩαβγδεζηθικλμνξοπρστυφχψω' + // Greek (Hy Lạp)
-                '가나다라마바사아자차카타파하' + // Hangul (Hàn Quốc)
-                '你好世界人中大上下左右' + // Hanzi (Trung Quốc)
-                'あいうえおかきくけこサシスセソ' + // Japanese (Hiragana/Katakana)
-                'ÁÀẢÃẠĂẰẮẲẴẶÂẦẤẨẪẬĐÈÉẺẼẸÊỀẾỂỄỆÌÍỈĨỊÒÓỎÕỌÔỒỐỔỖỘƠỜỚỞỠỢÙÚỦŨỤƯỪỨỬỮỰỲÝỶỸỴáàảãạăằắẳẵặâầấẩẫậđèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵ' + // Vietnamese
-                '+−×÷=≠≈≤≥√∑∫∂∞π€$£%^&*()_+-=[]{};\':"\\|,./<>?!@#'; // Mathematical/Special Symbols
-            
-            let result = '';
-            for (let i = 0; i < 21; i++) {
-                result += chars.charAt(Math.floor(Math.random() * chars.length));
+        // Hàm tạo tên file ngẫu nhiên an toàn cho URL/DOM/download
+        function generateRandomFilename(length = 21) {
+            if (window.crypto && typeof crypto.randomUUID === 'function') {
+                return crypto.randomUUID().replace(/-/g, '').slice(0, length);
             }
-            return result;
+
+            const chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_';
+            const result = [];
+
+            if (window.crypto && typeof crypto.getRandomValues === 'function') {
+                const randomValues = new Uint32Array(length);
+                crypto.getRandomValues(randomValues);
+                for (let i = 0; i < length; i++) {
+                    result.push(chars[randomValues[i] % chars.length]);
+                }
+                return result.join('');
+            }
+
+            for (let i = 0; i < length; i++) {
+                result.push(chars.charAt(Math.floor(Math.random() * chars.length)));
+            }
+            return result.join('');
         }
     </script>
     <style>
