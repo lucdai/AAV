@@ -9,6 +9,55 @@ const AUTO_SAVE_INTERVAL = 1000; // Lưu mỗi 1 giây khi có thay đổi
 let autoSaveTimer = null;
 let hasUnsavedChanges = false;
 
+function sanitizeText(value, fallback = '') {
+    return typeof value === 'string' ? value : fallback;
+}
+
+function sanitizeNumberValue(value, fallback = 0) {
+    const num = Number(value);
+    return Number.isFinite(num) ? num : fallback;
+}
+
+function sanitizeFreqs(freqs) {
+    if (!freqs || typeof freqs !== 'object') return {};
+    const safeFreqs = {};
+    Object.entries(freqs).forEach(([key, value]) => {
+        if (/^\d+$/.test(key)) {
+            safeFreqs[parseInt(key, 10)] = Math.max(0, Math.trunc(sanitizeNumberValue(value, 0)));
+        }
+    });
+    return safeFreqs;
+}
+
+function sanitizeState(state) {
+    if (!state || typeof state !== 'object') return null;
+
+    const safeState = {
+        m: state.m === 'table' ? 'table' : 'raw',
+        ds: Array.isArray(state.ds) ? state.ds.slice(0, 30).map((d, i) => ({
+            n: sanitizeText(d?.n, `${t('sample_prefix')}${String.fromCharCode(65 + i)}`).slice(0, 100),
+            s: sanitizeText(d?.s, '').slice(0, 50000)
+        })) : [],
+        mr: Array.isArray(state.mr) ? state.mr.slice(0, 200).map((r) => ({
+            l: sanitizeNumberValue(r?.l),
+            u: sanitizeNumberValue(r?.u),
+            f: sanitizeFreqs(r?.f)
+        })) : [],
+        dp: String(sanitizeNumberValue(state.dp, 2)),
+        meth: state.meth === 'manual' ? 'manual' : 'auto',
+        h: String(sanitizeNumberValue(state.h, 0)),
+        k: String(sanitizeNumberValue(state.k, 0)),
+        sv: String(sanitizeNumberValue(state.sv, 0)),
+        ct: state.ct === 'charts' ? 'charts' : 'data'
+    };
+
+    if (safeState.ds.length === 0) {
+        return null;
+    }
+
+    return safeState;
+}
+
 /**
  * Lấy trạng thái hiện tại của ứng dụng
  */
@@ -66,7 +115,8 @@ function loadFromLocalStorage() {
         const timestamp = localStorage.getItem(BACKUP_TIMESTAMP_KEY);
         
         if (savedData) {
-            const state = JSON.parse(savedData);
+            const state = sanitizeState(JSON.parse(savedData));
+            if (!state) return null;
             console.log('[AAV Auto-Backup] Dữ liệu được khôi phục từ:', timestamp);
             return state;
         }
@@ -144,12 +194,23 @@ function showAutoSaveNotification() {
         notification = document.createElement('div');
         notification.id = 'autoSaveNotification';
         notification.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg text-sm flex items-center gap-2 z-40 animate-pulse';
-        notification.innerHTML = `
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span>${t('data_saved')}</span>
-        `;
+        const icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        icon.setAttribute('class', 'w-4 h-4');
+        icon.setAttribute('fill', 'none');
+        icon.setAttribute('stroke', 'currentColor');
+        icon.setAttribute('viewBox', '0 0 24 24');
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('stroke-linecap', 'round');
+        path.setAttribute('stroke-linejoin', 'round');
+        path.setAttribute('stroke-width', '2');
+        path.setAttribute('d', 'M5 13l4 4L19 7');
+        icon.appendChild(path);
+
+        const label = document.createElement('span');
+        label.textContent = t('data_saved');
+
+        notification.appendChild(icon);
+        notification.appendChild(label);
         document.body.appendChild(notification);
     }
     
@@ -250,13 +311,13 @@ function importBackupFromJSON() {
         const reader = new FileReader();
         reader.onload = (event) => {
             try {
-                const state = JSON.parse(event.target.result);
-                
+                const state = sanitizeState(JSON.parse(event.target.result));
+
                 // Validate dữ liệu
-                if (!state.ds || !Array.isArray(state.ds)) {
+                if (!state || !state.ds || !Array.isArray(state.ds)) {
                     throw new Error(t('invalid_file_format'));
                 }
-                
+
                 // Lưu vào localStorage
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
                 localStorage.setItem(BACKUP_TIMESTAMP_KEY, new Date().toISOString());

@@ -153,31 +153,51 @@ function updateLanguageSwitcher() {
         'ru': 'Русский',
         'ur': 'اردو'
     };
-    
-    let html = `
-        <div class="relative inline-block text-left">
-            <button type="button" onclick="toggleLangDropdown()" class="flex items-center gap-2 bg-white border border-slate-300 text-slate-700 px-3 py-2 rounded-lg shadow-sm font-medium transition text-sm hover:bg-slate-50">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path></svg>
-                <span>${languages[currentLang]}</span>
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-            </button>
-            <div id="langDropdown" class="hidden absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50 max-h-64 overflow-y-auto">
-                <div class="py-1" role="menu" aria-orientation="vertical">
-    `;
-    
-    for (const [code, name] of Object.entries(languages)) {
-        html += `
-            <a href="#" onclick="changeLanguage('${code}'); return false;" class="block px-4 py-2 text-sm ${currentLang === code ? 'bg-indigo-50 text-indigo-700 font-bold' : 'text-slate-700 hover:bg-slate-100'}" role="menuitem">${name}</a>
-        `;
-    }
-    
-    html += `
-                </div>
-            </div>
-        </div>
-    `;
-    
-    switcher.innerHTML = html;
+
+    switcher.replaceChildren();
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'relative inline-block text-left';
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'flex items-center gap-2 bg-white border border-slate-300 text-slate-700 px-3 py-2 rounded-lg shadow-sm font-medium transition text-sm hover:bg-slate-50';
+    button.onclick = toggleLangDropdown;
+
+    button.insertAdjacentHTML('beforeend', '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path></svg>');
+
+    const currentLanguage = document.createElement('span');
+    currentLanguage.textContent = languages[currentLang] || languages.en;
+    button.appendChild(currentLanguage);
+
+    button.insertAdjacentHTML('beforeend', '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>');
+
+    const dropdown = document.createElement('div');
+    dropdown.id = 'langDropdown';
+    dropdown.className = 'hidden absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50 max-h-64 overflow-y-auto';
+
+    const menu = document.createElement('div');
+    menu.className = 'py-1';
+    menu.setAttribute('role', 'menu');
+    menu.setAttribute('aria-orientation', 'vertical');
+
+    Object.entries(languages).forEach(([code, name]) => {
+        const item = document.createElement('a');
+        item.href = '#';
+        item.className = `block px-4 py-2 text-sm ${currentLang === code ? 'bg-indigo-50 text-indigo-700 font-bold' : 'text-slate-700 hover:bg-slate-100'}`;
+        item.setAttribute('role', 'menuitem');
+        item.textContent = name;
+        item.addEventListener('click', (event) => {
+            event.preventDefault();
+            changeLanguage(code);
+        });
+        menu.appendChild(item);
+    });
+
+    dropdown.appendChild(menu);
+    wrapper.appendChild(button);
+    wrapper.appendChild(dropdown);
+    switcher.appendChild(wrapper);
 }
 
 function toggleLangDropdown() {
