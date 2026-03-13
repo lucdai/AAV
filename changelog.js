@@ -8,6 +8,28 @@ let changelogCache = null;
 const CACHE_KEY = 'aav_changelog_cache';
 const CACHE_EXPIRY_KEY = 'aav_changelog_cache_expiry';
 const CACHE_DURATION = 3600000; // 1 hour in milliseconds
+const MAX_CHANGELOG_CACHE_BYTES = 512 * 1024; // 512KB
+
+function getApproxByteSize(str) {
+    return new Blob([str]).size;
+}
+
+function safeCacheChangelog(changelog, expiresAt) {
+    const serialized = JSON.stringify(changelog);
+    const size = getApproxByteSize(serialized);
+
+    if (size > MAX_CHANGELOG_CACHE_BYTES) {
+        console.warn(`Changelog cache quá lớn (${Math.round(size / 1024)}KB), bỏ qua cache`);
+        return;
+    }
+
+    try {
+        localStorage.setItem(CACHE_KEY, serialized);
+        localStorage.setItem(CACHE_EXPIRY_KEY, expiresAt.toString());
+    } catch (error) {
+        console.warn('Không thể ghi cache changelog vào localStorage:', error);
+    }
+}
 
 // Initialize changelog modal
 function initChangelogModal() {
@@ -65,8 +87,7 @@ async function fetchChangelogFromJSON() {
         const changelog = await response.json();
         
         // Cache the data
-        localStorage.setItem(CACHE_KEY, JSON.stringify(changelog));
-        localStorage.setItem(CACHE_EXPIRY_KEY, (now + CACHE_DURATION).toString());
+        safeCacheChangelog(changelog, now + CACHE_DURATION);
         
         return changelog;
     } catch (error) {
@@ -130,8 +151,7 @@ async function fetchChangelogFromGitHub() {
         }
         
         // Cache the data
-        localStorage.setItem(CACHE_KEY, JSON.stringify(changelog));
-        localStorage.setItem(CACHE_EXPIRY_KEY, (now + CACHE_DURATION).toString());
+        safeCacheChangelog(changelog, now + CACHE_DURATION);
         
         return changelog;
     } catch (error) {

@@ -3,6 +3,8 @@
  */
 
 const PREFS_STORAGE_KEY = 'aav_user_preferences';
+const MAX_PREFS_BYTES = 64 * 1024; // 64KB
+const MAX_SESSION_BYTES = 1024 * 1024; // 1MB
 const DEFAULT_PREFS = {
     theme: 'system', // 'light', 'dark', 'high-contrast', 'system'
     accentColor: '#6366f1',
@@ -24,6 +26,44 @@ const DEFAULT_PREFS = {
 
 let userPrefs = { ...DEFAULT_PREFS };
 
+function getApproxByteSize(str) {
+    return new Blob([str]).size;
+}
+
+function isQuotaExceededError(error) {
+    return error && (
+        error.name === 'QuotaExceededError' ||
+        error.name === 'NS_ERROR_DOM_QUOTA_REACHED' ||
+        error.code === 22 ||
+        error.code === 1014
+    );
+}
+
+function validatePreferencesSchema(prefs) {
+    if (!prefs || typeof prefs !== 'object') return false;
+    if (prefs.theme && !['light', 'dark', 'high-contrast', 'system'].includes(prefs.theme)) return false;
+    if (prefs.accentColor && typeof prefs.accentColor !== 'string') return false;
+    if (prefs.fontSize && (typeof prefs.fontSize !== 'number' || prefs.fontSize < 50 || prefs.fontSize > 200)) return false;
+    if (prefs.featureFlags && typeof prefs.featureFlags !== 'object') return false;
+    return true;
+}
+
+function safeSetLocalStorage(key, value, maxBytes, quotaMessage) {
+    const size = getApproxByteSize(value);
+    if (size > maxBytes) {
+        throw new Error(`Dữ liệu ${key} quá lớn (${Math.round(size / 1024)}KB)`);
+    }
+
+    try {
+        localStorage.setItem(key, value);
+    } catch (error) {
+        if (isQuotaExceededError(error)) {
+            alert(quotaMessage || 'localStorage đã đầy. Vui lòng xuất dữ liệu rồi xóa bớt dữ liệu cũ.');
+        }
+        throw error;
+    }
+}
+
 /**
  * Initialize preferences
  */
@@ -31,7 +71,11 @@ function initPreferences() {
     const savedPrefs = localStorage.getItem(PREFS_STORAGE_KEY);
     if (savedPrefs) {
         try {
-            userPrefs = { ...DEFAULT_PREFS, ...JSON.parse(savedPrefs) };
+            const parsedPrefs = JSON.parse(savedPrefs);
+            if (!validatePreferencesSchema(parsedPrefs)) {
+                throw new Error('Preferences schema không hợp lệ');
+            }
+            userPrefs = { ...DEFAULT_PREFS, ...parsedPrefs };
         } catch (e) {
             console.error('Error parsing preferences:', e);
         }
@@ -219,7 +263,12 @@ function saveSessionData() {
             datasets: datasets,
             timestamp: new Date().getTime()
         };
-        localStorage.setItem('aav_last_session', JSON.stringify(data));
+        safeSetLocalStorage(
+            'aav_last_session',
+            JSON.stringify(data),
+            MAX_SESSION_BYTES,
+            'Không thể lưu phiên gần đây vì dung lượng localStorage đã đầy. Hãy xuất backup rồi xóa bớt dữ liệu.'
+        );
     }
 }
 
@@ -307,7 +356,12 @@ function applyFontFamily(family) {
  */
 function savePreferences(newPrefs) {
     userPrefs = { ...userPrefs, ...newPrefs };
-    localStorage.setItem(PREFS_STORAGE_KEY, JSON.stringify(userPrefs));
+    safeSetLocalStorage(
+        PREFS_STORAGE_KEY,
+        JSON.stringify(userPrefs),
+        MAX_PREFS_BYTES,
+        'Không thể lưu tùy chọn người dùng vì localStorage đã đầy. Hãy dọn dữ liệu cũ rồi thử lại.'
+    );
     applyAllPreferences();
     
     // Update color swatches active state

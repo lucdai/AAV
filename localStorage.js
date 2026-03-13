@@ -6,8 +6,68 @@
 const STORAGE_KEY = 'aav_backup_data';
 const BACKUP_TIMESTAMP_KEY = 'aav_backup_timestamp';
 const AUTO_SAVE_INTERVAL = 1000; // Lưu mỗi 1 giây khi có thay đổi
+const MAX_BACKUP_BYTES = 2 * 1024 * 1024; // Giới hạn 2MB cho backup
 let autoSaveTimer = null;
 let hasUnsavedChanges = false;
+
+function getApproxByteSize(str) {
+    return new Blob([str]).size;
+}
+
+function isQuotaExceededError(error) {
+    return error && (
+        error.name === 'QuotaExceededError' ||
+        error.name === 'NS_ERROR_DOM_QUOTA_REACHED' ||
+        error.code === 22 ||
+        error.code === 1014
+    );
+}
+
+function notifyStorageQuotaExceeded(error) {
+    console.warn('[AAV Auto-Backup] localStorage đầy:', error);
+    alert('Không thể lưu dữ liệu vì localStorage đã đầy. Vui lòng xuất dữ liệu cần thiết rồi xóa bớt dữ liệu sao lưu.');
+}
+
+function validateBackupState(state) {
+    if (!state || typeof state !== 'object') {
+        throw new Error('Dữ liệu backup không hợp lệ');
+    }
+
+    if (!Array.isArray(state.ds)) {
+        throw new Error('Dữ liệu backup thiếu danh sách mẫu (ds)');
+    }
+
+    state.ds.forEach((item, index) => {
+        if (!item || typeof item !== 'object') {
+            throw new Error(`Mẫu dữ liệu tại vị trí ${index + 1} không hợp lệ`);
+        }
+        if (typeof item.n !== 'string' || !item.n.trim()) {
+            throw new Error(`Mẫu dữ liệu tại vị trí ${index + 1} thiếu tên hợp lệ`);
+        }
+        if (typeof item.s !== 'string') {
+            throw new Error(`Mẫu dữ liệu tại vị trí ${index + 1} thiếu dataStr hợp lệ`);
+        }
+    });
+
+    if (state.mr && !Array.isArray(state.mr)) {
+        throw new Error('Dữ liệu manual rows không hợp lệ');
+    }
+
+    return true;
+}
+
+function persistBackupState(state, timestamp) {
+    validateBackupState(state);
+    const serializedState = JSON.stringify(state);
+    const dataSize = getApproxByteSize(serializedState);
+
+    if (dataSize > MAX_BACKUP_BYTES) {
+        throw new Error(`Dữ liệu sao lưu quá lớn (${Math.round(dataSize / 1024)}KB). Vui lòng giảm kích thước dữ liệu trước khi lưu.`);
+    }
+
+    localStorage.setItem(STORAGE_KEY, serializedState);
+    localStorage.setItem(BACKUP_TIMESTAMP_KEY, timestamp || new Date().toISOString());
+}
 
 /**
  * Lấy trạng thái hiện tại của ứng dụng
@@ -33,9 +93,7 @@ function saveToLocalStorage() {
     try {
         const state = getCurrentState();
         const timestamp = new Date().toISOString();
-        
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-        localStorage.setItem(BACKUP_TIMESTAMP_KEY, timestamp);
+        persistBackupState(state, timestamp);
         
         // Hiển thị thông báo sao lưu ngắn gọn
         showAutoSaveNotification();
@@ -44,15 +102,17 @@ function saveToLocalStorage() {
     } catch (e) {
         console.error('[AAV Auto-Backup] Lỗi khi lưu dữ liệu:', e);
         // Xử lý trường hợp localStorage đầy
-        if (e.name === 'QuotaExceededError') {
+        if (isQuotaExceededError(e)) {
             console.warn('[AAV Auto-Backup] localStorage đầy, xóa dữ liệu cũ');
             clearOldBackups();
             try {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(getCurrentState()));
-                localStorage.setItem(BACKUP_TIMESTAMP_KEY, new Date().toISOString());
+                persistBackupState(getCurrentState(), new Date().toISOString());
             } catch (e2) {
                 console.error('[AAV Auto-Backup] Không thể lưu dữ liệu:', e2);
+                notifyStorageQuotaExceeded(e2);
             }
+        } else {
+            alert(e.message || 'Không thể lưu dữ liệu sao lưu.');
         }
     }
 }
@@ -67,6 +127,7 @@ function loadFromLocalStorage() {
         
         if (savedData) {
             const state = JSON.parse(savedData);
+            validateBackupState(state);
             console.log('[AAV Auto-Backup] Dữ liệu được khôi phục từ:', timestamp);
             return state;
         }
@@ -251,19 +312,16 @@ function importBackupFromJSON() {
         reader.onload = (event) => {
             try {
                 const state = JSON.parse(event.target.result);
-                
-                // Validate dữ liệu
-                if (!state.ds || !Array.isArray(state.ds)) {
-                    throw new Error(t('invalid_file_format'));
-                }
-                
-                // Lưu vào localStorage
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-                localStorage.setItem(BACKUP_TIMESTAMP_KEY, new Date().toISOString());
+                validateBackupState(state);
+                persistBackupState(state, new Date().toISOString());
                 
                 alert(t('import_success'));
                 console.log('[AAV Auto-Backup] Dữ liệu sao lưu đã được nhập');
             } catch (e) {
+                if (isQuotaExceededError(e)) {
+                    notifyStorageQuotaExceeded(e);
+                    return;
+                }
                 alert('Lỗi khi nhập dữ liệu: ' + e.message);
                 console.error('[AAV Auto-Backup] Lỗi khi nhập:', e);
             }
