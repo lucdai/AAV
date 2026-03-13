@@ -1,18 +1,65 @@
 
 const urlParams = new URLSearchParams(window.location.search);
 let currentLang = urlParams.get('lang') || localStorage.getItem('aav_lang') || 'vi';
-let translations = {};
+const loadedTranslations = {};
+const loadingTranslations = new Map();
+
+const languages = {
+    'vi': 'Tiếng Việt',
+    'en': 'English',
+    'zh': '中文',
+    'hi': 'हिन्दी',
+    'es': 'Español',
+    'fr': 'Français',
+    'ar': 'العربية',
+    'bn': 'বাংলা',
+    'pt': 'Português',
+    'ru': 'Русский',
+    'ur': 'اردو'
+};
+
+async function loadLanguage(lang) {
+    if (!languages[lang]) {
+        throw new Error(`Unsupported language: ${lang}`);
+    }
+
+    if (loadedTranslations[lang]) {
+        return loadedTranslations[lang];
+    }
+
+    if (loadingTranslations.has(lang)) {
+        return loadingTranslations.get(lang);
+    }
+
+    const pendingRequest = fetch(`translations/${lang}.json`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Failed to load translations/${lang}.json (${response.status})`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            loadedTranslations[lang] = data;
+            loadingTranslations.delete(lang);
+            return data;
+        })
+        .catch(error => {
+            loadingTranslations.delete(lang);
+            throw error;
+        });
+
+    loadingTranslations.set(lang, pendingRequest);
+    return pendingRequest;
+}
 
 async function initI18n() {
     try {
-        const response = await fetch('translations.json');
-        translations = await response.json();
-        
-        // Ensure currentLang is valid
-        if (!translations[currentLang]) {
+        if (!languages[currentLang]) {
             currentLang = 'vi';
             localStorage.setItem('aav_lang', 'vi');
         }
+
+        await loadLanguage(currentLang);
         
         applyTranslations();
         updateLanguageSwitcher();
@@ -33,7 +80,8 @@ async function initI18n() {
 }
 
 function t(key, variables = {}) {
-    let text = translations[currentLang] ? translations[currentLang][key] : key;
+    const currentTranslations = loadedTranslations[currentLang] || {};
+    let text = currentTranslations[key] || key;
     if (!text) return key;
     
     for (const [varName, varValue] of Object.entries(variables)) {
@@ -83,7 +131,12 @@ function applyTranslations() {
     });
 }
 
-function changeLanguage(lang) {
+async function changeLanguage(lang) {
+    if (!languages[lang]) {
+        return;
+    }
+
+    await loadLanguage(lang);
     currentLang = lang;
     localStorage.setItem('aav_lang', lang);
     // Update dataset names if they are default samples
@@ -140,20 +193,6 @@ function updateLanguageSwitcher() {
     const switcher = document.getElementById('languageSwitcher');
     if (!switcher) return;
     
-    const languages = {
-        'vi': 'Tiếng Việt',
-        'en': 'English',
-        'zh': '中文',
-        'hi': 'हिन्दी',
-        'es': 'Español',
-        'fr': 'Français',
-        'ar': 'العربية',
-        'bn': 'বাংলা',
-        'pt': 'Português',
-        'ru': 'Русский',
-        'ur': 'اردو'
-    };
-
     switcher.replaceChildren();
 
     const wrapper = document.createElement('div');
@@ -187,9 +226,9 @@ function updateLanguageSwitcher() {
         item.className = `block px-4 py-2 text-sm ${currentLang === code ? 'bg-indigo-50 text-indigo-700 font-bold' : 'text-slate-700 hover:bg-slate-100'}`;
         item.setAttribute('role', 'menuitem');
         item.textContent = name;
-        item.addEventListener('click', (event) => {
+        item.addEventListener('click', async (event) => {
             event.preventDefault();
-            changeLanguage(code);
+            await changeLanguage(code);
         });
         menu.appendChild(item);
     });
@@ -231,19 +270,17 @@ async function updateLastUpdatedDate() {
         const dateDot = `${day}.${month}.${year}`;
         const dateChinese = `${year}年${lastCommitDate.getMonth() + 1}月${lastCommitDate.getDate()}日`;
         
-        for (let lang in translations) {
-            if (translations[lang].footer_text) {
-                let text = translations[lang].footer_text;
-                // Update year
-                text = text.replace(/© \d{4}/, `© ${year}`);
-                
-                if (lang === 'zh') {
-                    translations[lang].footer_text = text.replace(/\d{4}年\d{1,2}月\d{1,2}日/, dateChinese);
-                } else if (lang === 'ru') {
-                    translations[lang].footer_text = text.replace(/\d{2}\.\d{2}\.\d{4}/, dateDot);
-                } else {
-                    translations[lang].footer_text = text.replace(/\d{2}\/\d{2}\/\d{4}/, dateSlash);
-                }
+        const activeTranslations = loadedTranslations[currentLang];
+        if (activeTranslations && activeTranslations.footer_text) {
+            let text = activeTranslations.footer_text;
+            text = text.replace(/© \d{4}/, `© ${year}`);
+
+            if (currentLang === 'zh') {
+                activeTranslations.footer_text = text.replace(/\d{4}年\d{1,2}月\d{1,2}日/, dateChinese);
+            } else if (currentLang === 'ru') {
+                activeTranslations.footer_text = text.replace(/\d{2}\.\d{2}\.\d{4}/, dateDot);
+            } else {
+                activeTranslations.footer_text = text.replace(/\d{2}\/\d{2}\/\d{4}/, dateSlash);
             }
         }
         
