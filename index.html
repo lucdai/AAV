@@ -561,6 +561,48 @@
     </div>
 
     <script>
+        // Fallbacks to avoid runtime crashes when dependent scripts are unavailable.
+        (function ensureAppDependencies() {
+            if (typeof window.t !== 'function') {
+                window.t = function fallbackTranslate(key, variables = {}) {
+                    let text = String(key ?? '');
+                    Object.entries(variables).forEach(([name, value]) => {
+                        text = text.replace(new RegExp(`\\{${name}\\}`, 'g'), String(value));
+                    });
+                    return text;
+                };
+            }
+
+            if (typeof window.safeT !== 'function') {
+                window.safeT = function fallbackSafeTranslate(key, variables = {}) {
+                    return typeof window.t === 'function' ? window.t(key, variables) : String(key ?? '');
+                };
+            }
+
+            if (typeof window.showAppNotification !== 'function') {
+                window.showAppNotification = function fallbackNotification(message, type = 'info') {
+                    const safeMessage = String(message || '').trim();
+                    if (!safeMessage) return;
+                    console.log(`[${String(type || 'info').toUpperCase()}] ${safeMessage}`);
+                    if (typeof window.alert === 'function') {
+                        window.alert(safeMessage);
+                    }
+                };
+            }
+
+            if (typeof window.restoreFromLocalStorage !== 'function') {
+                window.restoreFromLocalStorage = () => false;
+            }
+
+            if (typeof window.initAutoBackup !== 'function') {
+                window.initAutoBackup = () => {};
+            }
+
+            if (typeof window.markAsChanged !== 'function') {
+                window.markAsChanged = () => {};
+            }
+        })();
+
         // --- State ---
         let mode = 'raw', currentTab = 'data';
         let datasets = [{ id: 1, name: t("sample_a"), dataStr: "45, 52, 60, 48, 55, 62, 49, 58, 65, 51" }];
