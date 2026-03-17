@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-03-17T16:04:55.254642",
-  "total_commits": 300,
+  "generated_at": "2026-03-17T16:05:40.171261",
+  "total_commits": 303,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-17",
-      "commit_count": 123,
+      "commit_count": 126,
       "categories": {
         "Features": [
           {
@@ -85,6 +85,18 @@
         ],
         "Improvements": [
           {
+            "sha": "eefc3d5",
+            "message": "Merge pull request #58 from lucdai/codex/optimize-calculate-function-calls",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/eefc3d5b5ccb856a5fc09b8f7fd74b5a678e6cf2"
+          },
+          {
+            "sha": "bed57f8",
+            "message": "perf: debounce calculate on raw input updates",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/bed57f846f6b8ac1be2ce3f4ce836cbf936d278b"
+          },
+          {
             "sha": "5eb8338",
             "message": "Remove Google Fonts imports to improve privacy and render performance",
             "author": "lucdai",
@@ -160,6 +172,12 @@
           }
         ],
         "Other": [
+          {
+            "sha": "0a68644",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/0a68644e0dd7e1d8f962141062555ecfe7492d27"
+          },
           {
             "sha": "2cee13c",
             "message": "Merge pull request #57 from lucdai/codex/check-for-null-before-accessing-decimalplaces",
