@@ -1178,7 +1178,8 @@
 
         function fmt(n) { 
             if (n === undefined || n === null) return "-";
-            let d = parseInt(document.getElementById('decimalPlaces').value);
+            const decimalPlacesInput = document.getElementById('decimalPlaces');
+            let d = parseInt(decimalPlacesInput ? decimalPlacesInput.value : "2");
             if (isNaN(d)) d = 2;
             
             let val = n;
