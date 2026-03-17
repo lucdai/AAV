@@ -1,13 +1,19 @@
 {
-  "generated_at": "2026-03-17T15:48:16.878991",
-  "total_commits": 264,
+  "generated_at": "2026-03-17T15:49:32.095249",
+  "total_commits": 267,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-17",
-      "commit_count": 87,
+      "commit_count": 90,
       "categories": {
         "Features": [
+          {
+            "sha": "9ab1da4",
+            "message": "Add i18n coverage check and complete locale keys",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/9ab1da4c34908318732bd3007c8d1ac2fa0bb514"
+          },
           {
             "sha": "4cc8579",
             "message": "Merge pull request #41 from lucdai/codex/add-user-warning-for-idx-fallback",
@@ -124,6 +130,18 @@
           }
         ],
         "Other": [
+          {
+            "sha": "499b5cf",
+            "message": "Merge pull request #44 from lucdai/codex/check-i18n-keys-for-consistency",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/499b5cfe46418f971e974914a334882d425fa327"
+          },
+          {
+            "sha": "30ba352",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/30ba352740c2200c20ab244a431f38b7946a3445"
+          },
           {
             "sha": "5ba3c05",
             "message": "Merge pull request #43 from lucdai/codex/sanitize-html-in-i18n-translations",
