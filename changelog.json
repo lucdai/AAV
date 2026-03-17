@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-03-17T15:34:33.894460",
-  "total_commits": 229,
+  "generated_at": "2026-03-17T15:35:24.802295",
+  "total_commits": 232,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-17",
-      "commit_count": 52,
+      "commit_count": 55,
       "categories": {
         "Features": [
           {
@@ -80,6 +80,24 @@
           }
         ],
         "Other": [
+          {
+            "sha": "c38f3f7",
+            "message": "Merge pull request #31 from lucdai/codex/ensure-safet-html-sanitization",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/c38f3f78b37649bc7131d7081d307bfea1b59462"
+          },
+          {
+            "sha": "ba05d93",
+            "message": "Harden safeT against HTML injection",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/ba05d93d2b04ec8fc8c5cf34199cb163d5fefd87"
+          },
+          {
+            "sha": "63d8ed3",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/63d8ed3ee0d157a92f4e4c44d178303d75602594"
+          },
           {
             "sha": "0f21585",
             "message": "chore: update changelog from commits",
