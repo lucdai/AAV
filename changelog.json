@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-03-17T15:45:26.031294",
-  "total_commits": 258,
+  "generated_at": "2026-03-17T15:47:26.845807",
+  "total_commits": 261,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-17",
-      "commit_count": 81,
+      "commit_count": 84,
       "categories": {
         "Features": [
           {
@@ -124,6 +124,24 @@
           }
         ],
         "Other": [
+          {
+            "sha": "60c0cb6",
+            "message": "Merge pull request #42 from lucdai/codex/clamp-decimalplaces-in-fmtinternal",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/60c0cb61ca1a7652a3f9a9f90b3c1b0b1ca69cc4"
+          },
+          {
+            "sha": "30b7c30",
+            "message": "Clamp decimalPlaces range in fmtInternal",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/30b7c30639f32a35066891b3b11adb6ccae3d1c5"
+          },
+          {
+            "sha": "9e960e9",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/9e960e90cdf380b00f7e9dc1d7480503aacc1e69"
+          },
           {
             "sha": "5652b1f",
             "message": "Harden quartile fallback index guards and warning emphasis",
