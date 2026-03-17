@@ -22,6 +22,15 @@
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --surface-muted: #f1f5f9;
+    --empty-state-bg: #f8fafc;
+    --empty-state-text: #64748b;
+    --action-backup-bg: #eab308;
+    --action-backup-text: #111827;
+    --action-share-bg: #4f46e5;
+    --action-share-text: #ffffff;
+    --action-neutral-bg: #1e293b;
+    --action-neutral-text: #ffffff;
 }
 
 body {
@@ -130,6 +139,47 @@ a.w-10:active {
     font-weight: 600;
     line-height: 1.2;
     transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.theme-surface-muted {
+    background: var(--surface-muted);
+    border-color: var(--border);
+}
+
+.action-btn {
+    border-radius: var(--radius-md);
+    padding: 0.625rem 1rem;
+    font-weight: 600;
+    border: 1px solid transparent;
+    transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.action-btn-backup {
+    background: var(--action-backup-bg);
+    color: var(--action-backup-text);
+}
+
+.action-btn-share {
+    background: var(--action-share-bg);
+    color: var(--action-share-text);
+}
+
+.action-btn-neutral {
+    background: var(--action-neutral-bg);
+    color: var(--action-neutral-text);
+}
+
+.group-add-btn {
+    background: var(--action-share-bg);
+    color: var(--action-share-text);
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+}
+
+.empty-state-sync {
+    background: var(--empty-state-bg);
+    color: var(--empty-state-text);
+    border-color: var(--border);
 }
 
 .export-format-btn:hover {
@@ -343,6 +393,15 @@ input:focus, textarea:focus, select:focus {
     --text-muted: #94a3b8;
     --border: #334155;
     --primary-light: rgba(99, 102, 241, 0.15);
+    --surface-muted: #111827;
+    --empty-state-bg: #0b1220;
+    --empty-state-text: #facc15;
+    --action-backup-bg: #facc15;
+    --action-backup-text: #111827;
+    --action-share-bg: #4f46e5;
+    --action-share-text: #f8fafc;
+    --action-neutral-bg: #f8fafc;
+    --action-neutral-text: #0f172a;
 }
 
 :root.high-contrast-mode {
