@@ -1091,7 +1091,7 @@
             // Lấy màu chữ và màu lưới từ preferences
             const rootStyle = getComputedStyle(document.documentElement);
             const textColor = rootStyle.getPropertyValue('--text-main').trim() || '#0f172a';
-            const gridColor = rootStyle.getPropertyValue('--grid').trim() || 'rgba(0, 0, 0, 0.1)';
+            const gridColor = rootStyle.getPropertyValue('--grid').trim() || rootStyle.getPropertyValue('--border').trim() || 'rgba(0, 0, 0, 0.1)';
 
             const defaultOptions = {
                 responsive: true,
