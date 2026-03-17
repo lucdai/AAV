@@ -91,44 +91,6 @@ body {
     color: var(--text-main);
 }
 
-.btn-contrast {
-    background: var(--text-main);
-    color: var(--background);
-    border: 1px solid var(--text-main);
-}
-
-.btn-contrast:hover {
-    filter: brightness(1.1);
-}
-
-.btn-neutral-contrast {
-    background: var(--surface);
-    color: var(--text-main);
-    border: 1px solid color-mix(in srgb, var(--text-main) 24%, transparent);
-}
-
-.btn-neutral-contrast:hover {
-    background: color-mix(in srgb, var(--surface) 75%, var(--text-main) 25%);
-    color: var(--background);
-}
-
-.btn-success {
-    background: var(--success);
-    color: var(--background);
-}
-
-.btn-success:hover {
-    filter: brightness(0.95);
-}
-
-.btn-info {
-    background: color-mix(in srgb, var(--primary) 80%, #0ea5e9 20%);
-    color: var(--background);
-}
-
-.btn-info:hover {
-    filter: brightness(0.95);
-}
 
 /* Tab Styling */
 .tab-btn {
@@ -308,6 +270,50 @@ input:focus, textarea:focus, select:focus {
         transform: scale(4);
         opacity: 0;
     }
+}
+
+
+/* THEME-AWARE CONTRAST BUTTONS */
+.btn-contrast {
+    background: var(--text-main);
+    color: var(--background);
+    border: 1px solid var(--text-main);
+}
+
+.btn-contrast:hover {
+    filter: brightness(1.1);
+}
+
+.btn-neutral-contrast {
+    background: var(--surface);
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    border: 1px solid color-mix(in srgb, var(--text-main) 24%, transparent);
+}
+
+.btn-neutral-contrast:hover {
+    background: var(--background);
+    background: color-mix(in srgb, var(--surface) 75%, var(--text-main) 25%);
+    color: var(--background);
+}
+
+.btn-success {
+    background: var(--success);
+    color: var(--background);
+}
+
+.btn-success:hover {
+    filter: brightness(0.95);
+}
+
+.btn-info {
+    background: #3b82f6;
+    background: color-mix(in srgb, var(--primary) 80%, #0ea5e9 20%);
+    color: var(--background);
+}
+
+.btn-info:hover {
+    filter: brightness(0.95);
 }
 
 /* THEME MODES */
