@@ -221,9 +221,20 @@ function generateMeanCalcOld(r, groups) {
 
 // Ensure t() is available even if translations are not yet loaded
 const originalT = typeof t === 'function' ? t : (k) => k;
+function escapeHtml(value) {
+    if (value === null || value === undefined) return '';
+    return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
 function safeT(key, vars = {}) {
-    if (typeof t === 'function') return t(key, vars);
-    return key;
+    const translationFn = typeof t === 'function' ? t : originalT;
+    const translated = translationFn(key, vars);
+    return escapeHtml(translated);
 }
 
 function generateModeCalcOld(r, groups) {
