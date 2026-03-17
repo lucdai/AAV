@@ -9,6 +9,35 @@ const AUTO_SAVE_INTERVAL = 1000; // Lưu mỗi 1 giây khi có thay đổi
 let autoSaveTimer = null;
 let hasUnsavedChanges = false;
 
+function showAppNotification(message, type = 'info') {
+    const safeMessage = String(message || '').trim();
+    if (!safeMessage) return;
+
+    let notification = document.getElementById('appNotification');
+    if (!notification) {
+        notification = document.createElement('div');
+        notification.id = 'appNotification';
+        notification.className = 'fixed top-4 right-4 max-w-sm text-white px-4 py-3 rounded-lg shadow-lg text-sm z-50';
+        document.body.appendChild(notification);
+    }
+
+    const typeClassMap = {
+        success: 'bg-emerald-600',
+        warning: 'bg-amber-600',
+        error: 'bg-rose-600',
+        info: 'bg-slate-700'
+    };
+
+    notification.className = `fixed top-4 right-4 max-w-sm text-white px-4 py-3 rounded-lg shadow-lg text-sm z-50 ${typeClassMap[type] || typeClassMap.info}`;
+    notification.textContent = safeMessage;
+    notification.style.display = 'block';
+
+    clearTimeout(showAppNotification._timer);
+    showAppNotification._timer = setTimeout(() => {
+        notification.style.display = 'none';
+    }, 2600);
+}
+
 function sanitizeText(value, fallback = '') {
     return typeof value === 'string' ? value : fallback;
 }
@@ -229,15 +258,13 @@ function showAutoSaveNotification() {
  * Xóa dữ liệu sao lưu
  */
 function clearBackup() {
-    if (confirm(t('confirm_clear_backup'))) {
-        try {
-            localStorage.removeItem(STORAGE_KEY);
-            localStorage.removeItem(BACKUP_TIMESTAMP_KEY);
-            console.log('[AAV Auto-Backup] Dữ liệu sao lưu đã được xóa');
-            alert(t('backup_cleared'));
-        } catch (e) {
-            console.error('[AAV Auto-Backup] Lỗi khi xóa dữ liệu:', e);
-        }
+    try {
+        localStorage.removeItem(STORAGE_KEY);
+        localStorage.removeItem(BACKUP_TIMESTAMP_KEY);
+        console.log('[AAV Auto-Backup] Dữ liệu sao lưu đã được xóa');
+        showAppNotification(t('backup_cleared'), 'success');
+    } catch (e) {
+        console.error('[AAV Auto-Backup] Lỗi khi xóa dữ liệu:', e);
     }
 }
 
@@ -283,7 +310,7 @@ function getLastBackupInfo() {
 function exportBackupAsJSON() {
     const state = loadFromLocalStorage();
     if (!state) {
-        alert(t('no_backup_to_export'));
+        showAppNotification(t('no_backup_to_export'), 'warning');
         return;
     }
     
@@ -322,10 +349,10 @@ function importBackupFromJSON() {
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
                 localStorage.setItem(BACKUP_TIMESTAMP_KEY, new Date().toISOString());
                 
-                alert(t('import_success'));
+                showAppNotification(t('import_success'), 'success');
                 console.log('[AAV Auto-Backup] Dữ liệu sao lưu đã được nhập');
             } catch (e) {
-                alert('Lỗi khi nhập dữ liệu: ' + e.message);
+                showAppNotification('Lỗi khi nhập dữ liệu: ' + e.message, 'error');
                 console.error('[AAV Auto-Backup] Lỗi khi nhập:', e);
             }
         };

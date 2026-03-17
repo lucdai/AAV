@@ -397,12 +397,10 @@ function exportUserData() {
 }
 
 function deleteUserData() {
-    if (confirm(t('confirm_delete_all_data'))) {
-        localStorage.removeItem(PREFS_STORAGE_KEY);
-        localStorage.removeItem('aav_backup_data');
-        localStorage.removeItem('aav_backup_timestamp');
-        location.reload();
-    }
+    localStorage.removeItem(PREFS_STORAGE_KEY);
+    localStorage.removeItem('aav_backup_data');
+    localStorage.removeItem('aav_backup_timestamp');
+    location.reload();
 }
 
 /**
