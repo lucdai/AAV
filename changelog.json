@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-03-17T14:00:19.706589",
-  "total_commits": 202,
+  "generated_at": "2026-03-17T14:14:41.490453",
+  "total_commits": 205,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-17",
-      "commit_count": 25,
+      "commit_count": 28,
       "categories": {
         "Features": [
           {
@@ -44,6 +44,24 @@
           }
         ],
         "Other": [
+          {
+            "sha": "4f52a5b",
+            "message": "Merge pull request #22 from lucdai/codex/ensure-consistent-button-colors-on-hover",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/4f52a5ba3a37aa4ff370fd2efccfa9ab4e30dc28"
+          },
+          {
+            "sha": "2a98bc1",
+            "message": "Unify PNG/JPEG export buttons with system theme colors",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/2a98bc104a7e0cb749f3ca49159f6a597e745955"
+          },
+          {
+            "sha": "d191068",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/d1910686ed17fb420509ec20839d476f24c90ebc"
+          },
           {
             "sha": "6487d42",
             "message": "Merge pull request #21 from lucdai/codex/update-active-state-colors-for-icons",
