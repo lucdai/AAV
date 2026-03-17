@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-03-17T15:47:26.845807",
-  "total_commits": 261,
+  "generated_at": "2026-03-17T15:48:16.878991",
+  "total_commits": 264,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-17",
-      "commit_count": 84,
+      "commit_count": 87,
       "categories": {
         "Features": [
           {
@@ -124,6 +124,24 @@
           }
         ],
         "Other": [
+          {
+            "sha": "5ba3c05",
+            "message": "Merge pull request #43 from lucdai/codex/sanitize-html-in-i18n-translations",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/5ba3c05a5f49a6a8db1ca7bcfaaec8f73871ee62"
+          },
+          {
+            "sha": "a80695b",
+            "message": "Sanitize HTML before rendering calculation i18n content",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/a80695ba0eeebeb861672b9afaa3e6301470a1cf"
+          },
+          {
+            "sha": "abbf02f",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/abbf02fb0e8f56e2498ca617af16b8a18e8a057f"
+          },
           {
             "sha": "60c0cb6",
             "message": "Merge pull request #42 from lucdai/codex/clamp-decimalplaces-in-fmtinternal",
