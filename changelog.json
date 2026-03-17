@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-03-17T15:32:45.566074",
-  "total_commits": 223,
+  "generated_at": "2026-03-17T15:33:45.409001",
+  "total_commits": 226,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-17",
-      "commit_count": 46,
+      "commit_count": 49,
       "categories": {
         "Features": [
           {
@@ -37,6 +37,18 @@
         ],
         "Improvements": [
           {
+            "sha": "ae039b1",
+            "message": "Merge pull request #29 from lucdai/codex/optimize-seo-and-performance-in-index.html",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/ae039b13c5c211e2d773ff92525d6f5d6e7e6c4a"
+          },
+          {
+            "sha": "d30b04a",
+            "message": "Improve head SEO/performance font loading",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/d30b04a1f06442ddcc7b7d7d78b5b75537011bd8"
+          },
+          {
             "sha": "cf49fb5",
             "message": "Fix GitHub login to perform real OAuth redirect",
             "author": "lucdai",
@@ -56,6 +68,12 @@
           }
         ],
         "Other": [
+          {
+            "sha": "1f2c0f4",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/1f2c0f44a3e2257fc0a68f0a832bc7085b413aea"
+          },
           {
             "sha": "76257cb",
             "message": "Merge pull request #28 from lucdai/codex/fix-github-login-redirect-logic",
