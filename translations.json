@@ -221,7 +221,13 @@
         "login_google": "Đăng nhập với Google",
         "sync_status": "Trạng thái đồng bộ",
         "not_logged_in": "Chưa đăng nhập",
-        "logged_in_as": "Đã đăng nhập: {name}"
+        "logged_in_as": "Đã đăng nhập: {name}",
+        "palette_default": "Mặc định (Indigo)",
+        "palette_ocean": "Đại dương (Blue/Teal)",
+        "palette_forest": "Rừng xanh (Green)",
+        "palette_sunset": "Hoàng hôn (Red/Orange)",
+        "palette_monochrome": "Đơn sắc (Slate)",
+        "import_error_prefix": "Lỗi khi nhập dữ liệu:"
     },
     "en": {
         "title": "AAV - Online Data Analysis & Visualization Tool",
@@ -445,7 +451,13 @@
         "advanced_personalization": "Advanced personalization",
         "chart_palette": "Chart color palette",
         "auto_save_session": "Auto-save session",
-        "hotkeys_enabled": "Enable keyboard shortcuts"
+        "hotkeys_enabled": "Enable keyboard shortcuts",
+        "palette_default": "Default (Indigo)",
+        "palette_ocean": "Ocean (Blue/Teal)",
+        "palette_forest": "Forest (Green)",
+        "palette_sunset": "Sunset (Red/Orange)",
+        "palette_monochrome": "Monochrome (Slate)",
+        "import_error_prefix": "Import error:"
     },
     "zh": {
         "title": "AAV - 在线数据分析与可视化工具",
@@ -669,7 +681,13 @@
         "advanced_personalization": "Advanced personalization",
         "chart_palette": "Chart color palette",
         "auto_save_session": "Auto-save session",
-        "hotkeys_enabled": "Enable keyboard shortcuts"
+        "hotkeys_enabled": "Enable keyboard shortcuts",
+        "palette_default": "Default (Indigo)",
+        "palette_ocean": "Ocean (Blue/Teal)",
+        "palette_forest": "Forest (Green)",
+        "palette_sunset": "Sunset (Red/Orange)",
+        "palette_monochrome": "Monochrome (Slate)",
+        "import_error_prefix": "Import error:"
     },
     "hi": {
         "title": "AAV - ऑनलाइन डेटा विश्लेषण और विज़ुअलाइज़ेशन टूल",
@@ -893,7 +911,13 @@
         "advanced_personalization": "Advanced personalization",
         "chart_palette": "Chart color palette",
         "auto_save_session": "Auto-save session",
-        "hotkeys_enabled": "Enable keyboard shortcuts"
+        "hotkeys_enabled": "Enable keyboard shortcuts",
+        "palette_default": "Default (Indigo)",
+        "palette_ocean": "Ocean (Blue/Teal)",
+        "palette_forest": "Forest (Green)",
+        "palette_sunset": "Sunset (Red/Orange)",
+        "palette_monochrome": "Monochrome (Slate)",
+        "import_error_prefix": "Import error:"
     },
     "es": {
         "title": "AAV - Herramienta de Análisis y Visualización de Datos en Línea",
@@ -1117,7 +1141,13 @@
         "advanced_personalization": "Advanced personalization",
         "chart_palette": "Chart color palette",
         "auto_save_session": "Auto-save session",
-        "hotkeys_enabled": "Enable keyboard shortcuts"
+        "hotkeys_enabled": "Enable keyboard shortcuts",
+        "palette_default": "Default (Indigo)",
+        "palette_ocean": "Ocean (Blue/Teal)",
+        "palette_forest": "Forest (Green)",
+        "palette_sunset": "Sunset (Red/Orange)",
+        "palette_monochrome": "Monochrome (Slate)",
+        "import_error_prefix": "Import error:"
     },
     "fr": {
         "title": "AAV - Outil d'Analyse et de Visualisation de Données en Ligne",
@@ -1341,7 +1371,13 @@
         "advanced_personalization": "Advanced personalization",
         "chart_palette": "Chart color palette",
         "auto_save_session": "Auto-save session",
-        "hotkeys_enabled": "Enable keyboard shortcuts"
+        "hotkeys_enabled": "Enable keyboard shortcuts",
+        "palette_default": "Default (Indigo)",
+        "palette_ocean": "Ocean (Blue/Teal)",
+        "palette_forest": "Forest (Green)",
+        "palette_sunset": "Sunset (Red/Orange)",
+        "palette_monochrome": "Monochrome (Slate)",
+        "import_error_prefix": "Import error:"
     },
     "ar": {
         "title": "AAV - أداة تحليل البيانات والتصور عبر الإنترنت",
@@ -1565,7 +1601,13 @@
         "advanced_personalization": "Advanced personalization",
         "chart_palette": "Chart color palette",
         "auto_save_session": "Auto-save session",
-        "hotkeys_enabled": "Enable keyboard shortcuts"
+        "hotkeys_enabled": "Enable keyboard shortcuts",
+        "palette_default": "Default (Indigo)",
+        "palette_ocean": "Ocean (Blue/Teal)",
+        "palette_forest": "Forest (Green)",
+        "palette_sunset": "Sunset (Red/Orange)",
+        "palette_monochrome": "Monochrome (Slate)",
+        "import_error_prefix": "Import error:"
     },
     "bn": {
         "title": "AAV - অনলাইন ডেটা বিশ্লেষণ এবং ভিজ্যুয়ালাইজেশন টুল",
@@ -1789,7 +1831,13 @@
         "advanced_personalization": "Advanced personalization",
         "chart_palette": "Chart color palette",
         "auto_save_session": "Auto-save session",
-        "hotkeys_enabled": "Enable keyboard shortcuts"
+        "hotkeys_enabled": "Enable keyboard shortcuts",
+        "palette_default": "Default (Indigo)",
+        "palette_ocean": "Ocean (Blue/Teal)",
+        "palette_forest": "Forest (Green)",
+        "palette_sunset": "Sunset (Red/Orange)",
+        "palette_monochrome": "Monochrome (Slate)",
+        "import_error_prefix": "Import error:"
     },
     "pt": {
         "title": "AAV - Ferramenta Online de Análise e Visualização de Dados",
@@ -2013,7 +2061,13 @@
         "advanced_personalization": "Advanced personalization",
         "chart_palette": "Chart color palette",
         "auto_save_session": "Auto-save session",
-        "hotkeys_enabled": "Enable keyboard shortcuts"
+        "hotkeys_enabled": "Enable keyboard shortcuts",
+        "palette_default": "Default (Indigo)",
+        "palette_ocean": "Ocean (Blue/Teal)",
+        "palette_forest": "Forest (Green)",
+        "palette_sunset": "Sunset (Red/Orange)",
+        "palette_monochrome": "Monochrome (Slate)",
+        "import_error_prefix": "Import error:"
     },
     "ru": {
         "title": "AAV - Онлайн-инструмент для анализа и визуализации данных",
@@ -2237,7 +2291,13 @@
         "advanced_personalization": "Advanced personalization",
         "chart_palette": "Chart color palette",
         "auto_save_session": "Auto-save session",
-        "hotkeys_enabled": "Enable keyboard shortcuts"
+        "hotkeys_enabled": "Enable keyboard shortcuts",
+        "palette_default": "Default (Indigo)",
+        "palette_ocean": "Ocean (Blue/Teal)",
+        "palette_forest": "Forest (Green)",
+        "palette_sunset": "Sunset (Red/Orange)",
+        "palette_monochrome": "Monochrome (Slate)",
+        "import_error_prefix": "Import error:"
     },
     "ur": {
         "title": "AAV - آن لائن ڈیٹا تجزیہ اور تصور کا آلہ",
@@ -2461,6 +2521,12 @@
         "advanced_personalization": "Advanced personalization",
         "chart_palette": "Chart color palette",
         "auto_save_session": "Auto-save session",
-        "hotkeys_enabled": "Enable keyboard shortcuts"
+        "hotkeys_enabled": "Enable keyboard shortcuts",
+        "palette_default": "Default (Indigo)",
+        "palette_ocean": "Ocean (Blue/Teal)",
+        "palette_forest": "Forest (Green)",
+        "palette_sunset": "Sunset (Red/Orange)",
+        "palette_monochrome": "Monochrome (Slate)",
+        "import_error_prefix": "Import error:"
     }
 }

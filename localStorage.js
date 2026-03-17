@@ -352,7 +352,7 @@ function importBackupFromJSON() {
                 showAppNotification(t('import_success'), 'success');
                 console.log('[AAV Auto-Backup] Dữ liệu sao lưu đã được nhập');
             } catch (e) {
-                showAppNotification('Lỗi khi nhập dữ liệu: ' + e.message, 'error');
+                showAppNotification(`${t('import_error_prefix')} ${e.message}`, 'error');
                 console.error('[AAV Auto-Backup] Lỗi khi nhập:', e);
             }
         };
