@@ -231,6 +231,10 @@ function adjustColor(hex, percent) {
 function hexToRgba(hex, alpha) {
     if (!hex || hex[0] !== '#') return null;
 
+    const numericAlpha = Number(alpha);
+    if (!Number.isFinite(numericAlpha)) return null;
+    const safeAlpha = Math.min(1, Math.max(0, numericAlpha));
+
     let normalizedHex = hex.slice(1);
     if (normalizedHex.length === 3) {
         normalizedHex = normalizedHex.split('').map(c => c + c).join('');
@@ -243,7 +247,7 @@ function hexToRgba(hex, alpha) {
     const b = parseInt(normalizedHex.slice(4, 6), 16);
     if (Number.isNaN(r) || Number.isNaN(g) || Number.isNaN(b)) return null;
 
-    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    return `rgba(${r}, ${g}, ${b}, ${safeAlpha})`;
 }
 
 function generateRandomState() {
