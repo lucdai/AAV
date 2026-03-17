@@ -427,7 +427,7 @@ function loginWithGitHub() {
     const SCOPE = 'read:user';
     const authUrl = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=${SCOPE}&state=${generateRandomState()}`;
     console.log('Redirecting to GitHub:', authUrl);
-    alert('Đang chuyển hướng đến GitHub để xác thực...');
+    // Tự động tiếp tục đăng nhập, không hiển thị hộp thoại xác nhận của trình duyệt
     setTimeout(() => {
         const mockUser = { name: 'lucdai', avatar: 'https://github.com/lucdai.png' };
         localStorage.setItem('aav_user', JSON.stringify(mockUser));
