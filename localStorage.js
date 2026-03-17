@@ -291,7 +291,7 @@ function getLastBackupInfo() {
         return {
             timestamp: timestamp,
             formatted: date.toLocaleString((() => {
-                const lang = localStorage.getItem('aav_lang') || 'vi';
+                const lang = typeof currentLang !== 'undefined' ? currentLang : (localStorage.getItem('aav_lang') || 'vi');
                 const localeMap = {
                     'vi': 'vi-VN', 'en': 'en-US', 'zh': 'zh-CN', 'hi': 'hi-IN', 'es': 'es-ES',
                     'fr': 'fr-FR', 'ar': 'ar-SA', 'bn': 'bn-BD', 'pt': 'pt-PT', 'ru': 'ru-RU', 'ur': 'ur-PK'
@@ -352,7 +352,7 @@ function importBackupFromJSON() {
                 showAppNotification(t('import_success'), 'success');
                 console.log('[AAV Auto-Backup] Dữ liệu sao lưu đã được nhập');
             } catch (e) {
-                showAppNotification(`${t('import_error_prefix')} ${e.message}`, 'error');
+                showAppNotification('Lỗi khi nhập dữ liệu: ' + e.message, 'error');
                 console.error('[AAV Auto-Backup] Lỗi khi nhập:', e);
             }
         };

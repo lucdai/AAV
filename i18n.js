@@ -134,10 +134,6 @@ function t(key, variables = {}) {
 }
 
 function applyTranslations() {
-    // Sync document language metadata
-    document.documentElement.lang = currentLang;
-    document.documentElement.dir = ['ar', 'ur'].includes(currentLang) ? 'rtl' : 'ltr';
-
     // Update title and meta tags
     document.title = t('title');
     const metaDesc = document.querySelector('meta[name="description"]');
@@ -181,10 +177,6 @@ function applyTranslations() {
 function changeLanguage(lang) {
     currentLang = lang;
     localStorage.setItem('aav_lang', lang);
-
-    const nextUrl = new URL(window.location.href);
-    nextUrl.searchParams.set('lang', lang);
-    window.history.replaceState({}, '', nextUrl);
     // Update dataset names if they are default samples
     if (typeof datasets !== 'undefined') {
         datasets.forEach(ds => {

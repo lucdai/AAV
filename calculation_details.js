@@ -4,28 +4,11 @@
  * Tích hợp đa ngôn ngữ hoàn toàn cho các chi tiết phép tính
  */
 
-const localeMap = {
-    'vi': 'vi-VN', 'en': 'en-US', 'zh': 'zh-CN', 'hi': 'hi-IN', 'es': 'es-ES',
-    'fr': 'fr-FR', 'ar': 'ar-SA', 'bn': 'bn-BD', 'pt': 'pt-PT', 'ru': 'ru-RU', 'ur': 'ur-PK'
-};
-let currentLang = localStorage.getItem('aav_lang') || 'vi';
-
-if (typeof window !== 'undefined' && typeof window.changeLanguage === 'function') {
-    const originalChangeLanguage = window.changeLanguage;
-    window.changeLanguage = function(lang) {
-        currentLang = lang;
-        return originalChangeLanguage.call(this, lang);
-    };
-}
-
 // Hàm định dạng số nội bộ
 function fmtInternal(n) { 
     if (n === undefined || n === null) return "-";
-    const minDecimalPlaces = -6;
-    const maxDecimalPlaces = 10;
     let d = (document.getElementById('decimalPlaces') ? parseInt(document.getElementById('decimalPlaces').value) : 2);
     if (isNaN(d)) d = 2;
-    d = Math.min(maxDecimalPlaces, Math.max(minDecimalPlaces, d));
 
     let val = n;
     let minFD = d > 0 ? d : 0;
@@ -38,11 +21,12 @@ function fmtInternal(n) {
         maxFD = 0;
     }
 
-    if (typeof window !== 'undefined' && typeof window.currentLang === 'string') {
-        currentLang = window.currentLang;
-    }
-
-    return new Intl.NumberFormat(localeMap[currentLang] || 'en-US', { 
+    const lang = localStorage.getItem('aav_lang') || 'vi';
+    const localeMap = {
+        'vi': 'vi-VN', 'en': 'en-US', 'zh': 'zh-CN', 'hi': 'hi-IN', 'es': 'es-ES',
+        'fr': 'fr-FR', 'ar': 'ar-SA', 'bn': 'bn-BD', 'pt': 'pt-PT', 'ru': 'ru-RU', 'ur': 'ur-PK'
+    };
+    return new Intl.NumberFormat(localeMap[lang] || 'en-US', { 
         minimumFractionDigits: minFD, 
         maximumFractionDigits: maxFD 
     }).format(val); 
@@ -55,70 +39,17 @@ function frac(top, bot) {
 
 function parseSerializedData(data) {
     if (typeof data !== 'string') return data;
-
-    const rawInput = data.trim();
-    if (!rawInput) return null;
-
     try {
-        return JSON.parse(rawInput);
+        return JSON.parse(decodeURIComponent(data));
     } catch (error) {
-        try {
-            return JSON.parse(decodeURIComponent(rawInput));
-        } catch (decodeError) {
-            console.error('Unable to parse serialized calculation data:', decodeError);
-            return null;
-        }
+        console.error('Unable to parse serialized calculation data:', error);
+        return null;
     }
 }
 
 function sanitizeNumber(value, fallback = 0) {
     const num = Number(value);
     return Number.isFinite(num) ? num : fallback;
-}
-
-function sanitizeHtmlContent(html) {
-    if (typeof html !== 'string') return '';
-
-    const template = document.createElement('template');
-    template.innerHTML = html;
-
-    const allowedTags = new Set([
-        'DIV', 'SPAN', 'P', 'UL', 'LI', 'STRONG', 'EM', 'B', 'I', 'BR'
-    ]);
-    const allowedAttributes = new Set(['class', 'title', 'role']);
-
-    const cleanNode = (node) => {
-        if (node.nodeType === Node.TEXT_NODE) return;
-        if (node.nodeType !== Node.ELEMENT_NODE) {
-            node.remove();
-            return;
-        }
-
-        const el = node;
-        if (!allowedTags.has(el.tagName)) {
-            const text = document.createTextNode(el.textContent || '');
-            el.replaceWith(text);
-            return;
-        }
-
-        const attrs = [...el.attributes];
-        for (const attr of attrs) {
-            const name = attr.name.toLowerCase();
-            const value = attr.value || '';
-            const isAria = name.startsWith('aria-');
-            const isEvent = name.startsWith('on');
-            const hasJavascriptProtocol = /javascript:/i.test(value);
-
-            if (isEvent || hasJavascriptProtocol || (!allowedAttributes.has(name) && !isAria)) {
-                el.removeAttribute(attr.name);
-            }
-        }
-
-        [...el.childNodes].forEach(cleanNode);
-    };
-
-    [...template.content.childNodes].forEach(cleanNode);
-    return template.innerHTML;
 }
 
 function normalizeGroups(groups) {
@@ -175,19 +106,19 @@ function showCalculation(statId, resultData, groupsData) {
     if (!groups) { console.error('Groups data not provided'); return; }
 
     const metricNames = {
-        'mean': safeT('mean'),
-        'q2': safeT('median'),
-        'q1': safeT('q1'),
-        'q3': safeT('q3'),
-        'mode': safeT('mode'),
-        'variance': safeT('variance'),
-        'sd': safeT('sd'),
-        'range': safeT('range'),
-        'iqr': safeT('iqr'),
-        'cv': safeT('cv')
+        'mean': t('mean'),
+        'q2': t('median'),
+        'q1': t('q1'),
+        'q3': t('q3'),
+        'mode': t('mode'),
+        'variance': t('variance'),
+        'sd': t('sd'),
+        'range': t('range'),
+        'iqr': t('iqr'),
+        'cv': t('cv')
     };
 
-    title = safeT('calc_detail_for', {metric: metricNames[statId] || statId, name: result.name});
+    title = t('calc_detail_for', {metric: metricNames[statId] || statId, name: result.name});
 
     switch(statId) {
         case 'mean':
@@ -215,7 +146,7 @@ function showCalculation(statId, resultData, groupsData) {
             content = generateCVCalcOld(result, groups);
             break;
         default:
-            content = safeT('updating_feature') + statId;
+            content = t('updating_feature') + statId;
     }
 
     const modal = document.getElementById('calcModal');
@@ -224,10 +155,7 @@ function showCalculation(statId, resultData, groupsData) {
         const modalBody = document.getElementById('calcModalBody');
         const contentContainer = document.createElement('div');
         contentContainer.className = 'math-text';
-        // Translation strings may contain trusted inline markup (e.g. <strong>),
-        // but we still sanitize before injecting to reduce XSS risk if translation
-        // sources become user-provided in the future.
-        contentContainer.innerHTML = sanitizeHtmlContent(content);
+        contentContainer.innerHTML = content;
         modalBody.replaceChildren(contentContainer);
         modal.classList.remove('hidden');
         modal.classList.add('flex');
@@ -247,28 +175,22 @@ function generateQuartileCalcNew(id, r, groups) {
     const k = id==='q1'?1:(id==='q3'?3:2);
     const pos = r.s.N * k / 4;
     const label = id==='q2'?'M<span class="sub">e</span>':(id==='q1'?'Q<span class="sub">1</span>':'Q<span class="sub">3</span>');
-
-    if (!Array.isArray(groups) || groups.length === 0 || !Array.isArray(r.gStats) || r.gStats.length === 0) {
-        let h = safeT('determine_group', {label: label});
-        h += `<p class="text-red-600 text-sm mb-2 font-semibold">${safeT('note_title')} ${safeT('fallback_note')}</p>`;
-        return h;
-    }
     
     let idx = r.s[id + 'Idx'];
     let isFallback = false;
 
-    if (!Number.isInteger(idx) || idx < 0 || !groups[idx] || !r.gStats[idx]) {
+    if (idx === undefined || idx === -1 || !groups[idx]) {
         idx = groups.length - 1;
         isFallback = true;
     }
     
     const g = groups[idx];
-    const prevCf = idx > 0 && r.gStats[idx-1] ? r.gStats[idx-1].cf : 0;
-    const n_m = r.gStats[idx] ? r.gStats[idx].freq : 0;
+    const prevCf = idx > 0 ? r.gStats[idx-1].cf : 0;
+    const n_m = r.gStats[idx].freq;
     const h_val = g.upper - g.lower;
 
     let h = safeT('determine_group', {label: label});
-    if (isFallback) h += `<p class="text-amber-700 text-sm mb-2 font-semibold">${safeT('note_title')} ${safeT('fallback_note')}</p>`;
+    if (isFallback) h += `<p class="text-amber-600 text-sm mb-2 italic">${safeT('note_title')} ${safeT('fallback_note')}</p>`;
     h += `<ul class="list-disc ml-8 mb-4 text-sm">
             <li>${safeT('total_freq')}${r.s.N}</li>
             <li>${safeT('position')}${k}N/4 = ${pos}</li>
@@ -299,20 +221,9 @@ function generateMeanCalcOld(r, groups) {
 
 // Ensure t() is available even if translations are not yet loaded
 const originalT = typeof t === 'function' ? t : (k) => k;
-function escapeHtml(value) {
-    if (value === null || value === undefined) return '';
-    return String(value)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;');
-}
-
 function safeT(key, vars = {}) {
-    const translationFn = typeof t === 'function' ? t : originalT;
-    const translated = translationFn(key, vars);
-    return escapeHtml(translated);
+    if (typeof t === 'function') return t(key, vars);
+    return key;
 }
 
 function generateModeCalcOld(r, groups) {
