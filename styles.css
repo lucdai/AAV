@@ -96,6 +96,31 @@ a.w-10:active {
     box-shadow: 0 2px 0 rgba(15, 23, 42, 0.2), 0 5px 10px rgba(15, 23, 42, 0.12);
 }
 
+.footer-icon-btn {
+    background: #f8fafc;
+    color: #64748b;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.footer-icon-btn:hover,
+.footer-icon-btn:focus-visible,
+.footer-icon-btn:active {
+    background: #020617;
+    color: #f8fafc;
+    border-color: #020617;
+}
+
+.footer-icon-btn:hover svg,
+.footer-icon-btn:focus-visible svg,
+.footer-icon-btn:active svg {
+    color: #faff00;
+}
+
+.footer-icon-btn:focus-visible {
+    outline: 2px solid #faff00;
+    outline-offset: 2px;
+}
+
 .btn-primary {
     background: var(--primary);
     color: white;
