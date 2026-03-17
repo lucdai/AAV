@@ -143,16 +143,6 @@
                 
                 <div class="space-y-4">
                     <div>
-                        <label class="block text-sm font-bold text-[var(--text-main)] mb-2" data-i18n="theme">Chế độ màu sắc</label>
-                        <div class="grid grid-cols-2 gap-2">
-                            <button onclick="savePreferences({theme: 'light'})" class="px-3 py-2 text-sm border border-[var(--border)] rounded-lg hover:bg-slate-50" data-i18n="light">Sáng</button>
-                            <button onclick="savePreferences({theme: 'dark'})" class="px-3 py-2 text-sm border border-[var(--border)] rounded-lg hover:bg-slate-50" data-i18n="dark">Tối</button>
-                            <button onclick="savePreferences({theme: 'high-contrast'})" class="px-3 py-2 text-sm border border-[var(--border)] rounded-lg hover:bg-slate-50" data-i18n="high_contrast">Tương phản</button>
-                            <button onclick="savePreferences({theme: 'system'})" class="px-3 py-2 text-sm border border-[var(--border)] rounded-lg hover:bg-slate-50" data-i18n="system">Hệ thống</button>
-                        </div>
-                    </div>
-
-                    <div>
                         <label class="block text-sm font-bold text-[var(--text-main)] mb-2" data-i18n="accent_color">Màu nhấn</label>
                         <div class="flex gap-3">
                             <div onclick="savePreferences({accentColor: '#6366f1'})" class="color-swatch bg-[#6366f1]"></div>
@@ -1099,11 +1089,9 @@
             if(charts[id]) charts[id].destroy();
             
             // Lấy màu chữ và màu lưới từ preferences
-            const isDark = document.documentElement.classList.contains('dark-mode') || 
-                          (typeof userPrefs !== 'undefined' && userPrefs.theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
             const rootStyle = getComputedStyle(document.documentElement);
-            const textColor = rootStyle.getPropertyValue('--text-main').trim() || (isDark ? '#f8fafc' : '#0f172a');
-            const gridColor = rootStyle.getPropertyValue('--grid').trim() || (isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)');
+            const textColor = rootStyle.getPropertyValue('--text-main').trim() || '#0f172a';
+            const gridColor = rootStyle.getPropertyValue('--grid').trim() || 'rgba(0, 0, 0, 0.1)';
 
             const defaultOptions = {
                 responsive: true,
