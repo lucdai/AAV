@@ -91,6 +91,31 @@ body {
     color: var(--text-main);
 }
 
+.export-format-btn {
+    --format-color: var(--primary);
+    background: var(--surface);
+    color: var(--format-color);
+    border: 1px solid var(--format-color);
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    line-height: 1.2;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.export-format-btn:hover {
+    background: var(--format-color);
+    color: var(--surface);
+    border-color: var(--format-color);
+}
+
+.export-format-btn--png {
+    --format-color: #22c55e;
+}
+
+.export-format-btn--jpeg {
+    --format-color: #2563eb;
+}
+
 /* Tab Styling */
 .tab-btn {
     position: relative;
