@@ -1,13 +1,19 @@
 {
-  "generated_at": "2026-03-17T15:36:35.695502",
-  "total_commits": 235,
+  "generated_at": "2026-03-17T15:37:42.985033",
+  "total_commits": 238,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-17",
-      "commit_count": 58,
+      "commit_count": 61,
       "categories": {
         "Features": [
+          {
+            "sha": "721fb09",
+            "message": "Merge pull request #33 from lucdai/codex/add-defer-to-script-tags",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/721fb09248140478d8cd5765c5a2845f10c3ac76"
+          },
           {
             "sha": "a8febf0",
             "message": "Merge pull request #27 from lucdai/codex/add-close-animation-to-settings-panel",
@@ -36,6 +42,12 @@
           }
         ],
         "Improvements": [
+          {
+            "sha": "637aef8",
+            "message": "Improve script loading to reduce render blocking",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/637aef8cb3b22af59e31f67639411f30e6b6b418"
+          },
           {
             "sha": "ff018be",
             "message": "Merge pull request #30 from lucdai/codex/optimize-performance-of-fmtinternal-function",
@@ -80,6 +92,12 @@
           }
         ],
         "Other": [
+          {
+            "sha": "a6f4114",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/a6f411408ded37be120939cecfe2b0eaedab5c38"
+          },
           {
             "sha": "0af5940",
             "message": "Merge pull request #32 from lucdai/codex/remove-pat-from-client-code",
