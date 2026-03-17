@@ -1,13 +1,25 @@
 {
-  "generated_at": "2026-03-17T15:50:29.024704",
-  "total_commits": 270,
+  "generated_at": "2026-03-17T15:52:53.204569",
+  "total_commits": 274,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-17",
-      "commit_count": 93,
+      "commit_count": 97,
       "categories": {
         "Features": [
+          {
+            "sha": "9d6394c",
+            "message": "Merge pull request #47 from lucdai/codex/add-fallback-for-backdrop-filter",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/9d6394c0d5294acce7b358bf204820a24fd75ec0"
+          },
+          {
+            "sha": "5c446f9",
+            "message": "Add backdrop-filter fallbacks for unsupported browsers",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/5c446f9e50d220124053bf38bb6eb2901c96d3dc"
+          },
           {
             "sha": "9ab1da4",
             "message": "Add i18n coverage check and complete locale keys",
@@ -60,6 +72,12 @@
           }
         ],
         "Improvements": [
+          {
+            "sha": "5eb8338",
+            "message": "Remove Google Fonts imports to improve privacy and render performance",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/5eb83387cc01a6eb79aa65bf1fe0413a1b40a7a2"
+          },
           {
             "sha": "c671e39",
             "message": "Improve serialized calculation data parsing fallback",
@@ -130,6 +148,12 @@
           }
         ],
         "Other": [
+          {
+            "sha": "4a925ce",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/4a925ce206a96b3d7af1b2da680b85cfcb5297b2"
+          },
           {
             "sha": "c91e3e4",
             "message": "Merge pull request #45 from lucdai/codex/fix-css-syntax-error-in-box-shadow",
