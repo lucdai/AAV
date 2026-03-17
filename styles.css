@@ -404,45 +404,6 @@ input:focus, textarea:focus, select:focus {
     }
 }
 
-/* THEME MODES */
-:root.light-mode {
-    --background: #f8fafc;
-    --surface: #ffffff;
-    --text-main: #0f172a;
-    --text-muted: #64748b;
-    --border: #e2e8f0;
-    --primary-light: #eef2ff;
-}
-
-:root.dark-mode {
-    --background: #0f172a;
-    --surface: #1e293b;
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
-    --border: #334155;
-    --primary-light: rgba(99, 102, 241, 0.15);
-    --surface-muted: #111827;
-    --empty-state-bg: #0b1220;
-    --empty-state-text: #facc15;
-    --action-backup-bg: #facc15;
-    --action-backup-text: #111827;
-    --action-share-bg: #4f46e5;
-    --action-share-text: #f8fafc;
-    --action-neutral-bg: #f8fafc;
-    --action-neutral-text: #0f172a;
-}
-
-:root.high-contrast-mode {
-    --background: #000000;
-    --surface: #000000;
-    --text-main: #ffffff;
-    --text-muted: #ffff00;
-    --border: #ffffff;
-    --primary: #ffff00;
-    --primary-hover: #ffffff;
-    --primary-light: rgba(255, 255, 255, 0.2);
-}
-
 /* Ensure smooth transitions */
 body {
     transition: background-color 0.3s, color 0.3s;

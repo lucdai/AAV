@@ -4,7 +4,6 @@
 
 const PREFS_STORAGE_KEY = 'aav_user_preferences';
 const DEFAULT_PREFS = {
-    theme: 'system', // 'light', 'dark', 'high-contrast', 'system'
     accentColor: '#6366f1',
     backgroundColor: '', // Empty means use theme default
     textColor: '', // Empty means use theme default
@@ -32,13 +31,13 @@ function initPreferences() {
     if (savedPrefs) {
         try {
             userPrefs = { ...DEFAULT_PREFS, ...JSON.parse(savedPrefs) };
+            delete userPrefs.theme;
         } catch (e) {
             console.error('Error parsing preferences:', e);
         }
     }
     
     applyAllPreferences();
-    setupSystemThemeListener();
     setupColorInputs();
     
     if (userPrefs.autoSaveSession) {
@@ -51,7 +50,6 @@ function initPreferences() {
  * Apply all preferences to the UI
  */
 function applyAllPreferences() {
-    applyTheme(userPrefs.theme);
     applyAccentColor(userPrefs.accentColor);
     applyCustomColors(userPrefs.backgroundColor, userPrefs.textColor);
     applyFontSize(userPrefs.fontSize);
@@ -61,67 +59,19 @@ function applyAllPreferences() {
 }
 
 /**
- * Theme Management
- */
-function applyTheme(theme) {
-    const root = document.documentElement;
-    let effectiveTheme = theme;
-    
-    if (theme === 'system') {
-        effectiveTheme = isSystemDarkMode() ? 'dark' : 'light';
-    }
-    
-    root.classList.remove('light-mode', 'dark-mode', 'high-contrast-mode');
-    root.classList.add(`${effectiveTheme}-mode`);
-    
-    // Update Chart.js defaults
-    updateChartTheme(effectiveTheme);
-}
-
-function getSystemDarkMediaQuery() {
-    if (typeof window.matchMedia !== 'function') return null;
-    return window.matchMedia('(prefers-color-scheme: dark)');
-}
-
-function isSystemDarkMode() {
-    const mediaQuery = getSystemDarkMediaQuery();
-    return !!(mediaQuery && mediaQuery.matches);
-}
-
-/**
  * Update Chart.js defaults based on theme
  */
-function updateChartTheme(theme) {
+function updateChartTheme() {
     if (typeof Chart === 'undefined') return;
-    
-    const isDark = theme === 'dark' || theme === 'high-contrast' || 
-                  (theme === 'system' && isSystemDarkMode());
-    
-    // Determine colors based on theme or custom preferences
-    let textColor = userPrefs.textColor || (isDark ? '#94a3b8' : '#64748b');
+
+    // Determine colors based on preferences
+    let textColor = userPrefs.textColor || '#64748b';
     
     Chart.defaults.color = textColor;
     
     // Force re-calculate and re-draw all charts to ensure full synchronization
     if (typeof calculate === 'function' && typeof lastGroups !== 'undefined' && lastGroups.length > 0) {
         calculate();
-    }
-}
-
-function setupSystemThemeListener() {
-    const mediaQuery = getSystemDarkMediaQuery();
-    if (!mediaQuery) return;
-
-    const onThemeChange = () => {
-        if (userPrefs.theme === 'system') {
-            applyTheme('system');
-        }
-    };
-
-    if (typeof mediaQuery.addEventListener === 'function') {
-        mediaQuery.addEventListener('change', onThemeChange);
-    } else if (typeof mediaQuery.addListener === 'function') {
-        mediaQuery.addListener(onThemeChange);
     }
 }
 
@@ -139,7 +89,7 @@ function applyAccentColor(color) {
     
     // Sync charts when accent color changes
     if (typeof lastGroups !== 'undefined' && lastGroups.length > 0) {
-        updateChartTheme(userPrefs.theme);
+        updateChartTheme();
     }
 }
 
@@ -164,7 +114,7 @@ function applyCustomColors(bgColor, textColor) {
     }
     
     // Refresh charts to pick up new text color
-    updateChartTheme(userPrefs.theme);
+    updateChartTheme();
 }
 
 /**
@@ -321,17 +271,16 @@ function setupColorInputs() {
     const textInput = document.getElementById('textColorInput');
     const textHex = document.getElementById('textColorHex');
     
-    const isDark = document.documentElement.classList.contains('dark-mode') || 
-                  (userPrefs.theme === 'system' && isSystemDarkMode());
+    const rootStyle = getComputedStyle(document.documentElement);
     
     if (accentInput) accentInput.value = userPrefs.accentColor;
     if (accentHex) accentHex.value = userPrefs.accentColor;
     
-    const currentBg = userPrefs.backgroundColor || (isDark ? '#0f172a' : '#f8fafc');
+    const currentBg = userPrefs.backgroundColor || rootStyle.getPropertyValue('--background').trim() || '#f8fafc';
     if (bgInput) bgInput.value = currentBg;
     if (bgHex) bgHex.value = currentBg;
     
-    const currentText = userPrefs.textColor || (isDark ? '#f8fafc' : '#0f172a');
+    const currentText = userPrefs.textColor || rootStyle.getPropertyValue('--text-main').trim() || '#0f172a';
     if (textInput) textInput.value = currentText;
     if (textHex) textHex.value = currentText;
 }
@@ -358,7 +307,9 @@ function applyFontFamily(family) {
  * Save preferences
  */
 function savePreferences(newPrefs) {
-    userPrefs = { ...userPrefs, ...newPrefs };
+    const { theme, ...filteredPrefs } = newPrefs;
+    userPrefs = { ...userPrefs, ...filteredPrefs };
+    delete userPrefs.theme;
     localStorage.setItem(PREFS_STORAGE_KEY, JSON.stringify(userPrefs));
     applyAllPreferences();
     
