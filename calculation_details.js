@@ -4,6 +4,110 @@
  * Tích hợp đa ngôn ngữ hoàn toàn cho các chi tiết phép tính
  */
 
+
+const MODAL_FOCUSABLE_SELECTORS = [
+    'a[href]',
+    'area[href]',
+    'button:not([disabled])',
+    'input:not([disabled]):not([type="hidden"])',
+    'select:not([disabled])',
+    'textarea:not([disabled])',
+    '[tabindex]:not([tabindex="-1"])'
+].join(',');
+
+const modalA11yState = new WeakMap();
+
+function getFocusableElements(container) {
+    if (!container) return [];
+    return Array.from(container.querySelectorAll(MODAL_FOCUSABLE_SELECTORS))
+        .filter((el) => !el.hasAttribute('disabled') && el.getAttribute('aria-hidden') !== 'true');
+}
+
+function openAccessibleModal(modalId, contentId) {
+    const modal = document.getElementById(modalId);
+    const content = document.getElementById(contentId);
+    if (!modal || !content) return;
+
+    const existingState = modalA11yState.get(modal);
+    if (existingState) {
+        modal.removeEventListener('keydown', existingState.onKeyDown);
+        modal.removeEventListener('click', existingState.onBackdropClick);
+    }
+
+    const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    modal.setAttribute('aria-hidden', 'false');
+
+    const onKeyDown = (event) => {
+        if (event.key === 'Escape') {
+            closeAccessibleModal(modalId);
+            return;
+        }
+
+        if (event.key !== 'Tab') return;
+
+        const focusableElements = getFocusableElements(content);
+        if (focusableElements.length === 0) {
+            event.preventDefault();
+            content.focus();
+            return;
+        }
+
+        const first = focusableElements[0];
+        const last = focusableElements[focusableElements.length - 1];
+        const active = document.activeElement;
+
+        if (event.shiftKey && active === first) {
+            event.preventDefault();
+            last.focus();
+        } else if (!event.shiftKey && active === last) {
+            event.preventDefault();
+            first.focus();
+        }
+    };
+
+    const onBackdropClick = (event) => {
+        if (event.target === modal) {
+            closeAccessibleModal(modalId);
+        }
+    };
+
+    modal.addEventListener('keydown', onKeyDown);
+    modal.addEventListener('click', onBackdropClick);
+
+    modalA11yState.set(modal, { previousFocus, onKeyDown, onBackdropClick });
+
+    const focusableElements = getFocusableElements(content);
+    const nextFocus = focusableElements[0] || content;
+    window.requestAnimationFrame(() => nextFocus.focus());
+}
+
+function closeAccessibleModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (!modal) return;
+
+    const state = modalA11yState.get(modal);
+    if (state) {
+        modal.removeEventListener('keydown', state.onKeyDown);
+        modal.removeEventListener('click', state.onBackdropClick);
+    }
+
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    modal.setAttribute('aria-hidden', 'true');
+
+    if (state?.previousFocus && document.contains(state.previousFocus)) {
+        state.previousFocus.focus();
+    }
+
+    modalA11yState.delete(modal);
+}
+
+window.openAccessibleModal = openAccessibleModal;
+window.closeAccessibleModal = closeAccessibleModal;
+
 // Hàm định dạng số nội bộ
 function fmtInternal(n) { 
     if (n === undefined || n === null) return "-";
@@ -157,17 +261,12 @@ function showCalculation(statId, resultData, groupsData) {
         contentContainer.className = 'math-text';
         contentContainer.innerHTML = content;
         modalBody.replaceChildren(contentContainer);
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
+        openAccessibleModal('calcModal', 'calcModalContent');
     }
 }
 
 function closeCalcModal() {
-    const modal = document.getElementById('calcModal');
-    if (modal) {
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-    }
+    closeAccessibleModal('calcModal');
 }
 
 // --- ĐỊNH DẠNG MỚI CHO TRUNG VỊ, Q1, Q3 ---
