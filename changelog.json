@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-03-17T15:30:38.006997",
-  "total_commits": 214,
+  "generated_at": "2026-03-17T15:31:20.874385",
+  "total_commits": 217,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-17",
-      "commit_count": 37,
+      "commit_count": 40,
       "categories": {
         "Features": [
           {
@@ -44,6 +44,24 @@
           }
         ],
         "Other": [
+          {
+            "sha": "bffa1ad",
+            "message": "Merge pull request #26 from lucdai/codex/remove-@import-from-styles.css",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/bffa1ada1157d6c554085f0c8b4296f9abb1331e"
+          },
+          {
+            "sha": "ed4f835",
+            "message": "Move Google Font imports from CSS to HTML head",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/ed4f83502970e47a17577155cef97814ef0c3c58"
+          },
+          {
+            "sha": "205255b",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/205255b118f8afedb0ca045bdeb79a17cc1f0f07"
+          },
           {
             "sha": "f7a70b5",
             "message": "Merge pull request #25 from lucdai/codex/fix-urdu-translation-for-confirm_clear_all",
