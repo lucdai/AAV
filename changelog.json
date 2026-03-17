@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-03-17T16:00:59.175957",
-  "total_commits": 288,
+  "generated_at": "2026-03-17T16:01:44.681231",
+  "total_commits": 291,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-17",
-      "commit_count": 111,
+      "commit_count": 114,
       "categories": {
         "Features": [
           {
@@ -160,6 +160,24 @@
           }
         ],
         "Other": [
+          {
+            "sha": "c7b53c1",
+            "message": "Merge pull request #54 from lucdai/codex/fix-currentlang-declaration-in-fmt",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/c7b53c134283da5c8bf017fbfe1641ed993cf572"
+          },
+          {
+            "sha": "1f9eb08",
+            "message": "Fix language fallback without global currentLang dependency",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/1f9eb088cd4222601f7efca15ff37e26f8e44edd"
+          },
+          {
+            "sha": "8355476",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/8355476adfe92f17f0c2b6a83e60d37868bc5ea7"
+          },
           {
             "sha": "e10ea9c",
             "message": "Merge pull request #53 from lucdai/codex/fix-gridcolor-default-value-in-draw",
