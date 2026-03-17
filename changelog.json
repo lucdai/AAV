@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-03-17T15:42:40.658000",
-  "total_commits": 249,
+  "generated_at": "2026-03-17T15:43:37.328645",
+  "total_commits": 252,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-17",
-      "commit_count": 72,
+      "commit_count": 75,
       "categories": {
         "Features": [
           {
@@ -112,6 +112,24 @@
           }
         ],
         "Other": [
+          {
+            "sha": "e6853a7",
+            "message": "Merge pull request #39 from lucdai/codex/fix-duplicate-keydown-listeners-in-setuphotkeys",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/e6853a79a55313369a901fa076b57bdb3824664e"
+          },
+          {
+            "sha": "f315139",
+            "message": "Fix duplicate global hotkey listener bindings",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/f3151398fc234ae8a99de73fd9d0f8d844fb9760"
+          },
+          {
+            "sha": "c7d918f",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/c7d918fd8f09e4947057546351e29917c065976f"
+          },
           {
             "sha": "eea7012",
             "message": "Merge pull request #38 from lucdai/codex/ensure-hextorgba-returns-valid-string",
