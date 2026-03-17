@@ -1,12 +1,20 @@
 {
-  "generated_at": "2026-03-17T13:29:00.160967",
-  "total_commits": 184,
+  "generated_at": "2026-03-17T13:29:31.721585",
+  "total_commits": 187,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-17",
-      "commit_count": 7,
+      "commit_count": 10,
       "categories": {
+        "Features": [
+          {
+            "sha": "2edb18d",
+            "message": "Add 3D press effect for clickable controls",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/2edb18dabaf9ff8b6002b657c5669257d95bb127"
+          }
+        ],
         "Improvements": [
           {
             "sha": "b3277ff",
@@ -16,6 +24,18 @@
           }
         ],
         "Other": [
+          {
+            "sha": "63ae592",
+            "message": "Merge pull request #16 from lucdai/codex/bien-nut-thanh-dang-khoi-3d",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/63ae592c29f158c228b707881c655c54abc6843a"
+          },
+          {
+            "sha": "e830adb",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/e830adbbca81b78a17951590fa594f6ab25b3971"
+          },
           {
             "sha": "f04ba84",
             "message": "Merge pull request #15 from lucdai/codex/remove-annotations-from-image",
