@@ -624,7 +624,6 @@
         }
         
         function clearAllData() {
-            if(!confirm(t("confirm_clear_all"))) return;
             datasets = [{ id: 1, name: t("sample_prefix") + "A", dataStr: "" }];
             manualRows = [{ id: Date.now(), lower: 0, upper: 10, freqs: {} }];
             
@@ -695,11 +694,11 @@
                         renderInputs();
                         calculate();
                         markAsChanged();
-                        alert(t("csv_import_success"));
+                        showAppNotification(t("csv_import_success"), "success");
                     }
                 } catch (err) {
                     console.error(err);
-                    alert(t("csv_parse_error"));
+                    showAppNotification(t("csv_parse_error"), "error");
                 }
                 input.value = ""; // Reset input
             };
@@ -1174,7 +1173,7 @@
         function downloadChartImage(chartId, baseName, format) {
             const chart = charts[chartId];
             if (!chart) {
-                alert(t('chart_not_created'));
+                showAppNotification(t('chart_not_created'), 'warning');
                 return;
             }
             
@@ -1217,7 +1216,7 @@
         function toggleInputs() { const m=document.getElementById('method').value; document.getElementById('inputH').classList.toggle('hidden', m!=='manual_width'); document.getElementById('inputK').classList.toggle('hidden', m!=='manual_count'); document.getElementById('inputStart').classList.toggle('hidden', m==='auto'); }
         function copyTable() { 
             const el = document.getElementById('freqTable'); let range, sel;
-            if (document.createRange && window.getSelection) { range = document.createRange(); sel = window.getSelection(); sel.removeAllRanges(); try { range.selectNodeContents(el); sel.addRange(range); } catch (e) { range.selectNode(el); sel.addRange(range); } document.execCommand("copy"); sel.removeAllRanges(); alert(t("copied")); }
+            if (document.createRange && window.getSelection) { range = document.createRange(); sel = window.getSelection(); sel.removeAllRanges(); try { range.selectNodeContents(el); sel.addRange(range); } catch (e) { range.selectNode(el); sel.addRange(range); } document.execCommand("copy"); sel.removeAllRanges(); showAppNotification(t("copied"), "success"); }
         }
 
         // --- Sharing Feature ---
@@ -1261,9 +1260,9 @@
                 btn.innerHTML = originalText;
                 btn.disabled = false;
                 navigator.clipboard.writeText(urlToCopy).then(() => {
-                    alert(t("share_link_copied") + "\n\n" + urlToCopy);
+                    showAppNotification(t("share_link_copied"), "success");
                 }).catch(err => {
-                    prompt(t("copy_share_link_here"), urlToCopy);
+                    showAppNotification(`${t("copy_share_link_here")}: ${urlToCopy}`, "warning");
                 });
             };
 
