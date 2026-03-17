@@ -175,22 +175,28 @@ function generateQuartileCalcNew(id, r, groups) {
     const k = id==='q1'?1:(id==='q3'?3:2);
     const pos = r.s.N * k / 4;
     const label = id==='q2'?'M<span class="sub">e</span>':(id==='q1'?'Q<span class="sub">1</span>':'Q<span class="sub">3</span>');
+
+    if (!Array.isArray(groups) || groups.length === 0 || !Array.isArray(r.gStats) || r.gStats.length === 0) {
+        let h = safeT('determine_group', {label: label});
+        h += `<p class="text-red-600 text-sm mb-2 font-semibold">${safeT('note_title')} ${safeT('fallback_note')}</p>`;
+        return h;
+    }
     
     let idx = r.s[id + 'Idx'];
     let isFallback = false;
 
-    if (idx === undefined || idx === -1 || !groups[idx]) {
+    if (!Number.isInteger(idx) || idx < 0 || !groups[idx] || !r.gStats[idx]) {
         idx = groups.length - 1;
         isFallback = true;
     }
     
     const g = groups[idx];
-    const prevCf = idx > 0 ? r.gStats[idx-1].cf : 0;
-    const n_m = r.gStats[idx].freq;
+    const prevCf = idx > 0 && r.gStats[idx-1] ? r.gStats[idx-1].cf : 0;
+    const n_m = r.gStats[idx] ? r.gStats[idx].freq : 0;
     const h_val = g.upper - g.lower;
 
     let h = safeT('determine_group', {label: label});
-    if (isFallback) h += `<p class="text-amber-600 text-sm mb-2 italic">${safeT('note_title')} ${safeT('fallback_note')}</p>`;
+    if (isFallback) h += `<p class="text-amber-700 text-sm mb-2 font-semibold">${safeT('note_title')} ${safeT('fallback_note')}</p>`;
     h += `<ul class="list-disc ml-8 mb-4 text-sm">
             <li>${safeT('total_freq')}${r.s.N}</li>
             <li>${safeT('position')}${k}N/4 = ${pos}</li>
