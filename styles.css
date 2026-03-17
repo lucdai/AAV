@@ -55,6 +55,23 @@ body {
     box-shadow: var(--shadow-md);
 }
 
+
+/* Backdrop-filter fallback for unsupported browsers */
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+    .glass-card {
+        background: rgba(255, 255, 255, 0.96);
+        border-color: rgba(148, 163, 184, 0.3);
+    }
+
+    .settings-overlay {
+        background: rgba(2, 6, 23, 0.72);
+    }
+
+    #calcModal {
+        background: rgba(2, 6, 23, 0.76) !important;
+    }
+}
+
 .modern-card {
     background: var(--surface);
     border: 1px solid var(--border);
