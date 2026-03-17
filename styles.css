@@ -219,7 +219,7 @@ a.w-10:active {
     background: #b22222;
     color: #ffd700;
     border-color: #ffd700;
-    box-shadow: inset 0 1px 0 rgb(255 215 0 / 0.35);
+    box-shadow: inset 0 1px 0 rgba(255, 215, 0, 0.35);
 }
 
 /* Tab Styling */
