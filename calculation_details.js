@@ -4,6 +4,20 @@
  * Tích hợp đa ngôn ngữ hoàn toàn cho các chi tiết phép tính
  */
 
+const localeMap = {
+    'vi': 'vi-VN', 'en': 'en-US', 'zh': 'zh-CN', 'hi': 'hi-IN', 'es': 'es-ES',
+    'fr': 'fr-FR', 'ar': 'ar-SA', 'bn': 'bn-BD', 'pt': 'pt-PT', 'ru': 'ru-RU', 'ur': 'ur-PK'
+};
+let currentLang = localStorage.getItem('aav_lang') || 'vi';
+
+if (typeof window !== 'undefined' && typeof window.changeLanguage === 'function') {
+    const originalChangeLanguage = window.changeLanguage;
+    window.changeLanguage = function(lang) {
+        currentLang = lang;
+        return originalChangeLanguage.call(this, lang);
+    };
+}
+
 // Hàm định dạng số nội bộ
 function fmtInternal(n) { 
     if (n === undefined || n === null) return "-";
@@ -21,12 +35,11 @@ function fmtInternal(n) {
         maxFD = 0;
     }
 
-    const lang = localStorage.getItem('aav_lang') || 'vi';
-    const localeMap = {
-        'vi': 'vi-VN', 'en': 'en-US', 'zh': 'zh-CN', 'hi': 'hi-IN', 'es': 'es-ES',
-        'fr': 'fr-FR', 'ar': 'ar-SA', 'bn': 'bn-BD', 'pt': 'pt-PT', 'ru': 'ru-RU', 'ur': 'ur-PK'
-    };
-    return new Intl.NumberFormat(localeMap[lang] || 'en-US', { 
+    if (typeof window !== 'undefined' && typeof window.currentLang === 'string') {
+        currentLang = window.currentLang;
+    }
+
+    return new Intl.NumberFormat(localeMap[currentLang] || 'en-US', { 
         minimumFractionDigits: minFD, 
         maximumFractionDigits: maxFD 
     }).format(val); 
