@@ -106,19 +106,19 @@ function showCalculation(statId, resultData, groupsData) {
     if (!groups) { console.error('Groups data not provided'); return; }
 
     const metricNames = {
-        'mean': t('mean'),
-        'q2': t('median'),
-        'q1': t('q1'),
-        'q3': t('q3'),
-        'mode': t('mode'),
-        'variance': t('variance'),
-        'sd': t('sd'),
-        'range': t('range'),
-        'iqr': t('iqr'),
-        'cv': t('cv')
+        'mean': safeT('mean'),
+        'q2': safeT('median'),
+        'q1': safeT('q1'),
+        'q3': safeT('q3'),
+        'mode': safeT('mode'),
+        'variance': safeT('variance'),
+        'sd': safeT('sd'),
+        'range': safeT('range'),
+        'iqr': safeT('iqr'),
+        'cv': safeT('cv')
     };
 
-    title = t('calc_detail_for', {metric: metricNames[statId] || statId, name: result.name});
+    title = safeT('calc_detail_for', {metric: metricNames[statId] || statId, name: result.name});
 
     switch(statId) {
         case 'mean':
@@ -146,7 +146,7 @@ function showCalculation(statId, resultData, groupsData) {
             content = generateCVCalcOld(result, groups);
             break;
         default:
-            content = t('updating_feature') + statId;
+            content = safeT('updating_feature') + statId;
     }
 
     const modal = document.getElementById('calcModal');
