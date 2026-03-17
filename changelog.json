@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-03-17T15:35:24.802295",
-  "total_commits": 232,
+  "generated_at": "2026-03-17T15:36:35.695502",
+  "total_commits": 235,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-17",
-      "commit_count": 55,
+      "commit_count": 58,
       "categories": {
         "Features": [
           {
@@ -80,6 +80,24 @@
           }
         ],
         "Other": [
+          {
+            "sha": "0af5940",
+            "message": "Merge pull request #32 from lucdai/codex/remove-pat-from-client-code",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/0af5940982d88154f75dc0b4eb9fa1a0c201b27a"
+          },
+          {
+            "sha": "53b9b50",
+            "message": "Remove client-side GitHub PAT dispatch flow",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/53b9b50813aaad59c5f42b72c6687770bf059f9c"
+          },
+          {
+            "sha": "7b765a2",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/7b765a2cc3098e2fb99f580d69127b113f318755"
+          },
           {
             "sha": "c38f3f7",
             "message": "Merge pull request #31 from lucdai/codex/ensure-safet-html-sanitization",
