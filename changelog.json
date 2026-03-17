@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-03-17T15:43:37.328645",
-  "total_commits": 252,
+  "generated_at": "2026-03-17T15:44:33.235520",
+  "total_commits": 255,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-17",
-      "commit_count": 75,
+      "commit_count": 78,
       "categories": {
         "Features": [
           {
@@ -48,6 +48,12 @@
           }
         ],
         "Improvements": [
+          {
+            "sha": "c671e39",
+            "message": "Improve serialized calculation data parsing fallback",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/c671e39795f7eb9e17f8ed19bc9749077ccb8eb3"
+          },
           {
             "sha": "9201025",
             "message": "Improve modal accessibility and keyboard focus handling",
@@ -112,6 +118,18 @@
           }
         ],
         "Other": [
+          {
+            "sha": "9e9ca13",
+            "message": "Merge pull request #40 from lucdai/codex/fix-decoding-issue-in-parseserializeddata",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/9e9ca13ba26347a7479e18d436c84913c0ff512e"
+          },
+          {
+            "sha": "7f66811",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/7f668117c931352fc64fac3f3222ce2905b22e24"
+          },
           {
             "sha": "e6853a7",
             "message": "Merge pull request #39 from lucdai/codex/fix-duplicate-keydown-listeners-in-setuphotkeys",
