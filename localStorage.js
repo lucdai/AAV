@@ -291,7 +291,7 @@ function getLastBackupInfo() {
         return {
             timestamp: timestamp,
             formatted: date.toLocaleString((() => {
-                const lang = typeof currentLang !== 'undefined' ? currentLang : (localStorage.getItem('aav_lang') || 'vi');
+                const lang = localStorage.getItem('aav_lang') || 'vi';
                 const localeMap = {
                     'vi': 'vi-VN', 'en': 'en-US', 'zh': 'zh-CN', 'hi': 'hi-IN', 'es': 'es-ES',
                     'fr': 'fr-FR', 'ar': 'ar-SA', 'bn': 'bn-BD', 'pt': 'pt-PT', 'ru': 'ru-RU', 'ur': 'ur-PK'

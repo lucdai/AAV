@@ -190,7 +190,7 @@ async function fetchChangelogFromGitHub() {
 // Display changelog in modal
 function displayChangelog(changelog) {
     const modalBody = document.getElementById('changelogModalBody');
-    const lang = typeof currentLang !== 'undefined' ? currentLang : 'vi';
+    const lang = localStorage.getItem('aav_lang') || 'vi';
     
     if (!changelog || !changelog.entries || changelog.entries.length === 0) {
         modalBody.innerHTML = `
