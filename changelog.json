@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-03-17T16:02:32.843696",
-  "total_commits": 294,
+  "generated_at": "2026-03-17T16:03:22.101192",
+  "total_commits": 297,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-17",
-      "commit_count": 117,
+      "commit_count": 120,
       "categories": {
         "Features": [
           {
@@ -160,6 +160,24 @@
           }
         ],
         "Other": [
+          {
+            "sha": "5d0c5b7",
+            "message": "Merge pull request #56 from lucdai/codex/check-for-missing-brackets-in-index.html",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/5d0c5b761ecedabb3fd35fd9d75b28214ba746d4"
+          },
+          {
+            "sha": "4059b70",
+            "message": "Fix table HTML string concatenation in renderTables",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/4059b70cb08093b439335e6db0daddc91f1e64db"
+          },
+          {
+            "sha": "5b89be0",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/5b89be029030d9b6a085fa87df682f3e2727c3d0"
+          },
           {
             "sha": "59700af",
             "message": "Merge pull request #55 from lucdai/codex/fix-undefined-t-in-showcalculation",
