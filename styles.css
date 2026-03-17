@@ -413,7 +413,7 @@ body {
 
 /* Settings UI Styles */
 .settings-panel {
-    display: none;
+    display: block;
     position: fixed;
     top: 0;
     right: 0;
@@ -426,20 +426,23 @@ body {
     border-left: 1px solid var(--border);
     padding: 2rem;
     overflow-y: auto;
+    transform: translateX(100%);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out, visibility 0s linear 0.3s;
 }
 
 .settings-panel.active {
-    display: block;
-    animation: slideInRight 0.3s ease-out;
-}
-
-@keyframes slideInRight {
-    from { transform: translateX(100%); }
-    to { transform: translateX(0); }
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out, visibility 0s;
 }
 
 .settings-overlay {
-    display: none;
+    display: block;
     position: fixed;
     top: 0;
     left: 0;
@@ -448,10 +451,17 @@ body {
     background: rgba(0,0,0,0.5);
     z-index: 999;
     backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease-out, visibility 0s linear 0.3s;
 }
 
 .settings-overlay.active {
-    display: block;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity 0.3s ease-out, visibility 0s;
 }
 
 .color-swatch {
