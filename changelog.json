@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-03-17T15:56:52.988117",
-  "total_commits": 281,
+  "generated_at": "2026-03-17T15:58:08.369632",
+  "total_commits": 284,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-17",
-      "commit_count": 104,
+      "commit_count": 107,
       "categories": {
         "Features": [
           {
@@ -160,6 +160,24 @@
           }
         ],
         "Other": [
+          {
+            "sha": "e500edb",
+            "message": "Merge pull request #51 from lucdai/codex/reset-manualrows-to-default-values",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/e500edbc83f7d2ca76d5044903a28a8dadc0be6f"
+          },
+          {
+            "sha": "a2daa01",
+            "message": "Fix clearAllData to restore default manual rows",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/a2daa0131ec8cb508080ffdee55f533c52979475"
+          },
+          {
+            "sha": "e22eab1",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/e22eab1977f4cf7c5da4d232cc3d0ca7f28168e4"
+          },
           {
             "sha": "b6018e7",
             "message": "Merge pull request #50 from lucdai/codex/define-or-import-missing-functions",
