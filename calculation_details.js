@@ -21,8 +21,11 @@ if (typeof window !== 'undefined' && typeof window.changeLanguage === 'function'
 // Hàm định dạng số nội bộ
 function fmtInternal(n) { 
     if (n === undefined || n === null) return "-";
+    const minDecimalPlaces = -6;
+    const maxDecimalPlaces = 10;
     let d = (document.getElementById('decimalPlaces') ? parseInt(document.getElementById('decimalPlaces').value) : 2);
     if (isNaN(d)) d = 2;
+    d = Math.min(maxDecimalPlaces, Math.max(minDecimalPlaces, d));
 
     let val = n;
     let minFD = d > 0 ? d : 0;
