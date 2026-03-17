@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-03-17T13:59:27.742717",
-  "total_commits": 199,
+  "generated_at": "2026-03-17T14:00:19.706589",
+  "total_commits": 202,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-17",
-      "commit_count": 22,
+      "commit_count": 25,
       "categories": {
         "Features": [
           {
@@ -44,6 +44,24 @@
           }
         ],
         "Other": [
+          {
+            "sha": "6487d42",
+            "message": "Merge pull request #21 from lucdai/codex/update-active-state-colors-for-icons",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/6487d42e46ed6b85936c30eab05895c11bd6fdee"
+          },
+          {
+            "sha": "12c8676",
+            "message": "Enhance footer icon active contrast and inverted states",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/12c8676ed3641e07389baeb59352e401467879c0"
+          },
+          {
+            "sha": "81eab7a",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/81eab7aeee87578653ffda61a2917344500a50bd"
+          },
           {
             "sha": "808079d",
             "message": "Merge pull request #20 from lucdai/codex/update-ui-colors-for-system-theme",
