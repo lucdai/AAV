@@ -1,13 +1,19 @@
 {
-  "generated_at": "2026-03-17T15:31:20.874385",
-  "total_commits": 217,
+  "generated_at": "2026-03-17T15:31:57.703681",
+  "total_commits": 220,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-17",
-      "commit_count": 40,
+      "commit_count": 43,
       "categories": {
         "Features": [
+          {
+            "sha": "a8febf0",
+            "message": "Merge pull request #27 from lucdai/codex/add-close-animation-to-settings-panel",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/a8febf0eb10ef88dc9d4a74a707b9f4067069fba"
+          },
           {
             "sha": "2edb18d",
             "message": "Add 3D press effect for clickable controls",
@@ -44,6 +50,18 @@
           }
         ],
         "Other": [
+          {
+            "sha": "174328c",
+            "message": "Smooth settings panel close transition",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/174328c93053bd9114a32030f1b7fedd55c88ceb"
+          },
+          {
+            "sha": "306f237",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/306f237f68f72dd50b980c0c0c430be864f308d7"
+          },
           {
             "sha": "bffa1ad",
             "message": "Merge pull request #26 from lucdai/codex/remove-@import-from-styles.css",
