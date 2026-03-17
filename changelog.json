@@ -1,13 +1,19 @@
 {
-  "generated_at": "2026-03-17T15:44:33.235520",
-  "total_commits": 255,
+  "generated_at": "2026-03-17T15:45:26.031294",
+  "total_commits": 258,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-17",
-      "commit_count": 78,
+      "commit_count": 81,
       "categories": {
         "Features": [
+          {
+            "sha": "4cc8579",
+            "message": "Merge pull request #41 from lucdai/codex/add-user-warning-for-idx-fallback",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/4cc8579ff10d852fea4bb79b08d301e7680cf75c"
+          },
           {
             "sha": "fd5a982",
             "message": "Merge pull request #35 from lucdai/codex/add-validation-for-shared-data-loading",
@@ -118,6 +124,18 @@
           }
         ],
         "Other": [
+          {
+            "sha": "5652b1f",
+            "message": "Harden quartile fallback index guards and warning emphasis",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/5652b1f2a35b5cde6404ab174994540611ee0d95"
+          },
+          {
+            "sha": "a08b7d7",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/a08b7d7d1c331bf4a806d91e87f162d34cab538f"
+          },
           {
             "sha": "9e9ca13",
             "message": "Merge pull request #40 from lucdai/codex/fix-decoding-issue-in-parseserializeddata",
