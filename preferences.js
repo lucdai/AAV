@@ -374,14 +374,11 @@ function loginWithGitHub() {
     const CLIENT_ID = 'Ov23liYvG9H6gabDLa4Y';
     const REDIRECT_URI = window.location.origin + window.location.pathname;
     const SCOPE = 'read:user';
-    const authUrl = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=${SCOPE}&state=${generateRandomState()}`;
-    console.log('Redirecting to GitHub:', authUrl);
-    // Tự động tiếp tục đăng nhập, không hiển thị hộp thoại xác nhận của trình duyệt
-    setTimeout(() => {
-        const mockUser = { name: 'lucdai', avatar: 'https://github.com/lucdai.png' };
-        localStorage.setItem('aav_user', JSON.stringify(mockUser));
-        updateSyncStatus(mockUser);
-    }, 1500);
+    const state = generateRandomState();
+    const authUrl = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=${SCOPE}&state=${state}`;
+
+    sessionStorage.setItem('aav_github_oauth_state', state);
+    window.location.href = authUrl;
 }
 
 function updateSyncStatus(user) {
