@@ -628,6 +628,15 @@
             { bg: 'rgba(16, 185, 129, 0.5)', border: '#059669' }, { bg: 'rgba(245, 158, 11, 0.5)', border: '#d97706' },
             { bg: 'rgba(139, 92, 246, 0.5)', border: '#7c3aed' }
         ];
+        let calculateDebounceTimer = null;
+
+        function scheduleCalculate(delay = 180) {
+            if (calculateDebounceTimer) clearTimeout(calculateDebounceTimer);
+            calculateDebounceTimer = setTimeout(() => {
+                calculateDebounceTimer = null;
+                calculate();
+            }, delay);
+        }
         
         // --- Tabs & Mode ---
         function switchTab(t) {
@@ -656,7 +665,7 @@
             markAsChanged();
         }
         function removeLastDataset() { if(datasets.length<=1)return; datasets.pop(); renderInputs(); calculate(); markAsChanged(); }
-        function updateRaw(id, val) { datasets.find(d=>d.id===id).dataStr=val; calculate(); markAsChanged(); }
+        function updateRaw(id, val) { datasets.find(d=>d.id===id).dataStr=val; scheduleCalculate(); markAsChanged(); }
         function updateName(id, val) { datasets.find(d=>d.id===id).name=val; renderInputs(); calculate(); markAsChanged(); }
         
         function deleteDataset(id) {
