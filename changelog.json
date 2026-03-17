@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-03-17T13:29:31.721585",
-  "total_commits": 187,
+  "generated_at": "2026-03-17T13:37:59.154881",
+  "total_commits": 191,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-17",
-      "commit_count": 10,
+      "commit_count": 14,
       "categories": {
         "Features": [
           {
@@ -17,6 +17,12 @@
         ],
         "Improvements": [
           {
+            "sha": "747788d",
+            "message": "Improve footer icon contrast with inverted system colors",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/747788d56581b1d571444b5a55c13f5149f21d54"
+          },
+          {
             "sha": "b3277ff",
             "message": "Improve theme-aware contrast for action buttons and empty states",
             "author": "lucdai",
@@ -24,6 +30,24 @@
           }
         ],
         "Other": [
+          {
+            "sha": "5309bc8",
+            "message": "Merge pull request #18 from lucdai/codex/remove-confirmation-messages-from-lucdai.github.io",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/5309bc84d355cb42d63ece0f7cacb45f3102a50a"
+          },
+          {
+            "sha": "b1de42e",
+            "message": "Remove GitHub auth alert confirmation dialog",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/b1de42e168c1958c8393609b43152dbda8dfc12e"
+          },
+          {
+            "sha": "9184dd6",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/9184dd6b8ab2711b008146a2ac8fe71ff7ef2f90"
+          },
           {
             "sha": "63ae592",
             "message": "Merge pull request #16 from lucdai/codex/bien-nut-thanh-dang-khoi-3d",
