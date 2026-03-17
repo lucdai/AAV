@@ -1271,30 +1271,9 @@
                         const shortUrl = baseUrl + 's/' + shortId;
                         finalizeShare(shortUrl);
                     } else {
-                        // TỰ ĐỘNG RÚT GỌN NGẦM NẾU DỮ LIỆU LỚN
-                        if (compressed.length > 100) { // Ngưỡng dữ liệu lớn
-                            const newId = Math.random().toString(36).substring(2, 8);
-                            const shortUrl = baseUrl + 's/' + newId;
-                            
-                            // Gửi yêu cầu rút gọn ngầm đến GitHub Action
-                            // Lưu ý: Cần cấu hình GITHUB_TOKEN trong repo để trigger này hoạt động
-                            // Ở đây chúng ta trả về link ngắn ngay, nó sẽ hoạt động sau ~30s khi Action chạy xong
-                            fetch(`https://api.github.com/repos/lucdai/AAV/dispatches`, {
-                                method: 'POST',
-                                headers: {
-                                    'Accept': 'application/vnd.github.v3+json',
-                                    'Authorization': 'token GITHUB_PAT_PLACEHOLDER', // Người dùng cần thay PAT của mình vào đây
-                                },
-                                body: JSON.stringify({
-                                    event_type: 'shorten_link',
-                                    client_payload: { id: newId, data: compressed }
-                                })
-                            }).catch(e => console.error("Auto-shorten request failed:", e));
-
-                            finalizeShare(shortUrl);
-                        } else {
-                            finalizeShare(fullUrl);
-                        }
+                        // Không gọi GitHub API trực tiếp từ client để tránh lộ token bí mật.
+                        // Nếu cần tạo short URL, hãy xử lý qua backend/serverless endpoint an toàn.
+                        finalizeShare(fullUrl);
                     }
                 })
                 .catch(() => {
