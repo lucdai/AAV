@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-03-17T15:58:08.369632",
-  "total_commits": 284,
+  "generated_at": "2026-03-17T16:00:59.175957",
+  "total_commits": 288,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-17",
-      "commit_count": 107,
+      "commit_count": 111,
       "categories": {
         "Features": [
           {
@@ -160,6 +160,30 @@
           }
         ],
         "Other": [
+          {
+            "sha": "e10ea9c",
+            "message": "Merge pull request #53 from lucdai/codex/fix-gridcolor-default-value-in-draw",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/e10ea9c744ba83ae201b3b5ca69e193ffefce313"
+          },
+          {
+            "sha": "722c505",
+            "message": "Fix chart grid color fallback to existing CSS variable",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/722c5058b99ca29f37bb301e0fd9113f552627e0"
+          },
+          {
+            "sha": "3ac8d23",
+            "message": "Remove mock GitHub login UI and logic",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/3ac8d23b05cc1e501639564b67d61672223a7fa3"
+          },
+          {
+            "sha": "9994509",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/9994509bd7bee2310e1cfb3e81e5e2da9650431e"
+          },
           {
             "sha": "e500edb",
             "message": "Merge pull request #51 from lucdai/codex/reset-manualrows-to-default-values",
