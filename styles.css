@@ -1,4 +1,6 @@
 /* MODERN UI UPGRADE FOR AAV */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
     --primary: #6366f1;
@@ -53,23 +55,6 @@ body {
     box-shadow: var(--shadow-md);
 }
 
-
-/* Backdrop-filter fallback for unsupported browsers */
-@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
-    .glass-card {
-        background: rgba(255, 255, 255, 0.96);
-        border-color: rgba(148, 163, 184, 0.3);
-    }
-
-    .settings-overlay {
-        background: rgba(2, 6, 23, 0.72);
-    }
-
-    #calcModal {
-        background: rgba(2, 6, 23, 0.76) !important;
-    }
-}
-
 .modern-card {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -92,6 +77,19 @@ a.w-10 {
     transform: translateY(0);
     box-shadow: 0 4px 0 rgba(15, 23, 42, 0.18), 0 10px 18px rgba(15, 23, 42, 0.12);
     transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease;
+}
+
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+.btn-primary,
+.btn-secondary,
+.action-btn,
+.group-add-btn,
+.footer-icon-btn,
+.export-format-btn {
+    border-radius: 9999px !important;
 }
 
 .pressable-3d:hover,
@@ -236,7 +234,7 @@ a.w-10:active {
     background: #b22222;
     color: #ffd700;
     border-color: #ffd700;
-    box-shadow: inset 0 1px 0 rgba(255, 215, 0, 0.35);
+    box-shadow: inset 0 1px 0 rgb(255 215 0 / 0.35);
 }
 
 /* Tab Styling */
@@ -430,7 +428,7 @@ body {
 
 /* Settings UI Styles */
 .settings-panel {
-    display: block;
+    display: none;
     position: fixed;
     top: 0;
     right: 0;
@@ -443,23 +441,20 @@ body {
     border-left: 1px solid var(--border);
     padding: 2rem;
     overflow-y: auto;
-    transform: translateX(100%);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: transform 0.3s ease-out, opacity 0.3s ease-out, visibility 0s linear 0.3s;
 }
 
 .settings-panel.active {
-    transform: translateX(0);
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transition: transform 0.3s ease-out, opacity 0.3s ease-out, visibility 0s;
+    display: block;
+    animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
 }
 
 .settings-overlay {
-    display: block;
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -468,17 +463,10 @@ body {
     background: rgba(0,0,0,0.5);
     z-index: 999;
     backdrop-filter: blur(4px);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.3s ease-out, visibility 0s linear 0.3s;
 }
 
 .settings-overlay.active {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transition: opacity 0.3s ease-out, visibility 0s;
+    display: block;
 }
 
 .color-swatch {
