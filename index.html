@@ -994,7 +994,7 @@
                     return `<td class="text-center font-bold text-[var(--text-main)] px-4 py-3">${fmt(v)}${calcBtn}</td>`;
                 }).join('') + `</tr>`;
             });
-            document.getElementById('statsTable').innerHTML = h+`</tbody>`;
+            document.getElementById('statsTable').innerHTML = h + '</tbody>';
 
             let groupTitle = document.getElementById('groupColumnTitle')?.innerText || t("group");
             groupTitle = escapeHtml(groupTitle);
@@ -1002,7 +1002,7 @@
             groups.forEach((g,i)=>{
                 fh += `<tr class="border-b hover:bg-slate-50"><td class="px-4 py-2 text-slate-800">[${fmt(g.lower)}; ${fmt(g.upper)})</td><td class="px-4 py-2 text-center text-[var(--text-muted)]">${fmt(g.midpoint)}</td>`+results.map(r=>`<td class="px-4 py-2 text-center font-bold">${r.gStats[i].freq}</td>`).join('')+`</tr>`;
             });
-            document.getElementById('freqTable').innerHTML = fh+`</tbody>`;
+            document.getElementById('freqTable').innerHTML = fh + '</tbody>';
         }
 
         let charts = {};
