@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-03-17T15:41:44.759376",
-  "total_commits": 246,
+  "generated_at": "2026-03-17T15:42:40.658000",
+  "total_commits": 249,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-17",
-      "commit_count": 69,
+      "commit_count": 72,
       "categories": {
         "Features": [
           {
@@ -112,6 +112,24 @@
           }
         ],
         "Other": [
+          {
+            "sha": "eea7012",
+            "message": "Merge pull request #38 from lucdai/codex/ensure-hextorgba-returns-valid-string",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/eea70122d89df75c6d85cf5b3d78530aee4cca73"
+          },
+          {
+            "sha": "b96b5c1",
+            "message": "Harden hexToRgba alpha handling",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/b96b5c1e57add3e126ad1b2a25277a016ecbb06d"
+          },
+          {
+            "sha": "f99ea69",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/f99ea69d9cb9c018ccbc4cb210a63b91e4be654a"
+          },
           {
             "sha": "bbed235",
             "message": "Merge pull request #37 from lucdai/codex/update-defensive-checks-in-updatecharttheme",
