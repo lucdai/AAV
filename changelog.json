@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-03-17T14:53:32.703189",
-  "total_commits": 208,
+  "generated_at": "2026-03-17T14:54:22.986458",
+  "total_commits": 211,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-17",
-      "commit_count": 31,
+      "commit_count": 34,
       "categories": {
         "Features": [
           {
@@ -44,6 +44,24 @@
           }
         ],
         "Other": [
+          {
+            "sha": "a2e6fe5",
+            "message": "Merge pull request #24 from lucdai/codex/remove-color-mode-settings",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/a2e6fe5262774a7850818fbca37cbbd90fcd323d"
+          },
+          {
+            "sha": "38be5cc",
+            "message": "Remove color mode settings and theme logic",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/38be5ccf3da2a91f1c30fcfd8258f78e3ae661b5"
+          },
+          {
+            "sha": "dc65a6b",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/dc65a6bec84def9755ad74995d2ed9af987d3809"
+          },
           {
             "sha": "f6d6383",
             "message": "Merge pull request #23 from lucdai/codex/thay-oi-mau-chu-va-nen-he-thong",
