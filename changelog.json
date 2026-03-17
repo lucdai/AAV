@@ -1,13 +1,39 @@
 {
-  "generated_at": "2026-03-17T13:21:03.377601",
-  "total_commits": 180,
+  "generated_at": "2026-03-17T13:29:00.160967",
+  "total_commits": 184,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-17",
-      "commit_count": 3,
+      "commit_count": 7,
       "categories": {
+        "Improvements": [
+          {
+            "sha": "b3277ff",
+            "message": "Improve theme-aware contrast for action buttons and empty states",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/b3277ff11ec536c11b0ff69cff478c4fde2eb0c0"
+          }
+        ],
         "Other": [
+          {
+            "sha": "f04ba84",
+            "message": "Merge pull request #15 from lucdai/codex/remove-annotations-from-image",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/f04ba8412d1e39128982668839bee0ac6b478bca"
+          },
+          {
+            "sha": "bd2b3fb",
+            "message": "Remove chart tab count badge label",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/bd2b3fb86619df86d9571fae11f4b43373ddf9b8"
+          },
+          {
+            "sha": "715ab1b",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/715ab1b40e7d399e01119fc3bde46ad9a2e18f67"
+          },
           {
             "sha": "851afb3",
             "message": "Merge pull request #13 from lucdai/codex/ong-bo-mau-nut-khi-hover",
