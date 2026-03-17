@@ -325,7 +325,7 @@ function addChangelogIcon() {
         const changelogIcon = document.createElement('a');
         changelogIcon.id = 'changelogIcon';
         changelogIcon.href = '#';
-        changelogIcon.className = 'w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 transition-all cursor-pointer';
+        changelogIcon.className = 'footer-icon-btn w-10 h-10 rounded-full flex items-center justify-center transition-all cursor-pointer';
         changelogIcon.title = 'View Update History';
         changelogIcon.setAttribute('data-i18n-title', 'changelog');
         changelogIcon.onclick = (e) => {
