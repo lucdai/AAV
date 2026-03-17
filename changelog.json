@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-03-17T15:52:53.204569",
-  "total_commits": 274,
+  "generated_at": "2026-03-17T15:55:54.030459",
+  "total_commits": 278,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-17",
-      "commit_count": 97,
+      "commit_count": 101,
       "categories": {
         "Features": [
           {
@@ -58,6 +58,12 @@
           }
         ],
         "Bug Fixes": [
+          {
+            "sha": "9050333",
+            "message": "fix: remove client-side GitHub dispatch link shortening",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/90503337d728e254316433a41f7aed5508f42afe"
+          },
           {
             "sha": "7bb3e7c",
             "message": "Resolve styles.css merge overlap for export format buttons",
@@ -148,6 +154,24 @@
           }
         ],
         "Other": [
+          {
+            "sha": "fd1f222",
+            "message": "Merge pull request #49 from lucdai/codex/fix-data-escaping-in-onclick-handler",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/fd1f2223d25b28403e8d97b389bd51438cdb9240"
+          },
+          {
+            "sha": "42107dd",
+            "message": "Fix unsafe inline onclick for calculation detail button",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/42107dd597075c8b0ef8627075c4b3c653d8abb7"
+          },
+          {
+            "sha": "ad7d44c",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/ad7d44c741a2123979845385a2c4e164a18a6613"
+          },
           {
             "sha": "4a925ce",
             "message": "chore: update changelog from commits",
