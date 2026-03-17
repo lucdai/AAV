@@ -292,13 +292,13 @@
                 
                 <div class="h-8 w-px bg-slate-200 hidden md:block"></div>
                 
-                <div class="flex items-center gap-3 bg-slate-50 p-1.5 rounded-xl border border-[var(--border)]">
+                <div class="flex items-center gap-3 theme-surface-muted p-1.5 rounded-xl border border-[var(--border)]">
                     <span class="text-xs font-bold text-[var(--text-muted)] px-2 uppercase"><span data-i18n="rounding"></span></span>
                     <input type="number" id="decimalPlaces" value="2" min="-10" max="10" class="w-14 h-9 p-0 text-center border-none bg-[var(--surface)] rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 font-mono text-sm font-bold" onchange="calculate()">
                 </div>
 
                 <div class="relative group">
-                    <button class="btn-primary shadow-indigo-200" data-i18n-title="backup_mgmt">
+                    <button class="btn-primary action-btn action-btn-backup shadow-indigo-200" data-i18n-title="backup_mgmt">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"></path></svg>
                         <span data-i18n="backup" class="hidden sm:inline"></span>
                     </button>
@@ -325,7 +325,7 @@
                         </button>
                     </div>
                 </div>
-                <button onclick="shareLink()" class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg shadow-sm font-medium transition text-sm">
+                <button onclick="shareLink()" class="flex items-center gap-2 action-btn action-btn-share px-4 py-2 rounded-lg shadow-sm font-medium transition text-sm">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 100-2.684 3 3 0 000 2.684zm0 9a3 3 0 100-2.684 3 3 0 000 2.684z"></path></svg>
                     <span data-i18n="share"></span>
                 </button>
@@ -380,7 +380,7 @@
                 <div id="tableSection" class="hidden bg-[var(--surface)] rounded-xl shadow-sm border border-[var(--border)] overflow-hidden">
                     <div class="p-3 bg-slate-50 border-b border-[var(--border)] flex justify-between items-center">
                         <h3 class="font-bold text-sm text-[var(--text-main)]" data-i18n="input_table_title">Nhập Bảng</h3>
-                        <button onclick="addManualRow()" class="text-xs bg-[var(--surface)] border px-2 py-1 rounded hover:bg-[var(--primary-light)] text-indigo-700" data-i18n="add_group"></button>
+                        <button onclick="addManualRow()" class="text-xs px-2 py-1 group-add-btn hover:bg-[var(--primary)]" data-i18n="add_group"></button>
                     </div>
                     <div class="p-2 overflow-x-auto"><table class="w-full text-xs" id="manualInputTable"><thead><tr id="manualHeaderRow"></tr></thead><tbody id="manualBody"></tbody></table></div>
                 </div>
@@ -432,7 +432,7 @@
                 </div>
                 
                 <!-- Empty State Data -->
-                <div id="emptyState" class="hidden h-96 flex flex-col items-center justify-center text-slate-400 bg-slate-50 border-2 border-dashed border-[var(--border)] rounded-xl">
+                <div id="emptyState" class="hidden h-96 flex flex-col items-center justify-center empty-state-sync border-2 border-dashed rounded-xl">
                     <svg class="w-12 h-12 mb-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                     <p class="text-sm" data-i18n="enter_data_msg">Vui lòng nhập dữ liệu để xem kết quả</p>
                 </div>
@@ -561,7 +561,7 @@
             </div>
 
             <!-- Empty State Charts -->
-            <div id="emptyChartsState" class="hidden h-96 flex flex-col items-center justify-center text-slate-400 bg-slate-50 border-2 border-dashed border-[var(--border)] rounded-xl mt-6">
+            <div id="emptyChartsState" class="hidden h-96 flex flex-col items-center justify-center empty-state-sync border-2 border-dashed rounded-xl mt-6">
                 <svg class="w-12 h-12 mb-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path></svg>
                 <p class="text-sm" data-i18n="enter_chart_msg">Vui lòng nhập dữ liệu để xem biểu đồ</p>
             </div>
