@@ -1,13 +1,19 @@
 {
-  "generated_at": "2026-03-17T15:55:54.030459",
-  "total_commits": 278,
+  "generated_at": "2026-03-17T15:56:52.988117",
+  "total_commits": 281,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-17",
-      "commit_count": 101,
+      "commit_count": 104,
       "categories": {
         "Features": [
+          {
+            "sha": "976681d",
+            "message": "Add runtime fallbacks for missing global app helpers",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/976681d3317c381d05bb2e8efc529c51281ebe58"
+          },
           {
             "sha": "9d6394c",
             "message": "Merge pull request #47 from lucdai/codex/add-fallback-for-backdrop-filter",
@@ -154,6 +160,18 @@
           }
         ],
         "Other": [
+          {
+            "sha": "b6018e7",
+            "message": "Merge pull request #50 from lucdai/codex/define-or-import-missing-functions",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/b6018e7a2fe5e8158930a91820c4d1d56fe4b7d9"
+          },
+          {
+            "sha": "cf7f38f",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/cf7f38feff4101359e547761a58809cb312989ca"
+          },
           {
             "sha": "fd1f222",
             "message": "Merge pull request #49 from lucdai/codex/fix-data-escaping-in-onclick-handler",
