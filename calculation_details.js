@@ -39,11 +39,19 @@ function frac(top, bot) {
 
 function parseSerializedData(data) {
     if (typeof data !== 'string') return data;
+
+    const rawInput = data.trim();
+    if (!rawInput) return null;
+
     try {
-        return JSON.parse(decodeURIComponent(data));
+        return JSON.parse(rawInput);
     } catch (error) {
-        console.error('Unable to parse serialized calculation data:', error);
-        return null;
+        try {
+            return JSON.parse(decodeURIComponent(rawInput));
+        } catch (decodeError) {
+            console.error('Unable to parse serialized calculation data:', decodeError);
+            return null;
+        }
     }
 }
 
