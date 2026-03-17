@@ -70,7 +70,7 @@ function updateChartTheme() {
     Chart.defaults.color = textColor;
     
     // Force re-calculate and re-draw all charts to ensure full synchronization
-    if (typeof calculate === 'function' && typeof lastGroups !== 'undefined' && lastGroups.length > 0) {
+    if (typeof calculate === 'function' && Array.isArray(lastGroups) && lastGroups.length > 0) {
         calculate();
     }
 }
@@ -88,7 +88,7 @@ function applyAccentColor(color) {
     document.documentElement.style.setProperty('--primary-light', primaryLight || color);
     
     // Sync charts when accent color changes
-    if (typeof lastGroups !== 'undefined' && lastGroups.length > 0) {
+    if (Array.isArray(lastGroups) && lastGroups.length > 0) {
         updateChartTheme();
     }
 }
