@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-03-17T15:49:32.095249",
-  "total_commits": 267,
+  "generated_at": "2026-03-17T15:50:29.024704",
+  "total_commits": 270,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-17",
-      "commit_count": 90,
+      "commit_count": 93,
       "categories": {
         "Features": [
           {
@@ -130,6 +130,24 @@
           }
         ],
         "Other": [
+          {
+            "sha": "c91e3e4",
+            "message": "Merge pull request #45 from lucdai/codex/fix-css-syntax-error-in-box-shadow",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/c91e3e4961fc0fce50f6e663de87fe216964c170"
+          },
+          {
+            "sha": "80a000e",
+            "message": "Fix truncated error button box-shadow color syntax",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/80a000e83c62b82ec486e79b7e4bfd33762bc436"
+          },
+          {
+            "sha": "12999ae",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/12999ae80607bbaf700a8ff234ce6ddfcbe2b69c"
+          },
           {
             "sha": "499b5cf",
             "message": "Merge pull request #44 from lucdai/codex/check-i18n-keys-for-consistency",
