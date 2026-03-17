@@ -76,6 +76,51 @@ function sanitizeNumber(value, fallback = 0) {
     return Number.isFinite(num) ? num : fallback;
 }
 
+function sanitizeHtmlContent(html) {
+    if (typeof html !== 'string') return '';
+
+    const template = document.createElement('template');
+    template.innerHTML = html;
+
+    const allowedTags = new Set([
+        'DIV', 'SPAN', 'P', 'UL', 'LI', 'STRONG', 'EM', 'B', 'I', 'BR'
+    ]);
+    const allowedAttributes = new Set(['class', 'title', 'role']);
+
+    const cleanNode = (node) => {
+        if (node.nodeType === Node.TEXT_NODE) return;
+        if (node.nodeType !== Node.ELEMENT_NODE) {
+            node.remove();
+            return;
+        }
+
+        const el = node;
+        if (!allowedTags.has(el.tagName)) {
+            const text = document.createTextNode(el.textContent || '');
+            el.replaceWith(text);
+            return;
+        }
+
+        const attrs = [...el.attributes];
+        for (const attr of attrs) {
+            const name = attr.name.toLowerCase();
+            const value = attr.value || '';
+            const isAria = name.startsWith('aria-');
+            const isEvent = name.startsWith('on');
+            const hasJavascriptProtocol = /javascript:/i.test(value);
+
+            if (isEvent || hasJavascriptProtocol || (!allowedAttributes.has(name) && !isAria)) {
+                el.removeAttribute(attr.name);
+            }
+        }
+
+        [...el.childNodes].forEach(cleanNode);
+    };
+
+    [...template.content.childNodes].forEach(cleanNode);
+    return template.innerHTML;
+}
+
 function normalizeGroups(groups) {
     if (!Array.isArray(groups)) return [];
     return groups.map((group) => ({
@@ -179,7 +224,10 @@ function showCalculation(statId, resultData, groupsData) {
         const modalBody = document.getElementById('calcModalBody');
         const contentContainer = document.createElement('div');
         contentContainer.className = 'math-text';
-        contentContainer.innerHTML = content;
+        // Translation strings may contain trusted inline markup (e.g. <strong>),
+        // but we still sanitize before injecting to reduce XSS risk if translation
+        // sources become user-provided in the future.
+        contentContainer.innerHTML = sanitizeHtmlContent(content);
         modalBody.replaceChildren(contentContainer);
         modal.classList.remove('hidden');
         modal.classList.add('flex');
