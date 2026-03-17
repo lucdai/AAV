@@ -82,10 +82,11 @@
     </script>
     <style>
         /* MATH TYPOGRAPHY STYLES */
-        .math-text { font-family: 'Noto Serif', serif; font-size: 1.1rem; color: #1e293b; line-height: 1.6; }
-        .formula-container { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 6px; margin: 15px 0; padding: 15px; background: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; }
+        .math-text { font-family: 'Noto Serif', serif; font-size: 1.1rem; color: var(--system-text); line-height: 1.6; }
+        .formula-container { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 6px; margin: 15px 0; padding: 15px; background: var(--system-bg); color: var(--system-text); border-radius: 12px; border: 1px solid var(--system-text); }
+        .calc-detail-box { background: var(--system-bg); color: var(--system-text); border: 1px solid var(--system-text); }
         .fraction { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 4px; }
-        .numerator { border-bottom: 1.5px solid #000; padding: 0 6px 2px 6px; text-align: center; width: 100%; }
+        .numerator { border-bottom: 1.5px solid var(--system-text); padding: 0 6px 2px 6px; text-align: center; width: 100%; }
         .denominator { padding: 2px 6px 0 6px; text-align: center; width: 100%; }
         .math-symbol { font-style: italic; margin-right: 2px; }
         .sub { font-size: 0.75em; vertical-align: sub; line-height: 0; }
@@ -100,8 +101,8 @@
     <!-- MODAL FOR CALCULATION DETAILS -->
     <div id="calcModal" class="fixed inset-0 bg-slate-900/60 z-50 hidden items-center justify-center p-4 backdrop-blur-md animate-fade-in">
         <div id="calcModalContent" class="bg-[var(--surface)] rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden border border-white/20">
-            <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
-                <h3 id="calcModalTitle" class="text-lg font-extrabold text-slate-900 flex items-center gap-3">
+            <div class="p-6 border-b border-[var(--border)] flex justify-between items-center bg-[var(--system-bg)]">
+                <h3 id="calcModalTitle" class="text-lg font-extrabold text-[var(--system-text)] flex items-center gap-3">
                     <div class="p-2 bg-indigo-100 rounded-xl text-indigo-600">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     </div>
@@ -119,7 +120,7 @@
             <div id="calcModalBody" class="p-8 overflow-y-auto text-[var(--text-main)] leading-relaxed math-text">
                 <!-- Content will be injected here -->
             </div>
-            <div class="p-6 border-t border-slate-100 bg-slate-50/50 text-right">
+            <div class="p-6 border-t border-[var(--border)] bg-[var(--system-bg)] text-right">
                 <button onclick="closeCalcModal()" class="px-6 py-2.5 bg-[var(--surface)] border border-[var(--border)] text-[var(--text-main)] rounded-xl hover:bg-slate-100 transition-all duration-200 font-bold text-sm shadow-sm"><span data-i18n="close">Đóng</span></button>
             </div>
         </div>
