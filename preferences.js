@@ -140,10 +140,13 @@ function applyChartPalette(paletteName) {
  * Hotkeys Management
  */
 function setupHotkeys(enabled) {
+    // Always unbind first to avoid duplicate handlers when setup is called repeatedly.
+    document.removeEventListener('keydown', handleGlobalHotkeys);
+
     if (!enabled) {
-        document.removeEventListener('keydown', handleGlobalHotkeys);
         return;
     }
+
     document.addEventListener('keydown', handleGlobalHotkeys);
 }
 
