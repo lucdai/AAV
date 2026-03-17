@@ -1307,6 +1307,20 @@
             if (!sharedData) return;
 
             try {
+                const isPlainObject = (value) =>
+                    value !== null && typeof value === 'object' && !Array.isArray(value);
+                const toSafeString = (value, maxLength = 10000) => {
+                    if (typeof value !== 'string') return null;
+                    const trimmed = value.trim();
+                    if (!trimmed || trimmed.length > maxLength) return null;
+                    return trimmed;
+                };
+                const toSafeNumber = (value) => {
+                    if (value === null || value === undefined || value === '') return null;
+                    const num = Number(value);
+                    return Number.isFinite(num) ? num : null;
+                };
+
                 let json;
                 // Thử giải nén bằng LZString trước
                 const decompressed = LZString.decompressFromEncodedURIComponent(sharedData);
@@ -1319,16 +1333,76 @@
                 }
 
                 const state = JSON.parse(json);
+                if (!isPlainObject(state)) return;
+
+                if (state.m === 'raw' || state.m === 'table') {
+                    mode = state.m;
+                }
+
+                if (Array.isArray(state.ds)) {
+                    const safeDatasets = state.ds
+                        .map((d, i) => {
+                            if (!isPlainObject(d)) return null;
+                            const name = toSafeString(d.n, 100) || `Dataset ${i + 1}`;
+                            const dataStr = toSafeString(d.s, 50000);
+                            if (!dataStr) return null;
+                            return { id: i + 1, name, dataStr };
+                        })
+                        .filter(Boolean);
+                    if (safeDatasets.length > 0) {
+                        datasets = safeDatasets;
+                    }
+                }
+
+                if (Array.isArray(state.mr)) {
+                    const safeRows = state.mr
+                        .map((r, i) => {
+                            if (!isPlainObject(r)) return null;
+                            const lower = toSafeNumber(r.l);
+                            const upper = toSafeNumber(r.u);
+                            if (lower === null || upper === null || lower >= upper) return null;
+
+                            const freqs = {};
+                            if (isPlainObject(r.f)) {
+                                Object.keys(r.f).forEach((key) => {
+                                    const freq = toSafeNumber(r.f[key]);
+                                    if (freq !== null && freq >= 0) {
+                                        freqs[key] = freq;
+                                    }
+                                });
+                            }
+
+                            return { id: Date.now() + i, lower, upper, freqs };
+                        })
+                        .filter(Boolean);
+                    if (safeRows.length > 0) {
+                        manualRows = safeRows;
+                    }
+                }
                 
-                if (state.m) mode = state.m;
-                if (state.ds) datasets = state.ds.map((d, i) => ({ id: i + 1, name: d.n, dataStr: d.s }));
-                if (state.mr) manualRows = state.mr.map((r, i) => ({ id: Date.now() + i, lower: r.l, upper: r.u, freqs: r.f }));
-                
-                if (state.dp) document.getElementById('decimalPlaces').value = state.dp;
-                if (state.meth) document.getElementById('method').value = state.meth;
-                if (state.h) document.getElementById('manualH').value = state.h;
-                if (state.k) document.getElementById('manualK').value = state.k;
-                if (state.sv) document.getElementById('startValue').value = state.sv;
+                const decimalPlaces = toSafeNumber(state.dp);
+                if (decimalPlaces !== null && Number.isInteger(decimalPlaces) && decimalPlaces >= -10 && decimalPlaces <= 10) {
+                    document.getElementById('decimalPlaces').value = String(decimalPlaces);
+                }
+
+                if (state.meth === 'auto' || state.meth === 'manual_width' || state.meth === 'manual_count') {
+                    document.getElementById('method').value = state.meth;
+                }
+
+                const h = toSafeNumber(state.h);
+                if (h !== null && h > 0) {
+                    document.getElementById('manualH').value = String(h);
+                }
+
+                const k = toSafeNumber(state.k);
+                if (k !== null && Number.isInteger(k) && k >= 1 && k <= 50) {
+                    document.getElementById('manualK').value = String(k);
+                }
+
+                const startValue = toSafeNumber(state.sv);
+                if (startValue !== null) {
+                    document.getElementById('startValue').value = String(startValue);
+                }
 
                 toggleInputs();
                 if (mode === 'table') {
