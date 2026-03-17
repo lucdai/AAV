@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-03-17T13:37:59.154881",
-  "total_commits": 191,
+  "generated_at": "2026-03-17T13:51:13.451590",
+  "total_commits": 196,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-17",
-      "commit_count": 14,
+      "commit_count": 19,
       "categories": {
         "Features": [
           {
@@ -13,6 +13,20 @@
             "message": "Add 3D press effect for clickable controls",
             "author": "lucdai",
             "url": "https://github.com/lucdai/AAV/commit/2edb18dabaf9ff8b6002b657c5669257d95bb127"
+          }
+        ],
+        "Bug Fixes": [
+          {
+            "sha": "7bb3e7c",
+            "message": "Resolve styles.css merge overlap for export format buttons",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/7bb3e7cc6a27aa67a558afe5e46b9f13ae52e267"
+          },
+          {
+            "sha": "8d59022",
+            "message": "Resolve styles.css merge hotspot for theme contrast buttons",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/8d59022adbb16606ee4852fb59af5c6fb4b014fa"
           }
         ],
         "Improvements": [
@@ -30,6 +44,24 @@
           }
         ],
         "Other": [
+          {
+            "sha": "68b5a67",
+            "message": "Merge pull request #19 from lucdai/codex/remove-confirmation-notification-boxes",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/68b5a67d352a0d21a4ae13daa37fb63c0e1cb263"
+          },
+          {
+            "sha": "51ba4aa",
+            "message": "Remove browser confirmation dialogs and replace with in-app notifications",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/51ba4aad3ac94caf1197b409e097aa1d75f71a40"
+          },
+          {
+            "sha": "46d8a5d",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/46d8a5d63ba3959ccd18db049bd9fc8c521e77de"
+          },
           {
             "sha": "5309bc8",
             "message": "Merge pull request #18 from lucdai/codex/remove-confirmation-messages-from-lucdai.github.io",
