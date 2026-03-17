@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-03-17T15:39:43.324137",
-  "total_commits": 242,
+  "generated_at": "2026-03-17T15:41:44.759376",
+  "total_commits": 246,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-17",
-      "commit_count": 65,
+      "commit_count": 69,
       "categories": {
         "Features": [
           {
@@ -48,6 +48,12 @@
           }
         ],
         "Improvements": [
+          {
+            "sha": "9201025",
+            "message": "Improve modal accessibility and keyboard focus handling",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/92010256b8335557ec3005e3d2407a84f52084e0"
+          },
           {
             "sha": "637aef8",
             "message": "Improve script loading to reduce render blocking",
@@ -106,6 +112,24 @@
           }
         ],
         "Other": [
+          {
+            "sha": "bbed235",
+            "message": "Merge pull request #37 from lucdai/codex/update-defensive-checks-in-updatecharttheme",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/bbed2358581a766525861c07e0e187e1f68ac056"
+          },
+          {
+            "sha": "cf1cfe0",
+            "message": "Harden lastGroups checks before chart recalculation",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/cf1cfe0300a4c35661a85219714787100495fa93"
+          },
+          {
+            "sha": "52df661",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/52df66149a5e78feb5cdcc00fc8d0e14bc445ba3"
+          },
           {
             "sha": "5b77145",
             "message": "Harden shared state parsing with input validation",
