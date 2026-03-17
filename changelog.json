@@ -1,13 +1,19 @@
 {
-  "generated_at": "2026-03-17T15:37:42.985033",
-  "total_commits": 238,
+  "generated_at": "2026-03-17T15:39:43.324137",
+  "total_commits": 242,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-17",
-      "commit_count": 61,
+      "commit_count": 65,
       "categories": {
         "Features": [
+          {
+            "sha": "fd5a982",
+            "message": "Merge pull request #35 from lucdai/codex/add-validation-for-shared-data-loading",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/fd5a982befc980118fd9bb0f29a47153d632a839"
+          },
           {
             "sha": "721fb09",
             "message": "Merge pull request #33 from lucdai/codex/add-defer-to-script-tags",
@@ -91,7 +97,27 @@
             "url": "https://github.com/lucdai/AAV/commit/b3277ff11ec536c11b0ff69cff478c4fde2eb0c0"
           }
         ],
+        "Documentation": [
+          {
+            "sha": "a2cea76",
+            "message": "docs: note Chart.js pin and SRI update requirement",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/a2cea76ecab39121903773a407d34fb4c5c16857"
+          }
+        ],
         "Other": [
+          {
+            "sha": "5b77145",
+            "message": "Harden shared state parsing with input validation",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/5b77145cae097dd1f0523a32a4f0ae467c8c8243"
+          },
+          {
+            "sha": "e00ff9e",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/e00ff9e355d3c91b3711afe9dec4f8a3b7f7f698"
+          },
           {
             "sha": "a6f4114",
             "message": "chore: update changelog from commits",
