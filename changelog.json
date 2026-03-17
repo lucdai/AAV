@@ -1,8 +1,34 @@
 {
-  "generated_at": "2026-03-17T01:55:39.923969",
-  "total_commits": 177,
+  "generated_at": "2026-03-17T13:21:03.377601",
+  "total_commits": 180,
   "repository": "lucdai/AAV",
   "entries": [
+    {
+      "date": "2026-03-17",
+      "commit_count": 3,
+      "categories": {
+        "Other": [
+          {
+            "sha": "851afb3",
+            "message": "Merge pull request #13 from lucdai/codex/ong-bo-mau-nut-khi-hover",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/851afb3552209b6ead5a9b8b6c4b3eb6c7fdc7f3"
+          },
+          {
+            "sha": "ac5e028",
+            "message": "Unify PNG/JPEG hover color behavior for chart export buttons",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/ac5e028a5e099d3531e758889ffb4201c14ea2e3"
+          },
+          {
+            "sha": "845db42",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/845db42af283dfd71c32bd08b8fd0a5a5ed30c65"
+          }
+        ]
+      }
+    },
     {
       "date": "2026-03-16",
       "commit_count": 1,
