@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-03-17T16:03:22.101192",
-  "total_commits": 297,
+  "generated_at": "2026-03-17T16:04:55.254642",
+  "total_commits": 300,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-17",
-      "commit_count": 120,
+      "commit_count": 123,
       "categories": {
         "Features": [
           {
@@ -160,6 +160,24 @@
           }
         ],
         "Other": [
+          {
+            "sha": "2cee13c",
+            "message": "Merge pull request #57 from lucdai/codex/check-for-null-before-accessing-decimalplaces",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/2cee13c214a475f42b98966750f375aa2d87e145"
+          },
+          {
+            "sha": "359f68b",
+            "message": "Guard fmt decimalPlaces lookup before DOM is ready",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/359f68bb3689f37b20f0faea8d8c060ddc554fc7"
+          },
+          {
+            "sha": "9f7cb30",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/9f7cb30175bd9b741cfd646fec90e203f7ed42c8"
+          },
           {
             "sha": "5d0c5b7",
             "message": "Merge pull request #56 from lucdai/codex/check-for-missing-brackets-in-index.html",
