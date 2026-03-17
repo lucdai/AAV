@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-03-17T15:31:57.703681",
-  "total_commits": 220,
+  "generated_at": "2026-03-17T15:32:45.566074",
+  "total_commits": 223,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-03-17",
-      "commit_count": 43,
+      "commit_count": 46,
       "categories": {
         "Features": [
           {
@@ -37,6 +37,12 @@
         ],
         "Improvements": [
           {
+            "sha": "cf49fb5",
+            "message": "Fix GitHub login to perform real OAuth redirect",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/cf49fb52cfc94e2ac8f4997c6726b70d5e3d6288"
+          },
+          {
             "sha": "747788d",
             "message": "Improve footer icon contrast with inverted system colors",
             "author": "lucdai",
@@ -50,6 +56,18 @@
           }
         ],
         "Other": [
+          {
+            "sha": "76257cb",
+            "message": "Merge pull request #28 from lucdai/codex/fix-github-login-redirect-logic",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/76257cbba50e5c0ee762567310afa5358115ff99"
+          },
+          {
+            "sha": "57b0c36",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/57b0c366410279b669e7ae3694cfdbb570dd4c4a"
+          },
           {
             "sha": "174328c",
             "message": "Smooth settings panel close transition",
