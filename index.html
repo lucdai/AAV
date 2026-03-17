@@ -564,7 +564,12 @@
         // --- State ---
         let mode = 'raw', currentTab = 'data';
         let datasets = [{ id: 1, name: t("sample_a"), dataStr: "45, 52, 60, 48, 55, 62, 49, 58, 65, 51" }];
-        let manualRows = [{ id: 1, lower: 40, upper: 50, freqs: {} }, { id: 2, lower: 50, upper: 60, freqs: {} }, { id: 3, lower: 60, upper: 70, freqs: {} }];
+        const getDefaultManualRows = () => ([
+            { id: 1, lower: 40, upper: 50, freqs: {} },
+            { id: 2, lower: 50, upper: 60, freqs: {} },
+            { id: 3, lower: 60, upper: 70, freqs: {} }
+        ]);
+        let manualRows = getDefaultManualRows();
         function escapeHtml(text) {
             if (text === undefined || text === null) return '';
             return String(text).replace(/[&<>"']/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m]));
@@ -616,7 +621,7 @@
         
         function clearAllData() {
             datasets = [{ id: 1, name: t("sample_prefix") + "A", dataStr: "" }];
-            manualRows = [{ id: Date.now(), lower: 0, upper: 10, freqs: {} }];
+            manualRows = getDefaultManualRows();
             
             // Reset other UI elements
             const methodSelect = document.getElementById('method');
