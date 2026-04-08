@@ -831,12 +831,17 @@
             markAsChanged();
         }
         function delRow(id) { if(manualRows.length>1) { manualRows=manualRows.filter(r=>r.id!==id); renderManualBody(); calculate(); markAsChanged(); } }
+        function evaluateNumericValue(val) {
+            if (typeof math === 'undefined') return parseFloat(val);
+            const evaluated = math.evaluate(val);
+            return typeof evaluated === 'number' && Number.isFinite(evaluated) ? evaluated : parseFloat(val);
+        }
         function updRow(id, f, val) {
             const r = manualRows.find(x=>x.id===id); if(!r)return;
             if(f.startsWith('freq')) r.freqs[parseInt(f.split('_')[1])] = parseInt(val)||0;
             else { 
                 try {
-                    r[f] = typeof math !== 'undefined' ? math.evaluate(val) : parseFloat(val);
+                    r[f] = evaluateNumericValue(val);
                 } catch(e) { r[f] = parseFloat(val); }
                 if(manualRows.indexOf(r)===0 && (f==='lower'||f==='upper')) {
                    const w = manualRows[0].upper - manualRows[0].lower;
@@ -860,7 +865,7 @@
             if(mode==='raw') {
                 const pDS = datasets.map(d => ({...d, data: d.dataStr.split(/[\s,;]+/).map(x=>{
                     try {
-                        return typeof math !== 'undefined' ? math.evaluate(x) : parseFloat(x);
+                        return evaluateNumericValue(x);
                     } catch(e) { return NaN; }
                 }).filter(n=>!isNaN(n) && typeof n === 'number').sort((a,b)=>a-b)})).filter(d=>d.data.length>0);
                 if(pDS.length===0) { 
