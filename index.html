@@ -99,8 +99,8 @@
     <div class="sr-only" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;"><p data-i18n="welcome_msg"></p><p data-i18n="welcome_msg_2"></p></div>
 
     <!-- MODAL FOR CALCULATION DETAILS -->
-    <div id="calcModal" class="fixed inset-0 bg-slate-900/60 z-50 hidden items-center justify-center p-4 backdrop-blur-md animate-fade-in">
-        <div id="calcModalContent" class="bg-[var(--surface)] rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden border border-white/20">
+    <div id="calcModal" class="fixed inset-0 bg-slate-900/60 z-50 hidden items-center justify-center p-4 backdrop-blur-md animate-fade-in" role="dialog" aria-modal="true" aria-labelledby="calcModalTitle" aria-hidden="true">
+        <div id="calcModalContent" class="bg-[var(--surface)] rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden border border-white/20" tabindex="-1">
             <div class="p-6 border-b border-[var(--border)] flex justify-between items-center bg-[var(--system-bg)]">
                 <h3 id="calcModalTitle" class="text-lg font-extrabold text-[var(--system-text)] flex items-center gap-3">
                     <div class="p-2 bg-indigo-100 rounded-xl text-indigo-600">
@@ -109,10 +109,10 @@
                     <span data-i18n="calc_details">Chi tiết phép tính</span>
                 </h3>
                 <div class="flex items-center gap-3">
-                    <button onclick="downloadCalcImage()" class="p-2.5 text-[var(--text-muted)] hover:text-indigo-600 hover:bg-[var(--primary-light)] rounded-xl transition-all duration-200" data-i18n-title="download_calc_img">
+                    <button onclick="downloadCalcImage()" class="p-2.5 text-[var(--text-muted)] hover:text-indigo-600 hover:bg-[var(--primary-light)] rounded-xl transition-all duration-200" data-i18n-title="download_calc_img" aria-label="Download calculation image">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                     </button>
-                    <button onclick="closeCalcModal()" class="p-2.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all duration-200">
+                    <button onclick="closeCalcModal()" class="p-2.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all duration-200" aria-label="Close calculation details modal">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                     </button>
                 </div>
