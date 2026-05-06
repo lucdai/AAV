@@ -17,6 +17,34 @@ document.addEventListener('DOMContentLoaded', () => {
         createClickEffect(e.clientX, e.clientY);
     });
 
+    // 3. Hover Effect for Icons and Buttons
+    const interactiveElements = document.querySelectorAll('button, .footer-icon-btn, .logo-container, .export-format-btn');
+    interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            const svg = el.querySelector('svg');
+            if (svg) {
+                svg.style.transition = 'transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                svg.style.transform = 'scale(1.2) rotate(5deg)';
+            }
+        });
+        el.addEventListener('mouseleave', () => {
+            const svg = el.querySelector('svg');
+            if (svg) {
+                svg.style.transform = 'scale(1) rotate(0deg)';
+            }
+        });
+    });
+
+    // 4. Smooth Scroll for Tab Switching
+    window.addEventListener('i18nReady', () => {
+        const tabs = document.querySelectorAll('.tab-btn');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    });
+
     // 2. Touch Ripple Effect (for Mobile)
     document.addEventListener('touchstart', (e) => {
         const touch = e.touches[0];

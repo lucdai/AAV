@@ -263,10 +263,12 @@
     <div class="max-w-7xl mx-auto space-y-4">
         
         <!-- HEADER -->
-        <header class="modern-card p-6 flex flex-col lg:flex-row justify-between items-center gap-6 animate-fade-in relative z-50">
+        <header class="modern-card p-6 animate-scale-in flex flex-col lg:flex-row justify-between items-center gap-6 relative z-50">
             <div class="flex items-center gap-4 cursor-pointer logo-container" onclick="goHome()">
-                <div class="p-2 bg-[var(--primary-light)] rounded-2xl">
-                    <img src="logo.png" alt="AAV Logo" class="h-12 w-auto">
+                <div class="p-2.5 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl shadow-lg shadow-indigo-200/50">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                    </svg>
                 </div>
                 <div>
                     <h1 class="text-2xl font-extrabold tracking-tight text-slate-900">AAV</h1>
@@ -355,7 +357,7 @@
 
                 <!-- RAW INPUT -->
                 <div id="rawSection" class="space-y-3">
-                    <div id="datasetContainer" class="space-y-3 max-h-[400px] overflow-y-auto pr-1"></div>
+                    <div id="datasetsContainer" class="space-y-4 max-h-[400px] overflow-y-auto pr-1"></div>
                     <div class="bg-[var(--surface)] rounded-xl shadow-sm border border-[var(--border)] p-4">
                         <div class="font-bold text-[var(--text-main)] mb-3 text-xs uppercase" data-i18n="group_config"></div>
                         <div class="space-y-3">
@@ -431,8 +433,7 @@
         </div>
 
         <!-- ================= TAB 2: VISUALIZATION ================= -->
-        <div id="tabChartsContent" class="hidden">
-            
+     <div id="tabChartsContent" class="hidden space-y-8 animate-fade-in">      
             <!-- Charts Wrapper -->
             <div id="chartsWrapper" class="hidden space-y-6">
                 <h3 class="text-lg font-bold text-slate-800 border-b pb-2" data-i18n="basic_dist_comp"></h3>
@@ -447,7 +448,7 @@
                         </div>
                         <div class="h-64 relative w-full"><canvas id="chartHistogram"></canvas></div>
                     </div>
-                    <div class="modern-card p-5">
+                    <div class="modern-card p-5 animate-scale-in">
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="font-bold text-[var(--text-main)] text-center flex-1" data-i18n="polygon_name"></h3>
                             <div class="flex gap-1">
@@ -457,7 +458,7 @@
                         </div>
                         <div class="h-64 relative w-full"><canvas id="chartPolygon"></canvas></div>
                     </div>
-                    <div class="modern-card p-5">
+                    <div class="modern-card p-5 animate-scale-in">
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="font-bold text-[var(--text-main)] text-center flex-1" data-i18n="stacked_bar_name"></h3>
                             <div class="flex gap-1">
@@ -467,7 +468,7 @@
                         </div>
                         <div class="h-64 relative w-full"><canvas id="chartStacked"></canvas></div>
                     </div>
-                    <div class="modern-card p-5">
+                    <div class="modern-card p-5 animate-scale-in">
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="font-bold text-[var(--text-main)] text-center flex-1" data-i18n="rel_freq_bar_name"></h3>
                             <div class="flex gap-1">
@@ -481,7 +482,7 @@
 
                 <h3 class="text-lg font-bold text-slate-800 border-b pb-2 pt-4" data-i18n="advanced_stats"></h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="modern-card p-5">
+                    <div class="modern-card p-5 animate-scale-in">
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="font-bold text-[var(--text-main)] text-center flex-1" data-i18n="violin_name"></h3>
                             <div class="flex gap-1">
@@ -491,7 +492,7 @@
                         </div>
                         <div class="h-64 relative w-full"><canvas id="chartViolin"></canvas></div>
                     </div>
-                    <div class="modern-card p-5">
+                    <div class="modern-card p-5 animate-scale-in">
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="font-bold text-[var(--text-main)] text-center flex-1" data-i18n="boxplot_name"></h3>
                             <div class="flex gap-1">
@@ -515,7 +516,7 @@
 
                 <h3 class="text-lg font-bold text-slate-800 border-b pb-2 pt-4" data-i18n="structure_cum"></h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="modern-card p-5">
+                    <div class="modern-card p-5 animate-scale-in">
                         <div class="flex justify-between items-center mb-4">
                             <div class="flex-1">
                                 <h3 class="font-bold text-[var(--text-main)] text-sm" data-i18n="pie_chart_name">Pie/Donut</h3>
@@ -528,7 +529,7 @@
                         </div>
                         <div class="h-64 relative w-full"><canvas id="chartPie"></canvas></div>
                     </div>
-                    <div class="modern-card p-5">
+                    <div class="modern-card p-5 animate-scale-in">
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="font-bold text-[var(--text-main)] text-center flex-1" data-i18n="area_chart_name"></h3>
                             <div class="flex gap-1">
@@ -538,7 +539,7 @@
                         </div>
                         <div class="h-64 relative w-full"><canvas id="chartArea"></canvas></div>
                     </div>
-                    <div class="modern-card p-5">
+                    <div class="modern-card p-5 animate-scale-in">
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="font-bold text-[var(--text-main)] text-center flex-1" data-i18n="ogive_chart_name"></h3>
                             <div class="flex gap-1">
@@ -979,28 +980,27 @@
                 {id:'outliers', l:t('outliers_count'), raw:1, len:1},
                 {id:'q1Loc', l:t('q1_loc'), txt:1}, {id:'q2Loc', l:t('q2_loc'), txt:1}, {id:'q3Loc', l:t('q3_loc'), txt:1}
             ];
-            let h = `<thead><tr class="bg-[var(--primary-light)] border-b"><th class="px-4 py-2" data-i18n="metric_col">${t('metric_col')}</th>`+results.map(r=>`<th class="px-4 py-2 text-center" style="color:${r.color.border}">${escapeHtml(r.name)}</th>`).join('')+`</tr></thead><tbody>`;
+            let h = `<thead><tr class="bg-[var(--primary-light)] border-b"><th class="px-6 py-4 text-left font-extrabold text-[var(--text-main)] rounded-tl-xl" data-i18n="metric_col">${t('metric_col')}</th>`+results.map((r, idx)=>`<th class="px-6 py-4 text-center font-extrabold ${idx === results.length - 1 ? 'rounded-tr-xl' : ''}" style="color:${r.color.border}">${escapeHtml(r.name)}</th>`).join('')+`</tr></thead><tbody class="divide-y divide-[var(--border)]">`;
             m.forEach(x => {
-                h += `<tr class="border-b last:border-0 hover:bg-slate-50"><td class="px-4 py-3 font-medium text-[var(--text-muted)]">${x.l}</td>` + results.map((r, rIdx)=>{
+                h += `<tr class="hover:bg-[var(--primary-light)] transition-colors duration-150"><td class="px-6 py-4 font-semibold text-slate-700">${x.l}</td>` + results.map((r, rIdx)=>{
                     let v = r.s[x.id];
-                    // Mã hóa dữ liệu để truyền an toàn qua HTML attribute
                     const rData = encodeURIComponent(JSON.stringify({name: r.name, s: r.s, gStats: r.gStats}));
                     const gData = encodeURIComponent(JSON.stringify(groups));
-                    let calcBtn = x.calc ? `<button onclick="showCalculation('${x.id}', '${rData}', '${gData}')" class="p-1 text-indigo-400 hover:text-indigo-600 hover:bg-[var(--primary-light)] rounded-full transition ml-1" title="${t('view_calc_detail')}"><svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></button>` : '';
-                    if(x.raw && mode==='table') return `<td class="text-center text-slate-300 italic">N/A</td>`;
-                    if(v===undefined) return `<td>-</td>`;
-                    if(x.len) return `<td class="text-center font-bold text-red-600">${v.length}</td>`;
-                    if(x.txt) return `<td class="text-center text-[var(--text-main)]">${escapeHtml(v)}</td>`;
-                    return `<td class="text-center font-bold text-[var(--text-main)] px-4 py-3">${fmt(v)}${calcBtn}</td>`;
+                    let calcBtn = x.calc ? `<button onclick="showCalculation('${x.id}', '${rData}', '${gData}')" class="p-1.5 text-indigo-500 hover:text-indigo-700 hover:bg-indigo-100 rounded-xl transition-all duration-200 ml-2 shadow-sm" title="${t('view_calc_detail')}"><svg class="w-4.5 h-4.5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></button>` : '';
+                    if(x.raw && mode==='table') return `<td class="px-6 py-4 text-center text-slate-300 italic">N/A</td>`;
+                    if(v===undefined) return `<td class="px-6 py-4 text-center">-</td>`;
+                    if(x.len) return `<td class="px-6 py-4 text-center font-bold text-red-500">${v.length}</td>`;
+                    if(x.txt) return `<td class="px-6 py-4 text-center text-[var(--text-main)] font-medium">${escapeHtml(v)}</td>`;
+                    return `<td class="px-6 py-4 text-center font-bold text-[var(--text-main)]">${fmt(v)}${calcBtn}</td>`;
                 }).join('') + `</tr>`;
             });
             document.getElementById('statsTable').innerHTML = h+`</tbody>`;
 
             let groupTitle = document.getElementById('groupColumnTitle')?.innerText || t("group");
             groupTitle = escapeHtml(groupTitle);
-            let fh = `<thead><tr class="bg-[var(--primary-light)] border-b"><th class="px-4 py-2 outline-none focus:ring-2 focus:ring-indigo-500" contenteditable="true" id="groupColumnTitle" onblur="calculate()">${groupTitle}</th><th class="px-4 py-2 text-center" data-i18n="rep_val">${t('rep_val')}</th>`+results.map(r=>`<th class="px-4 py-2 text-center" style="color:${r.color.border}" data-i18n="freq">${t('freq')}</th>`).join('')+`</tr></thead><tbody>`;
+            let fh = `<thead><tr class="bg-[var(--primary-light)] border-b"><th class="px-6 py-4 text-left font-extrabold text-[var(--text-main)] outline-none focus:ring-2 focus:ring-indigo-500 rounded-tl-xl" contenteditable="true" id="groupColumnTitle" onblur="calculate()">${groupTitle}</th><th class="px-6 py-4 text-center font-extrabold text-[var(--text-main)]" data-i18n="rep_val">${t('rep_val')}</th>`+results.map((r, idx)=>`<th class="px-6 py-4 text-center font-extrabold ${idx === results.length - 1 ? 'rounded-tr-xl' : ''}" style="color:${r.color.border}" data-i18n="freq">${t('freq')}</th>`).join('')+`</tr></thead><tbody class="divide-y divide-[var(--border)]">`;
             groups.forEach((g,i)=>{
-                fh += `<tr class="border-b hover:bg-slate-50"><td class="px-4 py-2 text-slate-800">[${fmt(g.lower)}; ${fmt(g.upper)})</td><td class="px-4 py-2 text-center text-[var(--text-muted)]">${fmt(g.midpoint)}</td>`+results.map(r=>`<td class="px-4 py-2 text-center font-bold">${r.gStats[i].freq}</td>`).join('')+`</tr>`;
+                fh += `<tr class="hover:bg-[var(--primary-light)] transition-colors duration-150"><td class="px-6 py-4 text-slate-700 font-medium">[${fmt(g.lower)}; ${fmt(g.upper)})</td><td class="px-6 py-4 text-center text-[var(--text-muted)]">${fmt(g.midpoint)}</td>`+results.map(r=>`<td class="px-6 py-4 text-center font-bold text-[var(--text-main)]">${r.gStats[i].freq}</td>`).join('')+`</tr>`;
             });
             document.getElementById('freqTable').innerHTML = fh+`</tbody>`;
         }
@@ -1096,23 +1096,32 @@
             const defaultOptions = {
                 responsive: true,
                 maintainAspectRatio: false,
+                animation: {
+                    duration: 1000,
+                    easing: 'easeOutQuart'
+                },
                 plugins: {
                     legend: {
                         position: 'bottom',
-                        labels: { color: textColor }
+                        labels: { 
+                            color: textColor,
+                            usePointStyle: true,
+                            padding: 20,
+                            font: { size: 12, weight: '600' }
+                        }
                     },
                     title: { color: textColor }
                 },
                 scales: {
                     x: {
-                        grid: { color: gridColor },
-                        ticks: { color: textColor },
-                        title: { color: textColor }
+                        grid: { color: gridColor, drawBorder: false },
+                        ticks: { color: textColor, font: { size: 11 } },
+                        title: { color: textColor, font: { weight: 'bold' } }
                     },
                     y: {
-                        grid: { color: gridColor },
-                        ticks: { color: textColor },
-                        title: { color: textColor }
+                        grid: { color: gridColor, drawBorder: false },
+                        ticks: { color: textColor, font: { size: 11 } },
+                        title: { color: textColor, font: { weight: 'bold' } }
                     }
                 }
             };
