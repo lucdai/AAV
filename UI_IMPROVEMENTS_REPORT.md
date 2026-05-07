@@ -29,7 +29,8 @@ Dựa trên yêu cầu kiểm tra và nâng cấp giao diện cho repository AAV
   - Hiệu ứng `hover:bg-indigo-50` giúp người dùng dễ dàng theo dõi dòng dữ liệu đang chọn.
   - Tăng khoảng cách đệm (padding) để dữ liệu không bị gò bó.
 - **Icon & Logo:** Thay thế logo hình ảnh tĩnh bằng SVG vector có độ sắc nét cao và hỗ trợ animation.
-- **Nút bấm (Buttons):** Bo tròn hoàn toàn (pill-shaped) cho các nút chức năng chính, tạo cảm giác thân thiện và hiện đại.
+- **Nút bấm (Buttons):** Chuyển từ dạng bo tròn hoàn toàn (pill-shaped) sang bo góc hiện đại (`1rem`), tạo sự đồng bộ với các thẻ (cards) và mang lại cảm giác chuyên nghiệp, vững chãi hơn.
+- **Bảng màu biểu đồ (Chart Palettes):** Cập nhật 5 bộ bảng màu (Default, Ocean, Forest, Sunset, Monochrome) với các dải màu gradient tự nhiên, giúp biểu đồ không chỉ đẹp mà còn dễ phân biệt các tập dữ liệu.
 
 ## 5. Kết quả đạt được
 - Giao diện trông **chuyên nghiệp và bắt mắt** hơn đáng kể.

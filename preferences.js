@@ -121,11 +121,11 @@ function applyCustomColors(bgColor, textColor) {
  * Chart Palette Management
  */
 const CHART_PALETTES = {
-    'default': ['#6366f1', '#f43f5e', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#06b6d4'],
-    'ocean': ['#0ea5e9', '#2dd4bf', '#3b82f6', '#06b6d4', '#6366f1', '#94a3b8', '#0f172a'],
-    'forest': ['#10b981', '#84cc16', '#059669', '#15803d', '#4d7c0f', '#166534', '#3f6212'],
-    'sunset': ['#f43f5e', '#f97316', '#fbbf24', '#e11d48', '#ea580c', '#d97706', '#be123c'],
-    'monochrome': ['#1e293b', '#334155', '#475569', '#64748b', '#94a3b8', '#cbd5e1', '#e2e8f0']
+    'default': ['#4f46e5', '#7c3aed', '#ec4899', '#f43f5e', '#f97316', '#eab308', '#10b981'],
+    'ocean': ['#0ea5e9', '#06b6d4', '#2dd4bf', '#10b981', '#3b82f6', '#6366f1', '#4f46e5'],
+    'forest': ['#059669', '#10b981', '#84cc16', '#a8a29e', '#4d7c0f', '#166534', '#064e3b'],
+    'sunset': ['#f43f5e', '#fb7185', '#f97316', '#fbbf24', '#e11d48', '#be123c', '#991b1b'],
+    'monochrome': ['#1e293b', '#334155', '#475569', '#64748b', '#94a3b8', '#cbd5e1', '#f1f5f9']
 };
 
 function applyChartPalette(paletteName) {
