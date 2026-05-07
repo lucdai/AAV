@@ -58,8 +58,8 @@ async function parseJsonResponse(response, sourceName) {
 // Initialize changelog modal
 function initChangelogModal() {
     const modalHTML = `
-        <div id="changelogModal" class="fixed inset-0 bg-slate-900/60 z-50 hidden items-center justify-center p-4 backdrop-blur-md animate-fade-in">
-            <div id="changelogModalContent" class="bg-white rounded-3xl shadow-2xl max-w-3xl w-full max-h-[85vh] flex flex-col overflow-hidden border border-white/20">
+        <div id="changelogModal" class="fixed inset-0 bg-slate-900/60 z-50 hidden items-center justify-center p-4 backdrop-blur-md animate-fade-in" role="dialog" aria-modal="true" aria-labelledby="changelogModalTitle" aria-hidden="true">
+            <div id="changelogModalContent" class="bg-white rounded-3xl shadow-2xl max-w-3xl w-full max-h-[85vh] flex flex-col overflow-hidden border border-white/20" tabindex="-1">
                 <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
                     <h3 id="changelogModalTitle" class="text-lg font-extrabold text-slate-900 flex items-center gap-3">
                         <div class="p-2 bg-indigo-100 rounded-xl text-indigo-600">
@@ -67,7 +67,7 @@ function initChangelogModal() {
                         </div>
                         <span data-i18n="changelog_title">Lịch sử cập nhật phiên bản</span>
                     </h3>
-                    <button onclick="closeChangelogModal()" class="p-2.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all duration-200">
+                    <button onclick="closeChangelogModal()" class="p-2.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all duration-200" aria-label="Close changelog modal">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                     </button>
                 </div>
@@ -293,9 +293,14 @@ async function openChangelogModal() {
         initChangelogModal();
     }
     
-    const modal2 = document.getElementById('changelogModal');
-    modal2.classList.remove('hidden');
-    modal2.classList.add('flex');
+    if (typeof openAccessibleModal === 'function') {
+        openAccessibleModal('changelogModal', 'changelogModalContent');
+    } else {
+        const modal2 = document.getElementById('changelogModal');
+        modal2.classList.remove('hidden');
+        modal2.classList.add('flex');
+        modal2.setAttribute('aria-hidden', 'false');
+    }
     
     // Fetch and display changelog
     let changelog = await fetchChangelogFromJSON();
@@ -310,10 +315,16 @@ async function openChangelogModal() {
 
 // Close changelog modal
 function closeChangelogModal() {
+    if (typeof closeAccessibleModal === 'function') {
+        closeAccessibleModal('changelogModal');
+        return;
+    }
+
     const modal = document.getElementById('changelogModal');
     if (modal) {
         modal.classList.add('hidden');
         modal.classList.remove('flex');
+        modal.setAttribute('aria-hidden', 'true');
     }
 }
 
