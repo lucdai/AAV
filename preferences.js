@@ -400,40 +400,5 @@ function toggleSettings() {
     }
 }
 
-function loginWithGitHub() {
-    const CLIENT_ID = 'Ov23liYvG9H6gabDLa4Y';
-    const REDIRECT_URI = window.location.origin + window.location.pathname;
-    const SCOPE = 'read:user';
-    const authUrl = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=${SCOPE}&state=${generateRandomState()}`;
-    console.log('Redirecting to GitHub:', authUrl);
-    // Tự động tiếp tục đăng nhập, không hiển thị hộp thoại xác nhận của trình duyệt
-    setTimeout(() => {
-        const mockUser = { name: 'lucdai', avatar: 'https://github.com/lucdai.png' };
-        localStorage.setItem('aav_user', JSON.stringify(mockUser));
-        updateSyncStatus(mockUser);
-    }, 1500);
-}
-
-function updateSyncStatus(user) {
-    const statusText = document.getElementById('syncStatusText');
-    if (statusText) {
-        if (user) {
-            statusText.innerText = t('logged_in_as', { name: user.name });
-            statusText.classList.add('text-indigo-600', 'font-bold');
-        } else {
-            statusText.innerText = t('not_logged_in');
-            statusText.classList.remove('text-indigo-600', 'font-bold');
-        }
-    }
-}
-
-// Check login status on load
-document.addEventListener('DOMContentLoaded', () => {
-    const savedUser = localStorage.getItem('aav_user');
-    if (savedUser) {
-        updateSyncStatus(JSON.parse(savedUser));
-    }
-});
-
 // Initialize on load
 document.addEventListener('DOMContentLoaded', initPreferences);
