@@ -17,20 +17,26 @@ document.addEventListener('DOMContentLoaded', () => {
         createClickEffect(e.clientX, e.clientY);
     });
 
-    // 3. Hover Effect for Icons and Buttons
-    const interactiveElements = document.querySelectorAll('button, .footer-icon-btn, .logo-container, .export-format-btn');
+    // 3. Hover Effect for Icons and Buttons (Micro-interactions)
+    const interactiveElements = document.querySelectorAll('button, .footer-icon-btn, .logo-container, .export-format-btn, .modern-card');
     interactiveElements.forEach(el => {
         el.addEventListener('mouseenter', () => {
             const svg = el.querySelector('svg');
             if (svg) {
-                svg.style.transition = 'transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
-                svg.style.transform = 'scale(1.2) rotate(5deg)';
+                svg.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                svg.style.transform = 'scale(1.25) rotate(8deg)';
+            }
+            if (el.classList.contains('modern-card')) {
+                el.style.transform = 'translateY(-6px)';
             }
         });
         el.addEventListener('mouseleave', () => {
             const svg = el.querySelector('svg');
             if (svg) {
                 svg.style.transform = 'scale(1) rotate(0deg)';
+            }
+            if (el.classList.contains('modern-card')) {
+                el.style.transform = 'translateY(0)';
             }
         });
     });

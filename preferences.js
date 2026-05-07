@@ -121,11 +121,41 @@ function applyCustomColors(bgColor, textColor) {
  * Chart Palette Management
  */
 const CHART_PALETTES = {
-    'default': ['#4f46e5', '#7c3aed', '#ec4899', '#f43f5e', '#f97316', '#eab308', '#10b981'],
-    'ocean': ['#0ea5e9', '#06b6d4', '#2dd4bf', '#10b981', '#3b82f6', '#6366f1', '#4f46e5'],
-    'forest': ['#059669', '#10b981', '#84cc16', '#a8a29e', '#4d7c0f', '#166534', '#064e3b'],
-    'sunset': ['#f43f5e', '#fb7185', '#f97316', '#fbbf24', '#e11d48', '#be123c', '#991b1b'],
-    'monochrome': ['#1e293b', '#334155', '#475569', '#64748b', '#94a3b8', '#cbd5e1', '#f1f5f9']
+    'default': [
+        { start: '#4f46e5', end: '#818cf8' },
+        { start: '#7c3aed', end: '#a78bfa' },
+        { start: '#ec4899', end: '#f472b6' },
+        { start: '#f43f5e', end: '#fb7185' },
+        { start: '#f97316', end: '#fb923c' }
+    ],
+    'ocean': [
+        { start: '#0ea5e9', end: '#38bdf8' },
+        { start: '#06b6d4', end: '#22d3ee' },
+        { start: '#2dd4bf', end: '#5eead4' },
+        { start: '#10b981', end: '#34d399' },
+        { start: '#3b82f6', end: '#60a5fa' }
+    ],
+    'forest': [
+        { start: '#059669', end: '#10b981' },
+        { start: '#10b981', end: '#34d399' },
+        { start: '#84cc16', end: '#a3e635' },
+        { start: '#4d7c0f', end: '#65a30d' },
+        { start: '#166534', end: '#22c55e' }
+    ],
+    'sunset': [
+        { start: '#f43f5e', end: '#fb7185' },
+        { start: '#fb7185', end: '#fda4af' },
+        { start: '#f97316', end: '#fb923c' },
+        { start: '#fbbf24', end: '#fcd34d' },
+        { start: '#e11d48', end: '#f43f5e' }
+    ],
+    'monochrome': [
+        { start: '#1e293b', end: '#475569' },
+        { start: '#334155', end: '#64748b' },
+        { start: '#475569', end: '#94a3b8' },
+        { start: '#64748b', end: '#cbd5e1' },
+        { start: '#94a3b8', end: '#e2e8f0' }
+    ]
 };
 
 function applyChartPalette(paletteName) {
