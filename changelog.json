@@ -1,13 +1,25 @@
 {
-  "generated_at": "2026-05-07T12:11:29.265846",
-  "total_commits": 371,
+  "generated_at": "2026-05-07T12:20:10.849104",
+  "total_commits": 373,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-05-07",
-      "commit_count": 2,
+      "commit_count": 4,
       "categories": {
         "Other": [
+          {
+            "sha": "999c691",
+            "message": "UI/UX Overhaul: Modern Visual Identity, Motion Design, and Data Visualization upgrades",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/999c69133323668d22c9d79610a93ed9a181450f"
+          },
+          {
+            "sha": "f08b3fb",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/f08b3fbe7de6375f1796efc283465ed024ac0586"
+          },
           {
             "sha": "164fada",
             "message": "style: refine animations, update chart palettes and button styles",
