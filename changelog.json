@@ -1,13 +1,19 @@
 {
-  "generated_at": "2026-05-12T17:04:17.518272",
-  "total_commits": 328,
+  "generated_at": "2026-05-12T17:32:21.314320",
+  "total_commits": 331,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-05-13",
-      "commit_count": 2,
+      "commit_count": 4,
       "categories": {
         "Improvements": [
+          {
+            "sha": "bb41e33",
+            "message": "Improve chart download button contrast behavior",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/bb41e3306e9af8d062ce282d81e3559f655dbcde"
+          },
           {
             "sha": "5cfb192",
             "message": "Refactor UI colors to semantic token contract",
@@ -16,6 +22,12 @@
           }
         ],
         "Other": [
+          {
+            "sha": "1965590",
+            "message": "Merge pull request #67 from lucdai/codex/adjust-background-and-text-colors-for-images",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/19655904461476fb9ad06e418d3e34ad2d928ef2"
+          },
           {
             "sha": "dbbab01",
             "message": "Merge pull request #66 from lucdai/codex/implement-semantic-color-tokens",
@@ -27,7 +39,7 @@
     },
     {
       "date": "2026-05-12",
-      "commit_count": 7,
+      "commit_count": 8,
       "categories": {
         "Improvements": [
           {
@@ -44,6 +56,12 @@
           }
         ],
         "Other": [
+          {
+            "sha": "a0db9b8",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/a0db9b8f7931aba63e35d9d9050487b436f25487"
+          },
           {
             "sha": "99346e3",
             "message": "chore: update changelog from commits",
