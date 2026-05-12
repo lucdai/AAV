@@ -4,7 +4,7 @@
 
 const PREFS_STORAGE_KEY = 'aav_user_preferences';
 const DEFAULT_PREFS = {
-    theme: 'system', // 'light', 'dark', 'high-contrast', 'system'
+    theme: 'system', // 'light', 'dark', 'system'
     accentColor: '#6366f1',
     backgroundColor: '', // Empty means use theme default
     textColor: '', // Empty means use theme default
@@ -37,6 +37,7 @@ function initPreferences() {
     if (savedPrefs) {
         try {
             userPrefs = { ...DEFAULT_PREFS, ...JSON.parse(savedPrefs) };
+            if (userPrefs.theme === 'high-contrast') userPrefs.theme = 'dark';
         } catch (e) {
             console.error('Error parsing preferences:', e);
         }
@@ -64,6 +65,7 @@ function applyAllPreferences() {
     applyFontFamily(userPrefs.fontFamily);
     applyChartPalette(userPrefs.chartPalette);
     setupHotkeys(userPrefs.hotkeysEnabled);
+    applyContrastEngine(userPrefs);
 }
 
 /**
@@ -77,7 +79,7 @@ function applyTheme(theme) {
         effectiveTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
     
-    root.classList.remove('light-mode', 'dark-mode', 'high-contrast-mode');
+    root.classList.remove('light-mode', 'dark-mode');
     root.classList.add(`${effectiveTheme}-mode`);
     
     // Update Chart.js defaults
@@ -90,7 +92,7 @@ function applyTheme(theme) {
 function updateChartTheme(theme) {
     if (typeof Chart === 'undefined') return;
     
-    const isDark = theme === 'dark' || theme === 'high-contrast' || 
+    const isDark = theme === 'dark' ||
                   (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
     
     // Determine colors based on theme or custom preferences
@@ -279,6 +281,39 @@ function adjustColor(hex, percent) {
 /**
  * Setup color inputs to sync with preferences
  */
+
+function getReadableTextColor(bgHex) {
+    const white = '#ffffff';
+    const black = '#0f172a';
+    return contrastRatio(bgHex, white) >= contrastRatio(bgHex, black) ? white : black;
+}
+
+function buildContrastTokens(base = {}) {
+    const bg = base.backgroundColor || getCurrentSystemColors().bg;
+    const text = base.textColor || getCurrentSystemColors().text;
+    const accent = base.accentColor || userPrefs.accentColor || '#6366f1';
+    const surface0 = adjustColor(bg, 6);
+    const surface1 = adjustColor(bg, 14);
+    const surface2 = adjustColor(bg, 22);
+    const on0 = contrastRatio(surface0, text) >= 4.5 ? text : getReadableTextColor(surface0);
+    const on1 = contrastRatio(surface1, text) >= 4.5 ? text : getReadableTextColor(surface1);
+    const on2 = contrastRatio(surface2, text) >= 4.5 ? text : getReadableTextColor(surface2);
+    const onAccent = getReadableTextColor(accent);
+    return {
+        '--surface-0': surface0, '--surface-1': surface1, '--surface-2': surface2,
+        '--on-surface-0': on0, '--on-surface-1': on1, '--on-surface-2': on2,
+        '--accent': accent, '--on-accent': onAccent,
+        '--border': adjustColor(bg, 28), '--focus-ring': `${accent}55`,
+        '--icon-default': on1, '--icon-hover': on0, '--icon-active': onAccent, '--icon-disabled': adjustColor(on1, 40),
+        '--control-disabled-bg': adjustColor(surface1, -10), '--control-disabled-text': adjustColor(on1, 35)
+    };
+}
+
+function applyContrastEngine(base = {}) {
+    const root = document.documentElement;
+    const tokens = buildContrastTokens(base);
+    Object.entries(tokens).forEach(([k, v]) => root.style.setProperty(k, v));
+}
 function setupColorInputs() {
     const accentInput = document.getElementById('accentColorInput');
     const accentHex = document.getElementById('accentColorHex');
@@ -489,8 +524,7 @@ function getHcSafePalette() {
 }
 
 function applyAccessibilityColorGuards(newPrefs) {
-    const isHc = userPrefs.theme === 'high-contrast' || newPrefs.theme === 'high-contrast';
-    const strict = isHc || userPrefs.accessibilityStrict;
+    const strict = userPrefs.accessibilityStrict;
     if (!strict) return newPrefs;
     const safe = getHcSafePalette();
     const candidateBg = newPrefs.backgroundColor || userPrefs.backgroundColor || safe.bg;
