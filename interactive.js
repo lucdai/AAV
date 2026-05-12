@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     document.addEventListener('mousedown', (e) => {
+        const target = e.target.closest('button, a, [role="button"], .tab-btn, .modern-card');
+        if (!target || window.userPrefs?.interactionEffectsEnabled === false) return;
         createClickEffect(e.clientX, e.clientY);
     });
 
@@ -24,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const y = touch.clientY;
         
         // Create ripple on the element touched if it's a button or card
-        const target = e.target.closest('button, .modern-card, .btn-primary, .btn-secondary');
+        const target = e.target.closest('button, a, [role="button"], .tab-btn, .modern-card');
         if (target) {
             const rect = target.getBoundingClientRect();
             const ripple = document.createElement('span');
@@ -49,11 +51,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         // Also show the click ripple at touch point
-        createClickEffect(x, y);
+        if (window.userPrefs?.interactionEffectsEnabled !== false) {
+            createClickEffect(x, y);
+        }
 
         // 3. Haptic Feedback (Vibration)
-        if (window.navigator && window.navigator.vibrate) {
-            // Vibrate for 10ms (very light tap)
+        if (window.userPrefs?.vibrateEnabled !== false && window.navigator && window.navigator.vibrate) {
             window.navigator.vibrate(10);
         }
     }, { passive: true });

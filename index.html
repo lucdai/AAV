@@ -108,7 +108,7 @@
                     <button onclick="downloadCalcImage()" class="p-2.5 text-[var(--text-muted)] hover:text-indigo-600 hover:bg-[var(--primary-light)] rounded-xl transition-all duration-200" data-i18n-title="download_calc_img">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                     </button>
-                    <button onclick="closeCalcModal()" class="p-2.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all duration-200">
+                    <button aria-label="Đóng chi tiết" onclick="closeCalcModal()" class="p-2.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all duration-200">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                     </button>
                 </div>
@@ -132,29 +132,29 @@
             </button>
         </div>
 
-        <div class="space-y-8">
+        <div class="settings-panel-header"><input id="settingsSearch" class="w-full" type="search" placeholder="Tìm cài đặt..." oninput="filterSettings(this.value)"></div><div class="settings-tabs"><button type="button" class="tab-btn active" onclick="switchSettingsTab('basic')">Cơ bản</button><button type="button" class="tab-btn" onclick="switchSettingsTab('advanced')">Nâng cao</button></div><div class="space-y-8">
             <!-- Personalization -->
-            <section>
-                <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4" data-i18n="personalization">Cá nhân hóa</h3>
+            <section class="panel-section" data-settings-section="basic">
+                <h3 class="field-label text-sm font-bold text-slate-400 uppercase tracking-wider mb-4" data-i18n="personalization">Cá nhân hóa</h3>
                 
                 <div class="space-y-4">
                     <div>
                         <label class="block text-sm font-bold text-[var(--text-main)] mb-2" data-i18n="theme">Chế độ màu sắc</label>
                         <div class="grid grid-cols-2 gap-2">
-                            <button onclick="savePreferences({theme: 'light'})" class="px-3 py-2 text-sm border border-[var(--border)] rounded-lg hover:bg-slate-50" data-i18n="light">Sáng</button>
-                            <button onclick="savePreferences({theme: 'dark'})" class="px-3 py-2 text-sm border border-[var(--border)] rounded-lg hover:bg-slate-50" data-i18n="dark">Tối</button>
-                            <button onclick="savePreferences({theme: 'high-contrast'})" class="px-3 py-2 text-sm border border-[var(--border)] rounded-lg hover:bg-slate-50" data-i18n="high_contrast">Tương phản</button>
-                            <button onclick="savePreferences({theme: 'system'})" class="px-3 py-2 text-sm border border-[var(--border)] rounded-lg hover:bg-slate-50" data-i18n="system">Hệ thống</button>
+                            <button onclick="savePreferences({theme: 'light'})" data-pref-key="theme" data-pref-value="light" class="btn btn-ghost" data-i18n="light">Sáng</button>
+                            <button onclick="savePreferences({theme: 'dark'})" data-pref-key="theme" data-pref-value="dark" class="btn btn-ghost" data-i18n="dark">Tối</button>
+                            <button onclick="savePreferences({theme: 'high-contrast'})" data-pref-key="theme" data-pref-value="high-contrast" class="btn btn-ghost" data-i18n="high_contrast">Tương phản</button>
+                            <button onclick="savePreferences({theme: 'system'})" data-pref-key="theme" data-pref-value="system" class="btn btn-ghost" data-i18n="system">Hệ thống</button>
                         </div>
                     </div>
 
                     <div>
                         <label class="block text-sm font-bold text-[var(--text-main)] mb-2" data-i18n="accent_color">Màu nhấn</label>
                         <div class="flex gap-3">
-                            <div onclick="savePreferences({accentColor: '#6366f1'})" class="color-swatch bg-[#6366f1]"></div>
-                            <div onclick="savePreferences({accentColor: '#f43f5e'})" class="color-swatch bg-[#f43f5e]"></div>
-                            <div onclick="savePreferences({accentColor: '#10b981'})" class="color-swatch bg-[#10b981]"></div>
-                            <div onclick="savePreferences({accentColor: '#f59e0b'})" class="color-swatch bg-[#f59e0b]"></div>
+                            <button type="button" aria-label="Accent Indigo" onclick="savePreferences({accentColor: '#6366f1'})" data-pref-key="accentColor" data-pref-value="#6366f1" data-color="#6366f1" class="color-swatch bg-[#6366f1]"></button>
+                            <button type="button" aria-label="Accent Rose" onclick="savePreferences({accentColor: '#f43f5e'})" data-pref-key="accentColor" data-pref-value="#f43f5e" data-color="#f43f5e" class="color-swatch bg-[#f43f5e]"></button>
+                            <button type="button" aria-label="Accent Emerald" onclick="savePreferences({accentColor: '#10b981'})" data-pref-key="accentColor" data-pref-value="#10b981" data-color="#10b981" class="color-swatch bg-[#10b981]"></button>
+                            <button type="button" aria-label="Accent Amber" onclick="savePreferences({accentColor: '#f59e0b'})" data-pref-key="accentColor" data-pref-value="#f59e0b" data-color="#f59e0b" class="color-swatch bg-[#f59e0b]"></button>
                             <div class="flex items-center gap-2 ml-auto">
                                 <span class="text-[10px] font-mono text-slate-400">HEX:</span>
                                 <input type="color" id="accentColorInput" onchange="savePreferences({accentColor: this.value})" class="w-8 h-8 p-0 border-none bg-transparent cursor-pointer">
@@ -166,10 +166,10 @@
                     <div>
                         <label class="block text-sm font-bold text-[var(--text-main)] mb-2" data-i18n="bg_color">Màu nền hệ thống</label>
                         <div class="flex items-center gap-3">
-                            <input type="color" id="bgColorInput" onchange="savePreferences({backgroundColor: this.value})" class="w-8 h-8 p-0 border-none bg-transparent cursor-pointer">
+                            <input type="color" id="bgColorInput" aria-label="Màu nền hệ thống" onchange="savePreferences({backgroundColor: this.value})" class="w-8 h-8 p-0 border-none bg-transparent cursor-pointer">
                             <input type="text" id="bgColorHex" onchange="if(/^#[0-9A-F]{6}$/i.test(this.value)) savePreferences({backgroundColor: this.value})" placeholder="#f8fafc" class="w-24 text-xs font-mono p-1 border rounded">
                             <button onclick="savePreferences({backgroundColor: ''})" class="text-xs text-indigo-600 hover:underline" data-i18n="reset">Đặt lại</button>
-                        </div>
+                        </div><p id="bgContrastWarning" class="contrast-warning"></p>
                     </div>
 
                     <div>
@@ -178,7 +178,7 @@
                             <input type="color" id="textColorInput" onchange="savePreferences({textColor: this.value})" class="w-8 h-8 p-0 border-none bg-transparent cursor-pointer">
                             <input type="text" id="textColorHex" onchange="if(/^#[0-9A-F]{6}$/i.test(this.value)) savePreferences({textColor: this.value})" placeholder="#0f172a" class="w-24 text-xs font-mono p-1 border rounded">
                             <button onclick="savePreferences({textColor: ''})" class="text-xs text-indigo-600 hover:underline" data-i18n="reset">Đặt lại</button>
-                        </div>
+                        </div><p id="textContrastWarning" class="contrast-warning"></p><p id="accentContrastWarning" class="contrast-warning"></p>
                     </div>
                 </div>
             </section>
@@ -197,7 +197,7 @@
                     </div>
                     <div>
                         <label class="block text-sm font-bold text-[var(--text-main)] mb-2" data-i18n="font_family">Loại Font</label>
-                        <select onchange="savePreferences({fontFamily: this.value})" class="w-full">
+                        <select id="fontFamilySelect" onchange="savePreferences({fontFamily: this.value})" class="w-full">
                             <option value="sans-serif" data-i18n="sans_serif">Không chân (Sans-serif)</option>
                             <option value="serif" data-i18n="serif">Có chân (Serif)</option>
                         </select>
@@ -211,7 +211,7 @@
                 <div class="space-y-3">
                     <div class="flex items-center justify-between">
                         <span class="text-sm text-[var(--text-main)]" data-i18n="tracking">Cho phép theo dõi</span>
-                        <input type="checkbox" checked onchange="savePreferences({trackingEnabled: this.checked})" class="w-5 h-5">
+                        <input id="trackingToggle" type="checkbox" checked onchange="savePreferences({trackingEnabled: this.checked})" class="w-5 h-5">
                     </div>
                     <button onclick="exportUserData()" class="w-full px-4 py-2 text-sm border border-[var(--border)] rounded-lg hover:bg-slate-50 flex items-center justify-center gap-2">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
@@ -230,7 +230,7 @@
                 <div class="space-y-4">
                     <div>
                         <label class="block text-sm font-bold text-slate-700 mb-2" data-i18n="chart_palette">Bảng màu biểu đồ</label>
-                        <select onchange="savePreferences({chartPalette: this.value})" class="w-full p-2 border border-slate-200 rounded-lg text-sm">
+                        <select id="chartPaletteSelect" onchange="savePreferences({chartPalette: this.value})" class="w-full p-2 border border-slate-200 rounded-lg text-sm">
                             <option value="default">Mặc định (Indigo)</option>
                             <option value="ocean">Đại dương (Blue/Teal)</option>
                             <option value="forest">Rừng xanh (Green)</option>
@@ -247,7 +247,7 @@
                         <input type="checkbox" id="hotkeysToggle" onchange="savePreferences({hotkeysEnabled: this.checked})" class="w-5 h-5">
                     </div>
                 </div>
-            </section>
+            <div class="flex items-center justify-between"><span class="text-sm text-slate-700">Hiệu ứng tương tác</span><input id="interactionEffectsToggle" type="checkbox" onchange="savePreferences({interactionEffectsEnabled: this.checked})" class="w-5 h-5"></div><div class="flex items-center justify-between"><span class="text-sm text-slate-700">Rung phản hồi</span><input id="vibrateToggle" type="checkbox" onchange="savePreferences({vibrateEnabled: this.checked})" class="w-5 h-5"></div></section>
 
             <!-- Account Sync -->
             <section>
@@ -283,7 +283,7 @@
             <div class="flex flex-wrap items-center justify-center gap-4">
                 <div id="languageSwitcher" class="scale-95 relative z-50"></div>
                 
-                <button onclick="toggleSettings()" class="p-2.5 text-[var(--text-muted)] hover:text-indigo-600 hover:bg-[var(--primary-light)] rounded-xl transition-all duration-200" data-i18n-title="settings">
+                <button aria-label="Mở cài đặt" onclick="toggleSettings()" class="p-2.5 text-[var(--text-muted)] hover:text-indigo-600 hover:bg-[var(--primary-light)] rounded-xl transition-all duration-200" data-i18n-title="settings">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                 </button>
                 
@@ -1314,5 +1314,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.5.0/lz-string.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.js"></script>
     <script src="calculation_details.js"></script>
-</body>
+<script>function switchSettingsTab(tab){document.querySelectorAll("#settingsPanel [data-settings-section]").forEach(s=>s.style.display=(tab==="basic"?s.dataset.settingsSection==="basic":s.dataset.settingsSection!=="basic")?"":"none");document.querySelectorAll(".settings-tabs .tab-btn").forEach((b,i)=>b.classList.toggle("active",(tab==="basic"&&i===0)||(tab==="advanced"&&i===1)));}function filterSettings(q){const v=q.toLowerCase();document.querySelectorAll("#settingsPanel section").forEach(sec=>{sec.style.display=sec.textContent.toLowerCase().includes(v)?"":"none";});}</script></body>
 </html>

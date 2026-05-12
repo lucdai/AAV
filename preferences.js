@@ -16,6 +16,8 @@ const DEFAULT_PREFS = {
     showDataLabels: true,
     chartPalette: 'default',
     hotkeysEnabled: true,
+    interactionEffectsEnabled: true,
+    vibrateEnabled: true,
     featureFlags: {
         newCharts: true,
         betaFeatures: false
@@ -23,6 +25,7 @@ const DEFAULT_PREFS = {
 };
 
 let userPrefs = { ...DEFAULT_PREFS };
+window.userPrefs = userPrefs;
 
 /**
  * Initialize preferences
@@ -38,6 +41,7 @@ function initPreferences() {
     }
     
     applyAllPreferences();
+    syncSettingsUI();
     setupSystemThemeListener();
     setupColorInputs();
     
@@ -318,12 +322,12 @@ function applyFontFamily(family) {
  * Save preferences
  */
 function savePreferences(newPrefs) {
+    if (!validateColorAccessibility(newPrefs)) return;
     userPrefs = { ...userPrefs, ...newPrefs };
+    window.userPrefs = userPrefs;
     localStorage.setItem(PREFS_STORAGE_KEY, JSON.stringify(userPrefs));
     applyAllPreferences();
-    
-    // Update color swatches active state
-    updateColorSwatches();
+    syncSettingsUI();
 }
 
 function updateColorSwatches() {
@@ -418,3 +422,69 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Initialize on load
 document.addEventListener('DOMContentLoaded', initPreferences);
+
+function hexToRgb(hex) {
+    const clean = hex.replace('#', '');
+    const bigint = parseInt(clean, 16);
+    return { r: (bigint >> 16) & 255, g: (bigint >> 8) & 255, b: bigint & 255 };
+}
+
+function relativeLuminance(hex) {
+    const { r, g, b } = hexToRgb(hex);
+    const srgb = [r, g, b].map(v => {
+        const c = v / 255;
+        return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * srgb[0] + 0.7152 * srgb[1] + 0.0722 * srgb[2];
+}
+
+function contrastRatio(hex1, hex2) {
+    const l1 = relativeLuminance(hex1);
+    const l2 = relativeLuminance(hex2);
+    const lighter = Math.max(l1, l2);
+    const darker = Math.min(l1, l2);
+    return (lighter + 0.05) / (darker + 0.05);
+}
+
+function getCurrentSystemColors() {
+    const isDark = document.documentElement.classList.contains('dark-mode') || (userPrefs.theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    return {
+        bg: userPrefs.backgroundColor || (isDark ? '#0f172a' : '#f8fafc'),
+        text: userPrefs.textColor || (isDark ? '#f8fafc' : '#0f172a')
+    };
+}
+
+function showContrastWarning(id, message) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = message || '';
+}
+
+function validateColorAccessibility(newPrefs) {
+    const c = getCurrentSystemColors();
+    const bg = newPrefs.backgroundColor ?? c.bg;
+    const text = newPrefs.textColor ?? c.text;
+    const ratio = contrastRatio(bg, text);
+    const ok = ratio >= 4.5;
+    showContrastWarning('bgContrastWarning', ok ? '' : `Độ tương phản thấp (${ratio.toFixed(2)}:1). Khuyến nghị >= 4.5:1.`);
+    showContrastWarning('textContrastWarning', ok ? '' : `Màu chữ chưa đạt chuẩn (${ratio.toFixed(2)}:1).`);
+    if (!ok) return window.confirm('Độ tương phản chưa đạt chuẩn WCAG 4.5:1. Bạn vẫn muốn dùng màu này?');
+    if (newPrefs.accentColor) {
+        const ar = contrastRatio(newPrefs.accentColor, bg);
+        showContrastWarning('accentContrastWarning', ar < 3 ? `Màu nhấn có thể khó đọc trên nền (${ar.toFixed(2)}:1).` : '');
+    }
+    return true;
+}
+
+function syncSettingsUI() {
+    document.querySelectorAll('[data-pref-key]').forEach(btn => {
+        const k = btn.dataset.prefKey;
+        const v = btn.dataset.prefValue;
+        btn.classList.toggle('active', String(userPrefs[k]) === v);
+    });
+    updateColorSwatches();
+    const map = {trackingToggle:'trackingEnabled',hotkeysToggle:'hotkeysEnabled',autoSaveToggle:'autoSaveSession',interactionEffectsToggle:'interactionEffectsEnabled',vibrateToggle:'vibrateEnabled'};
+    Object.entries(map).forEach(([id,key])=>{const el=document.getElementById(id); if(el) el.checked=!!userPrefs[key];});
+    const ff = document.getElementById('fontFamilySelect'); if (ff) ff.value = userPrefs.fontFamily;
+    const cp = document.getElementById('chartPaletteSelect'); if (cp) cp.value = userPrefs.chartPalette;
+    const fs = document.getElementById('fontSizeDisplay'); if (fs) fs.textContent = `${userPrefs.fontSize}%`;
+}
