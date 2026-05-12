@@ -18,6 +18,8 @@ const DEFAULT_PREFS = {
     hotkeysEnabled: true,
     interactionEffectsEnabled: true,
     vibrateEnabled: true,
+    accessibilityStrict: true,
+    effectiveTokens: {},
     featureFlags: {
         newCharts: true,
         betaFeatures: false
@@ -323,7 +325,8 @@ function applyFontFamily(family) {
  */
 function savePreferences(newPrefs) {
     if (!validateColorAccessibility(newPrefs)) return;
-    userPrefs = { ...userPrefs, ...newPrefs };
+    const withValidated = applyAccessibilityColorGuards(newPrefs);
+    userPrefs = { ...userPrefs, ...withValidated };
     window.userPrefs = userPrefs;
     localStorage.setItem(PREFS_STORAGE_KEY, JSON.stringify(userPrefs));
     applyAllPreferences();
@@ -473,6 +476,50 @@ function validateColorAccessibility(newPrefs) {
         showContrastWarning('accentContrastWarning', ar < 3 ? `Màu nhấn có thể khó đọc trên nền (${ar.toFixed(2)}:1).` : '');
     }
     return true;
+}
+
+function getHcSafePalette() {
+    return {
+        bg: '#800000',
+        text: '#fff8e8',
+        accent: '#d4af37',
+        border: '#efd8d8',
+        focus: '#ffe39a'
+    };
+}
+
+function applyAccessibilityColorGuards(newPrefs) {
+    const isHc = userPrefs.theme === 'high-contrast' || newPrefs.theme === 'high-contrast';
+    const strict = isHc || userPrefs.accessibilityStrict;
+    if (!strict) return newPrefs;
+    const safe = getHcSafePalette();
+    const candidateBg = newPrefs.backgroundColor || userPrefs.backgroundColor || safe.bg;
+    const candidateText = newPrefs.textColor || userPrefs.textColor || safe.text;
+    const candidateAccent = newPrefs.accentColor || userPrefs.accentColor || safe.accent;
+    const result = { ...newPrefs };
+    const effective = {
+        userPicked: { backgroundColor: newPrefs.backgroundColor, textColor: newPrefs.textColor, accentColor: newPrefs.accentColor },
+        effectiveColor: { backgroundColor: candidateBg, textColor: candidateText, accentColor: candidateAccent },
+        checks: {}
+    };
+    const pairs = [
+        ['text/background', candidateText, candidateBg, 4.5, 'textColor'],
+        ['button text/button bg', candidateText, candidateAccent, 4.5, 'accentColor'],
+        ['border/background', safe.border, candidateBg, 3, null],
+        ['focus ring/background', safe.focus, candidateBg, 3, null]
+    ];
+    pairs.forEach(([name, c1, c2, min, key]) => {
+        const ratio = contrastRatio(c1, c2);
+        effective.checks[name] = Number(ratio.toFixed(2));
+        if (ratio < min && key) {
+            result[key] = safe[key === 'textColor' ? 'text' : key === 'backgroundColor' ? 'bg' : 'accent'];
+            effective.effectiveColor[key] = result[key];
+            console.warn(`[A11Y] Override ${key}: ${c1} / ${c2} (${ratio.toFixed(2)}:1) < ${min}:1`);
+            showContrastWarning('accentContrastWarning', 'Một số màu đã được tự động điều chỉnh để đảm bảo độ tương phản ở chế độ HC.');
+        }
+    });
+    result.effectiveTokens = effective;
+    return result;
 }
 
 function syncSettingsUI() {
