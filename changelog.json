@@ -1,11 +1,33 @@
 {
-  "generated_at": "2026-05-12T16:26:18.012832",
-  "total_commits": 325,
+  "generated_at": "2026-05-12T17:04:17.518272",
+  "total_commits": 328,
   "repository": "lucdai/AAV",
   "entries": [
     {
+      "date": "2026-05-13",
+      "commit_count": 2,
+      "categories": {
+        "Improvements": [
+          {
+            "sha": "5cfb192",
+            "message": "Refactor UI colors to semantic token contract",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/5cfb192aa27b0d7efdcbbe34ae2c82c6f1d5be0b"
+          }
+        ],
+        "Other": [
+          {
+            "sha": "dbbab01",
+            "message": "Merge pull request #66 from lucdai/codex/implement-semantic-color-tokens",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/dbbab01330ebc62497d4841084589f374f911ad1"
+          }
+        ]
+      }
+    },
+    {
       "date": "2026-05-12",
-      "commit_count": 6,
+      "commit_count": 7,
       "categories": {
         "Improvements": [
           {
@@ -22,6 +44,12 @@
           }
         ],
         "Other": [
+          {
+            "sha": "99346e3",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/99346e3ce326a77a05db4bb8ed26267abcd2f4e4"
+          },
           {
             "sha": "a643fbc",
             "message": "Merge pull request #65 from lucdai/codex/update-high-contrast-visual-styles",
