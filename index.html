@@ -448,8 +448,8 @@
                         <div class="flex justify-between items-center mb-6">
                             <h3 class="font-extrabold text-slate-800 text-sm uppercase tracking-wider" data-i18n="histogram_name"></h3>
                             <div class="flex gap-2">
-                                <button onclick="downloadChartImage('chartHistogram', t('histogram_name'), 'png')" class="btn-secondary !py-1 !px-2 !text-[10px]">PNG</button>
-                                <button onclick="downloadChartImage('chartHistogram', t('histogram_name'), 'jpeg')" class="btn-secondary !py-1 !px-2 !text-[10px]">JPEG</button>
+                                <button onclick="downloadChartImage('chartHistogram', t('histogram_name'), 'png')" class="btn-secondary !py-1 !px-2 !text-[10px] chart-download-btn" data-role="chart-download" data-format="png">PNG</button>
+                                <button onclick="downloadChartImage('chartHistogram', t('histogram_name'), 'jpeg')" class="btn-secondary !py-1 !px-2 !text-[10px] chart-download-btn" data-role="chart-download" data-format="jpeg">JPEG</button>
                             </div>
                         </div>
                         <div class="h-64 relative w-full"><canvas id="chartHistogram"></canvas></div>
@@ -458,8 +458,8 @@
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="font-bold text-[var(--text-main)] text-center flex-1" data-i18n="polygon_name"></h3>
                             <div class="flex gap-1">
-                                <button onclick="downloadChartImage('chartPolygon', t('polygon_name'), 'png')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded hover:text-green-600">PNG</button>
-                                <button onclick="downloadChartImage('chartPolygon', t('polygon_name'), 'jpeg')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded hover:text-blue-600">JPEG</button>
+                                <button onclick="downloadChartImage('chartPolygon', t('polygon_name'), 'png')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded chart-download-btn" data-role="chart-download" data-format="png">PNG</button>
+                                <button onclick="downloadChartImage('chartPolygon', t('polygon_name'), 'jpeg')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded chart-download-btn" data-role="chart-download" data-format="jpeg">JPEG</button>
                             </div>
                         </div>
                         <div class="h-64 relative w-full"><canvas id="chartPolygon"></canvas></div>
@@ -468,8 +468,8 @@
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="font-bold text-[var(--text-main)] text-center flex-1" data-i18n="stacked_bar_name"></h3>
                             <div class="flex gap-1">
-                                <button onclick="downloadChartImage('chartStacked', t('stacked_bar_name'), 'png')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded hover:text-green-600">PNG</button>
-                                <button onclick="downloadChartImage('chartStacked', t('stacked_bar_name'), 'jpeg')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded hover:text-blue-600">JPEG</button>
+                                <button onclick="downloadChartImage('chartStacked', t('stacked_bar_name'), 'png')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded chart-download-btn" data-role="chart-download" data-format="png">PNG</button>
+                                <button onclick="downloadChartImage('chartStacked', t('stacked_bar_name'), 'jpeg')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded chart-download-btn" data-role="chart-download" data-format="jpeg">JPEG</button>
                             </div>
                         </div>
                         <div class="h-64 relative w-full"><canvas id="chartStacked"></canvas></div>
@@ -478,8 +478,8 @@
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="font-bold text-[var(--text-main)] text-center flex-1" data-i18n="rel_freq_bar_name"></h3>
                             <div class="flex gap-1">
-                                <button onclick="downloadChartImage('chartRelFreq', t('rel_freq_bar_name'), 'png')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded hover:text-green-600">PNG</button>
-                                <button onclick="downloadChartImage('chartRelFreq', t('rel_freq_bar_name'), 'jpeg')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded hover:text-blue-600">JPEG</button>
+                                <button onclick="downloadChartImage('chartRelFreq', t('rel_freq_bar_name'), 'png')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded chart-download-btn" data-role="chart-download" data-format="png">PNG</button>
+                                <button onclick="downloadChartImage('chartRelFreq', t('rel_freq_bar_name'), 'jpeg')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded chart-download-btn" data-role="chart-download" data-format="jpeg">JPEG</button>
                             </div>
                         </div>
                         <div class="h-64 relative w-full"><canvas id="chartRelFreq"></canvas></div>
@@ -492,8 +492,8 @@
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="font-bold text-[var(--text-main)] text-center flex-1" data-i18n="violin_name"></h3>
                             <div class="flex gap-1">
-                                <button onclick="downloadChartImage('chartViolin', t('violin_name'), 'png')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded hover:text-green-600">PNG</button>
-                                <button onclick="downloadChartImage('chartViolin', t('violin_name'), 'jpeg')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded hover:text-blue-600">JPEG</button>
+                                <button onclick="downloadChartImage('chartViolin', t('violin_name'), 'png')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded chart-download-btn" data-role="chart-download" data-format="png">PNG</button>
+                                <button onclick="downloadChartImage('chartViolin', t('violin_name'), 'jpeg')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded chart-download-btn" data-role="chart-download" data-format="jpeg">JPEG</button>
                             </div>
                         </div>
                         <div class="h-64 relative w-full"><canvas id="chartViolin"></canvas></div>
@@ -502,8 +502,8 @@
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="font-bold text-[var(--text-main)] text-center flex-1" data-i18n="boxplot_name"></h3>
                             <div class="flex gap-1">
-                                <button onclick="downloadChartImage('chartBox', t('boxplot_name'), 'png')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded hover:text-green-600">PNG</button>
-                                <button onclick="downloadChartImage('chartBox', t('boxplot_name'), 'jpeg')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded hover:text-blue-600">JPEG</button>
+                                <button onclick="downloadChartImage('chartBox', t('boxplot_name'), 'png')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded chart-download-btn" data-role="chart-download" data-format="png">PNG</button>
+                                <button onclick="downloadChartImage('chartBox', t('boxplot_name'), 'jpeg')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded chart-download-btn" data-role="chart-download" data-format="jpeg">JPEG</button>
                             </div>
                         </div>
                         <div class="h-64 relative w-full"><canvas id="chartBox"></canvas></div>
@@ -512,8 +512,8 @@
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="font-bold text-[var(--text-main)] text-center flex-1" data-i18n="scatter_name"></h3>
                             <div class="flex gap-1">
-                                <button onclick="downloadChartImage('chartScatter', t('scatter_name'), 'png')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded hover:text-green-600">PNG</button>
-                                <button onclick="downloadChartImage('chartScatter', t('scatter_name'), 'jpeg')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded hover:text-blue-600">JPEG</button>
+                                <button onclick="downloadChartImage('chartScatter', t('scatter_name'), 'png')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded chart-download-btn" data-role="chart-download" data-format="png">PNG</button>
+                                <button onclick="downloadChartImage('chartScatter', t('scatter_name'), 'jpeg')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded chart-download-btn" data-role="chart-download" data-format="jpeg">JPEG</button>
                             </div>
                         </div>
                         <div class="h-64 relative w-full"><canvas id="chartScatter"></canvas></div>
@@ -529,8 +529,8 @@
                                 <select id="pieDatasetSelect" onchange="updatePieChart()" class="text-xs border rounded p-1 w-full mt-1"></select>
                             </div>
                             <div class="flex gap-1 ml-2">
-                                <button onclick="downloadChartImage('chartPie', t('pie_chart_name'), 'png')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded hover:text-green-600">PNG</button>
-                                <button onclick="downloadChartImage('chartPie', t('pie_chart_name'), 'jpeg')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded hover:text-blue-600">JPEG</button>
+                                <button onclick="downloadChartImage('chartPie', t('pie_chart_name'), 'png')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded chart-download-btn" data-role="chart-download" data-format="png">PNG</button>
+                                <button onclick="downloadChartImage('chartPie', t('pie_chart_name'), 'jpeg')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded chart-download-btn" data-role="chart-download" data-format="jpeg">JPEG</button>
                             </div>
                         </div>
                         <div class="h-64 relative w-full"><canvas id="chartPie"></canvas></div>
@@ -539,8 +539,8 @@
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="font-bold text-[var(--text-main)] text-center flex-1" data-i18n="area_chart_name"></h3>
                             <div class="flex gap-1">
-                                <button onclick="downloadChartImage('chartArea', t('area_chart_name'), 'png')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded hover:text-green-600">PNG</button>
-                                <button onclick="downloadChartImage('chartArea', t('area_chart_name'), 'jpeg')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded hover:text-blue-600">JPEG</button>
+                                <button onclick="downloadChartImage('chartArea', t('area_chart_name'), 'png')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded chart-download-btn" data-role="chart-download" data-format="png">PNG</button>
+                                <button onclick="downloadChartImage('chartArea', t('area_chart_name'), 'jpeg')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded chart-download-btn" data-role="chart-download" data-format="jpeg">JPEG</button>
                             </div>
                         </div>
                         <div class="h-64 relative w-full"><canvas id="chartArea"></canvas></div>
@@ -549,8 +549,8 @@
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="font-bold text-[var(--text-main)] text-center flex-1" data-i18n="ogive_chart_name"></h3>
                             <div class="flex gap-1">
-                                <button onclick="downloadChartImage('chartOgive', t('ogive_chart_name'), 'png')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded hover:text-green-600">PNG</button>
-                                <button onclick="downloadChartImage('chartOgive', t('ogive_chart_name'), 'jpeg')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded hover:text-blue-600">JPEG</button>
+                                <button onclick="downloadChartImage('chartOgive', t('ogive_chart_name'), 'png')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded chart-download-btn" data-role="chart-download" data-format="png">PNG</button>
+                                <button onclick="downloadChartImage('chartOgive', t('ogive_chart_name'), 'jpeg')" class="text-xs border bg-[var(--surface)] px-2 py-1 rounded chart-download-btn" data-role="chart-download" data-format="jpeg">JPEG</button>
                             </div>
                         </div>
                         <div class="h-64 relative w-full"><canvas id="chartOgive"></canvas></div>
@@ -1314,5 +1314,38 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.5.0/lz-string.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.js"></script>
     <script src="calculation_details.js"></script>
+
+<script>
+function parseRGB(color){const m=color&&color.match(/\d+/g);return m?m.slice(0,3).map(Number):[255,255,255];}
+function luminance([r,g,b]){const c=[r,g,b].map(v=>{v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4)});return 0.2126*c[0]+0.7152*c[1]+0.0722*c[2];}
+function contrast(a,b){const l1=luminance(a),l2=luminance(b);const [x,y]=l1>l2?[l1,l2]:[l2,l1];return (x+0.05)/(y+0.05);}
+function invert([r,g,b]){return [255-r,255-g,255-b];}
+function rgbToCss([r,g,b]){return `rgb(${r}, ${g}, ${b})`;}
+function enhanceDownloadButtonContrast(){
+  document.querySelectorAll('[data-role="chart-download"]').forEach((btn)=>{
+    const parent=btn.closest('.bg-[var(--surface)]')||btn.parentElement;
+    const btnBg=parseRGB(getComputedStyle(btn).backgroundColor);
+    const parentBg=parseRGB(getComputedStyle(parent).backgroundColor);
+    let text=parseRGB(getComputedStyle(btn).color);
+    if(contrast(btnBg,parentBg)<1.35){
+      const inv=invert(parentBg);
+      btn.style.backgroundColor=rgbToCss(inv);
+      text=contrast(inv,[0,0,0])>=contrast(inv,[255,255,255])?[0,0,0]:[255,255,255];
+      btn.style.color=rgbToCss(text);
+      btn.style.borderColor=rgbToCss(text);
+    }
+    btn.onmouseenter=()=>{
+      const currentBg=parseRGB(getComputedStyle(btn).backgroundColor);
+      const outerBg=parseRGB(getComputedStyle(parent).backgroundColor);
+      if(contrast(currentBg,outerBg)<2.2){
+        btn.style.backgroundColor=rgbToCss(text);
+        btn.style.color=rgbToCss(currentBg);
+      }
+    };
+    btn.onmouseleave=()=>{btn.style.backgroundColor='';btn.style.color='';btn.style.borderColor='';enhanceDownloadButtonContrast();};
+  });
+}
+document.addEventListener('DOMContentLoaded',enhanceDownloadButtonContrast);
+</script>
 <script>function switchSettingsTab(tab){document.querySelectorAll("#settingsPanel [data-settings-section]").forEach(s=>s.style.display=(tab==="basic"?s.dataset.settingsSection==="basic":s.dataset.settingsSection!=="basic")?"":"none");document.querySelectorAll(".settings-tabs .tab-btn").forEach((b,i)=>b.classList.toggle("active",(tab==="basic"&&i===0)||(tab==="advanced"&&i===1)));}function filterSettings(q){const v=q.toLowerCase();document.querySelectorAll("#settingsPanel section").forEach(sec=>{sec.style.display=sec.textContent.toLowerCase().includes(v)?"":"none";});}</script></body>
 </html>
