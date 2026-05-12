@@ -1,13 +1,19 @@
 {
-  "generated_at": "2026-05-12T15:44:20.017245",
-  "total_commits": 322,
+  "generated_at": "2026-05-12T16:26:18.012832",
+  "total_commits": 325,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-05-12",
-      "commit_count": 3,
+      "commit_count": 6,
       "categories": {
         "Improvements": [
+          {
+            "sha": "5eeab72",
+            "message": "Improve high-contrast token system and component readability",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/5eeab7243171f653ffe576fbf6f91404bca79a2c"
+          },
           {
             "sha": "78f2fad",
             "message": "Merge pull request #64 from lucdai/codex/refactor-and-enhance-web-settings-functionality",
@@ -16,6 +22,18 @@
           }
         ],
         "Other": [
+          {
+            "sha": "a643fbc",
+            "message": "Merge pull request #65 from lucdai/codex/update-high-contrast-visual-styles",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/a643fbc90961a789c98862d638d77e10227458dd"
+          },
+          {
+            "sha": "a6bc190",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/a6bc190c96a51d46936c85ae17728d84816e8caa"
+          },
           {
             "sha": "097e514",
             "message": "Fix preference save flow before accessibility validation",
