@@ -143,7 +143,7 @@
                         <div class="grid grid-cols-2 gap-2">
                             <button onclick="savePreferences({theme: 'light'})" data-pref-key="theme" data-pref-value="light" class="btn btn-ghost" data-i18n="light">Sáng</button>
                             <button onclick="savePreferences({theme: 'dark'})" data-pref-key="theme" data-pref-value="dark" class="btn btn-ghost" data-i18n="dark">Tối</button>
-                            <button onclick="savePreferences({theme: 'high-contrast'})" data-pref-key="theme" data-pref-value="high-contrast" class="btn btn-ghost" data-i18n="high_contrast">Tương phản</button>
+                            
                             <button onclick="savePreferences({theme: 'system'})" data-pref-key="theme" data-pref-value="system" class="btn btn-ghost" data-i18n="system">Hệ thống</button>
                         </div>
                     </div>
@@ -208,7 +208,7 @@
             <!-- Privacy Center -->
             <section>
                 <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4" data-i18n="privacy_center">Trung tâm quyền riêng tư</h3>
-                <div class="space-y-3">
+                <div class="space-y-3 toolbar-controls">
                     <div class="flex items-center justify-between">
                         <span class="text-sm text-[var(--text-main)]" data-i18n="tracking">Cho phép theo dõi</span>
                         <input id="trackingToggle" type="checkbox" checked onchange="savePreferences({trackingEnabled: this.checked})" class="w-5 h-5">
