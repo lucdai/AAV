@@ -1,8 +1,36 @@
 {
-  "generated_at": "2026-05-12T15:30:07.222297",
-  "total_commits": 319,
+  "generated_at": "2026-05-12T15:44:20.017245",
+  "total_commits": 322,
   "repository": "lucdai/AAV",
   "entries": [
+    {
+      "date": "2026-05-12",
+      "commit_count": 3,
+      "categories": {
+        "Improvements": [
+          {
+            "sha": "78f2fad",
+            "message": "Merge pull request #64 from lucdai/codex/refactor-and-enhance-web-settings-functionality",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/78f2fad7aed32188ed5df8e048b8d6c1c1992001"
+          }
+        ],
+        "Other": [
+          {
+            "sha": "097e514",
+            "message": "Fix preference save flow before accessibility validation",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/097e5143872bb03c5ddd00cb2338f85ae290de12"
+          },
+          {
+            "sha": "bbdcfad",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/bbdcfad5832d318b1205325257ca5f348bb0f5a0"
+          }
+        ]
+      }
+    },
     {
       "date": "2026-03-21",
       "commit_count": 2,
