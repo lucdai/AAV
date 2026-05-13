@@ -81,6 +81,7 @@ function applyTheme(theme) {
     
     root.classList.remove('light-mode', 'dark-mode');
     root.classList.add(`${effectiveTheme}-mode`);
+    root.dispatchEvent(new CustomEvent('themechange', { detail: { theme: effectiveTheme } }));
     
     // Update Chart.js defaults
     updateChartTheme(effectiveTheme);
