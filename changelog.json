@@ -1,12 +1,26 @@
 {
-  "generated_at": "2026-05-13T02:49:44.325525",
-  "total_commits": 332,
+  "generated_at": "2026-05-13T18:08:03.906043",
+  "total_commits": 335,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-05-13",
-      "commit_count": 4,
+      "commit_count": 7,
       "categories": {
+        "Features": [
+          {
+            "sha": "f2ba99a",
+            "message": "Restore to 72dc94e and integrate adaptive contrast features from d1b95d6/53f2e67",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/f2ba99a76002f6b5c123f60973c73d80050dd275"
+          },
+          {
+            "sha": "53f2e67",
+            "message": "feat: tự động hoán đổi màu để đảm bảo tương phản toàn site",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/53f2e67aeb8f94fb831a6607eb4f39926dbfc9cd"
+          }
+        ],
         "Improvements": [
           {
             "sha": "bb41e33",
@@ -22,6 +36,12 @@
           }
         ],
         "Other": [
+          {
+            "sha": "72dc94e",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/72dc94e1a2257127150f3fac083655b0955fa822"
+          },
           {
             "sha": "1965590",
             "message": "Merge pull request #67 from lucdai/codex/adjust-background-and-text-colors-for-images",
