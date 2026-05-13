@@ -1316,36 +1316,70 @@
     <script src="calculation_details.js"></script>
 
 <script>
-function parseRGB(color){const m=color&&color.match(/\d+/g);return m?m.slice(0,3).map(Number):[255,255,255];}
+function parseRGB(color){
+  const m = color && color.match(/\d+(?:\.\d+)?/g);
+  return m ? m.slice(0,3).map(Number) : [255,255,255];
+}
 function luminance([r,g,b]){const c=[r,g,b].map(v=>{v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4)});return 0.2126*c[0]+0.7152*c[1]+0.0722*c[2];}
 function contrast(a,b){const l1=luminance(a),l2=luminance(b);const [x,y]=l1>l2?[l1,l2]:[l2,l1];return (x+0.05)/(y+0.05);}
 function invert([r,g,b]){return [255-r,255-g,255-b];}
-function rgbToCss([r,g,b]){return `rgb(${r}, ${g}, ${b})`;}
-function enhanceDownloadButtonContrast(){
-  document.querySelectorAll('[data-role="chart-download"]').forEach((btn)=>{
-    const parent=btn.closest('.bg-[var(--surface)]')||btn.parentElement;
-    const btnBg=parseRGB(getComputedStyle(btn).backgroundColor);
-    const parentBg=parseRGB(getComputedStyle(parent).backgroundColor);
-    let text=parseRGB(getComputedStyle(btn).color);
-    if(contrast(btnBg,parentBg)<1.35){
-      const inv=invert(parentBg);
-      btn.style.backgroundColor=rgbToCss(inv);
-      text=contrast(inv,[0,0,0])>=contrast(inv,[255,255,255])?[0,0,0]:[255,255,255];
-      btn.style.color=rgbToCss(text);
-      btn.style.borderColor=rgbToCss(text);
+function rgbToCss([r,g,b]){return `rgb(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)})`;}
+function bestTextOn(bg){return contrast(bg,[15,23,42])>=contrast(bg,[248,250,252])?[15,23,42]:[248,250,252];}
+
+function applyAdaptiveContrast(scope=document){
+  const nodes = scope.querySelectorAll('button, [role="button"], .btn-primary, .btn-secondary, .chart-download-btn, .tab-btn, .modern-card, .glass-card, .stat-card, a, input, select, textarea, [class*="bg-"]');
+  nodes.forEach((el)=>{
+    const st = getComputedStyle(el);
+    if (st.display === 'none' || st.visibility === 'hidden') return;
+    const bg = parseRGB(st.backgroundColor);
+    const fg = parseRGB(st.color);
+    const parent = el.parentElement || document.body;
+    const parentBg = parseRGB(getComputedStyle(parent).backgroundColor);
+
+    let nextBg = bg;
+    let nextFg = fg;
+
+    if (contrast(bg,parentBg) < 1.45) {
+      nextBg = invert(parentBg);
+      nextFg = bestTextOn(nextBg);
+    } else if (contrast(bg,fg) < 4.5) {
+      nextFg = bestTextOn(bg);
     }
-    btn.onmouseenter=()=>{
-      const currentBg=parseRGB(getComputedStyle(btn).backgroundColor);
-      const outerBg=parseRGB(getComputedStyle(parent).backgroundColor);
-      if(contrast(currentBg,outerBg)<2.2){
-        btn.style.backgroundColor=rgbToCss(text);
-        btn.style.color=rgbToCss(currentBg);
-      }
-    };
-    btn.onmouseleave=()=>{btn.style.backgroundColor='';btn.style.color='';btn.style.borderColor='';enhanceDownloadButtonContrast();};
+
+    if (contrast(nextBg,nextFg) < 4.5) nextFg = bestTextOn(nextBg);
+
+    el.style.backgroundColor = rgbToCss(nextBg);
+    el.style.color = rgbToCss(nextFg);
+    const iconNodes = el.querySelectorAll('svg, i');
+    iconNodes.forEach(icon=>{icon.style.color = rgbToCss(nextFg); icon.style.fill='currentColor';});
+    if (st.borderStyle !== 'none') el.style.borderColor = rgbToCss(nextFg);
+
+    if (el.matches('[data-role="chart-download"], .chart-download-btn')) {
+      el.onmouseenter = ()=>{
+        const outerBg = parseRGB(getComputedStyle(parent).backgroundColor);
+        let hoverBg = parseRGB(getComputedStyle(el).backgroundColor);
+        let hoverFg = parseRGB(getComputedStyle(el).color);
+        if (contrast(hoverBg,outerBg) < 2.4) {
+          hoverBg = invert(outerBg);
+          hoverFg = bestTextOn(hoverBg);
+        }
+        if (contrast(hoverBg,hoverFg) < 4.5) hoverFg = bestTextOn(hoverBg);
+        el.style.backgroundColor = rgbToCss(hoverBg);
+        el.style.color = rgbToCss(hoverFg);
+        el.style.borderColor = rgbToCss(hoverFg);
+      };
+      el.onmouseleave = ()=>applyAdaptiveContrast(document);
+    }
   });
 }
-document.addEventListener('DOMContentLoaded',enhanceDownloadButtonContrast);
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  applyAdaptiveContrast(document);
+  const obs = new MutationObserver(()=>applyAdaptiveContrast(document));
+  obs.observe(document.body, {subtree:true, childList:true, attributes:true, attributeFilter:['class','style']});
+  document.documentElement.addEventListener('themechange', ()=>applyAdaptiveContrast(document));
+  window.applyAdaptiveContrast = applyAdaptiveContrast;
+});
 </script>
 <script>function switchSettingsTab(tab){document.querySelectorAll("#settingsPanel [data-settings-section]").forEach(s=>s.style.display=(tab==="basic"?s.dataset.settingsSection==="basic":s.dataset.settingsSection!=="basic")?"":"none");document.querySelectorAll(".settings-tabs .tab-btn").forEach((b,i)=>b.classList.toggle("active",(tab==="basic"&&i===0)||(tab==="advanced"&&i===1)));}function filterSettings(q){const v=q.toLowerCase();document.querySelectorAll("#settingsPanel section").forEach(sec=>{sec.style.display=sec.textContent.toLowerCase().includes(v)?"":"none";});}</script></body>
 </html>
