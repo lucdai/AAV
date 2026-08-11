@@ -1,8 +1,22 @@
 {
-  "generated_at": "2026-08-10T01:25:47.497337",
-  "total_commits": 424,
+  "generated_at": "2026-08-11T01:23:46.894905",
+  "total_commits": 425,
   "repository": "lucdai/AAV",
   "entries": [
+    {
+      "date": "2026-08-10",
+      "commit_count": 1,
+      "categories": {
+        "Other": [
+          {
+            "sha": "3415031",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/34150313c7cdfff4a294a4535f3f63788283c3a8"
+          }
+        ]
+      }
+    },
     {
       "date": "2026-08-09",
       "commit_count": 1,
