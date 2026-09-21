@@ -1,8 +1,30 @@
 {
-  "generated_at": "2026-09-21T03:12:37.356254",
-  "total_commits": 466,
+  "generated_at": "2026-09-21T14:31:39.880536",
+  "total_commits": 468,
   "repository": "lucdai/AAV",
   "entries": [
+    {
+      "date": "2026-09-21",
+      "commit_count": 2,
+      "categories": {
+        "Features": [
+          {
+            "sha": "6e1a325",
+            "message": "feat: add permanent Castle Forge voxel simulator",
+            "author": "lucdai",
+            "url": "https://github.com/lucdai/AAV/commit/6e1a32565f504f703d10ae9b1f9270ab6b4dc0ff"
+          }
+        ],
+        "Other": [
+          {
+            "sha": "d5b24d6",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/d5b24d62aad7c63789aa0a66ce4f8143687f8ad3"
+          }
+        ]
+      }
+    },
     {
       "date": "2026-09-20",
       "commit_count": 1,
