@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Castle Forge — trình giả lập pháo đài Minecraft theo từng tầng block." />
+  <title>Castle Forge · Trình giả lập pháo đài</title>
+  <link rel="stylesheet" href="castle.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">✦</span><div><strong>CASTLE FORGE</strong><small>Voxel blueprint / Minecraft style</small></div></div>
+      <div class="top-actions"><span class="status-dot"></span><span id="blockCount">0 blocks</span><button class="ghost-btn" id="resetBtn">Reset camera</button></div>
+    </header>
+    <main class="workspace">
+      <aside class="sidebar left-panel">
+        <div class="eyebrow">01 / STRUCTURE</div>
+        <h1>Pháo đài<br><em>Stonewatch</em></h1>
+        <p class="intro">Một layout thành đá 61 × 49 block, được tách thành các tầng để kiểm tra lối đi, phòng và tuyến phòng thủ.</p>
+        <div class="metric-grid">
+          <div><b>61 × 49</b><span>footprint</span></div><div><b>12</b><span>max height</span></div><div><b>3</b><span>wall path</span></div><div><b>7</b><span>zones</span></div>
+        </div>
+        <div class="section-title">Vùng công trình</div>
+        <div class="legend-list">
+          <button class="legend-item active" data-zone="all"><i class="swatch all"></i><span>Tất cả công trình</span><small>61×49</small></button>
+          <button class="legend-item" data-zone="palace"><i class="swatch palace"></i><span>Cung điện</span><small>31×21</small></button>
+          <button class="legend-item" data-zone="wall"><i class="swatch wall"></i><span>Tường thành & tháp</span><small>3 / 9×9</small></button>
+          <button class="legend-item" data-zone="yard"><i class="swatch yard"></i><span>Sân trong & đường</span><small>5 / 3</small></button>
+          <button class="legend-item" data-zone="support"><i class="swatch support"></i><span>Kho / lính / chuồng</span><small>15×9</small></button>
+        </div>
+        <div class="note-card"><span class="note-icon">⌁</span><div><b>Gợi ý kiểm tra</b><p>Bật từng tầng từ Y=0 đến Y=12 để nhìn rõ trục giao thông và khoảng hở phòng.</p></div></div>
+      </aside>
+      <section class="viewport-panel">
+        <div class="viewport-toolbar">
+          <div class="view-tabs"><button class="view-tab active" data-view="overview">Overview</button><button class="view-tab" data-view="top">Top plan</button><button class="view-tab" data-view="section">Section</button></div>
+          <div class="toolbar-actions"><button class="icon-btn" id="rotateBtn" title="Tự xoay">◌</button><button class="icon-btn" id="gridBtn" title="Bật lưới">⌗</button><button class="capture-btn" id="captureBtn">◎ Chụp góc nhìn</button></div>
+        </div>
+        <div id="sceneWrap" class="scene-wrap"><canvas id="sceneCanvas"></canvas><div class="scene-hud"><div><span class="hud-label">CAMERA</span><strong id="cameraLabel">OBLIQUE / 62°</strong></div><div><span class="hud-label">LAYER</span><strong id="layerLabel">Y 0—12</strong></div><div><span class="hud-label">SCALE</span><strong>1 BLOCK = 1 UNIT</strong></div></div><div class="axis-key"><span class="axis-x">X</span><span class="axis-z">Z</span><span class="axis-y">Y</span></div></div>
+        <div class="layer-control"><div class="layer-head"><div><span class="eyebrow">02 / LAYER SCRUBBER</span><h2>Tầng hiển thị <span id="layerValue">0—12</span></h2></div><div class="layer-buttons"><button id="downBtn">−</button><button id="upBtn">＋</button></div></div><input id="layerSlider" type="range" min="0" max="12" value="12" /><div class="tick-row"><span>Y=0 nền</span><span>Y=4 tường</span><span>Y=8 lối đi</span><span>Y=12 tháp</span></div></div>
+        <div class="scene-caption"><div><span class="caption-kicker">ACTIVE LAYER</span><b id="layerCaption">Toàn bộ khối công trình · 0—12</b></div><p>Drag để orbit · Scroll để zoom · Click preset để đổi góc</p></div>
+      </section>
+      <aside class="sidebar right-panel">
+        <div class="eyebrow">03 / CAMERA DECK</div><h2>Ảnh chụp 3D</h2><p class="side-copy">Ba góc quan sát giúp đọc nhanh silhouette, sân trong và mặt bằng tầng.</p>
+        <div class="shot-list" id="shotList"></div>
+        <div class="side-divider"></div><div class="eyebrow">QUICK PRESETS</div><div class="preset-grid"><button data-preset="hero"><span>↗</span><b>Hero</b><small>góc 3/4</small></button><button data-preset="top"><span>⌃</span><b>Top-down</b><small>mặt bằng</small></button><button data-preset="court"><span>↘</span><b>Courtyard</b><small>sân trong</small></button><button data-preset="section"><span>▥</span><b>Section</b><small>cắt tầng</small></button></div>
+        <div class="export-card"><div><b>Xuất ảnh</b><p>PNG chất lượng cao từ canvas hiện tại.</p></div><button id="downloadBtn">↓</button></div>
+      </aside>
+    </main>
+    <footer class="footer"><span>STONEWATCH KEEP · V1.0</span><span>Voxel geometry / 2,989 sq. blocks footprint</span><span>© Castle Forge Studio</span></footer>
+  </div>
+  <script type="module" src="castle.js"></script>
+</body>
+</html>
