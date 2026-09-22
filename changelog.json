@@ -1,13 +1,19 @@
 {
-  "generated_at": "2026-09-22T02:51:40.432690",
-  "total_commits": 470,
+  "generated_at": "2026-09-22T03:12:00.362565",
+  "total_commits": 471,
   "repository": "lucdai/AAV",
   "entries": [
     {
       "date": "2026-09-22",
-      "commit_count": 1,
+      "commit_count": 2,
       "categories": {
         "Other": [
+          {
+            "sha": "dfba548",
+            "message": "chore: update changelog from commits",
+            "author": "GitHub Action",
+            "url": "https://github.com/lucdai/AAV/commit/dfba5482c3918058341031977a60e0ec6eabf112"
+          },
           {
             "sha": "1a5c121",
             "message": "remove Castle Forge simulator",
