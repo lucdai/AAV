@@ -75,26 +75,6 @@ body {
     box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 }
 
-.castle-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    padding: 0.625rem 1rem;
-    border: 1px solid #d8dfbd;
-    border-radius: var(--radius-md);
-    background: #f1f5df;
-    color: #5c7135;
-    font-size: 0.875rem;
-    font-weight: 700;
-    transition: all 0.2s;
-}
-
-.castle-link:hover {
-    background: #e6edc7;
-    border-color: #b8c88a;
-    transform: translateY(-1px);
-}
-
 .btn-secondary {
     background: var(--surface);
     color: var(--secondary);
